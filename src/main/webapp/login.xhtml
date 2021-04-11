@@ -5,19 +5,33 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title> Solidaridad Escuela | Login</title>
-    <link rel="stylesheet" href="WEB-INF/css/style.css">
+    <link rel="stylesheet" href="WEB-INF/css/style.css"/>
 </h:head>
 <style> 
 ui-panelgrid td {
     padding: 2px 30px ;
 }
+
+.form {
+    display: block; 
+    margin: auto;
+    margin-top: 10px;
+}
+
+.login{
+    display: block; 
+    margin: auto;
+    margin-top: 100px;
+    border: solid 1px;
+    border-radius: 10px;
+    width: 300px;
+}
 </style>
 <h:body>
-    <div class="banner">
-        <div class="body banner">
-            <h2> Halo :3 </h2>
-            <p> Please log in </p>
-        </div>
+    <div class="login" >
+        <p:inputText  id="Usuario" type="String" class="form" placeholder="Usuario"/>
+        <p:inputText  id="Password" type="String" class="form" placeholder="Contraseña"/>
+        <p:commandButton value="Log in" style="display: block; margin: auto; margin-top: 10px; margin-bottom: 10px;"/>
     </div>
 </h:body>
 </html>
