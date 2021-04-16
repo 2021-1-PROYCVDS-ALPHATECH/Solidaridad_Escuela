@@ -16,19 +16,16 @@ public class GuiceContextListener implements ServletContextListener {
         servletContext.removeAttribute(Injector.class.getName());
     }
 
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
-        /*
+    public void contextInitialized(ServletContextEvent servletContextEvent) {     
 	    Injector injector = Guice.createInjector(new XMLMyBatisModule() {
             @Override
             protected void initialize() {
                 install(JdbcHelper.PostgreSQL);
                 setEnvironmentId("development");
                 setClassPathResource("mybtis-config.xml");
-
+                
             }
         });
-        
         servletContextEvent.getServletContext().setAttribute(Injector.class.getName(), injector);
-        */
     }
 }

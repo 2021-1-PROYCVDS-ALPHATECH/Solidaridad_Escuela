@@ -28,10 +28,13 @@ ui-panelgrid td {
 }
 </style>
 <h:body>
-    <div class="login" >
-        <p:inputText  id="Usuario" type="String" class="form" placeholder="Usuario"/>
-        <p:inputText  id="Password" type="String" class="form" placeholder="Contraseña"/>
-        <p:commandButton value="Log in" style="display: block; margin: auto; margin-top: 10px; margin-bottom: 10px;"/>
-    </div>
+    <h:form id="log">
+        <div class="login" >
+            <p:inputText  id="Usuario" type="String" class="form" placeholder="Usuario" value="#{LoginBean.user}"/>
+            <p:inputText  id="Password" type="password" class="form" placeholder="Contraseña" value="#{LoginBean.password}"/>
+            <p:commandButton value="Log in" style="display: block; margin: auto; margin-top: 10px; margin-bottom: 10px;" update="log" actionListener="#{LoginBean.logIn()}"/>
+        </div>
+    </h:form>
+    
 </h:body>
 </html>
