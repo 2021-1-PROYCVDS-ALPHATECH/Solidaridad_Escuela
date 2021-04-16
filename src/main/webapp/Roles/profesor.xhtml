@@ -9,8 +9,11 @@
 </h:head>
 </style>
 <h:body>
-    <div class="login" >
-        <h1> Administrativo MAMAWEBO </h1>
-    </div>
+    <h:form id="log">
+        <div class="login" >
+            <h1> Profesor MAMAWEBO </h1>
+            <p:commandButton value="Log out" style="display: block; margin: auto; margin-top: 10px; margin-bottom: 10px;" update="log" actionListener="#{LoginBean.logOut()}"/>
+        </div>
+    </h:form>
 </h:body>
 </html>

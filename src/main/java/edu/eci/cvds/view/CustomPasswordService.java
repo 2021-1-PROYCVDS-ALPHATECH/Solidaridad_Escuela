@@ -173,7 +173,6 @@ public class CustomPasswordService implements HashingPasswordService {
         HashRequest request = createHashRequest(plaintextBytes);
         Hash computed = this.hashService.computeHash(request);
         String formatted = this.hashFormat.format(computed);
-        System.out.println(formatted);
         return constantEquals(saved, formatted);
     }
 

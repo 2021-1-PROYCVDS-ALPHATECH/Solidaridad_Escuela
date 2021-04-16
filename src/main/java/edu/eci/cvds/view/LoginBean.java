@@ -15,6 +15,8 @@ import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.Hash;
+import org.apache.shiro.crypto.hash.HashRequest;
 import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.realm.jdbc.JdbcRealm;
 
@@ -53,22 +55,35 @@ public class LoginBean{
         try {
             subject.login(token);
             if (subject.hasRole("Administrador")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/admin.xhtml");
 			}
             else if (subject.hasRole("Administrativo")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/administrativo.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/administrativo.xhtml");
 			}
             else if (subject.hasRole("Egresado")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/egresado.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/egresado.xhtml");
 			}
             else if (subject.hasRole("Profesor")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/profesor.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/profesor.xhtml");
 			}
             else if (subject.hasRole("Estudiante")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/estudiante.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/estudiante.xhtml");
 			}
         } catch(Exception e) {
             System.out.println(e.getMessage()+" "+e.getCause());
         }
+    }
+
+    public void logOut(){
+        subject.logout();
+        try{
+            System.out.println("Al menos intenta");
+            FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/login.xhtml");
+        }
+        catch(Exception e) {
+            System.out.println(e.getMessage()+" "+e.getCause());
+        }
+    }
+    public void register(){
     }
 }

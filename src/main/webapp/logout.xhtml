@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title> Solidaridad Escuela | Login</title>
+    <link rel="stylesheet" href="WEB-INF/css/style.css"/>
+</h:head>
+<style> 
+ui-panelgrid td {
+    padding: 2px 30px ;
+}
+
+.form {
+    display: block; 
+    margin: auto;
+    margin-top: 10px;
+}
+
+.login{
+    display: block; 
+    margin: auto;
+    margin-top: 100px;
+    border: solid 1px;
+    border-radius: 10px;
+    width: 300px;
+}
+</style>
+<h:body>
+    <h:form id="log">
+        <div class="login" >
+            <p:inputText  id="Usuario" type="String" class="form" placeholder="Usuario" value="#{LoginBean.user}"/>
+            <p:inputText  id="Password" type="password" class="form" placeholder="Contraseña" value="#{LoginBean.password}"/>
+            <p:commandButton value="Log in" style="display: block; margin: auto; margin-top: 10px; margin-bottom: 10px;" update="log" actionListener="#{LoginBean.logIn()}"/>
+        </div>
+    </h:form>
+    
+</h:body>
+</html>
