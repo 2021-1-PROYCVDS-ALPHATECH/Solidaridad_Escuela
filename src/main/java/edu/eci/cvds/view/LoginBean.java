@@ -51,9 +51,7 @@ public class LoginBean{
         subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user, new Sha256Hash(password).toHex());
         try {
-            testLog(token);
             subject.login(token);
-            System.out.println("yep");
             if (subject.hasRole("Administrador")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/admin.xhtml");
 			}
