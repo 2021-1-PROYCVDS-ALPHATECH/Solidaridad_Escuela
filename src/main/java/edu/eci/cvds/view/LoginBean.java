@@ -50,6 +50,7 @@ public class LoginBean{
     }
 
     public void logIn(){
+        System.out.println("Al menos entra");
         subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user, new Sha256Hash(password).toHex());
         try {
@@ -70,14 +71,13 @@ public class LoginBean{
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/estudiante.xhtml");
 			}
         } catch(Exception e) {
-            System.out.println(e.getMessage()+" "+e.getCause());
+            FacesContext.getCurrentInstance().addMessage("log:Usuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: ", "Usuario o contraseña incorrectos"));
         }
     }
 
     public void logOut(){
         subject.logout();
         try{
-            System.out.println("Al menos intenta");
             FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/login.xhtml");
         }
         catch(Exception e) {

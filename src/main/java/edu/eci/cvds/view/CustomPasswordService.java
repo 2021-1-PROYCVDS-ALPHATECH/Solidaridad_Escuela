@@ -136,7 +136,6 @@ public class CustomPasswordService implements HashingPasswordService {
     }
 
     public boolean passwordsMatch(Object submittedPlaintext, String saved) {
-        System.out.println("Entro esta kga");
         ByteSource plaintextBytes = createByteSource(submittedPlaintext);
 
         if (saved == null || saved.length() == 0) {
