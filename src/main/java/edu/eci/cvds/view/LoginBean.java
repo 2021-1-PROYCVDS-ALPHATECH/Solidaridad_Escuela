@@ -6,8 +6,10 @@ import java.util.List;
 import java.util.ArrayList;
 
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext; 
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
 import javax.faces.application.FacesMessage; 
 
 import org.apache.shiro.subject.Subject;
@@ -71,7 +73,7 @@ public class LoginBean{
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/estudiante.xhtml");
 			}
         } catch(Exception e) {
-            FacesContext.getCurrentInstance().addMessage("log:Usuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: ", "Usuario o contraseña incorrectos"));
+            FacesContext.getCurrentInstance().addMessage("log:Usuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Juaz juaz ", "Usuario o contraseña incorrectos"));
         }
     }
 

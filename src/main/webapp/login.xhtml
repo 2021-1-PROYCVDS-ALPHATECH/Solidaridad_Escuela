@@ -71,16 +71,19 @@ td {
 }
 
 .nav-item{
-    padding-right: 10px;
+    margin-left: 20px;
 }
 
-.nav-link:focus {
+.nav-item.active{
     border-bottom: 2px solid;
     border-radius: 0px;
     border-color: #7e1323;
 }
 
+
 .nav-link {
+    display: block;
+    margin: 0;
     color: #a6192e;
 }
 
@@ -229,7 +232,7 @@ body .ui-inputfield.ui-state-error {
 </style>
 <h:body>
     <div class="container">
-        <h:form id="log">
+        <h:form id="log" onsubmit="alert('submit!');return false">
             <div class="form">
                 <ul class="nav nav-pills">
                     <li class="active nav-item">
@@ -245,14 +248,17 @@ body .ui-inputfield.ui-state-error {
                     <div class="tab-pane active" id="signIn">
                         <h:panelGrid column="1" id="Grid1" style="width: 100%;" cellpadding="8">
                             <p:outputLabel styleClass="p-d-block" style="font-weight: bold;">Username</p:outputLabel>
-                            <p:inputText id="Usuario" name="user" class="userTextInput" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;" value="#{LoginBean.user}" required="true"/>
+                            
+                            <p:inputText id="Usuario" name="user" class="userTextInput" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;" value="#{LoginBean.user}" required="true" requiredMessage="El usuario no puede ser nulo"/>
+                            
                             <p:outputLabel styleClass="p-d-block" style="font-weight: bold;">Password</p:outputLabel>
-                            <p:inputText id="Password" type="password" class="passwordTextInput" style="width: 100%; border-radius: 100px; padding-left: 20px;" value="#{LoginBean.password}" required="true"/>
+                            <p:inputText id="Password" type="password" class="passwordTextInput" style="width: 100%; border-radius: 100px; padding-left: 20px;" value="#{LoginBean.password}" required="true" requiredMessage="La contraseña no puede ser nula"/>
                             <p:selectBooleanCheckbox value="true" itemLabel="Remember me" style="padding: 15px;"/>
                             <p:commandButton id="logButton" value="Log in" update="log" style="width: 100%; border-radius: 100px;" actionListener="#{LoginBean.logIn()}"/>
                             <hr style="margin-top: 30px; margin-bottom: 30px;"/>
                             
-                            <p:messages for="Usuario" id="messages" style="font-size: smaller;"/>
+                            <p:message for="Usuario" showDetail="true" id="messageUser" style="font-size: smaller; width: 100%;"/>
+                            <p:message for="Password" showDetail="true" id="messagePass" style="font-size: smaller; width: 100%;"/>
                             
                             <p:link value="Forgot password?" style="display: block; margin: auto; text-align: center; margin-bottom: 50px; color: #a6192e;"/>
                         </h:panelGrid>
@@ -262,13 +268,16 @@ body .ui-inputfield.ui-state-error {
                     <div class="tab-pane" id="signUp">
                         <h:panelGrid column="1" id="Grid2" style="width: 100%;" cellpadding="8">
                             <p:outputLabel styleClass="p-d-block" style="font-weight: bold;">Username</p:outputLabel>
-                            <p:inputText id="RegistroUsuario" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;"/>
+                            <p:inputText id="RegistroUsuario" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;" required="false" requiredMessage="El usuario no puede ser nulo"/>
                             <p:outputLabel styleClass="p-d-block" style="font-weight: bold;">Email</p:outputLabel>
-                            <p:inputText id="RegistroEmail" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;"/>
+                            <p:inputText id="RegistroEmail" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;" required="false" requiredMessage="La contraseña no puede ser nulo"/>
                             <p:outputLabel styleClass="p-d-block" style="font-weight: bold;">Password</p:outputLabel>
-                            <p:inputText id="RegistroPassword" type="password" style="width: 100%; border-radius: 100px; padding-left: 20px;"/>
+                            <p:inputText id="RegistroPassword" type="password" style="width: 100%; border-radius: 100px; padding-left: 20px;" required="false" requiredMessage="El Email no puede ser nulo"/>
                             <hr style="margin-top: 30px; margin-bottom: 30px;"/>
-                            <p:commandButton value="Register" update="log" style="width: 100%; margin-bottom: 100px; border-radius: 100px;"/>
+                            <p:message for="RegistroUsuario" showDetail="true" id="messageRUser" style="font-size: smaller; width: 100%;"/>
+                            <p:message for="RegistroPassword" showDetail="true" id="messageRPass" style="font-size: smaller; width: 100%;"/>
+                            <p:message for="RegistroEmail" showDetail="true" id="messageRMail" style="font-size: smaller; width: 100%;"/>
+                            <p:commandButton id="registerButton" value="Register" update="log" style="width: 100%; margin-bottom: 100px; border-radius: 100px;" onclick="return validateRegister();"/>
                         </h:panelGrid>
                     </div>
 
@@ -276,6 +285,14 @@ body .ui-inputfield.ui-state-error {
             </div>
         </h:form>
     </div>
+    <script>
+        function validateRegister(){
+            user = document.getElementById("log:RegistroUsuario");
+            pass = document.getElementById("log:RegistroPassword");
+            mail = document.getElementById("log:RegistroEmail");
+            return !(user.value.trim() == '' || pass.value.trim() == '' || mail.value.trim() == '');
+        }
+    </script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </h:body>
 </html>
