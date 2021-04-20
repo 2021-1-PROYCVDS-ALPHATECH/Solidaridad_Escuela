@@ -55,8 +55,7 @@ public class CustomPasswordMatcher implements CredentialsMatcher {
         }
         //otherwise they are a String (asserted in the 'assertStoredCredentialsType' method call above):
         String formatted = (String)storedCredentials;
-        System.out.println(formatted);
-        return passwordService.passwordsMatch(submittedPassword, formatted);
+        return passwordService.passwordsMatch(token, formatted);
     }
 
     private HashingPasswordService assertHashingPasswordService(PasswordService service) {

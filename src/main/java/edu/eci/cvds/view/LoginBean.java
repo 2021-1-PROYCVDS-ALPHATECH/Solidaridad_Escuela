@@ -15,6 +15,7 @@ import javax.faces.application.FacesMessage;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Hash;
@@ -52,7 +53,6 @@ public class LoginBean{
     }
 
     public void logIn(){
-        System.out.println("Al menos entra");
         subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user, new Sha256Hash(password).toHex());
         try {
@@ -76,7 +76,6 @@ public class LoginBean{
             FacesContext.getCurrentInstance().addMessage("log:Usuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Juaz juaz ", "Usuario o contraseña incorrectos"));
         }
     }
-
     public void logOut(){
         subject.logout();
         try{

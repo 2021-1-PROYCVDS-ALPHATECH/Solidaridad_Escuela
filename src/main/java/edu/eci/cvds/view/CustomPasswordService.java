@@ -31,6 +31,8 @@ import org.apache.shiro.crypto.hash.format.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UsernamePasswordToken;
 /**
  * Default implementation of the {@link PasswordService} interface that relies on an internal
  * {@link HashService}, {@link HashFormat}, and {@link HashFormatFactory} to function:
@@ -166,7 +168,6 @@ public class CustomPasswordService implements HashingPasswordService {
         //compare the formatted output with the saved string.  This will correctly compare passwords,
         //but does not allow changing the HashService configuration without breaking previously saved
         //passwords:
-
         //The saved text value can't be reconstituted into a Hash instance.  We need to format the
         //submittedPlaintext and then compare this formatted value with the saved value:
         HashRequest request = createHashRequest(plaintextBytes);
@@ -175,6 +176,11 @@ public class CustomPasswordService implements HashingPasswordService {
         return constantEquals(saved, formatted);
     }
 
+    public boolean passwordsMatch(AuthenticationToken token, String saved) {
+        UsernamePasswordToken user = (UsernamePasswordToken) token;
+        String submittedPass = new String(user.getPassword());
+        return saved.equals(submittedPass);
+    }
     protected HashRequest buildHashRequest(ByteSource plaintext, Hash saved) {
         //keep everything from the saved hash except for the source:
         return new HashRequest.Builder().setSource(plaintext)
