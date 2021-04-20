@@ -1,6 +1,6 @@
 package edu.eci.cvds.sampleprj.dao;
 
-import java.util.Date;
+
 import java.util.List;
 
 import edu.eci.cvds.samples.entities.Necesidad;
