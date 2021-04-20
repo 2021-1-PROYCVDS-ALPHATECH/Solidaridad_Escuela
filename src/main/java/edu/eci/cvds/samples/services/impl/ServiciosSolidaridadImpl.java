@@ -1,5 +1,6 @@
 package edu.eci.cvds.samples.services.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.google.inject.Inject;
@@ -18,6 +19,9 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
 
     @Inject
     private CategoriaDAO categoriaDAO;
+
+    @Inject
+    private NecesidadDAO necesidadDAO;
 
     @Transactional
     @Override
@@ -83,5 +87,46 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             throw new ExcepcionSolidaridadEscuela ("Error al actualizar el estado de la categoria con ID " + id, e);
         }
         
+    }
+
+    @Override
+    public void registrarNecesidades(String idNecesidad, String idUsuario, String nombre, String descripcion,
+            String urgencia, String estado)
+            throws ExcepcionSolidaridadEscuela {
+        try {
+            necesidadDAO.save(new Necesidad(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado));
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridadEscuela("Error al registrar la necesidad: "+ idNecesidad, e);
+        }
+        
+    }
+
+    @Override
+    public void actualizarNombreNecesidad(String idNecesidad, String nombre) throws ExcepcionSolidaridadEscuela {
+        try {
+            necesidadDAO.updateName(idNecesidad, nombre);
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridadEscuela("error al actualizar el nombre de la categoria con ID: "+ idNecesidad,e);
+        }
+        
+    }
+
+    @Override
+    public void actualizarEstadoNecesidad(String idNecesidad, String estado) throws ExcepcionSolidaridadEscuela {
+        try {
+            necesidadDAO.updateState(idNecesidad, estado);
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridadEscuela("Error al actualizar el estado de la categoria con ID: "+ idNecesidad, e);
+        }
+        
+    }
+
+    @Override
+    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridadEscuela {
+        try {
+            return necesidadDAO.loadAll();
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridadEscuela("Error al consultar todas las necesidades ", e);
+        }
     }
 }

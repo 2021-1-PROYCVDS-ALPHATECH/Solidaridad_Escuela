@@ -23,6 +23,15 @@ public class Categoria implements Serializable{
     private Date fechaModificacion;
     private String estado;
 
+    /**
+     * 
+     * @param id
+     * @param nombre
+     * @param descripcion
+     * @param fechaCreacion
+     * @param fechaModificacion
+     * @param estado
+     */
     public Categoria(String id, String nombre, String descripcion, Date fechaCreacion, Date fechaModificacion, String estado) {
         this.idCategoria = id;
         this.nombre = nombre;
@@ -32,13 +41,19 @@ public class Categoria implements Serializable{
         this.estado = estado;
     }
 
+    /**
+     * 
+     * @param id
+     * @param nombre
+     * @param descripcion
+     */
     public Categoria(String id, String nombre, String descripcion){
         this.idCategoria = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         LocalDate hoy = LocalDate.now();
         this.fechaCreacion = Date.valueOf(hoy);
-        this.fechaModificacion = Date.valueOf(hoy);;
+        this.fechaModificacion = Date.valueOf(hoy);
         this.estado = "Activa";
     }
 

@@ -9,6 +9,14 @@ import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.CategoriaMapper;
 import edu.eci.cvds.samples.entities.Categoria;
 
+/**
+ * @author Luis Amaya
+ * @author Angie Medina
+ * @author Sebastian Mina
+ * @author Jose Perez
+ * 
+ * @version 20/04/2021 v1.0
+ */
 public class MyBATISCategoriaDAO implements CategoriaDAO{
 
     @Inject
