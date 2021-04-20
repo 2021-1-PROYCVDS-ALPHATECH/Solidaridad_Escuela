@@ -88,6 +88,6 @@ public class Categoria implements Serializable{
 
     @Override
     public String toString(){
-        return "Categoria{" + "id=" + idCategoria + ", nombre=" + nombre + ", fecha C=" + fechaCreacion + ", fecha M=" + fechaModificacion+", estado= "+estado+'}';
+        return "Categoria{" + "id=" + idCategoria + ", nombre=" + nombre +", descripcion=" + descripcion +", fecha C=" + fechaCreacion + ", fecha M=" + fechaModificacion+", estado= "+estado+'}';
     }
 }

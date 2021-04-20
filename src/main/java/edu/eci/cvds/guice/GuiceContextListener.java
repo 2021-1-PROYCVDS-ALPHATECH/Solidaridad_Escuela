@@ -8,6 +8,8 @@ import org.mybatis.guice.datasource.helper.JdbcHelper;
 
 import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.*;
+import edu.eci.cvds.samples.services.ServiciosSolidaridad;
+import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -29,6 +31,8 @@ public class GuiceContextListener implements ServletContextListener {
                 setClassPathResource("mybtis-config.xml");
                 
                 bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
+                bind(CategoriaDAO.class).to(MyBATISCategoriaDAO.class);
+                bind(ServiciosSolidaridad.class).to(ServiciosSolidaridadImpl.class);
             }
         });
         servletContextEvent.getServletContext().setAttribute(Injector.class.getName(), injector);

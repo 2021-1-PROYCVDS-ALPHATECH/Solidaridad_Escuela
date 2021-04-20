@@ -14,7 +14,7 @@ import edu.eci.cvds.samples.entities.*;
  * @version 19/04/2021 v1.0
  */
 public interface ServiciosSolidaridad {
-    
+
     public abstract List<Usuario> consultarUsuarios() throws ExcepcionSolidaridadEscuela;
 
     public abstract List<Categoria> consultarCategorias() throws ExcepcionSolidaridadEscuela;

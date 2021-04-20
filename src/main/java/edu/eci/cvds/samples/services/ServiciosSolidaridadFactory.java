@@ -5,8 +5,9 @@ import org.apache.ibatis.transaction.TransactionFactory;
 import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.guice.XMLMyBatisModule;
 
-import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
-import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISUsuarioDAO;
+import edu.eci.cvds.sampleprj.dao.*;
+import edu.eci.cvds.sampleprj.dao.mybatis.*;
+import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
 
 import java.util.Optional;
 
@@ -34,6 +35,8 @@ public class ServiciosSolidaridadFactory {
                 setClassPathResource(pathResource);
                 
                 bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
+                bind(CategoriaDAO.class).to(MyBATISCategoriaDAO.class);
+                bind(ServiciosSolidaridad.class).to(ServiciosSolidaridadImpl.class);
             }
         });
     }
@@ -68,10 +71,27 @@ public class ServiciosSolidaridadFactory {
         try{
             System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
+            System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
+            System.out.println("-------------------------------- INSERTAR CATEGORIAS  --------------------------------");
+            //instance.getServiciosSolidaridad().registrarCategoria("3", "insercion", "inserciond");
+            System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
+            System.out.println("-------------------------------- ACTUALIZAR NOMBRE CATEGORIAS --------------------------------");
+            instance.getServiciosSolidaridad().actualizarNombreCategoria("1", "actnom");
+            System.out.println("-------------------------------- ACTUALIZAR DESCRIPCION CATEGORIAS --------------------------------");
+            instance.getServiciosSolidaridad().actualizarDescripcionCategoria("1", "actdes");
+            System.out.println("-------------------------------- ACTUALIZAR ESTADO CATEGORIAS --------------------------------");
+            instance.getServiciosSolidaridad().actualizarEstadoCategoria("1", "Inactiva");
+            System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
+
+
+
+            
         } catch (Exception e){
-            System.out.println("F");
+            System.out.println(e.getMessage());
         }
-        
     }
 
 }

@@ -8,10 +8,14 @@
     SELECT
       u.idUsuario AS u_idUsuario,
       u.nombre AS u_nombre,
-      u.clave AS u_email,
+      u.telefono AS u_telefono,
+      u.email AS u_email,
+      u.clave AS u_clave,
       u.rol AS u_rol
-    FROM Usuarios
+    FROM Usuarios u
   </select>
+
+  
 
   <resultMap type='Usuario' id='UsuarioResult'>
     <id property='idUsuario' column='u_idUsuario'/>
@@ -19,6 +23,6 @@
     <result property='telefono' column='u_telefono'/>  
     <result property='email' column='u_email'/>  
     <result property='clave' column='u_clave'/>  
-    <assosition property='rol' column='u_rol' javaType='edu.eci.cvds.samples.entities.Rol'/>
+    <result property='rol' column='u_rol'/>
   </resultMap>
 </mapper>

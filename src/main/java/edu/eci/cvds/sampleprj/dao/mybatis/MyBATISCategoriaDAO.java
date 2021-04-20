@@ -19,6 +19,7 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
         try{
             return categoriaMapper.consultarCategorias();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println("Error " + e.getMessage());
             throw new PersistenceException("Error al consultar las categorias", e);
         }
     }

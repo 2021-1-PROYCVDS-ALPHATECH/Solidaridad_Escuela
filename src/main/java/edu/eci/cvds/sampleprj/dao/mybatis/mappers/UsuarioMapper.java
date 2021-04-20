@@ -5,5 +5,5 @@ import java.util.List;
 import edu.eci.cvds.samples.entities.Usuario;
 
 public interface UsuarioMapper {
-    public List<Usuario> consultarClientes();
+    public List<Usuario> consultarUsuarios();
 }

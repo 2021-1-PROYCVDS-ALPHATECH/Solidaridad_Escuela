@@ -13,32 +13,32 @@
       c.fechaCreacion AS c_fechaCreacion,
       c.fechaCreacion AS c_fechaCreacion,
       c.estado AS c_estado
-    FROM Categoria
+    FROM Categorias c
 
   </select>
   <insert parameterType="map" id="insertarCategoria">
-    INSERT INTO Categoria
-      VALUES(#{cat.idCategoria}, #{cat.nombre}, #{cat.descripcion}, #{cat.fechaCreacion}, #{cat.fechaModificacion}, #{cat.estado})
+    INSERT INTO Categorias
+      VALUES(#{cat.idCategoria}, #{cat.nombre}, #{cat.descripcion})
   </insert>
 
   <update parameterType="map" id="actualizarNombre">
-    UPDATE Categoria
+    UPDATE Categorias
       SET nombre = #{nom} WHERE idCategoria = #{id}
   </update>
 
   <update parameterType="map" id="actualizarDescripcion">
-    UPDATE Categoria
+    UPDATE Categorias
       SET descripcion = #{des} WHERE idCategoria = #{id}
   </update>
 
   <update parameterType="map" id="actualizarEstado">
-    UPDATE Categoria
-      SET nombre = #{est} WHERE idCategoria = #{id}
+    UPDATE Categorias
+      SET estado = #{est} WHERE idCategoria = #{id}
   </update>
 
 
   <resultMap type='Categoria' id='CategoriaResult'>
-    <id property='idUCategoria' column='c_idCategoria'/>
+    <id property='idCategoria' column='c_idCategoria'/>
     <result property='nombre' column='c_nombre'/>
     <result property='descripcion' column='c_descripcion'/>  
     <result property='fechaCreacion' column='c_fechaCreacion'/>  

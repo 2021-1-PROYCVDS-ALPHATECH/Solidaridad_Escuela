@@ -1,6 +1,8 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
+
+import edu.eci.cvds.samples.entities.Rol;
 /**
  * Clase usario para asi poder ...
  * @author Luis Amaya
@@ -27,6 +29,16 @@ public class Usuario implements Serializable{
         this.rol = rol;
     }
 
+    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol){
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.telefono = telefono;
+        this.email = email;
+        this.clave = clave;
+        System.out.println("Rol: " + rol);
+        this.rol = Rol.valueOf(rol);
+    }
+    
     public void setIdUsuario(String newId) {
         idUsuario = newId;
     }
