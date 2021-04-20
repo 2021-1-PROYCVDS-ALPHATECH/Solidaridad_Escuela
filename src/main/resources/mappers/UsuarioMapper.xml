@@ -2,3 +2,23 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper">
+  <select parameterType="map" id="consultarUsuarios" resultMap="UsuarioResult">
+    SELECT
+      u.idUsuario AS u_idUsuario,
+      u.nombre AS u_nombre,
+      u.clave AS u_email,
+      u.rol AS u_rol
+    FROM Usuarios
+  </select>
+
+  <resultMap type='Usuario' id='UsuarioResult'>
+    <id property='idUsuario' column='u_idUsuario'/>
+    <result property='nombre' column='u_nombre'/>
+    <result property='telefono' column='u_telefono'/>  
+    <result property='email' column='u_email'/>  
+    <result property='clave' column='u_clave'/>  
+    <assosition property='rol' column='u_rol' javaType='edu.eci.cvds.samples.entities.Rol'/>
+  </resultMap>
+</mapper>

@@ -2,8 +2,7 @@
 -- Table `Roles`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Roles (
-    idRol VARCHAR(50) PRIMARY KEY,
-    nombre VARCHAR(20) UNIQUE NOT NULL
+    nombre VARCHAR(20)  PRIMARY KEY
 );
 
 -- -----------------------------------------------------
@@ -27,7 +26,7 @@ CREATE TABLE IF NOT EXISTS Categorias (
     descripcion VARCHAR(1000),
     fechaCreacion DATE NOT NULL,
     fechaModificacion DATE NOT NULL,
-    estado VARCHAR(10) NOT NULL
+    estado VARCHAR(10) DEFAULT 'Activa'
 );
 
 -- -----------------------------------------------------
@@ -59,10 +58,10 @@ CREATE TABLE IF NOT EXISTS Necesidades (
     FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario)
 );
 
-INSERT INTO Roles VALUES ('1','Administrador');
-INSERT INTO Roles VALUES ('2','Administrativo');
-INSERT INTO Roles VALUES ('3','Egresado');
-INSERT INTO Roles VALUES ('4','Profesor');
-INSERT INTO Roles VALUES ('5','Estudiante');
+/*INSERT INTO Roles VALUES ('Administrador');
+INSERT INTO Roles VALUES ('Administrativo');
+INSERT INTO Roles VALUES ('Egresado');
+INSERT INTO Roles VALUES ('Profesor');
+INSERT INTO Roles VALUES ('Estudiante');
 
-INSERT INTO Usuarios VALUES ('1','admin','0000000000','admin@mail.com','Administrador','123654');
+INSERT INTO Usuarios VALUES ('1','admin','0000000000','admin@mail.com','Administrador','123654');*/
