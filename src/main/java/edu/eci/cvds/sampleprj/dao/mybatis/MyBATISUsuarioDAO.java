@@ -20,6 +20,16 @@ public class MyBATISUsuarioDAO implements UsuarioDAO{
     private UsuarioMapper usuarioMapper;
     
     @Override
+    public void save(Usuario u) throws PersistenceException{
+        try{
+            usuarioMapper.registrarUsuario(u);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println("Error" + e.getMessage());
+            throw new PersistenceException("Error al insertar usuario " + u.toString(), e);
+        }
+    }
+
+    @Override
     public List<Usuario> loadAll() throws PersistenceException {
         try{
             return usuarioMapper.consultarUsuarios();

@@ -7,6 +7,8 @@ import org.mybatis.guice.XMLMyBatisModule;
 
 import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.*;
+import edu.eci.cvds.samples.entities.Rol;
+import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
 
 import java.util.Optional;
@@ -71,7 +73,12 @@ public class ServiciosSolidaridadFactory {
         try{
             System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
-            System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
+            System.out.println("-------------------------------- INSERTAR USUARIOS --------------------------------");
+            instance.getServiciosSolidaridad().registrarUsuario(new Usuario("2", "estudiante", "0000000000", "estu@gmail.com", "10e35e8e93e91e58b54af372922fe86028c587c7e32fa3f50c4a106eaa05e668", Rol.Estudiante));
+            System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
+
+            System.out.println("\n-------------------------------- CONSULAR CATEGORIAS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
             System.out.println("-------------------------------- INSERTAR CATEGORIAS  --------------------------------");
             //instance.getServiciosSolidaridad().registrarCategoria("3", "insercion", "inserciond");
@@ -84,11 +91,7 @@ public class ServiciosSolidaridadFactory {
             System.out.println("-------------------------------- ACTUALIZAR ESTADO CATEGORIAS --------------------------------");
             instance.getServiciosSolidaridad().actualizarEstadoCategoria("1", "Inactiva");
             System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
-
-
-
-            
+            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());   
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

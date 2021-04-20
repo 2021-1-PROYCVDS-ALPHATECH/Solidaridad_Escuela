@@ -15,8 +15,11 @@
     FROM Usuarios u
   </select>
 
+  <insert parameterType="map" id="registrarUsuario">
+    INSERT INTO Usuarios VALUES (#{usuario.idUsuario}, #{usuario.nombre}, #{usuario.telefono},
+                                 #{usuario.email}, #{usuario.clave}, #{usuario.rol})
+  </insert>
   
-
   <resultMap type='Usuario' id='UsuarioResult'>
     <id property='idUsuario' column='u_idUsuario'/>
     <result property='nombre' column='u_nombre'/>

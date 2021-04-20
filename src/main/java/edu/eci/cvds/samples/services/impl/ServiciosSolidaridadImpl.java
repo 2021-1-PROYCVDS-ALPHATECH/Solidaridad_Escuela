@@ -19,6 +19,16 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     @Inject
     private CategoriaDAO categoriaDAO;
 
+    @Transactional
+    @Override
+    public void registrarUsuario(Usuario u) throws ExcepcionSolidaridadEscuela {
+        try{
+            usuarioDAO.save(u);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridadEscuela ("Error al consultar los usuarios", e);
+        }
+    }
+
     @Override
     public List<Usuario> consultarUsuarios() throws ExcepcionSolidaridadEscuela {
         try{
@@ -37,6 +47,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         }
     }
 
+    @Transactional
     @Override
     public void registrarCategoria(String id, String nombre, String descripcion) throws ExcepcionSolidaridadEscuela {
         try{

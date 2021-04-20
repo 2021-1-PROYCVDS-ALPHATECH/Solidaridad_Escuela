@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     telefono VARCHAR(20) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
     rol VARCHAR(20) NOT NULL,
-    clave VARCHAR(20) NOT NULL,
+    clave VARCHAR(100) NOT NULL,
     FOREIGN KEY (rol) REFERENCES Roles(nombre)
 );
 -- -----------------------------------------------------
@@ -58,10 +58,13 @@ CREATE TABLE IF NOT EXISTS Necesidades (
     FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario)
 );
 
+ALTER TABLE Usuarios
+ALTER COLUMN clave TYPE VARCHAR(100);
 /*INSERT INTO Roles VALUES ('Administrador');
 INSERT INTO Roles VALUES ('Administrativo');
 INSERT INTO Roles VALUES ('Egresado');
 INSERT INTO Roles VALUES ('Profesor');
 INSERT INTO Roles VALUES ('Estudiante');
 
-INSERT INTO Usuarios VALUES ('1','admin','0000000000','admin@mail.com','Administrador','123654');*/
+INSERT INTO Usuarios VALUES ('1','admin','0000000000','admin@mail.com','Administrador','123654');
+*/

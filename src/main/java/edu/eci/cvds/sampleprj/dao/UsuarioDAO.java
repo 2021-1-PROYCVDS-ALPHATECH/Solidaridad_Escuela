@@ -15,6 +15,8 @@ import edu.eci.cvds.samples.entities.Usuario;
  */
 public interface UsuarioDAO {
 
+    public void save(Usuario u) throws PersistenceException;
+    
     public List<Usuario> loadAll() throws PersistenceException;
 
 }

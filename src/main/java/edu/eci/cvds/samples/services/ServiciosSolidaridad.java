@@ -15,6 +15,8 @@ import edu.eci.cvds.samples.entities.*;
  */
 public interface ServiciosSolidaridad {
 
+    public abstract void registrarUsuario(Usuario u) throws ExcepcionSolidaridadEscuela;
+    
     public abstract List<Usuario> consultarUsuarios() throws ExcepcionSolidaridadEscuela;
 
     public abstract List<Categoria> consultarCategorias() throws ExcepcionSolidaridadEscuela;
