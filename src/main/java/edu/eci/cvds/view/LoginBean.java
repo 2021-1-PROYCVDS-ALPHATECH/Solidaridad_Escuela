@@ -14,6 +14,11 @@ import javax.faces.application.FacesMessage;
 
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.subject.SubjectContext;
+
+import edu.eci.cvds.samples.entities.Categoria;
+import edu.eci.cvds.samples.services.ExcepcionSolidaridadEscuela;
+import edu.eci.cvds.samples.services.ServiciosSolidaridad;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -30,6 +35,7 @@ public class LoginBean{
     private String user;
     private String password;
     private Subject subject;
+    private ServiciosSolidaridad servicios;
 
     public LoginBean(){
         user = "";
@@ -76,6 +82,11 @@ public class LoginBean{
             FacesContext.getCurrentInstance().addMessage("log:Usuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Juaz juaz ", "Usuario o contraseña incorrectos"));
         }
     }
+
+    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridadEscuela{
+        return servicios.consultarCategorias();
+    }
+
     public void logOut(){
         subject.logout();
         try{
