@@ -83,8 +83,18 @@ public class LoginBean{
         }
     }
 
-    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridadEscuela{
-        return servicios.consultarCategorias();
+    public List<Integer> consultarCategorias() throws ExcepcionSolidaridadEscuela{
+        System.out.println(servicios.consultarCategorias().size());
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(1);
+        return list;
+    }
+
+    public ArrayList<Integer> test(){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(1);
+        list.add(2);
+        return list;
     }
 
     public void logOut(){
