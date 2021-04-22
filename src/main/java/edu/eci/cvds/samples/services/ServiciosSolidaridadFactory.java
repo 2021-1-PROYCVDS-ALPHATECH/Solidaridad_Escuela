@@ -40,6 +40,7 @@ public class ServiciosSolidaridadFactory {
                 bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
                 bind(CategoriaDAO.class).to(MyBATISCategoriaDAO.class);
                 bind(NecesidadDAO.class).to(MyBATISNecesidadDAO.class);
+                bind(OfertaDAO.class).to(MyBATISOfertaDAO.class);
                 bind(ServiciosSolidaridad.class).to(ServiciosSolidaridadImpl.class);
             }
         });
@@ -77,7 +78,7 @@ public class ServiciosSolidaridadFactory {
             System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
             System.out.println("-------------------------------- INSERTAR USUARIOS --------------------------------");
-            instance.getServiciosSolidaridad().registrarUsuario(new Usuario("2", "estudiante", "0000000000", "estu@gmail.com", "10e35e8e93e91e58b54af372922fe86028c587c7e32fa3f50c4a106eaa05e668", Rol.Estudiante));
+            //instance.getServiciosSolidaridad().registrarUsuario(new Usuario("2", "estudiante", "0000000000", "estu@gmail.com", "10e35e8e93e91e58b54af372922fe86028c587c7e32fa3f50c4a106eaa05e668", Rol.Estudiante));
             System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
 
