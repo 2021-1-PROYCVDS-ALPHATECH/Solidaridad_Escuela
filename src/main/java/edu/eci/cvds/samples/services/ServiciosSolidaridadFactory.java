@@ -74,6 +74,7 @@ public class ServiciosSolidaridadFactory {
 
     public static void main(String[] args){
         try{
+            
             System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
             System.out.println("-------------------------------- INSERTAR USUARIOS --------------------------------");

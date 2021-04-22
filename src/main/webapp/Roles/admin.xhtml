@@ -6,12 +6,81 @@
 <h:head>
     <title> Solidaridad Escuela | Login</title>
     <link rel="stylesheet" href="WEB-INF/css/style.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </h:head>
+<style>
+.curved svg {
+    display: block;
+    margin: auto;
+    width: 1904;
+    
+}
+.form {
+    width: 100%;
+}
+.curved {
+    width: 100%;
+    height: 400px;
+    text-align: center;   
+    display: block;
+    margin: auto;
+    background: #7e1323;
+}
+.buttons {
+    margin-top: 100px;
+}
+
+i {
+    font-size:48px;
+}
+
+a {
+    color:#7e1323;
+}
+
+p {
+    width: 50%; 
+    display: block; 
+    margin: auto; 
+    margin-top: 25px;
+    text-align: justify;
+}
+</style>
 <h:body>
     <h:form id="log">
-        <div class="login" >
-            <h1> Admin MAMAWEBO </h1>
-            <p:commandButton value="Log out" style="display: block; margin: auto; margin-top: 10px; margin-bottom: 10px;" update="log" actionListener="#{LoginBean.logOut()}"/>
+        <div class="curved">
+            <i style="position: absolute; top: 180px; font-size: 100px; margin: 0; color: #a6192e" class="fas fa-user-tie"></i>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 320"><path fill="#fff" fill-opacity="1" d="M0,224L48,240C96,256,192,288,288,293.3C384,299,480,277,576,240C672,203,768,149,864,106.7C960,64,1056,32,1152,69.3C1248,107,1344,213,1392,266.7L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
+            <div class="buttons">
+                <table style="width:100%">
+                    <colgroup>
+                        <col span="1" style="width: 25%;"/>
+                        <col span="1" style="width: 25%;"/>
+                        <col span="1" style="width: 25%;"/>
+                        <col span="1" style="width: 25%;"/>
+                    </colgroup>
+                    <tr>
+                        <th>
+                            <p style="color:#7e1323; font-size:32px;">Funcionalidades</p>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
+                        </th>
+                        <th>
+                            <a id="CategoriaLink" href="/faces/login.xhtml"><i class="fas fa-list"></i></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
+                        </th>
+                        <th>
+                            <a id="NecesidadLink" href="/faces/login.xhtml" ><i class="fas fa-receipt"></i></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
+                        </th>
+                        <th>
+                            <a id="OfertaLink" href="/faces/login.xhtml" ><i class="far fa-lightbulb"></i></a>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+            
         </div>
     </h:form>
 </h:body>
