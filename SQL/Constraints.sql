@@ -9,3 +9,9 @@ ADD CONSTRAINT Roles_CK
 CHECK (
 	nombre IN ('Administrador', 'Estudiante', 'Profesor', 'Egresado', 'Administrativo')
 );
+
+ALTER TABLE Necesiudades
+ADD CONSTRAINT Estados_CK
+CHECK (
+    estado IN ('Activa', 'En Proceso', 'Resuelta', 'Cerrada')
+);
