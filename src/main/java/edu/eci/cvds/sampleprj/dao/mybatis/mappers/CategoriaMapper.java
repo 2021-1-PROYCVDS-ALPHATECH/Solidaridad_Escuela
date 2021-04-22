@@ -6,6 +6,14 @@ import org.apache.ibatis.annotations.Param;
 
 import edu.eci.cvds.samples.entities.Categoria;
 
+/**
+ * @author Luis Amaya
+ * @author Angie Medina
+ * @author Sebastian Mina
+ * @author Jose Perez
+ * 
+ * @version 20/04/2021 v1.0
+ */
 public interface CategoriaMapper{
 
     public List<Categoria> consultarCategorias();
@@ -16,9 +24,9 @@ public interface CategoriaMapper{
                                 @Param("nom") String nombre);
     
     public void actualizarDescripcion(@Param("id") String id,
-                                      @Param("des") String descripcion);
+                                    @Param("des") String descripcion);
 
     public void actualizarEstado(@Param("id") String id,
-                                 @Param("est") String estado);
+                                @Param("est") String estado);
     
 }

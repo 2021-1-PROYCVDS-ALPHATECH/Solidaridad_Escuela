@@ -13,7 +13,14 @@ import edu.eci.cvds.sampleprj.dao.mybatis.mappers.UsuarioMapper;
 import edu.eci.cvds.samples.entities.Usuario;
 
 
-
+/**
+ * @author Luis Amaya
+ * @author Angie Medina
+ * @author Sebastian Mina
+ * @author Jose Perez
+ * 
+ * @version 20/04/2021 v1.0
+ */
 public class MyBATISUsuarioDAO implements UsuarioDAO{
 
     @Inject

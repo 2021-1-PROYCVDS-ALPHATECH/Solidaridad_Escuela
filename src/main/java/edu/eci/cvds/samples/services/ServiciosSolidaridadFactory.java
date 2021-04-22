@@ -7,6 +7,7 @@ import org.mybatis.guice.XMLMyBatisModule;
 
 import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.*;
+import edu.eci.cvds.samples.entities.Oferta;
 import edu.eci.cvds.samples.entities.Rol;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
@@ -38,33 +39,34 @@ public class ServiciosSolidaridadFactory {
                 
                 bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
                 bind(CategoriaDAO.class).to(MyBATISCategoriaDAO.class);
+                bind(NecesidadDAO.class).to(MyBATISNecesidadDAO.class);
                 bind(ServiciosSolidaridad.class).to(ServiciosSolidaridadImpl.class);
             }
         });
     }
- 
+
     private ServiciosSolidaridadFactory(){
         optInjector = Optional.empty();
     }
- 
+
     public ServiciosSolidaridad getServiciosSolidaridad(){
         if (!optInjector.isPresent()) {
             optInjector = Optional.of(myBatisInjector("development","mybatis-config.xml"));
         }
- 
+
         return optInjector.get().getInstance(ServiciosSolidaridad.class);
     }
- 
- 
+
+
     public ServiciosSolidaridad getServiciosSolidaridadTesting(){
         if (!optInjector.isPresent()) {
             optInjector = Optional.of(myBatisInjector("test","mybatis-config-h2.xml"));
         }
- 
+
         return optInjector.get().getInstance(ServiciosSolidaridad.class);
     }
- 
- 
+
+
     public static ServiciosSolidaridadFactory getInstance(){
         return instance;
     }
@@ -93,6 +95,17 @@ public class ServiciosSolidaridadFactory {
             instance.getServiciosSolidaridad().actualizarEstadoCategoria("1", "Inactiva");
             System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());   
+
+            System.out.println("-------------------------------- INSERTAR NECESIDADES --------------------------------");
+            instance.getServiciosSolidaridad().registrarNecesidades("1", "2", "estudiante", "necesidad1", "necesidad", "estado");
+            System.out.println("-------------------------------- CONSULTAR NECESIDADES --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarNecesidades().toString());
+
+            System.out.println("-------------------------------- INSERTAR OFERTAS --------------------------------");
+            instance.getServiciosSolidaridad().registrarOferta(new Oferta("1","2","estudiante","oferta1","estado"));
+            System.out.println("-------------------------------- CONSULTAR OFERTAS --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarOferta().toString());
+
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.NecesidadMapper">
+    <select parameterType="map" id="consultarNecesidades" resultMap="NecesidadResult">
+        SELECT 
+            n.idNecesidad AS n_idNecesidad,
+            n.idUsuario AS n_idUsuario, 
+            n.nombre AS n_nombre,
+            n.descripcion AS n_descripcion,
+            n.urgencia AS n_urgencia,
+            n.fechaCreacion AS n_fechaCreacion,
+            n.fechaModificacion AS n_fechaModificacion,
+            n.estado AS 
+        FROM Necesidades n
+    </select>
+
+    <insert id="registrarNecesidades" parameterType="map">
+        INSERT INTO Necesidades VALUES (#{necesidad.idNecesidad}, #{necesidad.idUsuario}, #{necesidad.nombre}, 
+                                        #{necesidad.descripcion}, #{necesidad.urgencia}, #{necesidad.estado})
+    </insert>
+
+    <update id="actualizarNombre" parameterType="map">
+        UPDATE Necesidades
+            SET nombre = #{nombre} WHERE idNecesidad = #{idNecesidad}
+    </update>
+
+    <update id="actualizarEstado" parameterType="map">
+        UPDATE Necesidades
+            SET estado = #{estado} WHERE idNecesidad = #{idNecesidad}
+    </update>
+
+    <resultMap id="NecesidadResult" type="Necesidad">
+        <id property='idNecesidad' column='n_idNecesidad' />
+        <id property="idUsuario" column="n_idUsuario" />
+        <result property="nombre" column="n_nombre"/>
+        <result property="descripcion" column="n_descripcion"/>
+        <result property="urgencia" column="n_urgencia"/>
+        <result property="fechaCreacion" column="n_fechaCreacion"/>
+        <result property="fechaModificacion" column="n_fechaModificacion"/>
+        <result property="estado" column="n_estado"/>
+    </resultMap>
+</mapper>

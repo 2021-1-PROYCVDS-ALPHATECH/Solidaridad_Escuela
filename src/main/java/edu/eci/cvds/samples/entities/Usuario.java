@@ -20,6 +20,15 @@ public class Usuario implements Serializable{
     private String clave;
     private Rol rol;
 
+    /**
+     * 
+     * @param idUsuario
+     * @param nombre
+     * @param telefono
+     * @param email
+     * @param clave
+     * @param rol
+     */
     public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, Rol rol){
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -28,7 +37,15 @@ public class Usuario implements Serializable{
         this.clave = clave;
         this.rol = rol;
     }
-
+    /**
+     * 
+     * @param idUsuario
+     * @param nombre
+     * @param telefono
+     * @param email
+     * @param clave
+     * @param rol
+     */
     public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol){
         this.idUsuario = idUsuario;
         this.nombre = nombre;

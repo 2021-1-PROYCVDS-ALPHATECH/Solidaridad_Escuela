@@ -1,10 +1,8 @@
 package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 
-import java.util.List;
-
-import edu.eci.cvds.samples.entities.Usuario;
-
 import org.apache.ibatis.annotations.Param;
+import edu.eci.cvds.samples.entities.Oferta;
+import java.util.List;
 
 /**
  * @author Luis Amaya
@@ -14,9 +12,11 @@ import org.apache.ibatis.annotations.Param;
  * 
  * @version 20/04/2021 v1.0
  */
-public interface UsuarioMapper {
 
-    public void registrarUsuario(@Param("usuario") Usuario u);
+public interface OfertaMapper {
+
+    public void registrarOferta(@Param ("oferta") Oferta o);
+
+    public List<Oferta> consultarOferta();
     
-    public List<Usuario> consultarUsuarios();
 }
