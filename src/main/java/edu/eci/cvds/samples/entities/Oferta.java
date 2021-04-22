@@ -105,6 +105,6 @@ public class Oferta implements Serializable {
 
     @Override
     public String toString(){
-        return "Oferta{ "+ "idOferta= "+ idOferta + ", idUsuario= " + idUsuario + ", nombre= " + nombre + ", descripcion= " + descripcion + ", fecha C" + fechaCreacion + ", fecha M" + fechaModificacion + ", estado= " + estado + "}";
+        return "Oferta{"+"idOferta= "+ idOferta + ", idUsuario= " + idUsuario + ", nombre= " + nombre + ", descripcion= " + descripcion + ", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + "}";
     }
 }

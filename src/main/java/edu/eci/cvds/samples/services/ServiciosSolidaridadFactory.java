@@ -77,10 +77,10 @@ public class ServiciosSolidaridadFactory {
             
             System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
-            System.out.println("-------------------------------- INSERTAR USUARIOS --------------------------------");
-            //instance.getServiciosSolidaridad().registrarUsuario(new Usuario("2", "estudiante", "0000000000", "estu@gmail.com", "10e35e8e93e91e58b54af372922fe86028c587c7e32fa3f50c4a106eaa05e668", Rol.Estudiante));
+            /*System.out.println("-------------------------------- INSERTAR USUARIOS --------------------------------");
+            instance.getServiciosSolidaridad().registrarUsuario(new Usuario("3", "estudiante1", "0000000000", "estu123@gmail.com", "10e35", Rol.Estudiante));
             System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
+            System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());*/
 
             System.out.println("\n-------------------------------- CONSULAR CATEGORIAS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
@@ -97,13 +97,13 @@ public class ServiciosSolidaridadFactory {
             System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());   
 
-            System.out.println("-------------------------------- INSERTAR NECESIDADES --------------------------------");
-            instance.getServiciosSolidaridad().registrarNecesidades("1", "2", "estudiante", "necesidad1", "necesidad", "estado");
+            /*System.out.println("-------------------------------- INSERTAR NECESIDADES --------------------------------");
+            instance.getServiciosSolidaridad().registrarNecesidades("3", "2", "estudiante", "necesidad2", "necesidad", "Activa");*/
             System.out.println("-------------------------------- CONSULTAR NECESIDADES --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarNecesidades().toString());
 
-            System.out.println("-------------------------------- INSERTAR OFERTAS --------------------------------");
-            instance.getServiciosSolidaridad().registrarOferta(new Oferta("1","2","estudiante","oferta1","estado"));
+            /*System.out.println("-------------------------------- INSERTAR OFERTAS --------------------------------");
+            instance.getServiciosSolidaridad().registrarOferta(new Oferta("1","1","estudiante","oferta1","estado"));*/
             System.out.println("-------------------------------- CONSULTAR OFERTAS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarOferta().toString());
 

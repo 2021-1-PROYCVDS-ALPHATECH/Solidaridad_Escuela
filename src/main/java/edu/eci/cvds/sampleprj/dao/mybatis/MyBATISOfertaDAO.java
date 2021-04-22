@@ -28,7 +28,8 @@ public class MyBATISOfertaDAO implements OfertaDAO {
         try {
             ofertaMapper.registrarOferta(oferta);
         } catch (Exception e) {
-            throw new PersistenceException("Error al registrar una nueva necesidad del usuario: ", e);
+            e.printStackTrace();
+            throw new PersistenceException("Error al registrar una nueva oferta del usuario: ", e);
         }
     }
 
@@ -37,7 +38,7 @@ public class MyBATISOfertaDAO implements OfertaDAO {
         try {
             return ofertaMapper.consultarOferta();
         } catch (Exception e) {
-            throw new PersistenceException("Error al consultar las necesidades ",e);
+            throw new PersistenceException("Error al consultar las ofertas ",e);
         }
     }
 }

@@ -126,6 +126,6 @@ public class Necesidad implements Serializable{
 
     @Override
     public String toString(){
-        return "Necesidad{ "+ "idNecesidad= "+ idNecesidad + ", idUsuario= " + idUsuario + ", nombre= " + nombre + ", descripcion= " + descripcion + ", urgencia= " + urgencia + ", fecha C" + fechaCreacion + ", fecha M" + fechaModificacion + ", estado= " + estado + "}";
+        return "Necesidad{"+"idNecesidad= "+ idNecesidad + ", idUsuario= " + idUsuario + ", nombre= " + nombre + ", descripcion= " + descripcion + ", urgencia= " + urgencia + ", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + "}";
     }
 }

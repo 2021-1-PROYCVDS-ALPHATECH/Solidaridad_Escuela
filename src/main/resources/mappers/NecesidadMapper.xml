@@ -13,12 +13,12 @@
             n.urgencia AS n_urgencia,
             n.fechaCreacion AS n_fechaCreacion,
             n.fechaModificacion AS n_fechaModificacion,
-            n.estado AS 
-        FROM Necesidades n
+            n.estado AS n_estado
+        FROM necesidades n
     </select>
 
     <insert id="registrarNecesidades" parameterType="map">
-        INSERT INTO Necesidades VALUES (#{necesidad.idNecesidad}, #{necesidad.idUsuario}, #{necesidad.nombre}, 
+        INSERT INTO Necesidades (idNecesidad, idUsuario, nombre, descripcion, urgencia, estado) VALUES (#{necesidad.idNecesidad}, #{necesidad.idUsuario}, #{necesidad.nombre}, 
                                         #{necesidad.descripcion}, #{necesidad.urgencia}, #{necesidad.estado})
     </insert>
 

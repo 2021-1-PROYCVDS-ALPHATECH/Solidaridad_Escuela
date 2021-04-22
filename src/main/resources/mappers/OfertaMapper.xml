@@ -12,13 +12,13 @@
             o.descripcion AS o_descripcion,
             o.fechaCreacion AS o_fechaCreacion,
             o.fechaModificacion AS o_fechaModificacion,
-            o.estado AS 
+            o.estado AS o_estado
         FROM Ofertas o
     </select>
 
-    <insert id="registrarOfertas" parameterType="map">
-        INSERT INTO Ofertas VALUES (#{oferta.idOferta}, #{oferta.idUsuario}, #{oferta.nombre}, 
-                                        #{oferta.descripcion}, #{oferta.estado})
+    <insert id="registrarOferta" parameterType="map">
+        INSERT INTO Ofertas (idOferta, idUsuario, nombre, descripcion, estado) VALUES (#{oferta.idOferta}, #{oferta.idUsuario}, #{oferta.nombre}, 
+                                    #{oferta.descripcion}, #{oferta.estado})
     </insert>
 
     <update id="actualizarNombre" parameterType="map">

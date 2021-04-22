@@ -6,36 +6,32 @@ import java.util.List;
 import java.util.ArrayList;
 
 import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 import javax.faces.application.FacesMessage; 
 
 import org.apache.shiro.subject.Subject;
-import org.apache.shiro.subject.SubjectContext;
 
 import edu.eci.cvds.samples.entities.Categoria;
+import edu.eci.cvds.samples.entities.Necesidad;
+import edu.eci.cvds.samples.entities.Oferta;
 import edu.eci.cvds.samples.services.ExcepcionSolidaridadEscuela;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.AuthenticationInfo;
-import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.crypto.hash.Hash;
-import org.apache.shiro.crypto.hash.HashRequest;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.apache.shiro.realm.jdbc.JdbcRealm;
+
+import java.sql.Date;
 
 @ManagedBean(name = "LoginBean")
 @SessionScoped
-public class LoginBean{
+public class LoginBean extends BasePageBean{
     @Inject
+    private ServiciosSolidaridad servicios;
     private String user;
     private String password;
     private Subject subject;
-    private ServiciosSolidaridad servicios;
 
     public LoginBean(){
         user = "";
@@ -83,18 +79,44 @@ public class LoginBean{
         }
     }
 
-    public List<Integer> consultarCategorias() throws ExcepcionSolidaridadEscuela{
-        System.out.println(servicios.consultarCategorias().size());
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(1);
-        return list;
+    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridadEscuela{
+        return servicios.consultarCategorias();
     }
 
-    public ArrayList<Integer> test(){
-        ArrayList<Integer> list = new ArrayList<Integer>();
-        list.add(1);
-        list.add(2);
-        return list;
+    public void registrarCategoria(String id, String nombre, String descripcion){
+        try{
+            servicios.registrarCategoria(id, nombre, descripcion);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+    }
+
+    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridadEscuela{
+        return servicios.consultarOferta();
+    }
+
+    public void registrarOferta(String idOferta, String idUsuario, String nombre, String descipcion, String fechaCreacion, String fechaModificacion, String estado){
+        try{
+            Oferta oferta = new Oferta(idOferta, idUsuario, nombre, descipcion, Date.valueOf(fechaCreacion), Date.valueOf(fechaModificacion), estado);
+            servicios.registrarOferta(oferta);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        
+    }
+
+    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridadEscuela{
+        return servicios.consultarNecesidades();
+    }
+
+    public void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado){
+        try{
+            servicios.registrarNecesidades(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        
     }
 
     public void logOut(){
@@ -105,7 +127,5 @@ public class LoginBean{
         catch(Exception e) {
             System.out.println(e.getMessage()+" "+e.getCause());
         }
-    }
-    public void register(){
     }
 }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title> Registro Cliente </title>
+</h:head>
+<style>
+.ui-panelgrid td {
+    padding: 2px 30px ;
+}
+</style>
+<h:body>
+    <div class="container">
+        <h:form id="Oferts">
+            <p:panel header="ofertas" toggleable="true" toggleSpeed="500" widgetVar="panel" style="text-align: center" name="panel" id="panel">
+                <p:dataTable  id="ofertaDT" var="oferta" value="#{LoginBean.consultarOfertas()}" rows="10" paginator="true" 
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left; align: center">
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{oferta.nombre}" />
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{oferta.descripcion}" />
+                    </p:column>
+                    <p:column headerText="Fecha de Creacion">
+                        <h:outputText value="#{oferta.fechaCreacion}" />
+                    </p:column>
+                    <p:column headerText="Fecha de Modificacion">
+                        <h:outputText value="#{oferta.fechaModificacion}" />
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <h:outputText value="#{oferta.estado}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+            <p:panel header="Registro" toggleable="true" style="text-align: center" toggleSpeed="500" widgetVar="panel2" name="panel2" id="panel2" collapsed="true">
+                <p:messages id="messages" showDetail="true" style="text-align: left"/>
+                <h:panelGrid columns="2" style="margin: auto">
+                    <p:outputLabel for="@next" value="ID"/>
+                    <p:inputText  id="registerID" type="String" binding="#{id}"/>
+                    <p:outputLabel for="@next" value="ID User"/>
+                    <p:inputText  id="registerIDUser" type="String" binding="#{idUser}"/>
+                    <p:outputLabel for="@next" value="Nombre" />
+                    <p:inputText  id= "registerNombre" type="Long" binding="#{nombre}"/>
+                    <p:outputLabel for="@next" value="Descripcion" />
+                    <p:inputText  id= "registerDes" type="String" binding="#{descripcion}"/>
+                    <p:outputLabel for="@next" value="Descripcion" />
+                    <p:inputText  id= "registerState" type="String" binding="#{estado}"/>
+                </h:panelGrid>
+            <p:commandButton update="Oferts" value="Registrar" actionListener="#{LoginBean.registrarOferta(id.value,idUser.value,nombre.value,descripcion.value,estado.value)}"/>
+	</p:panel>
+        </h:form>
+    </div>
+</h:body>
+</html>

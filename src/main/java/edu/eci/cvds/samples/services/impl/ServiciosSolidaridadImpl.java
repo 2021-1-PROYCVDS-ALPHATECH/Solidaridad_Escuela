@@ -1,5 +1,6 @@
 package edu.eci.cvds.samples.services.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try{
             return categoriaDAO.loadAll();
         } catch (PersistenceException e){
+            System.out.println(e.getMessage());
             throw new ExcepcionSolidaridadEscuela ("Error al consultar las categorias", e);
         }
     }
@@ -93,12 +95,12 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void registrarNecesidades(String idNecesidad, String idUsuario, String nombre, String descripcion,
-            String urgencia, String estado)
+    public void registrarNecesidades(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado)
             throws ExcepcionSolidaridadEscuela {
         try {
             necesidadDAO.save(new Necesidad(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado));
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             throw new ExcepcionSolidaridadEscuela("Error al registrar la necesidad: "+ idNecesidad, e);
         }
         
@@ -138,7 +140,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             return ofertaDAO.loadAll();
         } catch (Exception e) {
-            throw new ExcepcionSolidaridadEscuela("Error al consultar todas las necesidades ", e);
+            throw new ExcepcionSolidaridadEscuela("Error al consultar todas las ofertas ", e);
         }
     }
 
@@ -147,7 +149,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try{
             ofertaDAO.save(o);
         } catch (PersistenceException e){
-            throw new ExcepcionSolidaridadEscuela ("Error al consultar los usuarios", e);
+            e.printStackTrace();
+            throw new ExcepcionSolidaridadEscuela ("Error al insertar la oferta", e);
         }
         
     }
