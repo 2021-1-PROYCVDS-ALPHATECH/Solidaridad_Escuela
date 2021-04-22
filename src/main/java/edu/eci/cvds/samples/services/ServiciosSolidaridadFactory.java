@@ -7,6 +7,7 @@ import org.mybatis.guice.XMLMyBatisModule;
 
 import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.*;
+import edu.eci.cvds.samples.entities.Oferta;
 import edu.eci.cvds.samples.entities.Rol;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
@@ -100,7 +101,7 @@ public class ServiciosSolidaridadFactory {
             System.out.println(instance.getServiciosSolidaridad().consultarNecesidades().toString());
 
             System.out.println("-------------------------------- INSERTAR OFERTAS --------------------------------");
-            instance.getServiciosSolidaridad().registrarOferta("1","2","estudiante","oferta1","oferta2","estado");
+            instance.getServiciosSolidaridad().registrarOferta(new Oferta("1","2","estudiante","oferta1","estado"));
             System.out.println("-------------------------------- CONSULTAR OFERTAS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarOferta().toString());
 

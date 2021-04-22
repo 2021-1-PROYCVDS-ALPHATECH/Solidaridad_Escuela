@@ -35,3 +35,8 @@ CREATE trigger MO_Necesidad
 BEFORE INSERT ON public.Necesidades
 FOR EACH ROW
 EXECUTE PROCEDURE fechaModCategoria();
+
+CREATE trigger AD_Oferta
+BEFORE INSERT ON public.Ofertas
+FOR EACH ROW
+EXECUTE PROCEDURE fechasCategoria();

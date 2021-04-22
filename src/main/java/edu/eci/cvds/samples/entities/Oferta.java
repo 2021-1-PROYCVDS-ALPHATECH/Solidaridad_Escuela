@@ -36,6 +36,17 @@ public class Oferta implements Serializable {
         this.estado = estado;
     }
 
+    public Oferta(String idOferta, String idUsuario, String nombre, String descipcion,String estado){
+        LocalDate hoy = LocalDate.now();
+        this.fechaCreacion = Date.valueOf(hoy);
+        this.fechaModificacion = Date.valueOf(hoy);
+        this.idOferta = idOferta;
+        this.idUsuario = idUsuario;
+        this.nombre = nombre;
+        this.descripcion = descipcion;
+        this.estado = estado;
+    }
+
     public String getIdOferta(){
         return idOferta;
     }
