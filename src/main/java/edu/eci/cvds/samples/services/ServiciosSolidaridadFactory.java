@@ -98,6 +98,12 @@ public class ServiciosSolidaridadFactory {
             instance.getServiciosSolidaridad().registrarNecesidades("1", "2", "estudiante", "necesidad1", "necesidad", "estado");
             System.out.println("-------------------------------- CONSULTAR NECESIDADES --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarNecesidades().toString());
+
+            System.out.println("-------------------------------- INSERTAR OFERTAS --------------------------------");
+            instance.getServiciosSolidaridad().registrarOferta("1","2","estudiante","oferta1","oferta2","estado");
+            System.out.println("-------------------------------- CONSULTAR OFERTAS --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarOferta().toString());
+
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

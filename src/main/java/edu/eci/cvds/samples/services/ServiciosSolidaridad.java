@@ -2,7 +2,6 @@ package edu.eci.cvds.samples.services;
 
 import java.util.Date;
 import java.util.List;
-
 import edu.eci.cvds.samples.entities.*;
 
 /**
@@ -37,4 +36,8 @@ public interface ServiciosSolidaridad {
     public abstract void actualizarNombreNecesidad(String idNecesidad, String nombre) throws ExcepcionSolidaridadEscuela;
 
     public abstract void actualizarEstadoNecesidad(String idNecesidad, String estado) throws ExcepcionSolidaridadEscuela;
+
+    public abstract void registrarOferta(Oferta o)  throws ExcepcionSolidaridadEscuela;
+
+    public abstract List<Oferta> consultarOferta() throws ExcepcionSolidaridadEscuela;
 }

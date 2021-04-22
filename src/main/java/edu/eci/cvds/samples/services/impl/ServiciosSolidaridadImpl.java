@@ -23,6 +23,9 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     @Inject
     private NecesidadDAO necesidadDAO;
 
+    @Inject
+    private OfertaDAO ofertaDAO;
+
     @Transactional
     @Override
     public void registrarUsuario(Usuario u) throws ExcepcionSolidaridadEscuela {
@@ -128,5 +131,24 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         } catch (Exception e) {
             throw new ExcepcionSolidaridadEscuela("Error al consultar todas las necesidades ", e);
         }
+    }
+
+    @Override
+    public List<Oferta> consultarOferta() throws ExcepcionSolidaridadEscuela {
+        try {
+            return ofertaDAO.loadAll();
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridadEscuela("Error al consultar todas las necesidades ", e);
+        }
+    }
+
+    @Override
+    public void registrarOferta(Oferta o) throws ExcepcionSolidaridadEscuela {
+        try{
+            ofertaDAO.save(o);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridadEscuela ("Error al consultar los usuarios", e);
+        }
+        
     }
 }

@@ -18,7 +18,8 @@ import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISCategoriaDAO;
 import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISNecesidadDAO;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
-
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISOfertaDAO;
+import edu.eci.cvds.sampleprj.dao.OfertaDAO;
 
 public class GuiceContextListener implements ServletContextListener {
 
@@ -38,6 +39,7 @@ public class GuiceContextListener implements ServletContextListener {
                 bind(UsuarioDAO.class).to(MyBATISUsuarioDAO.class);
                 bind(CategoriaDAO.class).to(MyBATISCategoriaDAO.class);
                 bind(NecesidadDAO.class).to(MyBATISNecesidadDAO.class);
+                bind(OfertaDAO.class).to(MyBATISOfertaDAO.class);
                 bind(ServiciosSolidaridad.class).to(ServiciosSolidaridadImpl.class);
             }
         });
