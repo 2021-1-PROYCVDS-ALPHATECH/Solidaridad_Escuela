@@ -7,6 +7,7 @@ import org.mybatis.guice.XMLMyBatisModule;
 
 import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.*;
+import edu.eci.cvds.samples.entities.Categoria;
 import edu.eci.cvds.samples.entities.Oferta;
 import edu.eci.cvds.samples.entities.Rol;
 import edu.eci.cvds.samples.entities.Usuario;
@@ -75,12 +76,12 @@ public class ServiciosSolidaridadFactory {
     public static void main(String[] args){
         try{
             
-            System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
+            /*System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
             /*System.out.println("-------------------------------- INSERTAR USUARIOS --------------------------------");
             instance.getServiciosSolidaridad().registrarUsuario(new Usuario("3", "estudiante1", "0000000000", "estu123@gmail.com", "10e35", Rol.Estudiante));
             System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());*/
+            System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
 
             System.out.println("\n-------------------------------- CONSULAR CATEGORIAS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
@@ -95,17 +96,17 @@ public class ServiciosSolidaridadFactory {
             System.out.println("-------------------------------- ACTUALIZAR ESTADO CATEGORIAS --------------------------------");
             instance.getServiciosSolidaridad().actualizarEstadoCategoria("1", "Inactiva");
             System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());   
+            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());   */
 
-            /*System.out.println("-------------------------------- INSERTAR NECESIDADES --------------------------------");
-            instance.getServiciosSolidaridad().registrarNecesidades("3", "2", "estudiante", "necesidad2", "necesidad", "Activa");*/
+            //System.out.println("-------------------------------- INSERTAR NECESIDADES --------------------------------");
+            //instance.getServiciosSolidaridad().registrarNecesidades("3", "2", "estudiante", "necesidad2", "necesidad", "Activa", new Categoria("2", "test", "test"));
             System.out.println("-------------------------------- CONSULTAR NECESIDADES --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarNecesidades().toString());
 
             /*System.out.println("-------------------------------- INSERTAR OFERTAS --------------------------------");
-            instance.getServiciosSolidaridad().registrarOferta(new Oferta("1","1","estudiante","oferta1","estado"));*/
+            instance.getServiciosSolidaridad().registrarOferta(new Oferta("1","1","estudiante","oferta1","estado"));
             System.out.println("-------------------------------- CONSULTAR OFERTAS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarOferta().toString());
+            System.out.println(instance.getServiciosSolidaridad().consultarOferta().toString());*/
 
         } catch (Exception e){
             System.out.println(e.getMessage());

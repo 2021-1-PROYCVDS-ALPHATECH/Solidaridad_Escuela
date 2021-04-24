@@ -95,12 +95,13 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void registrarNecesidades(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado)
+    public void registrarNecesidades(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado, Categoria categoria)
             throws ExcepcionSolidaridadEscuela {
         try {
-            necesidadDAO.save(new Necesidad(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado));
+            necesidadDAO.save(new Necesidad(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado, categoria));
         } catch (Exception e) {
             System.out.println(e.getMessage());
+            e.printStackTrace();
             throw new ExcepcionSolidaridadEscuela("Error al registrar la necesidad: "+ idNecesidad, e);
         }
         
@@ -111,7 +112,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             necesidadDAO.updateName(idNecesidad, nombre);
         } catch (Exception e) {
-            throw new ExcepcionSolidaridadEscuela("error al actualizar el nombre de la categoria con ID: "+ idNecesidad,e);
+            throw new ExcepcionSolidaridadEscuela("Error al actualizar el nombre de la categoria con ID: "+ idNecesidad,e);
         }
         
     }
@@ -131,6 +132,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             return necesidadDAO.loadAll();
         } catch (Exception e) {
+            e.printStackTrace();
             throw new ExcepcionSolidaridadEscuela("Error al consultar todas las necesidades ", e);
         }
     }

@@ -46,17 +46,20 @@ CREATE TABLE IF NOT EXISTS Ofertas (
 -- -----------------------------------------------------
 -- Table `Necesidades`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS Necesidades (
+CREATE TABLE Necesidades (
     idNecesidad VARCHAR(50) PRIMARY KEY,
     idUsuario VARCHAR(50) NOT NULL,
     nombre VARCHAR(50) UNIQUE NOT NULL,
     descripcion VARCHAR(1000) NOT NULL,
     urgencia VARCHAR(50) NOT NULL,
+    idCategoria VARCHAR(50) NOT null,
     fechaCreacion DATE NOT NULL,
     fechaModificacion DATE NOT NULL,
     estado VARCHAR(10) NOT NULL,
-    FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario)
+    FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario),
+    FOREIGN KEY (idCategoria) REFERENCES Categorias(idCategoria)
 );
+
 
 ALTER TABLE Usuarios
 ALTER COLUMN clave TYPE VARCHAR(100);

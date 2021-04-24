@@ -23,9 +23,8 @@ public class Necesidad implements Serializable{
     private Date fechaCreacion;
     private Date fechaModificacion;
     private String estado;
+    private Categoria categoria;
 
-    public Necesidad(){
-    }
     /**
      * 
      * @param idNecesidad
@@ -36,8 +35,13 @@ public class Necesidad implements Serializable{
      * @param fechaCreacion
      * @param fechaModificacion
      * @param estado
+     * 
      */
-    public Necesidad(String idNecesidad, String idUsuario, String nombre, String descipcion, String urgencia, Date fechaCreacion, Date fechaModificacion, String estado){
+
+    public Necesidad(){
+    }
+    
+    public Necesidad(String idNecesidad, String idUsuario, String nombre, String descipcion, String urgencia, Date fechaCreacion, Date fechaModificacion, String estado, Categoria categoria){
         this.idNecesidad = idNecesidad;
         this.idUsuario = idUsuario;
         this.nombre = nombre;
@@ -46,9 +50,10 @@ public class Necesidad implements Serializable{
         this.fechaCreacion = fechaCreacion;
         this.fechaModificacion = fechaModificacion;
         this.estado = estado;
+        this.categoria = categoria;
     }
 
-    public Necesidad(String idNecesidad, String idUsuario, String nombre, String descipcion, String urgencia,String estado){
+    public Necesidad(String idNecesidad, String idUsuario, String nombre, String descipcion, String urgencia,String estado, Categoria categoria){
         LocalDate hoy = LocalDate.now();
         this.fechaCreacion = Date.valueOf(hoy);
         this.fechaModificacion = Date.valueOf(hoy);
@@ -58,6 +63,7 @@ public class Necesidad implements Serializable{
         this.descripcion = descipcion;
         this.urgencia = urgencia; 
         this.estado = estado;
+        this.categoria = categoria;
     }
 
     public String getIdNecesidad(){
@@ -124,8 +130,16 @@ public class Necesidad implements Serializable{
         this.estado = estado;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
     @Override
     public String toString(){
-        return "Necesidad{"+"idNecesidad= "+ idNecesidad + ", idUsuario= " + idUsuario + ", nombre= " + nombre + ", descripcion= " + descripcion + ", urgencia= " + urgencia + ", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + "}";
+        return "Necesidad{"+"idNecesidad= "+ idNecesidad + ", idUsuario= " + idUsuario + ", nombre= " + nombre + ", descripcion= " + descripcion + ", urgencia= " + urgencia + ", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + ", categoria= " + categoria + "}";
     }
 }

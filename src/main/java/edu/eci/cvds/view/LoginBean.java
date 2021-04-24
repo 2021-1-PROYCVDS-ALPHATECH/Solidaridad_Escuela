@@ -32,6 +32,7 @@ public class LoginBean extends BasePageBean{
     private String user;
     private String password;
     private Subject subject;
+    private Categoria categoria;
 
     public LoginBean(){
         user = "";
@@ -54,6 +55,13 @@ public class LoginBean extends BasePageBean{
         return password;
     }
 
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
     public void logIn(){
         subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user, new Sha256Hash(password).toHex());
@@ -112,14 +120,32 @@ public class LoginBean extends BasePageBean{
 
     public void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado){
         try{
-            servicios.registrarNecesidades(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado);
+            //servicios.registrarNecesidades(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
         
     }
 
+    public void modificarNecesidad(String nombre, String descripcion, String estado){
+        try{
+            String id = categoria.getId();
+            if(!nombre.trim().equals("")){
+                servicios.actualizarNombreCategoria(id, nombre);
+            }
+            if(!descripcion.trim().equals("")){
+                servicios.actualizarDescripcionCategoria(id, descripcion);
+            }
+            if(!estado.trim().equals("")){
+                servicios.actualizarEstadoCategoria(id, estado);
+            }
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void logOut(){
+        System.out.println("Log Out");
         subject.logout();
         try{
             FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/login.xhtml");

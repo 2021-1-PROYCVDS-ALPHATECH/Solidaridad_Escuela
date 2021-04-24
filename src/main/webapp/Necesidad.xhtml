@@ -7,52 +7,205 @@
     <title> Registro Cliente </title>
 </h:head>
 <style>
+*,*::after,*,*::before{
+    margin: 0;
+    box-sizing: border-box;
+} 
+
+* {
+    font-family: Montserrat;
+}
 .ui-panelgrid td {
     padding: 2px 30px ;
 }
+body {
+    overflow: hidden;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 84 84' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a6192e' fill-opacity='0.2'%3E%3Cpath d='M84 23c-4.417 0-8-3.584-8-7.998V8h-7.002C64.58 8 61 4.42 61 0H23c0 4.417-3.584 8-7.998 8H8v7.002C8 19.42 4.42 23 0 23v38c4.417 0 8 3.584 8 7.998V76h7.002C19.42 76 23 79.58 23 84h38c0-4.417 3.584-8 7.998-8H76v-7.002C76 64.58 79.58 61 84 61V23zM59.05 83H43V66.95c5.054-.5 9-4.764 9-9.948V52h5.002c5.18 0 9.446-3.947 9.95-9H83v16.05c-5.054.5-9 4.764-9 9.948V74h-5.002c-5.18 0-9.446 3.947-9.95 9zm-34.1 0H41V66.95c-5.053-.502-9-4.768-9-9.948V52h-5.002c-5.184 0-9.447-3.946-9.95-9H1v16.05c5.053.502 9 4.768 9 9.948V74h5.002c5.184 0 9.447 3.946 9.95 9zm0-82H41v16.05c-5.054.5-9 4.764-9 9.948V32h-5.002c-5.18 0-9.446 3.947-9.95 9H1V24.95c5.054-.5 9-4.764 9-9.948V10h5.002c5.18 0 9.446-3.947 9.95-9zm34.1 0H43v16.05c5.053.502 9 4.768 9 9.948V32h5.002c5.184 0 9.447 3.946 9.95 9H83V24.95c-5.053-.502-9-4.768-9-9.948V10h-5.002c-5.184 0-9.447-3.946-9.95-9zM50 50v7.002C50 61.42 46.42 65 42 65c-4.417 0-8-3.584-8-7.998V50h-7.002C22.58 50 19 46.42 19 42c0-4.417 3.584-8 7.998-8H34v-7.002C34 22.58 37.58 19 42 19c4.417 0 8 3.584 8 7.998V34h7.002C61.42 34 65 37.58 65 42c0 4.417-3.584 8-7.998 8H50z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.container{
+    margin-top: 100px;
+    height: 800px;
+    display: grid;
+    grid-template-columns: 34% 66%;
+    grid-template-rows: 100%;
+    column-gap: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#item1 {
+    margin-right: 25px;
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 2;   
+}
+
+#item2 {
+    margin-right: 25px;
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 3;   
+}
+
+body .ui-panel .ui-panel-titlebar {
+    border: 1px solid #dee2e6;
+    background: rgba(126, 19, 35, 1);
+    color: #fff;
+    padding: 1rem;
+    font-weight: 700;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+body .ui-widget{
+    font-family: Montserrat;
+}
+
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
+    background: #fdd5dc;
+    color: #495057;
+}
+
+body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-focus {
+    background: #fdd5dc;
+    color: #495057;
+    box-shadow: 0 0 0 0.2rem #fae3e7;
+}
+
+input{
+    border-radius: 100px; padding-left: 20px;
+}
+
+body .ui-inputfield.ui-state-hover {
+    border-color: #7e1323;
+}
+
+body .ui-inputfield.ui-state-focus {
+    border-color: #a6192e;
+    box-shadow: 0 0 0 0 #faa5b2;
+}
+
+body .ui-button {
+    background: #a6192e;
+    color: #ffffff;
+    border: 1px solid #a6192e;
+    margin: 0;
+    outline: 0 none;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+body .ui-button.ui-button.ui-state-hover {
+    background: #7e1323;
+    color: #ffffff;
+    border: 1px solid #7e1323;
+    margin: 0;
+    outline: 0 none;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+body .ui-button.ui-button.ui-state-active {
+    background: #7e1323;
+    border-color: #7e1323;
+    color: white;
+}
+
+body .ui-button.ui-button.ui-state-focus {
+    box-shadow: 0 0 0 0 #faa5b2;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v7/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
+}  
+
+body .ui-datatable .ui-datatable-footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    background-color: #7e132300;
+    width: 100%;
+    height: 50px;
+}
+
+.headerElements {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: -10px;
+}
+
 </style>
 <h:body>
-    <div class="container">
-        <h:form id="Necesities">
-            <p:panel header="necesidades" toggleable="true" toggleSpeed="500" widgetVar="panel" style="text-align: center" name="panel" id="panel">
-                <p:dataTable  id="necesidadDT" var="necesidad" value="#{LoginBean.consultarNecesidades()}" rows="10" paginator="true" 
-                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left; align: center">
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{necesidad.nombre}" />
-                    </p:column>
-                    <p:column headerText="Descripcion">
-                        <h:outputText value="#{necesidad.descripcion}" />
-                    </p:column>
-                    <p:column headerText="Fecha de Creacion">
-                        <h:outputText value="#{necesidad.fechaCreacion}" />
-                    </p:column>
-                    <p:column headerText="Fecha de Modificacion">
-                        <h:outputText value="#{necesidad.fechaModificacion}" />
-                    </p:column>
-                    <p:column headerText="Estado">
-                        <h:outputText value="#{necesidad.estado}" />
-                    </p:column>
-                </p:dataTable>
-            </p:panel>
-            <p:panel header="Registro" toggleable="true" style="text-align: center" toggleSpeed="500" widgetVar="panel2" name="panel2" id="panel2" collapsed="true">
+    <h:form id="Categories">
+        <div style="background-color: #7e1323; height: 10px;"></div>
+        <div class="header">
+            <div class="headerElements">
+                <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
+                <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                    <p:submenu label="Navigations">
+                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Categories" icon="pi pi-external-link"/>
+                    </p:submenu>
+                </p:menu>
+            </div> 
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" style="position: absolute; top: 10px; z-index: -1;">
+                <path fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,0L960,0L480,0L0,0Z"></path>
+            </svg>
+        </div>
+        <div class="container">
+            <p:panel header="Registar Categoria" style="text-align: center" name="panel" id="item1">   
                 <p:messages id="messages" showDetail="true" style="text-align: left"/>
-                <h:panelGrid columns="2" style="margin: auto">
+                <h:panelGrid columns="1" style="margin: auto" >
                     <p:outputLabel for="@next" value="ID"/>
                     <p:inputText  id="registerID" type="String" binding="#{id}"/>
-                    <p:outputLabel for="@next" value="ID User"/>
-                    <p:inputText  id="registerIDUser" type="String" binding="#{idUser}"/>
                     <p:outputLabel for="@next" value="Nombre" />
-                    <p:inputText  id= "registerNombre" type="Long" binding="#{nombre}"/>
+                    <p:inputText  id= "registerDoc" type="Long" binding="#{nombre}"/>
                     <p:outputLabel for="@next" value="Descripcion" />
                     <p:inputText  id= "registerDes" type="String" binding="#{descripcion}"/>
-                    <p:outputLabel for="@next" value="Urgencia" />
-                    <p:inputText  id= "registerState" type="String" binding="#{urgencia}"/>
-                    <p:outputLabel for="@next" value="Descripcion" />
-                    <p:inputText  id= "registerState" type="String" binding="#{estado}"/>
                 </h:panelGrid>
-            <p:commandButton update="Necesities" value="Registrar" actionListener="#{LoginBean.registrarNecesidad(id.value, idUser.value, nombre.value, descripcion.value, urgencia.value, estado.value)}"/>
-	</p:panel>
-        </h:form>
-    </div>
+                <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{LoginBean.registrarCategoria(id.value, nombre.value, descripcion.value)}"/>
+            </p:panel>
+            <p:panel header="Lista Categorias" style="text-align: center; min-height: 800px;" name="panel" id="item2">
+                <p:dataTable  id="categoriaDT" var="categoria" value="#{LoginBean.consultarCategorias()}" rows="10" paginator="true" selectionMode="single" selection="#{LoginBean.categoria}" rowKey="#{categoria.id }"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{categoria.nombre}" />
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{categoria.descripcion}" />
+                    </p:column>
+                    <p:column headerText="Fecha de Creacion">
+                        <h:outputText value="#{categoria.fechaCreacion}" />
+                    </p:column>
+                    <p:column headerText="Fecha de Modificacion">
+                        <h:outputText value="#{categoria.fechaModificacion}" />
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <h:outputText value="#{categoria.estado}" />
+                    </p:column>
+                    <f:facet name="footer" style="margin: auto">
+                        <p:commandButton id="Modify" value="Seleccionar" action="registroalquiler?faces-redirect = true" styleClass="ui-button"/>			
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>    
+        </div>
+    </h:form>
+    <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+        <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
+    </svg>
 </h:body>
 </html>

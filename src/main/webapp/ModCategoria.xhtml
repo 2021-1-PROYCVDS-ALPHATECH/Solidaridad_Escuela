@@ -149,9 +149,9 @@ body .ui-datatable .ui-datatable-footer{
     margin-top: -10px;
 }
 
-body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
-    background: #fae3e7;
-    color: #495057;
+.noEditable {
+    text-align: center;
+    background-color:#989999
 }
 
 </style>
@@ -172,41 +172,34 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
             </svg>
         </div>
         <div class="container">
-            <p:panel header="Registar Categoria" style="text-align: center" name="panel" id="item1">   
-                <p:messages id="messages" showDetail="true" style="text-align: left"/>
+            <p:panel header="Info #{LoginBean.categoria.nombre}" style="text-align: center" name="panel" id="item1">   
                 <h:panelGrid columns="1" style="margin: auto" >
                     <p:outputLabel for="@next" value="ID"/>
-                    <p:inputText  id="registerID" type="String" binding="#{id}"/>
+                    <p:inputText  id="ID" type="String" value="#{LoginBean.categoria.id}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Nombre" />
-                    <p:inputText  id= "registerDoc" type="Long" binding="#{nombre}"/>
+                    <p:inputText  id= "Name" type="String" value="#{LoginBean.categoria.nombre}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Descripcion" />
-                    <p:inputText  id= "registerDes" type="String" binding="#{descripcion}"/>
+                    <p:inputText  id= "Des" type="String" value="#{LoginBean.categoria.descripcion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:outputLabel for="@next" value="Fecha de Creacion" />
+                    <p:inputText  id= "CDate" type="String" value="#{LoginBean.categoria.fechaCreacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:outputLabel for="@next" value="Ultima Modificacion" />
+                    <p:inputText  id= "MDate" type="String" value="#{LoginBean.categoria.fechaModificacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:outputLabel for="@next" value="Estado" />
+                    <p:inputText  id= "State" type="String" value="#{LoginBean.categoria.estado}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                 </h:panelGrid>
                 <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{LoginBean.registrarCategoria(id.value, nombre.value, descripcion.value)}"/>
             </p:panel>
-            <p:panel header="Lista Categorias" style="text-align: center; min-height: 800px;" name="panel" id="item2">
-                <p:dataTable  id="categoriaDT" var="categoria" value="#{LoginBean.consultarCategorias()}" rows="10" paginator="true" selectionMode="single" selection="#{LoginBean.categoria}" rowKey="#{categoria.id }"
-                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{categoria.nombre}" />
-                    </p:column>
-                    <p:column headerText="Descripcion">
-                        <h:outputText value="#{categoria.descripcion}" />
-                    </p:column>
-                    <p:column headerText="Fecha de Creacion">
-                        <h:outputText value="#{categoria.fechaCreacion}" />
-                    </p:column>
-                    <p:column headerText="Fecha de Modificacion">
-                        <h:outputText value="#{categoria.fechaModificacion}" />
-                    </p:column>
-                    <p:column headerText="Estado">
-                        <h:outputText value="#{categoria.estado}" />
-                    </p:column>
-                    <f:facet name="footer" style="margin: auto">
-                        <p:commandButton id="Modify" value="Seleccionar" action="ModCategoria?faces-redirect = true" styleClass="ui-button"/>			
-                    </f:facet>
-                </p:dataTable>
-                    
+            <p:panel header="Modificar #{LoginBean.categoria.nombre}" style="text-align: center; min-height: 800px;" name="panel" id="item2">
+                <p:messages id="messages" showDetail="true" style="text-align: left"/>
+                <h:panelGrid columns="1" style="margin: auto" >
+                    <p:outputLabel for="@next" value="Nombre"/>
+                    <p:inputText  id="ModifyName" type="String" binding="#{nombre}" style="margin: 10px;"/>
+                    <p:outputLabel for="@next" value="Descripcion" />
+                    <p:inputTextarea id= "ModifyDes" rows="6" cols="30" type="String" binding="#{descripcion}" style="margin: 10px; width: 220px; font-size: 12px;"/>
+                    <p:outputLabel for="@next" value="Estado" />
+                    <p:inputText  id= "ModifyState" type="String" binding="#{estado}" style="margin: 10px;"/>
+                </h:panelGrid>
+                <p:commandButton id="Modify" style="margin-top: 20px;" value="Modificar" action="ModCategoria.xhtml" actionListener="#{LoginBean.modificarNecesidad(nombre.value,descripcion.value,estado.value)}" styleClass="ui-button"/>			
             </p:panel>    
         </div>
     </h:form>

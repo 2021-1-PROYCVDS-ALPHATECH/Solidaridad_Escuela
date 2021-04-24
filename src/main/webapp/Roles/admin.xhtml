@@ -10,78 +10,180 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </h:head>
 <style>
-.curved svg {
-    display: block;
-    margin: auto;
-    width: 1904;
-    
+*,*::after,*,*::before{
+    margin: 0;
+    box-sizing: border-box;
 }
 .form {
     width: 100%;
 }
-.curved {
-    width: 100%;
-    height: 400px;
-    text-align: center;   
-    display: block;
-    margin: auto;
-    background: #7e1323;
-}
-.buttons {
-    margin-top: 100px;
+.cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 800px;
 }
 
 i {
-    font-size:48px;
+    font-size:64px;
+    margin-bottom: 30px;
+    color: #7e1323;
 }
 
 a {
-    color:#7e1323;
+    text-decoration: none;
+    color: #000;
+    line-height: 1em;
+    width: 425px;
+    margin: auto;
 }
 
 p {
     width: 50%; 
     display: block; 
-    margin: auto; 
-    margin-top: 25px;
+    margin: 25px;
     text-align: justify;
+}
+
+.header {
+    background-color: #7e132300;
+    width: 100%;
+    height: 50px;
+}
+
+.headerElements {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: -10px;
+}
+
+body {
+    overflow: hidden;
+    background-color: #ffffff;
+    background-image: url("data:image/svg+xml,%3Csvg width='72' height='72' viewBox='0 0 84 84' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23a6192e' fill-opacity='0.09'%3E%3Cpath d='M84 23c-4.417 0-8-3.584-8-7.998V8h-7.002C64.58 8 61 4.42 61 0H23c0 4.417-3.584 8-7.998 8H8v7.002C8 19.42 4.42 23 0 23v38c4.417 0 8 3.584 8 7.998V76h7.002C19.42 76 23 79.58 23 84h38c0-4.417 3.584-8 7.998-8H76v-7.002C76 64.58 79.58 61 84 61V23zM59.05 83H43V66.95c5.054-.5 9-4.764 9-9.948V52h5.002c5.18 0 9.446-3.947 9.95-9H83v16.05c-5.054.5-9 4.764-9 9.948V74h-5.002c-5.18 0-9.446 3.947-9.95 9zm-34.1 0H41V66.95c-5.053-.502-9-4.768-9-9.948V52h-5.002c-5.184 0-9.447-3.946-9.95-9H1v16.05c5.053.502 9 4.768 9 9.948V74h5.002c5.184 0 9.447 3.946 9.95 9zm0-82H41v16.05c-5.054.5-9 4.764-9 9.948V32h-5.002c-5.18 0-9.446 3.947-9.95 9H1V24.95c5.054-.5 9-4.764 9-9.948V10h5.002c5.18 0 9.446-3.947 9.95-9zm34.1 0H43v16.05c5.053.502 9 4.768 9 9.948V32h5.002c5.184 0 9.447 3.946 9.95 9H83V24.95c-5.053-.502-9-4.768-9-9.948V10h-5.002c-5.184 0-9.447-3.946-9.95-9zM50 50v7.002C50 61.42 46.42 65 42 65c-4.417 0-8-3.584-8-7.998V50h-7.002C22.58 50 19 46.42 19 42c0-4.417 3.584-8 7.998-8H34v-7.002C34 22.58 37.58 19 42 19c4.417 0 8 3.584 8 7.998V34h7.002C61.42 34 65 37.58 65 42c0 4.417-3.584 8-7.998 8H50z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+.card {
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: auto;
+    border: 1px solid;
+    border-radius: 10px;
+    border-color: #7e1323;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    -webkit-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.4);
+    -moz-box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.4);
+    box-shadow: -1px 10px 5px 0px rgba(0,0,0,0.4);
+    transition: 0.5s;
+    height: 500px;
+}
+.card:hover{
+    -webkit-box-shadow: 0px 0px 34px 8px rgba(0,0,0,0.4);
+    -moz-box-shadow: 0px 0px 34px 8px rgba(0,0,0,0.4);
+    box-shadow: 0px 0px 34px 8px rgba(0,0,0,0.4);
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Montserrat-Regular'), url(https://fonts.gstatic.com/s/montserrat/v7/zhcz-_WihjSQC0oHJ9TCYL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
+}  
+
+div, input, select{
+    font-family: Montserrat;
+}
+
+body .ui-button {
+    background: #7e1323;
+    color: #ffffff;
+    border: 1px solid #7e1323;
+    margin: 0;
+    outline: 0 none;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+body .ui-button.ui-button.ui-state-hover {
+    background: #a6192e;
+    color: #ffffff;
+    border: 1px solid #a6192e;
+    margin: 0;
+    outline: 0 none;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+
+body .ui-button.ui-button.ui-state-active {
+    background: #7e1323;
+    border-color: #7e1323;
+    color: white;
+}
+
+body .ui-button.ui-button.ui-state-focus {
+    box-shadow: 0 0 0 0 #faa5b2;
+}
+
+.footer {
+    z-index: 1000;
 }
 </style>
 <h:body>
-    <h:form id="log">
-        <div class="curved">
-            <i style="position: absolute; top: 180px; font-size: 100px; margin: 0; color: #a6192e" class="fas fa-user-tie"></i>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1420 320"><path fill="#fff" fill-opacity="1" d="M0,224L48,240C96,256,192,288,288,293.3C384,299,480,277,576,240C672,203,768,149,864,106.7C960,64,1056,32,1152,69.3C1248,107,1344,213,1392,266.7L1440,320L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>
-            <div class="buttons">
-                <table style="width:100%">
-                    <colgroup>
-                        <col span="1" style="width: 25%;"/>
-                        <col span="1" style="width: 25%;"/>
-                        <col span="1" style="width: 25%;"/>
-                        <col span="1" style="width: 25%;"/>
-                    </colgroup>
-                    <tr>
-                        <th>
-                            <p style="color:#7e1323; font-size:32px;">Funcionalidades</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
-                        </th>
-                        <th>
-                            <a id="CategoriaLink" href="/faces/Categoria.xhtml"><i class="fas fa-list"></i></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
-                        </th>
-                        <th>
-                            <a id="NecesidadLink" href="/faces/login.xhtml" ><i class="fas fa-receipt"></i></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
-                        </th>
-                        <th>
-                            <a id="OfertaLink" href="/faces/login.xhtml" ><i class="far fa-lightbulb"></i></a>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
-                        </th>
-                    </tr>
-                </table>
+    <h:form id="admin">
+        <div class="container">
+            <div style="background-color: #7e1323; height: 10px;"></div>
+            <div class="header">
+                <div class="headerElements">
+                    <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars"/>
+                    <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                        <p:submenu label="Navigations">
+                            <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="admin" icon="pi pi-external-link"/>
+                        </p:submenu>
+                    </p:menu>
+                </div> 
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" style="position: absolute; top: 10px; z-index: -1;">
+                    <path fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,0L960,0L480,0L0,0Z"></path>
+                </svg>
             </div>
+            <div class="cards">
+                <a id="CategoriaLink" href="/faces/Categoria.xhtml">
+                    <div class="card">
+                        <i class="fas fa-list"></i>
+                        <p style="text-align: center; font-size: 24px; color: #7e1323;">Categorias</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </a>
             
+                <a id="NecesidadLink" href="/faces/Necesidad.xhtml">
+                    <div class="card">
+                        <i class="fas fa-book"></i>
+                        <p style="text-align: center; font-size: 24px; color: #7e1323;">Necesidades</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </a>
+            
+            
+                <a id="OfertaLink" href="/faces/Oferta.xhtml">
+                    <div class="card">
+                        <i class="fas fa-lightbulb"></i>
+                        <p style="text-align: center; font-size: 24px; color: #7e1323;">Ofertas</p>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incidunt ut labore et dolore magna aliqua.</p>
+                    </div>
+                </a>
+            </div>
         </div>
+        <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+            <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
+        </svg>
     </h:form>
 </h:body>
 </html>

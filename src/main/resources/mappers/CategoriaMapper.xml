@@ -36,7 +36,6 @@
       SET estado = #{est} WHERE idCategoria = #{id}
   </update>
 
-
   <resultMap type='Categoria' id='CategoriaResult'>
     <id property='idCategoria' column='c_idCategoria'/>
     <result property='nombre' column='c_nombre'/>

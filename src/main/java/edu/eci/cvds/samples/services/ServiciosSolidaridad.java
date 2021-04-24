@@ -29,7 +29,7 @@ public interface ServiciosSolidaridad {
 
     public abstract void actualizarEstadoCategoria(String id, String estado) throws ExcepcionSolidaridadEscuela;
 
-    public abstract void registrarNecesidades(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia,String estado) throws ExcepcionSolidaridadEscuela;
+    public abstract void registrarNecesidades(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia,String estado, Categoria categoria) throws ExcepcionSolidaridadEscuela;
 
     public abstract List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridadEscuela;
 
