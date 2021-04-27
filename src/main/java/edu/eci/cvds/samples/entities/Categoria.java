@@ -57,6 +57,8 @@ public class Categoria implements Serializable{
         this.estado = "Activa";
     }
 
+    public Categoria(){}
+
     public void setId(String newId){
         idCategoria = newId;
     }

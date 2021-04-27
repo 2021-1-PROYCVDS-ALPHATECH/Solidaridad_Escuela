@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.SolicitudMapper">
+  <select parameterType="map" id="consultarSolicitudes" resultMap="SolicitudResult">
+    SELECT 
+      s.idSolicitud AS s_idSolicitud,
+      s.descripcion AS s_descripcion,
+      s.estado AS s_estado,
+      s.fechaCreacion AS s_fechaCreacion,
+      s.fechaModificacion AS s_fechaModificacion,
+
+      c.idCategoria AS c_idCategoria,
+      c.nombre AS c_nombre,
+      c.descripcion AS c_descripcion,
+      c.fechaCreacion AS c_fechaCreacion,
+      c.fechaModificacion AS c_fechaModificacion,
+      c.estado AS c_estado
+
+    FROM Solicitudes s JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+  </select>
+
+  <select parameterType="map" id="consultarSolicitud" resultMap="SolicitudResult">
+    SELECT 
+      s.idSolicitud AS s_idSolicitud,
+      s.descripcion AS s_descripcion,
+      s.estado AS s_estado,
+      s.fechaCreacion AS s_fechaCreacion,
+      s.fechaModificacion AS s_fechaModificacion,
+
+      c.idCategoria AS c_idCategoria,
+      c.nombre AS c_nombre,
+      c.descripcion AS c_descripcion,
+      c.fechaCreacion AS c_fechaCreacion,
+      c.fechaModificacion AS c_fechaModificacion,
+      c.estado AS c_estado
+
+    FROM Solicitudes s JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+    WHERE idSolicitud = #{id}
+  </select>
+
+  <insert parameterType="map" id="insertarSolicitud">
+    INSERT INTO Solicitudes
+      VALUES(#{id}, #{idUsuario}, #{desc}, #{estado}, #{categoria}, CURRENT_DATE, CURRENT_DATE)
+  </insert>
+
+  <update parameterType="map" id="actualizarSolicitud">
+    UPDATE Solicitudes
+      SET estado = 'Cerrada', fechaModificacion = CURRENT_DATE
+      WHERE idSolicitud = #{id}
+  </update>
+
+  <delete id="eliminarSolicitud" parameterType="map">
+    DELETE FROM Solicitudes 
+      WHERE idSolicitud = #{idSolicitud}
+  </delete>
+
+  <resultMap type='Solicitud' id='SolicitudResult'>
+    <id property='idSolicitud' column='s_idSolicitud'/>
+    <result property='descripcion' column='s_descripcion'/>  
+    <result property='fechaCreacion' column='s_fechaCreacion'/>  
+    <result property='fechaModificacion' column='s_fechaModificacion'/>  
+    <result property='estado' column='s_estado'/>
+    <association  property="categoria"
+                resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.CategoriaMapper.CategoriaResult">
+    </association>
+  </resultMap>
+
+
+</mapper>

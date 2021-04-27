@@ -3,7 +3,6 @@ package edu.eci.cvds.view;
 import com.google.inject.Inject;
 
 import java.util.List;
-import java.util.ArrayList;
 
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -15,14 +14,12 @@ import org.apache.shiro.subject.Subject;
 import edu.eci.cvds.samples.entities.Categoria;
 import edu.eci.cvds.samples.entities.Necesidad;
 import edu.eci.cvds.samples.entities.Oferta;
-import edu.eci.cvds.samples.services.ExcepcionSolidaridadEscuela;
+import edu.eci.cvds.samples.services.ExcepcionSolidaridad;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-
-import java.sql.Date;
 
 @ManagedBean(name = "LoginBean")
 @SessionScoped
@@ -79,7 +76,7 @@ public class LoginBean extends BasePageBean{
         }
     }
 
-    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridadEscuela{
+    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridad{
         return servicios.consultarCategorias();
     }
 
@@ -92,24 +89,25 @@ public class LoginBean extends BasePageBean{
         
     }
 
-    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridadEscuela{
-        return servicios.consultarOferta();
+    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridad{
+        return servicios.consultarOfertas();
     }
 
-    public void registrarOferta(String idOferta, String idUsuario, String nombre, String descipcion, String fechaCreacion, String fechaModificacion, String estado){
+    /*public void registrarOferta(String idOferta, String idUsuario, String nombre, String descripcion, String fechaCreacion, String fechaModificacion, String estado){
         try{
-            Oferta oferta = new Oferta(idOferta, idUsuario, nombre, descipcion, Date.valueOf(fechaCreacion), Date.valueOf(fechaModificacion), estado);
+            Oferta oferta = new Oferta(idOferta, nombre, descripcion, Date.valueOf(fechaCreacion), Date.valueOf(fechaModificacion), estado);
             servicios.registrarOferta(oferta);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
         
-    }
+    }*/
 
-    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridadEscuela{
+    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad{
         return servicios.consultarNecesidades();
     }
 
+    /*
     public void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado){
         try{
             servicios.registrarNecesidades(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado);
@@ -117,7 +115,7 @@ public class LoginBean extends BasePageBean{
             System.out.println(e.getMessage());
         }
         
-    }
+    }*/
 
     public void logOut(){
         subject.logout();

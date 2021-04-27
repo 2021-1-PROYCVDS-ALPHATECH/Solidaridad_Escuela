@@ -15,8 +15,15 @@ import java.util.List;
 
 public interface OfertaMapper {
 
-    public void registrarOferta(@Param ("oferta") Oferta o);
+    public void registrarOferta(@Param ("id") String idOferta, 
+                                @Param("nombre") String nombre);
 
-    public List<Oferta> consultarOferta();
+
+    public List<Oferta> consultarOfertas();
+
+    public Oferta consultarOferta(@Param("id") String id);
+
+    public Oferta consultarOfertaNombre(@Param("nombre") String nombre);
     
+    public void eliminarOferta(@Param("idOferta") String idOferta);
 }

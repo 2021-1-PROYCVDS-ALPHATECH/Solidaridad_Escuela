@@ -18,12 +18,13 @@ public interface NecesidadMapper {
 
     public List<Necesidad> consultarNecesidades();
 
-    public void registrarNecesidades(@Param("necesidad") Necesidad necesidad);
+    public Necesidad consultarNecesidad(@Param("id") String idNecesidad);
 
+    public Necesidad consultarNecesidadNombre(@Param("nombre") String nombre);
 
-    public void actualizarNombre(@Param("idNecesidad") String idNecesidad,
-                                @Param("nombre") String nombre);
-
-    public void actualizarEstado(@Param("idNecesidad") String idNecesidad, 
-                                @Param("estado") String estado);
+    public void registrarNecesidad(@Param("id") String idNecesidad,
+                                    @Param("nombre") String nombre,
+                                    @Param("urg") String urgencia);
+    
+    public void eliminarNecesidad(@Param("idNecesidad") String idNecesidad);
 }

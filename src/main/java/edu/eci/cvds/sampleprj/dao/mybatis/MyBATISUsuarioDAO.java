@@ -1,11 +1,9 @@
 package edu.eci.cvds.sampleprj.dao.mybatis;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import com.google.inject.Inject;
 
-import org.apache.ibatis.jdbc.SQL;
 
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
@@ -19,7 +17,7 @@ import edu.eci.cvds.samples.entities.Usuario;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 20/04/2021 v1.0
+ * @version 26/04/2021 v2.0
  */
 public class MyBATISUsuarioDAO implements UsuarioDAO{
 
@@ -31,7 +29,6 @@ public class MyBATISUsuarioDAO implements UsuarioDAO{
         try{
             usuarioMapper.registrarUsuario(u);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error" + e.getMessage());
             throw new PersistenceException("Error al insertar usuario " + u.toString(), e);
         }
     }
@@ -41,9 +38,55 @@ public class MyBATISUsuarioDAO implements UsuarioDAO{
         try{
             return usuarioMapper.consultarUsuarios();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error" + e.getMessage());
             throw new PersistenceException("Error al consultar usuarios " + e);
         }
     }
-    
+
+    @Override
+    public Usuario load(String idUsuario) throws PersistenceException {
+        try{
+            return usuarioMapper.consultarUsuario(idUsuario);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar el usuario " + idUsuario + e);
+        }
+    }
+
+    @Override
+    public Usuario loadByName(String nombre) throws PersistenceException{
+        try{
+            return usuarioMapper.consultarUsuarioNombre(nombre);
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println("Error: " + e.getMessage());
+            throw new PersistenceException("Error al consultar el usuario con nombre " + nombre + e);
+        }
+    }
+
+    @Override
+    public List<Usuario> loadByRol(String rol) throws PersistenceException{
+        try{
+            return usuarioMapper.consultarUsuariosRol(rol);
+        }catch(org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println("Error: " + e.getMessage());
+            throw new PersistenceException("Error al consultar usuarios con rol " + rol + e);
+        }
+    }
+
+    @Override
+    public void updateNumApplication(String idUsuario, int numApplication) throws PersistenceException {
+        try{
+            usuarioMapper.actualizarNumSolicitudes(idUsuario, numApplication);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al actualizar el numero de solicitudes del usuario " + idUsuario + e);
+        }
+    }
+
+    @Override
+    public void delete(String idUsuario) throws PersistenceException {
+        try {
+            usuarioMapper.eliminarUsuario(idUsuario);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al eliminar usuario con id: "+ idUsuario, e);
+        }
+        
+    }
 }

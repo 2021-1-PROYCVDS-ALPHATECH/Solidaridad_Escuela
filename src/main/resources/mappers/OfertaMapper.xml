@@ -4,40 +4,93 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.OfertaMapper">
+    <select parameterType="map" id="consultarOfertas" resultMap="OfertaResult">
+        SELECT 
+            s.idSolicitud AS o_idSolicitud,
+            o.nombre AS o_nombre,
+            s.descripcion AS o_descripcion,
+            s.fechaCreacion AS o_fechaCreacion,
+            s.fechaModificacion AS o_fechaModificacion,
+            s.estado AS o_estado,
+
+            c.idCategoria AS c_idCategoria,
+            c.nombre AS c_nombre,
+            c.descripcion AS c_descripcion,
+            c.fechaCreacion AS c_fechaCreacion,
+            c.fechaModificacion AS c_fechaModificacion,
+            c.estado AS c_estado
+
+        FROM Solicitudes s JOIN Ofertas o ON (s.idSolicitud = o.idOferta)
+            JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+    </select>
+
     <select parameterType="map" id="consultarOferta" resultMap="OfertaResult">
         SELECT 
-            o.idOferta AS o_idOferta,
-            o.idUsuario AS o_idUsuario, 
+            s.idSolicitud AS o_idSolicitud,
             o.nombre AS o_nombre,
-            o.descripcion AS o_descripcion,
-            o.fechaCreacion AS o_fechaCreacion,
-            o.fechaModificacion AS o_fechaModificacion,
-            o.estado AS o_estado
-        FROM Ofertas o
+            s.descripcion AS o_descripcion,
+            s.fechaCreacion AS o_fechaCreacion,
+            s.fechaModificacion AS o_fechaModificacion,
+            s.estado AS o_estado,
+
+            c.idCategoria AS c_idCategoria,
+            c.nombre AS c_nombre,
+            c.descripcion AS c_descripcion,
+            c.fechaCreacion AS c_fechaCreacion,
+            c.fechaModificacion AS c_fechaModificacion,
+            c.estado AS c_estado
+
+        FROM Solicitudes s JOIN Ofertas o ON (s.idSolicitud = o.idOferta)
+            JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+
+        WHERE s.idSolicitud = #{id}
+    </select>
+
+<select parameterType="map" id="consultarOfertaNombre" resultMap="OfertaResult">
+        SELECT 
+            s.idSolicitud AS o_idSolicitud,
+            o.nombre AS o_nombre,
+            s.descripcion AS o_descripcion,
+            s.fechaCreacion AS o_fechaCreacion,
+            s.fechaModificacion AS o_fechaModificacion,
+            s.estado AS o_estado,
+
+            c.idCategoria AS c_idCategoria,
+            c.nombre AS c_nombre,
+            c.descripcion AS c_descripcion,
+            c.fechaCreacion AS c_fechaCreacion,
+            c.fechaModificacion AS c_fechaModificacion,
+            c.estado AS c_estado
+
+        FROM Solicitudes s JOIN Ofertas o ON (s.idSolicitud = o.idOferta)
+            JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+
+        WHERE o.nombre = #{nombre}
     </select>
 
     <insert id="registrarOferta" parameterType="map">
-        INSERT INTO Ofertas (idOferta, idUsuario, nombre, descripcion, estado) VALUES (#{oferta.idOferta}, #{oferta.idUsuario}, #{oferta.nombre}, 
-                                    #{oferta.descripcion}, #{oferta.estado})
+        INSERT INTO Ofertas VALUES (#{id}, #{nombre})
     </insert>
-
-    <update id="actualizarNombre" parameterType="map">
-        UPDATE Ofertas
-            SET nombre = #{nombre} WHERE idOferta = #{idOferta}
-    </update>
 
     <update id="actualizarEstado" parameterType="map">
         UPDATE Ofertas
             SET estado = #{estado} WHERE idOferta = #{idOferta}
     </update>
 
+    <delete id="eliminarOferta">
+        DELETE FROM Ofertas
+            WHERE idOferta = #{idOferta}
+    </delete>
+
     <resultMap id="OfertaResult" type="Oferta">
-        <id property='idOferta' column='o_idOferta' />
-        <id property="idUsuario" column="o_idUsuario" />
+        <id property='idSolicitud' column='o_idSolicitud' />
         <result property="nombre" column="o_nombre"/>
         <result property="descripcion" column="o_descripcion"/>
         <result property="fechaCreacion" column="o_fechaCreacion"/>
         <result property="fechaModificacion" column="o_fechaModificacion"/>
         <result property="estado" column="o_estado"/>
+        <association  property="categoria"
+                resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.CategoriaMapper.CategoriaResult">
+        </association>
     </resultMap>
 </mapper>

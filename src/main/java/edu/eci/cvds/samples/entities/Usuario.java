@@ -1,8 +1,9 @@
 package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-import edu.eci.cvds.samples.entities.Rol;
+
 /**
  * Clase usario para asi poder ...
  * @author Luis Amaya
@@ -19,6 +20,8 @@ public class Usuario implements Serializable{
     private String email;
     private String clave;
     private Rol rol;
+    private int numSolicitudes;
+    private ArrayList<Solicitud> solicitudes;
 
     /**
      * 
@@ -29,16 +32,19 @@ public class Usuario implements Serializable{
      * @param clave
      * @param rol
      */
-    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, Rol rol){
+    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, Rol rol,
+                    Integer numSolicitudes, ArrayList<Solicitud> solicitudes){
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.clave = clave;
         this.rol = rol;
+        this.numSolicitudes = numSolicitudes;
+        this.solicitudes = solicitudes;
     }
+
     /**
-     * 
      * @param idUsuario
      * @param nombre
      * @param telefono
@@ -46,16 +52,19 @@ public class Usuario implements Serializable{
      * @param clave
      * @param rol
      */
-    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol){
+    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol, Integer numSolicitudes){
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.clave = clave;
-        System.out.println("Rol: " + rol);
         this.rol = Rol.valueOf(rol);
+        this.numSolicitudes = numSolicitudes;
+        solicitudes = new ArrayList<>();
     }
-    
+
+    public Usuario(){}
+
     public void setIdUsuario(String newId) {
         idUsuario = newId;
     }
@@ -104,8 +113,28 @@ public class Usuario implements Serializable{
         return rol;
     }
 
+    public void setNumSolicitudes(int numSolicitudes) {
+        this.numSolicitudes = numSolicitudes;
+    }
+
+    public int getNumSolicitudes() {
+        return numSolicitudes;
+    }
+
+    public void setSolicitudes(ArrayList<Solicitud> newSolicitudes) {
+        this.solicitudes = newSolicitudes;
+    }
+
+    public ArrayList<Solicitud> getSolicitudes(){
+        return solicitudes;
+    }
+
+    public int solicitudesRestantes(){
+        return numSolicitudes - solicitudes.size();
+    }
+
     @Override
     public String toString(){
-        return "Usuario{" + "id=" + idUsuario + ", nombre=" + nombre + ", clave=" + clave + ",rol=" + rol + '}';
+        return "Usuario{" + "id = " + idUsuario + ", nombre = " + nombre + ", clave = " + clave + ", rol = " + rol + ", num = " + numSolicitudes + ", solicitudes = \n\t "+ solicitudes +'}';
     }
 }

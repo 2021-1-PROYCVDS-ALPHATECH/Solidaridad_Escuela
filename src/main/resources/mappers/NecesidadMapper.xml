@@ -6,40 +6,90 @@
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.NecesidadMapper">
     <select parameterType="map" id="consultarNecesidades" resultMap="NecesidadResult">
         SELECT 
-            n.idNecesidad AS n_idNecesidad,
-            n.idUsuario AS n_idUsuario, 
+            s.idSolicitud AS n_idSolicitud, 
             n.nombre AS n_nombre,
-            n.descripcion AS n_descripcion,
+            s.descripcion AS n_descripcion,
             n.urgencia AS n_urgencia,
-            n.fechaCreacion AS n_fechaCreacion,
-            n.fechaModificacion AS n_fechaModificacion,
-            n.estado AS n_estado
-        FROM necesidades n
+            s.fechaCreacion AS n_fechaCreacion,
+            s.fechaModificacion AS n_fechaModificacion,
+            s.estado AS n_estado,
+
+            c.idCategoria AS c_idCategoria,
+            c.nombre AS c_nombre,
+            c.descripcion AS c_descripcion,
+            c.fechaCreacion AS c_fechaCreacion,
+            c.fechaModificacion AS c_fechaModificacion,
+            c.estado AS c_estado
+
+        FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
+            JOIN Categorias c ON (s.idCategoria = c.idCategoria)
     </select>
 
-    <insert id="registrarNecesidades" parameterType="map">
-        INSERT INTO Necesidades (idNecesidad, idUsuario, nombre, descripcion, urgencia, estado) VALUES (#{necesidad.idNecesidad}, #{necesidad.idUsuario}, #{necesidad.nombre}, 
-                                        #{necesidad.descripcion}, #{necesidad.urgencia}, #{necesidad.estado})
+    <select parameterType="map" id="consultarNecesidad" resultMap="NecesidadResult">
+        SELECT 
+            s.idSolicitud AS n_idSolicitud, 
+            n.nombre AS n_nombre,
+            s.descripcion AS n_descripcion,
+            n.urgencia AS n_urgencia,
+            s.fechaCreacion AS n_fechaCreacion,
+            s.fechaModificacion AS n_fechaModificacion,
+            s.estado AS n_estado,
+
+            c.idCategoria AS c_idCategoria,
+            c.nombre AS c_nombre,
+            c.descripcion AS c_descripcion,
+            c.fechaCreacion AS c_fechaCreacion,
+            c.fechaModificacion AS c_fechaModificacion,
+            c.estado AS c_estado
+
+        FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
+            JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+
+        WHERE s.idSolicitud = #{id}
+    </select>
+
+    <select parameterType="map" id="consultarNecesidadNombre" resultMap="NecesidadResult">
+        SELECT 
+            s.idSolicitud AS n_idSolicitud, 
+            n.nombre AS n_nombre,
+            s.descripcion AS n_descripcion,
+            n.urgencia AS n_urgencia,
+            s.fechaCreacion AS n_fechaCreacion,
+            s.fechaModificacion AS n_fechaModificacion,
+            s.estado AS n_estado,
+
+            c.idCategoria AS c_idCategoria,
+            c.nombre AS c_nombre,
+            c.descripcion AS c_descripcion,
+            c.fechaCreacion AS c_fechaCreacion,
+            c.fechaModificacion AS c_fechaModificacion,
+            c.estado AS c_estado
+
+        FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
+            JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+
+        WHERE n.nombre = #{nombre}
+    </select>
+
+    <insert id="registrarNecesidad" parameterType="map">
+        INSERT INTO Necesidades VALUES (#{id}, #{nombre}, #{urg})
     </insert>
 
-    <update id="actualizarNombre" parameterType="map">
-        UPDATE Necesidades
-            SET nombre = #{nombre} WHERE idNecesidad = #{idNecesidad}
-    </update>
-
-    <update id="actualizarEstado" parameterType="map">
-        UPDATE Necesidades
-            SET estado = #{estado} WHERE idNecesidad = #{idNecesidad}
-    </update>
+    <delete id="eliminarNecesidad" parameterType="map">
+        DELETE FROM Necesidades 
+            WHERE idNecesidad = #{idNecesidad}
+    </delete>
 
     <resultMap id="NecesidadResult" type="Necesidad">
-        <id property='idNecesidad' column='n_idNecesidad' />
-        <id property="idUsuario" column="n_idUsuario" />
+        <id property='idSolicitud' column='n_idSolicitud' />
         <result property="nombre" column="n_nombre"/>
         <result property="descripcion" column="n_descripcion"/>
         <result property="urgencia" column="n_urgencia"/>
         <result property="fechaCreacion" column="n_fechaCreacion"/>
         <result property="fechaModificacion" column="n_fechaModificacion"/>
         <result property="estado" column="n_estado"/>
+        <association  property="categoria"
+                resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.CategoriaMapper.CategoriaResult">
+        </association>
     </resultMap>
 </mapper>

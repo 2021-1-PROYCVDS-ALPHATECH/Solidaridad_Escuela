@@ -1,6 +1,5 @@
 package edu.eci.cvds.samples.services;
 
-import java.util.Date;
 import java.util.List;
 import edu.eci.cvds.samples.entities.*;
 
@@ -11,33 +10,70 @@ import edu.eci.cvds.samples.entities.*;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 19/04/2021 v1.0
+ * @version 22/04/2021 v2.0
  */
 public interface ServiciosSolidaridad {
 
-    public abstract void registrarUsuario(Usuario u) throws ExcepcionSolidaridadEscuela;
+    public abstract void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol, int num) throws ExcepcionSolidaridad;
     
-    public abstract List<Usuario> consultarUsuarios() throws ExcepcionSolidaridadEscuela;
+    public abstract List<Usuario> consultarUsuarios() throws ExcepcionSolidaridad;
 
-    public abstract List<Categoria> consultarCategorias() throws ExcepcionSolidaridadEscuela;
+    public abstract Usuario consultarUsuario(String idUsuario) throws ExcepcionSolidaridad;
 
-    public abstract void registrarCategoria(String id, String nombre, String descripcion) throws ExcepcionSolidaridadEscuela;
+    public abstract Usuario consultarUsuarioNombre(String nombre) throws ExcepcionSolidaridad;
 
-    public abstract void actualizarNombreCategoria(String id, String nombre) throws ExcepcionSolidaridadEscuela;
+    public abstract List<Usuario> consultarUsuariosRol(String rol) throws ExcepcionSolidaridad;
 
-    public abstract void actualizarDescripcionCategoria(String id, String descripcion) throws ExcepcionSolidaridadEscuela;
+    public abstract void actualizarNumSolicitudes(String idUsuario, int numSolicitudes) throws ExcepcionSolidaridad;
 
-    public abstract void actualizarEstadoCategoria(String id, String estado) throws ExcepcionSolidaridadEscuela;
+    public abstract void registrarCategoria(String id, String nombre, String descripcion) throws ExcepcionSolidaridad;
 
-    public abstract void registrarNecesidades(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia,String estado) throws ExcepcionSolidaridadEscuela;
+    public abstract List<Categoria> consultarCategorias() throws ExcepcionSolidaridad;
 
-    public abstract List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridadEscuela;
+    public abstract Categoria consultarCategoriaId(String id) throws ExcepcionSolidaridad;
+    
+    public abstract Categoria consultarCategoriaNombre(String nombre) throws ExcepcionSolidaridad;
 
-    public abstract void actualizarNombreNecesidad(String idNecesidad, String nombre) throws ExcepcionSolidaridadEscuela;
+    public abstract void actualizarCategoria(String id, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad;
 
-    public abstract void actualizarEstadoNecesidad(String idNecesidad, String estado) throws ExcepcionSolidaridadEscuela;
+    public abstract void registrarSolicitud(String id, String descripcion, String estado, String categoria, String idUsuario) throws ExcepcionSolidaridad;
 
-    public abstract void registrarOferta(Oferta o)  throws ExcepcionSolidaridadEscuela;
+    public abstract List<Solicitud> consultarSolicitudes() throws ExcepcionSolidaridad;
+    
+    public abstract Solicitud consultarSolicitudId(String id) throws ExcepcionSolidaridad;
 
-    public abstract List<Oferta> consultarOferta() throws ExcepcionSolidaridadEscuela;
+    public abstract void actualizarSolicitud(String id) throws ExcepcionSolidaridad;
+    
+    public abstract void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado, String categoria) throws ExcepcionSolidaridad;
+
+    public abstract List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad;
+
+    public abstract Necesidad consultarNecesidadId(String id) throws ExcepcionSolidaridad;
+    
+    public abstract Necesidad consultarNecesidadNombre(String nombre) throws ExcepcionSolidaridad;
+
+    public abstract void actualizarEstadoNecesidad(String idNecesidad) throws ExcepcionSolidaridad;
+
+    public abstract void registrarOferta(String idOferta, String idUsuario, String nombre, String descripcion, String estado, String categoria)  throws ExcepcionSolidaridad;
+
+    public abstract List<Oferta> consultarOfertas() throws ExcepcionSolidaridad;
+
+    public abstract Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad;
+
+    public abstract Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad;
+
+    public abstract void actualizarEstadoOferta(String idOferta) throws ExcepcionSolidaridad;
+
+    public abstract void eliminarOferta(String idOferta) throws ExcepcionSolidaridad;
+
+    public abstract void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad;
+
+    public abstract void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad;
+
+    public abstract void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad;
+
+    public abstract void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad;
+
+    //public abstract void eliminarRespuesta(String idRespuesta) throws ExcepcionSolidaridad;
+
 }

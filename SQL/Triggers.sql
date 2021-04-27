@@ -1,65 +1,40 @@
-CREATE OR REPLACE FUNCTION fechasCategoria() RETURNS TRIGGER AS
-$$
+CREATE OR REPLACE FUNCTION fechas() RETURNS TRIGGER AS $fechas$
+DECLARE
 BEGIN
 	new.fechaCreacion := current_date;
 	new.fechaModificacion := current_date;
 	RETURN new;
 END;
-$$ LANGUAGE 'plpgsql';
+$fechas$ LANGUAGE 'plpgsql';
 
-CREATE trigger AD_Categoria
+CREATE TRIGGER AD_Categoria
 BEFORE INSERT ON public.Categorias 
 FOR EACH ROW
-EXECUTE PROCEDURE fechasCategoria();
+EXECUTE PROCEDURE fechas();
 
+CREATE TRIGGER AD_Solicitud
+BEFORE INSERT ON public.Solicitudes
+FOR EACH ROW
+EXECUTE PROCEDURE fechas();
 
-CREATE OR REPLACE FUNCTION fechaModCategoria() RETURNS TRIGGER AS
-$$
+CREATE OR REPLACE FUNCTION fechaModificacion() RETURNS TRIGGER AS $fechaModificacion$
+DECLARE
 BEGIN
 	new.fechaModificacion := current_date;
 	RETURN new;
 END;
-$$ LANGUAGE 'plpgsql';
+$fechaModificacion$ LANGUAGE 'plpgsql'; 
 
-CREATE trigger MO_Categoria
-BEFORE INSERT ON public.Categorias 
+
+CREATE TRIGGER MO_Categoria
+BEFORE UPDATE ON public.Categorias 
 FOR EACH ROW
-EXECUTE PROCEDURE fechaModCategoria();
+EXECUTE PROCEDURE fechaModificacion();
 
-CREATE OR REPLACE FUNCTION fechasNecesidad() RETURNS TRIGGER AS
-$$
-BEGIN
-	new.fechaCreacion := current_date;
-	new.fechaModificacion := current_date;
-	RETURN new;
-END;
-$$ LANGUAGE 'plpgsql';
-
-CREATE trigger AD_Categoria
-BEFORE INSERT ON public.Categorias 
+CREATE TRIGGER MO_Solicitud
+BEFORE UPDATE ON public.Solicitudes
 FOR EACH ROW
-EXECUTE PROCEDURE fechasCategoria();
+EXECUTE PROCEDURE fechaModificacion();
 
 
-CREATE OR REPLACE FUNCTION fechaModNecesidad() RETURNS TRIGGER AS
-$$
-BEGIN
-	new.fechaModificacion := current_date;
-	RETURN new;
-END;
-$$ LANGUAGE 'plpgsql';
 
-CREATE trigger AD_Necesidad
-BEFORE INSERT ON public.Necesidades
-FOR EACH ROW
-EXECUTE PROCEDURE fechasNecesidad();
-
-CREATE trigger MO_Necesidad
-BEFORE INSERT ON public.Necesidades
-FOR EACH ROW
-EXECUTE PROCEDURE fechaModNecesidad();
-
-CREATE trigger AD_Oferta
-BEFORE INSERT ON public.Ofertas
-FOR EACH ROW
-EXECUTE PROCEDURE fechasCategoria();
