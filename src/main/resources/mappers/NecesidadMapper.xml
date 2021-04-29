@@ -77,7 +77,7 @@
 
     <delete id="eliminarNecesidad" parameterType="map">
         DELETE FROM Necesidades 
-            WHERE idNecesidad = #{idNecesidad}
+            WHERE idNecesidad = #{idNecesidad};
     </delete>
 
     <resultMap id="NecesidadResult" type="Necesidad">

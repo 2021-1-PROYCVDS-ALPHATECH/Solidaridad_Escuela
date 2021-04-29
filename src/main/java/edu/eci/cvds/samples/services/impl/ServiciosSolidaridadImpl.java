@@ -234,7 +234,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             actualizarSolicitud(idNecesidad);
         } catch (ExcepcionSolidaridad e) {
-            throw new ExcepcionSolidaridad("Error al actualizar el estado de la categoria con ID: "+ idNecesidad, e);
+            throw new ExcepcionSolidaridad("Error al actualizar el estado de la necesidad con ID: "+ idNecesidad, e);
         }
     }    
 
@@ -291,6 +291,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     public void eliminarOferta(String idOferta) throws ExcepcionSolidaridad {
         try {
             ofertaDAO.delete(idOferta);
+            solicitudDAO.delete(idOferta);
+            if(ofertaDAO.load(idOferta) != null) throw new ExcepcionSolidaridad("No se elimino la oferta");
         } catch (Exception e) {
             throw new ExcepcionSolidaridad("Error al eliminar la oferta con ID: " + idOferta, e);
         }
@@ -311,6 +313,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     public void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad {
         try {
             necesidadDAO.delete(idNecesidad);
+            solicitudDAO.delete(idNecesidad);
+            if(necesidadDAO.load(idNecesidad) != null) throw new ExcepcionSolidaridad("No se elimino la Necesidad");
         } catch (Exception e) {
             throw new ExcepcionSolidaridad("Error al eliminar la necesidad con ID: " + idNecesidad, e);
         }

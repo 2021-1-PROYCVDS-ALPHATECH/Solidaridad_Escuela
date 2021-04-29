@@ -1,6 +1,10 @@
 package edu.eci.cvds.test;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.LocalDate;
 
 import com.google.inject.Inject;
@@ -22,6 +26,8 @@ public class ServiciosSolidaridadTest {
     private SqlSession SqlSession;
 
     ServiciosSolidaridad serviciosSolidaridad;
+    Connection connection;
+    Statement stmt;
 
     public ServiciosSolidaridadTest(){
         serviciosSolidaridad = ServiciosSolidaridadFactory.getInstance().getServiciosSolidaridadTesting();
@@ -29,7 +35,12 @@ public class ServiciosSolidaridadTest {
     
     @Before
     public void setUp(){
-
+        try {
+            connection = DriverManager.getConnection("jdbc:h2:~/test", "sa", "");
+            stmt = connection .createStatement();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -43,7 +54,7 @@ public class ServiciosSolidaridadTest {
                 fail("No se encontro el usuario.");
             }
         } catch(ExcepcionSolidaridad e){
-            fail("Lanzo excepcion.");
+            fail("Lanzo excepcion." + e.getMessage());
         }
     }
 
@@ -58,7 +69,7 @@ public class ServiciosSolidaridadTest {
                 fail("No se encontro el usuario.");
             }
         } catch(ExcepcionSolidaridad e){
-            fail("Lanzo excepcion.");
+            fail("Lanzo excepcion." + e.getMessage());
         }
     }
 
@@ -71,7 +82,7 @@ public class ServiciosSolidaridadTest {
                 fail("No se encontraron usuarios.");
             }
         } catch(ExcepcionSolidaridad e){
-            fail("Lanzo excepcion.");
+            fail("Lanzo excepcion."+ e.getMessage());
         }
     }
 
@@ -86,7 +97,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.actualizarNumSolicitudes("13", numSolicitudes);
             assertEquals(numSolicitudes, serviciosSolidaridad.consultarUsuario("13").getNumSolicitudes());
         } catch(ExcepcionSolidaridad e){
-            fail("Lanzo excepcion.");
+            fail("Lanzo excepcion." + e.getMessage());
         }
     }
 
@@ -221,7 +232,7 @@ public class ServiciosSolidaridadTest {
                 fail("No se inserto la necesidad.");
             }
         } catch(ExcepcionSolidaridad e){
-            fail("Lanzo excepcion.");
+            fail("Lanzo excepcion." + e.getMessage());
         }
     }
 
@@ -250,7 +261,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.registrarNecesidad("11", "3" ,"Solicitud1", "DescripcionSN10", "Alta", "Activa", "2");
             fail("No lanzo excepcion");
         } catch(ExcepcionSolidaridad e){
-            assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
+            assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
     
@@ -261,7 +272,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaRegistrarNecesidadNumSolicitudes(){
         try{
-            serviciosSolidaridad.registrarNecesidad("12", "4", "Necesidad1", "DescripconN1", "Alta", "Activa", "1");
+            serviciosSolidaridad.registrarNecesidad("13", "4", "Necesidad1", "DescripconN1", "Alta", "Activa", "1");
             fail("No lanzo excepcion");
         } catch(ExcepcionSolidaridad e){
             assertEquals(ExcepcionSolidaridad.INVALID_REGISTRED, e.getMessage());
@@ -302,7 +313,7 @@ public class ServiciosSolidaridadTest {
                 fail("No se inserto la oferta.");
             }
         } catch(ExcepcionSolidaridad e){
-            fail("Lanzo excepcion.");
+            fail("Lanzo excepcion."+e.getMessage());
         }
     }
 
@@ -327,10 +338,11 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaRegistrarOfertaNombreExistente(){
         try{
-            serviciosSolidaridad.registrarOferta("21", "3", "Solicitud3", "DescripconO21", "Activa", "1");
+            serviciosSolidaridad.registrarOferta("22", "3", "Solicitud23", "DescripconO23", "Activa", "1");
+            serviciosSolidaridad.registrarOferta("21", "3", "Solicitud23", "DescripconO21", "Activa", "1");
             fail("No lanzo excepcion");
         } catch(ExcepcionSolidaridad e){
-            assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
+            assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
 
@@ -342,7 +354,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaRegistrarOfertaNumSolicitudes(){
         try{
-            serviciosSolidaridad.registrarOferta("22", "4", "Oferta22", "DescripconO22", "Activa", "1");
+            serviciosSolidaridad.registrarOferta("24", "4", "Oferta24", "DescripconO24", "Activa", "1");
             fail("No lanzo excepcion");
         } catch(ExcepcionSolidaridad e){
             assertEquals(ExcepcionSolidaridad.INVALID_REGISTRED, e.getMessage());
@@ -352,9 +364,18 @@ public class ServiciosSolidaridadTest {
     @After
     public void dropData(){
         try {
+            stmt.execute("DROP ALL OBJECTS");
+            connection.commit();
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        try {
             serviciosSolidaridad.eliminarNecesidad("10");
-            serviciosSolidaridad.eliminarNecesidad("11");
             serviciosSolidaridad.eliminarOferta("20");
+            serviciosSolidaridad.eliminarOferta("21");
+            serviciosSolidaridad.eliminarOferta("23");
+            serviciosSolidaridad.eliminarOferta("22");
             serviciosSolidaridad.eliminarCategoria("11");
             serviciosSolidaridad.eliminarUsuario("10");
             serviciosSolidaridad.eliminarUsuario("11");

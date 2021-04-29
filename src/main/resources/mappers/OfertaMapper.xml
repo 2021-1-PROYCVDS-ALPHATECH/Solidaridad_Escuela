@@ -79,7 +79,7 @@
 
     <delete id="eliminarOferta">
         DELETE FROM Ofertas
-            WHERE idOferta = #{idOferta}
+            WHERE idOferta = #{idOferta};
     </delete>
 
     <resultMap id="OfertaResult" type="Oferta">
