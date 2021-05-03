@@ -26,6 +26,8 @@ public interface ServiciosSolidaridad {
 
     public abstract void actualizarNumSolicitudes(String idUsuario, int numSolicitudes) throws ExcepcionSolidaridad;
 
+    public abstract void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad;
+
     public abstract void registrarCategoria(String id, String nombre, String descripcion) throws ExcepcionSolidaridad;
 
     public abstract List<Categoria> consultarCategorias() throws ExcepcionSolidaridad;
@@ -36,6 +38,8 @@ public interface ServiciosSolidaridad {
 
     public abstract void actualizarCategoria(String id, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad;
 
+    public abstract void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad;
+
     public abstract void registrarSolicitud(String id, String descripcion, String estado, String categoria, String idUsuario) throws ExcepcionSolidaridad;
 
     public abstract List<Solicitud> consultarSolicitudes() throws ExcepcionSolidaridad;
@@ -43,16 +47,20 @@ public interface ServiciosSolidaridad {
     public abstract Solicitud consultarSolicitudId(String id) throws ExcepcionSolidaridad;
 
     public abstract void actualizarSolicitud(String id) throws ExcepcionSolidaridad;
+
+    public abstract void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad;
     
     public abstract void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado, String categoria) throws ExcepcionSolidaridad;
 
     public abstract List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad;
 
     public abstract Necesidad consultarNecesidadId(String id) throws ExcepcionSolidaridad;
-    
+
     public abstract Necesidad consultarNecesidadNombre(String nombre) throws ExcepcionSolidaridad;
 
     public abstract void actualizarEstadoNecesidad(String idNecesidad) throws ExcepcionSolidaridad;
+
+    public abstract void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad;
 
     public abstract void registrarOferta(String idOferta, String idUsuario, String nombre, String descripcion, String estado, String categoria)  throws ExcepcionSolidaridad;
 
@@ -66,14 +74,16 @@ public interface ServiciosSolidaridad {
 
     public abstract void eliminarOferta(String idOferta) throws ExcepcionSolidaridad;
 
-    public abstract void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad;
+    public abstract void registrarRespuesta(String idRespuesta, String idUsuario, String nombre, String comentarios, String idSolicitud) throws ExcepcionSolidaridad;
 
-    public abstract void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad;
+    public abstract List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad;
 
-    public abstract void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad;
+    public abstract Respuesta consultarRespuestaId(String id) throws ExcepcionSolidaridad;
 
-    public abstract void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad;
+    public abstract List<Respuesta> consultarRespuestasUsuario(String nombre) throws ExcepcionSolidaridad;
 
-    //public abstract void eliminarRespuesta(String idRespuesta) throws ExcepcionSolidaridad;
+    public abstract List<Respuesta> consultarRespuestasSolicitud(String nombre) throws ExcepcionSolidaridad;
+
+    public abstract void eliminarRespuesta(String id) throws ExcepcionSolidaridad;
 
 }

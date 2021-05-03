@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 19/04/2021 v1.0
+ * @version 28/04/2021 v2.0
  */
 public class Usuario implements Serializable{
     private String idUsuario;
@@ -22,6 +22,8 @@ public class Usuario implements Serializable{
     private Rol rol;
     private int numSolicitudes;
     private ArrayList<Solicitud> solicitudes;
+    private ArrayList<Respuesta> respuestas;
+
 
     /**
      * 
@@ -33,7 +35,7 @@ public class Usuario implements Serializable{
      * @param rol
      */
     public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, Rol rol,
-                    Integer numSolicitudes, ArrayList<Solicitud> solicitudes){
+                    Integer numSolicitudes, ArrayList<Solicitud> solicitudes, ArrayList<Respuesta> respuestas){
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.telefono = telefono;
@@ -42,6 +44,7 @@ public class Usuario implements Serializable{
         this.rol = rol;
         this.numSolicitudes = numSolicitudes;
         this.solicitudes = solicitudes;
+        this.respuestas = respuestas;
     }
 
     /**
@@ -61,6 +64,7 @@ public class Usuario implements Serializable{
         this.rol = Rol.valueOf(rol);
         this.numSolicitudes = numSolicitudes;
         solicitudes = new ArrayList<>();
+        respuestas =  new ArrayList<>();
     }
 
     public Usuario(){}
@@ -122,7 +126,7 @@ public class Usuario implements Serializable{
     }
 
     public void setSolicitudes(ArrayList<Solicitud> newSolicitudes) {
-        this.solicitudes = newSolicitudes;
+        solicitudes = newSolicitudes;
     }
 
     public ArrayList<Solicitud> getSolicitudes(){
@@ -133,8 +137,16 @@ public class Usuario implements Serializable{
         return numSolicitudes - solicitudes.size();
     }
 
+    public void setRespuestas(ArrayList<Respuesta> newRespuestas){
+        respuestas = newRespuestas;
+    }
+
+    public ArrayList<Respuesta> getRespuestas(){
+        return respuestas;
+    }
+
     @Override
     public String toString(){
-        return "Usuario{" + "id = " + idUsuario + ", nombre = " + nombre + ", clave = " + clave + ", rol = " + rol + ", num = " + numSolicitudes + ", solicitudes = \n\t "+ solicitudes +'}';
+        return "Usuario{" + "id = " + idUsuario + ", nombre = " + nombre + ", clave = " + clave + ", rol = " + rol + ", num = " + numSolicitudes + ", solicitudes = \n\t "+ solicitudes + ", respuestas = \n\t"+ respuestas+'}';
     }
 }

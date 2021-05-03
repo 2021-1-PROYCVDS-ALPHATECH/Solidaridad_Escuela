@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.RespuestaMapper">
+    
+    <select parameterType="map" id="consultarRespuestas" resultMap="RespuestaResult">
+        SELECT 
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion
+        FROM Respuestas r
+    </select>
+
+    <select parameterType="map" id="consultarRespuestaId" resultMap="RespuestaResult">
+        SELECT 
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion
+        FROM Respuestas r
+        WHERE r.idRespuesta = #{id}
+    </select>
+
+    <select parameterType="map" id="consultarRespuestasUsuario" resultMap="RespuestaResult">
+        SELECT 
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion
+        FROM Respuestas r
+        WHERE r.idUsuario IN (SELECT idUsuario
+                                FROM Usuarios
+                                WHERE nombre = #{nombre})
+    </select>
+
+    <select parameterType="map" id="consultarRespuestasSolicitud" resultMap="RespuestaResult">
+        SELECT 
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion
+        FROM Respuestas r
+        WHERE r.idSolicitud IN (SELECT idSolicitud
+                                FROM Solicitudes
+                                WHERE nombre = #{nombre})
+    </select>
+
+    <insert parameterType="map" id="insertarRespuesta">
+        INSERT INTO Respuestas
+            VALUES(#{res.idRespuesta}, #{idUs},#{res.nombre}, #{res.comentarios}, CURRENT_DATE, #{idSol})
+    </insert>
+
+    <delete id="eliminarRespuesta" parameterType="map">
+        DELETE FROM Respuestas 
+            WHERE idRespuesta = #{idRespuesta};
+  </delete>
+
+    <resultMap id="RespuestaResult" type="Respuesta">
+        <id property='idRespuesta' column='r_idRespuesta' />
+        <result property="nombre" column="r_nombre"/>
+        <result property="comentarios" column="r_comentarios"/>
+        <result property="fechaCreacion" column="r_fechaCreacion"/>
+    </resultMap>
+</mapper>

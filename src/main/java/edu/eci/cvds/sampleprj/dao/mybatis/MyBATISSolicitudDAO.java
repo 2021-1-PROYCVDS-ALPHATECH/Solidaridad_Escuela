@@ -38,6 +38,7 @@ public class MyBATISSolicitudDAO implements SolicitudDAO{
         try{
             return solicitudMapper.consultarSolicitudes();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println(e.getMessage());
             throw new PersistenceException("Error al consultar las solicitudes", e);
         }
     }
@@ -47,6 +48,7 @@ public class MyBATISSolicitudDAO implements SolicitudDAO{
         try{
             return solicitudMapper.consultarSolicitud(id);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println(e.getMessage());
             throw new PersistenceException("Error al consultar la solicitud " + id, e);
         }
     }

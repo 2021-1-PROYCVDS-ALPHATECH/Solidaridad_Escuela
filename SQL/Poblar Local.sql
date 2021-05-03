@@ -24,6 +24,8 @@ INSERT INTO Solicitudes VALUES ('2', '3', 'DescripcionSN2', 'Activa', '2', '2014
 INSERT INTO Solicitudes VALUES ('3', '2', 'DescripcionSO3', 'Activa', '1', '2013-06-01', '2013-06-01');
 INSERT INTO Solicitudes VALUES ('4', '3', 'DescripcionSO4', 'Activa', '2', '2014-06-01', '2014-06-01');
 INSERT INTO Solicitudes VALUES ('5', '4', 'DescripcionSO5', 'Activa', '2', '2014-06-01', '2014-06-01');
+INSERT INTO Solicitudes VALUES ('6', '2', 'DescripcionSO6', 'Cerrada', '2', '2014-06-01', '2014-06-01');
+
 
 
 INSERT INTO Necesidades VALUES ('1', 'Solicitud1', 'Media');
@@ -32,6 +34,11 @@ INSERT INTO Necesidades VALUES ('2', 'Solicitud2', 'Alta');
 INSERT INTO Ofertas VALUES('3', 'Solicitud3');
 INSERT INTO Ofertas VALUES('4', 'Solicitud4');
 INSERT INTO Ofertas VALUES('5', 'Solicitud5');
+INSERT INTO Ofertas VALUES('6', 'Solicitud6');
+
+
+INSERT INTO Respuestas VALUES('1', '2', 'Respuesta1', 'RespuestaComent1', '2016-06-01', '1');
+
 
 
 

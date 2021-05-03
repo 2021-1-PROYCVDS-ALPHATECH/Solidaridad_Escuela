@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Clase Solicitud en donde se van a guardar de maera correcta las diferentes necesidades que puedan
@@ -13,7 +14,7 @@ import java.time.LocalDate;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 22/04/2021 v2.0
+ * @version 28/04/2021 v3.0
  */
 
 public class Solicitud implements Serializable{
@@ -24,7 +25,18 @@ public class Solicitud implements Serializable{
     protected Categoria categoria;
     protected Date fechaCreacion;
     protected Date fechaModificacion;
+    protected ArrayList<Respuesta> respuestas;
 
+
+    public Solicitud(String idSolicitud, String descripcion, String estado, Date fechaCreacion, Date fechaModificacion, Categoria categoria, ArrayList<Respuesta> respuestas){
+        this.idSolicitud = idSolicitud;
+        this.descripcion = descripcion;
+        this.fechaCreacion = fechaCreacion;
+        this.fechaModificacion = fechaModificacion;
+        this.estado = estado;
+        this.categoria = categoria;
+        this.respuestas = respuestas;
+    }
 
     public Solicitud(String idSolicitud, String descripcion, String estado, Date fechaCreacion, Date fechaModificacion, Categoria categoria){
         this.idSolicitud = idSolicitud;
@@ -33,6 +45,7 @@ public class Solicitud implements Serializable{
         this.fechaModificacion = fechaModificacion;
         this.estado = estado;
         this.categoria = categoria;
+        this.respuestas = new ArrayList<Respuesta>();
     }
 
     public Solicitud(String idSolicitud, String descipcion,String estado, Categoria categoria){
@@ -43,6 +56,7 @@ public class Solicitud implements Serializable{
         this.descripcion = descipcion;
         this.estado = estado;
         this.categoria = categoria;
+        this.respuestas = new ArrayList<Respuesta>();
     }
 
     public Solicitud(){}
@@ -95,8 +109,16 @@ public class Solicitud implements Serializable{
         return fechaModificacion;
     }
 
+    public void setRespuenta(ArrayList<Respuesta> newRespuestas){
+        respuestas = newRespuestas;
+    }
+
+    public ArrayList<Respuesta> getRespuesta(){
+        return respuestas;
+    }
+
     @Override
     public String toString(){
-        return "Solicitud{"+"id= "+ idSolicitud + ", descripcion= " + descripcion +", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + ", categoria="+ categoria+"}";
+        return "Solicitud{"+"id = "+ idSolicitud + ", descripcion = " + descripcion +", fecha C = " + fechaCreacion + ", fecha M = " + fechaModificacion + ", estado = " + estado + ", categoria = \n\t"+ categoria + ", respuestas = \n\t" + respuestas + "}";
     }
 }

@@ -73,10 +73,11 @@ CREATE TABLE IF NOT EXISTS Respuestas (
     idRespuesta VARCHAR(50) PRIMARY KEY,
     idUsuario VARCHAR(50) NOT NULL,
     nombre VARCHAR(50) UNIQUE NOT NULL,
-    comentarios VARCHAR(1000) NOT NULL,
+    comentarios TEXT NOT NULL,
     fechaCreacion DATE NOT NULL,
     idSolicitud VARCHAR(50) NOT NULL,
     FOREIGN KEY (idSolicitud) REFERENCES Solicitudes(idSolicitud),
     FOREIGN KEY (idUsuario) REFERENCES Usuarios(idUsuario)
-
 );
+
+

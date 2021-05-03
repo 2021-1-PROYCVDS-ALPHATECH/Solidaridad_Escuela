@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 26/04/2021 v1.0
+ * @version 28/04/2021 v2.0
  */
 public class Respuesta implements Serializable{
     private String idRespuesta;
@@ -71,6 +71,6 @@ public class Respuesta implements Serializable{
 
     @Override
     public String toString(){
-        return "Respuesta{"+"id= "+ idRespuesta + ", nombre= " + nombre + ",comentarios=" + comentarios + ", fecha C= " + fechaCreacion +"}";
+        return "Respuesta{"+"id = "+ idRespuesta + ", nombre = " + nombre + ", comentarios =" + comentarios + ", fecha C = " + fechaCreacion +"}";
     }
 }

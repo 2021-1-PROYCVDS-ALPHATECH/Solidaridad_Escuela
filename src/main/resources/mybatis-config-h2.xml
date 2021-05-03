@@ -11,6 +11,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias type='edu.eci.cvds.samples.entities.Rol' alias='Rol'/>
         <typeAlias type="edu.eci.cvds.samples.entities.Oferta" alias="Oferta" />
         <typeAlias type="edu.eci.cvds.samples.entities.Solicitud" alias="Solicitud" /> 
+        <typeAlias type="edu.eci.cvds.samples.entities.Respuesta" alias="Respuesta" /> 
 
     </typeAliases>
 
@@ -33,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <mapper resource="mappers/NecesidadMapper.xml"></mapper>
         <mapper resource="mappers/OfertaMapper.xml"></mapper>
         <mapper resource="mappers/SolicitudMapper.xml"></mapper>
+        <mapper resource="mappers/RespuestaMapper.xml"></mapper>
     </mappers> 
 
 </configuration>

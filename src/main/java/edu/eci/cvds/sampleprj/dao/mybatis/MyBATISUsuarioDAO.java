@@ -38,6 +38,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO{
         try{
             return usuarioMapper.consultarUsuarios();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println(e.getMessage());
             throw new PersistenceException("Error al consultar usuarios " + e);
         }
     }

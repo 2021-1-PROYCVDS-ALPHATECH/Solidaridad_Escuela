@@ -19,10 +19,16 @@
             c.descripcion AS c_descripcion,
             c.fechaCreacion AS c_fechaCreacion,
             c.fechaModificacion AS c_fechaModificacion,
-            c.estado AS c_estado
+            c.estado AS c_estado,
+            
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion
 
         FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
             JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+            LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
     </select>
 
     <select parameterType="map" id="consultarNecesidad" resultMap="NecesidadResult">
@@ -40,10 +46,16 @@
             c.descripcion AS c_descripcion,
             c.fechaCreacion AS c_fechaCreacion,
             c.fechaModificacion AS c_fechaModificacion,
-            c.estado AS c_estado
+            c.estado AS c_estado,
+
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion
 
         FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
             JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+            LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
 
         WHERE s.idSolicitud = #{id}
     </select>
@@ -63,10 +75,16 @@
             c.descripcion AS c_descripcion,
             c.fechaCreacion AS c_fechaCreacion,
             c.fechaModificacion AS c_fechaModificacion,
-            c.estado AS c_estado
+            c.estado AS c_estado,
+
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion
 
         FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
             JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+            LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
 
         WHERE n.nombre = #{nombre}
     </select>
@@ -91,5 +109,9 @@
         <association  property="categoria"
                 resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.CategoriaMapper.CategoriaResult">
         </association>
+        <collection property='respuestas'
+                ofType='Respuesta'
+                resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RespuestaMapper.RespuestaResult'>
+        </collection>
     </resultMap>
 </mapper>

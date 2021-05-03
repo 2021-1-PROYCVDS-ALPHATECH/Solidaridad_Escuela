@@ -15,11 +15,15 @@ import edu.eci.cvds.samples.entities.Respuesta;
  */
 public interface RespuestaDAO {
 
-    public void save(Respuesta r) throws PersistenceException;
+    public void save(Respuesta r, String idUsuario, String idSolicitud) throws PersistenceException;
 
     public List<Respuesta> loadAll() throws PersistenceException;
 
-    public List<Respuesta> loadByUser(String idUsuario) throws PersistenceException;
+    public Respuesta load(String id) throws PersistenceException;
+
+    public List<Respuesta> loadByUser(String nombre) throws PersistenceException;
+
+    public List<Respuesta> loadByApplication(String nombre) throws PersistenceException;
 
     public void delete(String id) throws PersistenceException;
 

@@ -29,6 +29,10 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     @Inject
     private SolicitudDAO solicitudDAO;
 
+    @Inject
+    private RespuestaDAO respuestaDAO;
+
+
     @Transactional
     @Override
     public void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol, int num) throws ExcepcionSolidaridad{
@@ -85,6 +89,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             usuarioDAO.updateNumApplication(idUsuario, numSolicitudes);
         } catch (PersistenceException e){
             throw new ExcepcionSolidaridad ("Error al consultar los usuarios", e);
+        }
+    }
+
+    @Override
+    public void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad {
+        try {
+            usuarioDAO.delete(idUsuario);
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridad("Error al eliminar el usuario con ID: " + idUsuario, e);
         }
     }
 
@@ -149,6 +162,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         }
     }
 
+    @Override
+    public void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad{
+        try {
+            categoriaDAO.delete(idCategoria);
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridad("Error al eliminar la categoria con ID: " + idCategoria, e);
+        }
+    }
+
     @Transactional
     @Override
     public void registrarSolicitud(String id, String descripcion, String estado, String categoria, String idUsuario) throws ExcepcionSolidaridad {
@@ -186,6 +208,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             solicitudDAO.update(id);
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al actualizar la solicitud " + id, e);
+        }
+    }
+
+    @Override
+    public void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad {
+        try {
+            solicitudDAO.delete(idSolicitud);
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridad("Error al eliminar la solicitud con ID: " + idSolicitud, e);
         }
     }
     
@@ -237,6 +268,18 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             throw new ExcepcionSolidaridad("Error al actualizar el estado de la necesidad con ID: "+ idNecesidad, e);
         }
     }    
+
+    @Override
+    public void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad {
+        try {
+            necesidadDAO.delete(idNecesidad);
+            solicitudDAO.delete(idNecesidad);
+            if(necesidadDAO.load(idNecesidad) != null) throw new ExcepcionSolidaridad("No se elimino la Necesidad");
+        } catch (Exception e) {
+            throw new ExcepcionSolidaridad("Error al eliminar la necesidad con ID: " + idNecesidad, e);
+        }
+        
+    }
 
     @Transactional
     @Override
@@ -296,48 +339,65 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         } catch (Exception e) {
             throw new ExcepcionSolidaridad("Error al eliminar la oferta con ID: " + idOferta, e);
         }
-        
     }
 
     @Override
-    public void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad {
-        try {
-            usuarioDAO.delete(idUsuario);
-        } catch (Exception e) {
-            throw new ExcepcionSolidaridad("Error al eliminar el usuario con ID: " + idUsuario, e);
+    public void registrarRespuesta(String idRespuesta, String idUsuario, String nombre, String comentarios, String idSolicitud) throws ExcepcionSolidaridad {
+        try{
+            String estado = solicitudDAO.load(idSolicitud).getEstado();
+            if (respuestaDAO.load(idRespuesta) != null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_ID);
+            if (!(estado.equals("Activa")) && !(estado.equalsIgnoreCase("en proceso"))) {
+                throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_ANSWER);
+            }
+            respuestaDAO.save(new Respuesta(idRespuesta, nombre, comentarios), idUsuario, idSolicitud);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al registrar respuesta con id: " + idRespuesta, e);
         }
-        
     }
 
     @Override
-    public void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad {
-        try {
-            necesidadDAO.delete(idNecesidad);
-            solicitudDAO.delete(idNecesidad);
-            if(necesidadDAO.load(idNecesidad) != null) throw new ExcepcionSolidaridad("No se elimino la Necesidad");
-        } catch (Exception e) {
-            throw new ExcepcionSolidaridad("Error al eliminar la necesidad con ID: " + idNecesidad, e);
+    public List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad {
+        try{
+            return respuestaDAO.loadAll();
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar todas las respuestas", e);
         }
-        
     }
 
     @Override
-    public void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad {
-        try {
-            solicitudDAO.delete(idSolicitud);
-        } catch (Exception e) {
-            throw new ExcepcionSolidaridad("Error al eliminar la solicitud con ID: " + idSolicitud, e);
+    public Respuesta consultarRespuestaId(String id) throws ExcepcionSolidaridad {
+        try{
+            return respuestaDAO.load(id);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar la respuesta con id: " + id, e);
         }
-        
     }
 
     @Override
-    public void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad{
-        try {
-            categoriaDAO.delete(idCategoria);
-        } catch (Exception e) {
-            throw new ExcepcionSolidaridad("Error al eliminar la categoria con ID: " + idCategoria, e);
+    public List<Respuesta> consultarRespuestasUsuario(String nombre) throws ExcepcionSolidaridad {
+        try{
+            return respuestaDAO.loadByUser(nombre);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar las respuestas del usuario  " + nombre, e);
         }
     }
 
+    @Override
+    public List<Respuesta> consultarRespuestasSolicitud(String nombre) throws ExcepcionSolidaridad {
+        try{
+            return respuestaDAO.loadByApplication(nombre);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar las respuestas de la solicitud " + nombre, e);
+        }
+    }
+
+    @Override
+    public void eliminarRespuesta(String id) throws ExcepcionSolidaridad {
+        try{
+            respuestaDAO.delete(id);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al eliminar la respuesta con id  " + id, e);
+        }
+        
+    }
 }

@@ -361,6 +361,52 @@ public class ServiciosSolidaridadTest {
         }
     }
 
+
+    /**
+     * Prueba Historia de usuario #6 Registrar Respuestas
+     * Se comprueba que se registre la categoria de manera exitosa
+     */
+    @Test
+    public void deberiaRegistrarRespuesta(){
+        try{
+            serviciosSolidaridad.registrarRespuesta("11", "3", "Respuesta11", "RespuestaCom11", "2");
+            if (serviciosSolidaridad.consultarRespuestaId("11") == null) {
+                fail("No se encontro la respuesta.");
+            }
+        } catch(ExcepcionSolidaridad e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Prueba Historia de usuario #6 Registrar Respuestas
+     * Se prueba que no sea posible registrar una respuesta con id ya existente
+     */
+    @Test
+    public void noDeberiaRegistrarRespuestaIdExistente(){
+        try{
+            serviciosSolidaridad.registrarRespuesta("1", "3", "Respuesta11", "RespuestaCom11", "2");
+            fail("Lanzo excepcion.");
+        } catch(ExcepcionSolidaridad e){
+            assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
+        }
+    }
+
+    /**
+     * Prueba Historia de usuario #6 Registrar Respuestas
+     * Se prueba que no sea posible registrar una respuesta cuando la solicitud indicada no
+     * esta Activa o en proceso
+     */
+    @Test
+    public void noDeberiaRegistrarRespuestaEstadoSolicitud(){
+        try{
+            serviciosSolidaridad.registrarRespuesta("1", "3", "Respuesta11", "RespuestaCom11", "2");
+            fail("Lanzo excepcion.");
+        } catch(ExcepcionSolidaridad e){
+            assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
+        }
+    }
+
     @After
     public void dropData(){
         try {
@@ -383,6 +429,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.eliminarUsuario("13");
             serviciosSolidaridad.actualizarCategoria("3", "Categoria3", "DescripcionC3", "Activa");
             serviciosSolidaridad.actualizarCategoria("2", "Categoria2", "DescripcionC2", "Inactiva");
+            serviciosSolidaridad.eliminarRespuesta("11");
         } catch (Exception e) {
             //System.out.println(e.getMessage());
         }
