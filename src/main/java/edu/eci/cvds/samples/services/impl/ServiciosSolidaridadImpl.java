@@ -96,7 +96,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     public void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad {
         try {
             usuarioDAO.delete(idUsuario);
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al eliminar el usuario con ID: " + idUsuario, e);
         }
     }
@@ -153,6 +153,9 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             if (oldNombre.equals(nombre) && oldDescripcion.equals(descripcion) &&  oldEstado.equals(estado)){
                 throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_UPDATE);
             }
+            if (nombre != null && consultarCategoriaNombre(nombre) != null){
+                throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NAME);
+            }
             if (nombre == null) nombre = oldNombre;
             if (descripcion == null) descripcion = oldDescripcion;
             if (estado == null) estado = oldEstado;
@@ -166,7 +169,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     public void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad{
         try {
             categoriaDAO.delete(idCategoria);
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al eliminar la categoria con ID: " + idCategoria, e);
         }
     }
@@ -179,7 +182,6 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             else if(consultarUsuario(idUsuario).solicitudesRestantes() == 0) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_REGISTRED);
             solicitudDAO.save(id, descripcion, estado, categoria, idUsuario);
         } catch (PersistenceException e) {
-            System.out.println(e.getMessage());
             throw new ExcepcionSolidaridad("Error al insertar solicitud: " + id, e);
         }
     }
@@ -203,9 +205,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void actualizarSolicitud(String id) throws ExcepcionSolidaridad{
+    public void actualizarSolicitud(String id, String descripcion, String estado) throws ExcepcionSolidaridad{
         try {
-            solicitudDAO.update(id);
+            Solicitud solicitud = consultarSolicitudId(id);
+            if (solicitud == null){
+                throw new ExcepcionSolidaridad(ExcepcionSolidaridad.NO_APPLICATION_REGISTRED);
+            }
+            if (descripcion == null) descripcion = solicitud.getDescripcion();
+            if (estado == null) estado = solicitud.getEstado();
+            solicitudDAO.update(id, descripcion, estado);
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al actualizar la solicitud " + id, e);
         }
@@ -215,7 +223,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     public void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad {
         try {
             solicitudDAO.delete(idSolicitud);
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al eliminar la solicitud con ID: " + idSolicitud, e);
         }
     }
@@ -261,10 +269,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void actualizarEstadoNecesidad(String idNecesidad) throws ExcepcionSolidaridad {
+    public void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
         try {
-            actualizarSolicitud(idNecesidad);
-        } catch (ExcepcionSolidaridad e) {
+            Necesidad necesidad = consultarNecesidadId(idNecesidad);
+            if (nombre != null &&  !necesidad.getNombre().equals(nombre) && consultarNecesidadNombre(nombre) != null){
+                throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NAME);
+            }
+            actualizarSolicitud(idNecesidad, descripcion, estado);
+            if (nombre != null) necesidadDAO.update(idNecesidad, nombre);
+        } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al actualizar el estado de la necesidad con ID: "+ idNecesidad, e);
         }
     }    
@@ -275,7 +288,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             necesidadDAO.delete(idNecesidad);
             solicitudDAO.delete(idNecesidad);
             if(necesidadDAO.load(idNecesidad) != null) throw new ExcepcionSolidaridad("No se elimino la Necesidad");
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al eliminar la necesidad con ID: " + idNecesidad, e);
         }
         
@@ -289,7 +302,6 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             registrarSolicitud(idOferta, descripcion, estado, categoria, idUsuario);
             ofertaDAO.save(idOferta, nombre);
         } catch (PersistenceException e){
-            e.printStackTrace();
             throw new ExcepcionSolidaridad ("Error al insertar la oferta", e);
         }
     }
@@ -322,11 +334,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void actualizarEstadoOferta(String idOferta) throws ExcepcionSolidaridad {
+    public void actualizarOferta(String idOferta, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
         try {
-            actualizarSolicitud(idOferta);
-        } catch (ExcepcionSolidaridad e) {
-            throw new ExcepcionSolidaridad("Error al actualizar el estado de la oferta con ID: "+ idOferta, e);
+            if (nombre != null && consultarNecesidadNombre(nombre) != null){
+                throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NAME);
+            }
+            actualizarSolicitud(idOferta, descripcion, estado);
+            if (nombre != null) ofertaDAO.update(idOferta, nombre);
+        } catch (PersistenceException e) {
+            throw new ExcepcionSolidaridad("Error al actualizar el estado de la oferta con id: "+ idOferta, e);
         }
     }
 
@@ -336,7 +352,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             ofertaDAO.delete(idOferta);
             solicitudDAO.delete(idOferta);
             if(ofertaDAO.load(idOferta) != null) throw new ExcepcionSolidaridad("No se elimino la oferta");
-        } catch (Exception e) {
+        } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al eliminar la oferta con ID: " + idOferta, e);
         }
     }

@@ -22,7 +22,7 @@ public interface SolicitudDAO {
     
     public Solicitud load(String id) throws PersistenceException;
 
-    public void update(String id) throws PersistenceException;
+    public void update(String id, String descripcion, String estado) throws PersistenceException;
 
     public void delete(String idSolicitud) throws PersistenceException;
 }

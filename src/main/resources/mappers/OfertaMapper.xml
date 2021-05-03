@@ -90,9 +90,10 @@
         INSERT INTO Ofertas VALUES (#{id}, #{nombre})
     </insert>
 
-    <update id="actualizarEstado" parameterType="map">
+    <update parameterType="map" id="actualizarOferta">
         UPDATE Ofertas
-            SET estado = #{estado} WHERE idOferta = #{idOferta}
+        SET nombre = #{nombre}
+        WHERE idOferta = #{id}
     </update>
 
     <delete id="eliminarOferta">

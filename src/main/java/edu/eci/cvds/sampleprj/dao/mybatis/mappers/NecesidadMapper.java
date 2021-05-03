@@ -16,15 +16,19 @@ import edu.eci.cvds.samples.entities.Necesidad;
  */
 public interface NecesidadMapper {
 
+    public void registrarNecesidad(@Param("id") String idNecesidad,
+                                    @Param("nombre") String nombre,
+                                    @Param("urg") String urgencia);
+
+
     public List<Necesidad> consultarNecesidades();
 
     public Necesidad consultarNecesidad(@Param("id") String idNecesidad);
 
     public Necesidad consultarNecesidadNombre(@Param("nombre") String nombre);
 
-    public void registrarNecesidad(@Param("id") String idNecesidad,
-                                    @Param("nombre") String nombre,
-                                    @Param("urg") String urgencia);
-    
+    public void actualizarNecesidad(@Param("id") String idNecesidad,
+                                    @Param("nombre") String nombre);
+
     public void eliminarNecesidad(@Param("idNecesidad") String idNecesidad);
 }

@@ -26,7 +26,9 @@ public interface SolicitudMapper{
 
     public Solicitud consultarSolicitud(@Param("id") String id);
     
-    public void actualizarSolicitud(@Param("id") String id);
+    public void actualizarSolicitud(@Param("id") String id,
+                                    @Param("desc") String descripcion,
+                                    @Param("estado") String estado);
 
     public void eliminarSolicitud(@Param("idSolicitud") String idSolicitud);
 }

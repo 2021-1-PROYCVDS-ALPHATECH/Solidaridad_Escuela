@@ -57,7 +57,16 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
             return necesidadMapper.consultarNecesidadNombre(nombre);
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            throw new PersistenceException("Error al consultar la necesidad con nombre " + nombre,e);
+            throw new PersistenceException("Error al consultar la necesidad con nombre " + nombre, e);
+        }
+    }
+
+    @Override
+    public void update(String idNecesidad, String nombre) throws PersistenceException {
+        try {
+            necesidadMapper.actualizarNecesidad(idNecesidad, nombre);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al actualizar la necesidad con id " + idNecesidad, e);
         }
     }
 

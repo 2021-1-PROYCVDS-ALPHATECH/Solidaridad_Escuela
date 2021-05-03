@@ -60,7 +60,7 @@
 
   <update parameterType="map" id="actualizarSolicitud">
     UPDATE Solicitudes
-      SET estado = 'Cerrada', fechaModificacion = CURRENT_DATE
+      SET descripcion = #{desc}, estado =  #{estado}, fechaModificacion = CURRENT_DATE
       WHERE idSolicitud = #{id}
   </update>
 

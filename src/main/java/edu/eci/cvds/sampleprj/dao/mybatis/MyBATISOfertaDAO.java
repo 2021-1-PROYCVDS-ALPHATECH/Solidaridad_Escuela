@@ -27,7 +27,7 @@ public class MyBATISOfertaDAO implements OfertaDAO {
     public void save(String idOferta, String nombre) throws PersistenceException {
         try {
             ofertaMapper.registrarOferta(idOferta, nombre);
-        } catch (Exception e) {
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             e.printStackTrace();
             throw new PersistenceException("Error al registrar la oferta " + idOferta, e);
         }
@@ -37,7 +37,7 @@ public class MyBATISOfertaDAO implements OfertaDAO {
     public List<Oferta> loadAll() throws PersistenceException {
         try {
             return ofertaMapper.consultarOfertas();
-        } catch (Exception e) {
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             System.out.println(e.getMessage());
             throw new PersistenceException("Error al consultar las ofertas ", e);
         }
@@ -47,8 +47,7 @@ public class MyBATISOfertaDAO implements OfertaDAO {
     public Oferta load(String id) throws PersistenceException {
         try {
             return ofertaMapper.consultarOferta(id);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar la oferta " + id, e);
         }
     }
@@ -57,9 +56,18 @@ public class MyBATISOfertaDAO implements OfertaDAO {
     public Oferta loadByName(String nombre) throws PersistenceException {
         try {
             return ofertaMapper.consultarOfertaNombre(nombre);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar la oferta con nombre" + nombre, e);
+        }
+    }
+
+    @Override
+    public void update(String idOferta, String nombre) throws PersistenceException {
+        try {
+            ofertaMapper.actualizarOferta(idOferta, nombre);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            System.out.println(e.getMessage());
+            throw new PersistenceException("Error al actualizar la oferta con id: " + idOferta, e);
         }
     }
 
@@ -67,7 +75,7 @@ public class MyBATISOfertaDAO implements OfertaDAO {
     public void delete(String idOferta) throws PersistenceException {
         try {
             ofertaMapper.eliminarOferta(idOferta);
-        } catch (Exception e) {
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al eliminar la oferta con id: " + idOferta, e);
         }
     }

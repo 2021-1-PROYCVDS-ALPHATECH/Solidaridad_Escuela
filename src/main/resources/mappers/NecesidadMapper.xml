@@ -93,6 +93,12 @@
         INSERT INTO Necesidades VALUES (#{id}, #{nombre}, #{urg})
     </insert>
 
+    <update parameterType="map" id="actualizarNecesidad">
+        UPDATE Necesidades
+        SET nombre = #{nombre}
+        WHERE idNecesidad = #{id}
+    </update>
+
     <delete id="eliminarNecesidad" parameterType="map">
         DELETE FROM Necesidades 
             WHERE idNecesidad = #{idNecesidad};

@@ -15,24 +15,16 @@ import edu.eci.cvds.samples.entities.Necesidad;
  */
 public interface NecesidadDAO {
 
-    /**
-     * 
-     * @return
-     * @throws PersistenceException
-     */
+    public void save(String idNecesidad, String nombre, String urgencia) throws PersistenceException;
+
     public List<Necesidad> loadAll() throws PersistenceException;
 
     public Necesidad load(String id) throws PersistenceException;
 
     public Necesidad loadByName(String nombre) throws PersistenceException;
 
-    /**
-     * 
-     * @param necesidad
-     * @throws PersistenceException
-     */
-    public void save(String idNecesidad, String nombre, String urgencia) throws PersistenceException;
-
+    public void update(String id, String nombre) throws PersistenceException;
+    
     public void delete(String idNecesidad) throws PersistenceException;
 
 }

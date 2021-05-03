@@ -46,7 +46,7 @@ public interface ServiciosSolidaridad {
     
     public abstract Solicitud consultarSolicitudId(String id) throws ExcepcionSolidaridad;
 
-    public abstract void actualizarSolicitud(String id) throws ExcepcionSolidaridad;
+    public abstract void actualizarSolicitud(String id, String descripcion, String estado) throws ExcepcionSolidaridad;
 
     public abstract void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad;
     
@@ -58,7 +58,7 @@ public interface ServiciosSolidaridad {
 
     public abstract Necesidad consultarNecesidadNombre(String nombre) throws ExcepcionSolidaridad;
 
-    public abstract void actualizarEstadoNecesidad(String idNecesidad) throws ExcepcionSolidaridad;
+    public abstract void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad;
 
     public abstract void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad;
 
@@ -70,7 +70,7 @@ public interface ServiciosSolidaridad {
 
     public abstract Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad;
 
-    public abstract void actualizarEstadoOferta(String idOferta) throws ExcepcionSolidaridad;
+    public abstract void actualizarOferta(String idOferta, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad;
 
     public abstract void eliminarOferta(String idOferta) throws ExcepcionSolidaridad;
 

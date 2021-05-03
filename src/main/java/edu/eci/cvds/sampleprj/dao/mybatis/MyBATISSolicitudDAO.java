@@ -54,9 +54,9 @@ public class MyBATISSolicitudDAO implements SolicitudDAO{
     }
 
     @Override
-    public void update(String id) throws PersistenceException {
+    public void update(String id, String descripcion, String estado) throws PersistenceException {
         try{
-            solicitudMapper.consultarSolicitud(id);
+            solicitudMapper.actualizarSolicitud(id, descripcion, estado);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
             throw new PersistenceException("Error al actualizar la solicitud " + id, e);
         }

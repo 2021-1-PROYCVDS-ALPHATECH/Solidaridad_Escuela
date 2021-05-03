@@ -280,25 +280,6 @@ public class ServiciosSolidaridadTest {
     }
 
     /**
-     * Prueba Historia de usuario #7 Actualizar Necesidad
-     * 
-     */
-    /*
-    @Test
-    public void deberiaActualizarNecesidad(){
-        try{
-            serviciosSolidaridad.registrarNecesidad("12", "2", "Necesidad1", "DescripconN1", "Alta", "Activa", "1");
-            serviciosSolidaridad.actualizarEstadoNecesidad("12");
-            if (serviciosSolidaridad.consultarNecesidadId("12").getEstado() != "Cerrada"){
-                fail("No se actualizo la necesidad.");
-            }
-        } catch(ExcepcionSolidaridad e){
-            fail("Lanzo excepcion.");
-        }
-    }*/
-
-
-    /**
      * Prueba Historia de usuario #5 Registrar Oferta
      * Se comprueba que se registre la oferta de manera exitosa
      */
@@ -404,6 +385,38 @@ public class ServiciosSolidaridadTest {
             fail("Lanzo excepcion.");
         } catch(ExcepcionSolidaridad e){
             assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
+        }
+    }
+
+    /**
+     * Prueba Historia de Usuario #7 Actualizar Necesidad
+     * Se prueba que al actualizar una necesidad se actualice la fecha de modificacion a la actual
+     */
+    @Test
+    public void deberiaActualizarLaFechaNecesidad(){
+        try{
+            serviciosSolidaridad.actualizarNecesidad("7", "Solicitud77", "DescripcionSN77", "Cerrada");
+            if (!(serviciosSolidaridad.consultarNecesidadId("7").getFechaModificacion().equals(Date.valueOf(LocalDate.now())))){
+                fail("No se actualizo la fecha de la necesidad.");
+            }
+        } catch(ExcepcionSolidaridad e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Prueba Historia de Usuario #8 Actualizar Oferta
+     * Se prueba que al actualizar una oferta se actualice la fecha de modificacion a la actual
+     */
+    @Test
+    public void deberiaActualizarLaFechaOferta(){
+        try{
+            serviciosSolidaridad.actualizarOferta("8", "Solicitud88", "DescripcionSN88", "Cerrada");
+            if (!(serviciosSolidaridad.consultarOfertaId("8").getFechaModificacion().equals(Date.valueOf(LocalDate.now())))){
+                fail("No se actualizo la fecha de la oferta.");
+            }
+        } catch(ExcepcionSolidaridad e){
+            fail("Lanzo excepcion: " + e.getMessage());
         }
     }
 
