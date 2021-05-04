@@ -15,6 +15,8 @@
         <typeAlias type='edu.eci.cvds.samples.entities.Rol' alias='Rol'/>
         <typeAlias type="edu.eci.cvds.samples.entities.Necesidad" alias="Necesidad" />
         <typeAlias type="edu.eci.cvds.samples.entities.Oferta" alias="Oferta" />
+        <typeAlias type="edu.eci.cvds.samples.entities.Solicitud" alias="Solicitud" /> 
+        <typeAlias type="edu.eci.cvds.samples.entities.Respuesta" alias="Respuesta" /> 
 
     </typeAliases>		
 
@@ -23,9 +25,9 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="org.postgresql.Driver" />
-                <property name="url" value="jdbc:postgresql://ec2-34-233-0-64.compute-1.amazonaws.com:5432/d7ao2add080r04??ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&amp;sslmode=require"/> 
-                <property name="username" value="qppagsvnpgnjtr" />
-                <property name="password" value="df8ccdb97c878d3422f88bdad422ce1eea8d98a2807b8fe6171f70114ca5e304" />
+                <property name="url" value="jdbc:postgresql://ec2-54-87-112-29.compute-1.amazonaws.com:5432/d51irtfbr1rm3a?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory&amp;sslmode=require"/> 
+                <property name="username" value="bmfrrjfohnqgff" />
+                <property name="password" value="11a53677044c9c4746373f1893c87ade96495e0f91d27bb9d959b3290eacdfd8" />
             </dataSource>
         </environment>
     </environments>
@@ -35,6 +37,9 @@
         <mapper resource="mappers/CategoriaMapper.xml"></mapper>
         <mapper resource="mappers/NecesidadMapper.xml"></mapper>
         <mapper resource="mappers/OfertaMapper.xml"></mapper>
+        <mapper resource="mappers/SolicitudMapper.xml"></mapper>
+        <mapper resource="mappers/RespuestaMapper.xml"></mapper>
+        
     </mappers> 
         
         

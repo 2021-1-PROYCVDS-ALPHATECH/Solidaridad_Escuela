@@ -11,15 +11,153 @@
       u.telefono AS u_telefono,
       u.email AS u_email,
       u.clave AS u_clave,
-      u.rol AS u_rol
-    FROM Usuarios u
+      u.rol AS u_rol,
+      u.numSolicitudes AS u_numSolicitudes,
+
+      s.idSolicitud AS s_idSolicitud,
+      s.descripcion AS s_descripcion,
+      s.estado AS s_estado,
+      s.fechaCreacion AS s_fechaCreacion,
+      s.fechaModificacion AS s_fechaModificacion,
+
+      c.idCategoria AS c_idCategoria,
+      c.nombre AS c_nombre,
+      c.descripcion AS c_descripcion,
+      c.fechaCreacion AS c_fechaCreacion,
+      c.fechaModificacion AS c_fechaModificacion,
+      c.estado AS c_estado,
+
+      r.idRespuesta AS r_idRespuesta,
+      r.nombre AS r_nombre,
+      r.comentarios AS r_comentarios,
+      r.fechaCreacion AS r_fechaCreacion
+
+    FROM Usuarios u LEFT JOIN Solicitudes s ON (s.idUsuario = u.idUsuario)
+      LEFT JOIN Categorias c ON (s.idCategoria = c.idCategoria) 
+      LEFT JOIN Respuestas r ON (r.idUsuario = u.idUsuario)
+  </select>
+
+  <select parameterType="map" id="consultarUsuario" resultMap="UsuarioResult">
+    SELECT
+      u.idUsuario AS u_idUsuario,
+      u.nombre AS u_nombre,
+      u.telefono AS u_telefono,
+      u.email AS u_email,
+      u.clave AS u_clave,
+      u.rol AS u_rol,
+      u.numSolicitudes AS u_numSolicitudes,
+
+      s.idSolicitud AS s_idSolicitud,
+      s.descripcion AS s_descripcion,
+      s.estado AS s_estado,
+      s.fechaCreacion AS s_fechaCreacion,
+      s.fechaModificacion AS s_fechaModificacion,
+
+      c.idCategoria AS c_idCategoria,
+      c.nombre AS c_nombre,
+      c.descripcion AS c_descripcion,
+      c.fechaCreacion AS c_fechaCreacion,
+      c.fechaModificacion AS c_fechaModificacion,
+      c.estado AS c_estado,
+
+      r.idRespuesta AS r_idRespuesta,
+      r.nombre AS r_nombre,
+      r.comentarios AS r_comentarios,
+      r.fechaCreacion AS r_fechaCreacion
+
+    FROM Usuarios u LEFT JOIN Solicitudes s ON (s.idUsuario = u.idUsuario)
+      LEFT JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+      LEFT JOIN Respuestas r ON (r.idUsuario = u.idUsuario)
+
+    WHERE u.idUsuario = #{id}
+  </select>
+
+  <select parameterType="map" id="consultarUsuarioNombre" resultMap="UsuarioResult">
+    SELECT
+      u.idUsuario AS u_idUsuario,
+      u.nombre AS u_nombre,
+      u.telefono AS u_telefono,
+      u.email AS u_email,
+      u.clave AS u_clave,
+      u.rol AS u_rol,
+      u.numSolicitudes AS u_numSolicitudes,
+
+      s.idSolicitud AS s_idSolicitud,
+      s.descripcion AS s_descripcion,
+      s.estado AS s_estado,
+      s.fechaCreacion AS s_fechaCreacion,
+      s.fechaModificacion AS s_fechaModificacion,
+
+      c.idCategoria AS c_idCategoria,
+      c.nombre AS c_nombre,
+      c.descripcion AS c_descripcion,
+      c.fechaCreacion AS c_fechaCreacion,
+      c.fechaModificacion AS c_fechaModificacion,
+      c.estado AS c_estado,
+
+      r.idRespuesta AS r_idRespuesta,
+      r.nombre AS r_nombre,
+      r.comentarios AS r_comentarios,
+      r.fechaCreacion AS r_fechaCreacion
+
+    FROM Usuarios u LEFT JOIN Solicitudes s ON (s.idUsuario = u.idUsuario)
+      LEFT JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+      LEFT JOIN Respuestas r ON (r.idUsuario = u.idUsuario)
+
+    WHERE u.nombre = #{nombre}
+  </select>
+
+  <select parameterType="map" id="consultarUsuariosRol" resultMap="UsuarioResult">
+    SELECT
+      u.idUsuario AS u_idUsuario,
+      u.nombre AS u_nombre,
+      u.telefono AS u_telefono,
+      u.email AS u_email,
+      u.clave AS u_clave,
+      u.rol AS u_rol,
+      u.numSolicitudes AS u_numSolicitudes,
+
+      s.idSolicitud AS s_idSolicitud,
+      s.descripcion AS s_descripcion,
+      s.estado AS s_estado,
+      s.fechaCreacion AS s_fechaCreacion,
+      s.fechaModificacion AS s_fechaModificacion,
+
+      c.idCategoria AS c_idCategoria,
+      c.nombre AS c_nombre,
+      c.descripcion AS c_descripcion,
+      c.fechaCreacion AS c_fechaCreacion,
+      c.fechaModificacion AS c_fechaModificacion,
+      c.estado AS c_estado,
+
+      r.idRespuesta AS r_idRespuesta,
+      r.nombre AS r_nombre,
+      r.comentarios AS r_comentarios,
+      r.fechaCreacion AS r_fechaCreacion
+
+    FROM Usuarios u LEFT JOIN Solicitudes s ON (s.idUsuario = u.idUsuario)
+      LEFT JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+      LEFT JOIN Respuestas r ON (r.idUsuario = u.idUsuario)
+
+    WHERE u.rol = #{rol}
   </select>
 
   <insert parameterType="map" id="registrarUsuario">
     INSERT INTO Usuarios VALUES (#{usuario.idUsuario}, #{usuario.nombre}, #{usuario.telefono},
-                                  #{usuario.email}, #{usuario.clave}, #{usuario.rol})
+                                  #{usuario.email}, #{usuario.rol}, #{usuario.clave}, #{usuario.numSolicitudes})
   </insert>
+
+  <update parameterType="map" id="actualizarNumSolicitudes">
+    UPDATE Usuarios
+      SET numSolicitudes = #{num}
+      WHERE idUsuario = #{id}
+  </update>
   
+  <delete id="eliminarUsuario" parameterType="map">
+    DELETE FROM Usuarios 
+      WHERE idUsuario = #{idUsuario};
+  </delete>
+
   <resultMap type='Usuario' id='UsuarioResult'>
     <id property='idUsuario' column='u_idUsuario'/>
     <result property='nombre' column='u_nombre'/>
@@ -27,5 +165,14 @@
     <result property='email' column='u_email'/>  
     <result property='clave' column='u_clave'/>  
     <result property='rol' column='u_rol'/>
+    <result property='numSolicitudes' column='u_numSolicitudes'/>
+    <collection property='solicitudes'
+                ofType='Solicitud' 
+                resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.SolicitudMapper.SolicitudResult'>
+    </collection>
+    <collection property='respuestas'
+                ofType='Respuesta'
+                resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.RespuestaMapper.RespuestaResult'>
+    </collection>
   </resultMap>
 </mapper>

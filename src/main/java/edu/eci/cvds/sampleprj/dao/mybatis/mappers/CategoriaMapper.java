@@ -12,21 +12,22 @@ import edu.eci.cvds.samples.entities.Categoria;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 20/04/2021 v1.0
+ * @version 22/04/2021 v2.0
  */
 public interface CategoriaMapper{
 
+    public void insertarCategoria(@Param("cat") Categoria ca);
+    
     public List<Categoria> consultarCategorias();
 
-    public void insertarCategoria(@Param("cat") Categoria ca);
+    public Categoria consultarCategoria(@Param("id") String id);
 
-    public void actualizarNombre(@Param("id") String id,
-                                @Param("nom") String nombre);
-    
-    public void actualizarDescripcion(@Param("id") String id,
-                                    @Param("des") String descripcion);
+    public Categoria consultarCategoriaNombre(@Param("nombre") String nombre);
 
-    public void actualizarEstado(@Param("id") String id,
-                                @Param("est") String estado);
-    
+    public void actualizarCategoria(@Param("id") String id,
+                            @Param("nom") String nombre,
+                            @Param("desc") String descripcion, 
+                            @Param("est") String estado);
+
+    public void eliminarCategoria(@Param("idCategoria") String idCategoria);
 }

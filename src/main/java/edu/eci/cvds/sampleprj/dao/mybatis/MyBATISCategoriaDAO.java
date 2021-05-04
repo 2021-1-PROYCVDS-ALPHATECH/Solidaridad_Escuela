@@ -21,7 +21,17 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
 
     @Inject
     private CategoriaMapper categoriaMapper;
-    
+
+    @Override
+    public void save(Categoria ca) throws PersistenceException {
+        try{
+            categoriaMapper.insertarCategoria(ca);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println(e.getMessage());
+            throw new PersistenceException("Error al registrar la categoria" + ca.toString(), e);
+        }   
+    }
+
     @Override
     public List<Categoria> loadAll() throws PersistenceException {
         try{
@@ -31,44 +41,42 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
             throw new PersistenceException("Error al consultar las categorias", e);
         }
     }
-    
+
     @Override
-    public void save(Categoria ca) throws PersistenceException {
+    public Categoria load(String id) throws PersistenceException {
         try{
-            categoriaMapper.insertarCategoria(ca);
+            return categoriaMapper.consultarCategoria(id);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al registrar la categoria" + ca.toString(), e);
+            System.out.println("Error consulta" + e.getMessage());
+            throw new PersistenceException("Error al consultar la categoria: " + id, e);
+        }
+    }
+
+    @Override
+    public Categoria loadByName(String nombre) throws PersistenceException {
+        try{
+            return categoriaMapper.consultarCategoriaNombre(nombre);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println("Error consulta" + e.getMessage());
+            throw new PersistenceException("Error al consultar la categoria con nombre: " + nombre, e);
+        }
+    }
+
+    @Override
+    public void update(String id, String nombre, String descripcion, String estado) throws PersistenceException {
+        try{
+            categoriaMapper.actualizarCategoria(id, nombre, descripcion, estado);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al actualizar la categoria: " + id, e);
         }   
     }
 
     @Override
-    public void updateName(String id, String name) throws PersistenceException {
-        try{
-            categoriaMapper.actualizarNombre(id, name);
-        } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al actualizar el nombre de la categoria con id = " + id, e);
-        }  
+    public void delete(String idCategoria) throws PersistenceException {
+        try {
+            categoriaMapper.eliminarCategoria(idCategoria);
+        } catch (Exception e) {
+            throw new PersistenceException("Error al eliminar la categoria: " + idCategoria, e);
+        }
     }
-
-    @Override
-    public void updateDescription(String id, String description) throws PersistenceException {
-        try{
-            categoriaMapper.actualizarDescripcion(id, description);
-        } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al actualizar la descripcion de la categoria con id = " + id, e);
-        }  
-    }
-
-    @Override
-    public void updateState(String id, String state) throws PersistenceException {
-        try{
-            categoriaMapper.actualizarEstado(id, state);
-        } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al actualizar el estado de la categoria con id = " + id, e);
-        }  
-        
-    }
-
-    
-    
 }

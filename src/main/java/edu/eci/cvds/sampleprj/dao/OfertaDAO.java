@@ -9,23 +9,21 @@ import java.util.List;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 20/04/2021 v1.0
+ * @version 22/04/2021 v2.0
  */
 
 public interface OfertaDAO {
 
-    /**
-     * 
-     * @return
-     * @throws PersistenceException
-     */
+    public void save (String idOferta, String nombre) throws PersistenceException;
+
     public List<Oferta> loadAll() throws PersistenceException;
 
-    /**
-     * 
-     * @param oferta
-     * @throws PersistenceException
-     */
-    public void save (Oferta oferta) throws PersistenceException;
+    public Oferta load(String id) throws PersistenceException;
+
+    public Oferta loadByName(String nombre) throws PersistenceException;
+
+    public void update(String id, String nombre) throws PersistenceException;
+
+    public void delete(String idOferta) throws PersistenceException;
     
 }

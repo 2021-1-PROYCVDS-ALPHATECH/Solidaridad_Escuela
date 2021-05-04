@@ -15,7 +15,9 @@ import org.apache.shiro.subject.Subject;
 import edu.eci.cvds.samples.entities.Categoria;
 import edu.eci.cvds.samples.entities.Necesidad;
 import edu.eci.cvds.samples.entities.Oferta;
-import edu.eci.cvds.samples.services.ExcepcionSolidaridadEscuela;
+import edu.eci.cvds.samples.entities.Usuario;
+import edu.eci.cvds.samples.entities.Rol;
+import edu.eci.cvds.samples.services.ExcepcionSolidaridad;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 
 import org.apache.shiro.SecurityUtils;
@@ -33,6 +35,8 @@ public class LoginBean extends BasePageBean{
     private String password;
     private Subject subject;
     private Categoria categoria;
+    private Usuario currentUser;
+    private Usuario usuario;
 
     public LoginBean(){
         user = "";
@@ -55,39 +59,48 @@ public class LoginBean extends BasePageBean{
         return password;
     }
 
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public Usuario getUsuario() {
+        return usuario;
     }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
     public void logIn(){
         subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user, new Sha256Hash(password).toHex());
         try {
             subject.login(token);
             if (subject.hasRole("Administrador")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/admin.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Admin/admin.xhtml");
 			}
             else if (subject.hasRole("Administrativo")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/administrativo.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Administrativo/administrativo.xhtml");
 			}
             else if (subject.hasRole("Egresado")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/egresado.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Egresado/egresado.xhtml");
 			}
             else if (subject.hasRole("Profesor")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/profesor.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Profesor/profesor.xhtml");
 			}
             else if (subject.hasRole("Estudiante")) {
-                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/estudiante.xhtml");
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Estudiante/estudiante.xhtml");
 			}
         } catch(Exception e) {
             FacesContext.getCurrentInstance().addMessage("log:Usuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Juaz juaz ", "Usuario o contraseña incorrectos"));
         }
     }
 
-    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridadEscuela{
+    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridad{
         return servicios.consultarCategorias();
     }
 
@@ -100,52 +113,55 @@ public class LoginBean extends BasePageBean{
         
     }
 
-    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridadEscuela{
-        return servicios.consultarOferta();
+    public void actualizarCategoria(String id, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
+        if (nombre == "") nombre = null;
+        if (estado == "") estado = null;
+        if (descripcion == "") descripcion = null;
+        servicios.actualizarCategoria(id, nombre, descripcion, estado);
     }
 
-    public void registrarOferta(String idOferta, String idUsuario, String nombre, String descipcion, String fechaCreacion, String fechaModificacion, String estado){
+    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridad{
+        return servicios.consultarOfertas();
+    }
+
+    public void registrarOferta(String idOferta, String idUsuario, String nombre, String descripcion, String estado, String categoria){
         try{
-            Oferta oferta = new Oferta(idOferta, idUsuario, nombre, descipcion, Date.valueOf(fechaCreacion), Date.valueOf(fechaModificacion), estado);
-            servicios.registrarOferta(oferta);
+            servicios.registrarOferta(idOferta, idUsuario, nombre, descripcion, estado, categoria);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
-        
     }
 
-    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridadEscuela{
+    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad{
         return servicios.consultarNecesidades();
     }
 
-    public void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado){
+    public void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado, String categoria){
         try{
-            //servicios.registrarNecesidades(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado);
+            servicios.registrarNecesidad(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado, categoria);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
         
     }
 
-    public void modificarNecesidad(String nombre, String descripcion, String estado){
-        try{
-            String id = categoria.getId();
-            if(!nombre.trim().equals("")){
-                servicios.actualizarNombreCategoria(id, nombre);
-            }
-            if(!descripcion.trim().equals("")){
-                servicios.actualizarDescripcionCategoria(id, descripcion);
-            }
-            if(!estado.trim().equals("")){
-                servicios.actualizarEstadoCategoria(id, estado);
-            }
-        }catch(Exception e){
+    public List<Usuario> consultarUsuarios() throws ExcepcionSolidaridad{
+        return servicios.consultarUsuariosRol("WHERE u.nombre = 'admin'");
+    }
+
+    public void registrarUsuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol, int num){
+        try {
+            servicios.registrarUsuario(idUsuario, nombre, telefono, email, clave, rol, num);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }
 
+    public void actualizarNumSolicitudes(String idUsuario, int numSolicitudes) throws ExcepcionSolidaridad{
+        servicios.actualizarNumSolicitudes(idUsuario, numSolicitudes);
+    }
+    
     public void logOut(){
-        System.out.println("Log Out");
         subject.logout();
         try{
             FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/login.xhtml");

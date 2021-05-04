@@ -10,16 +10,10 @@ import com.google.inject.Injector;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
-import edu.eci.cvds.sampleprj.dao.CategoriaDAO;
-import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
-import edu.eci.cvds.sampleprj.dao.NecesidadDAO;
-import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISUsuarioDAO;
-import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISCategoriaDAO;
-import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISNecesidadDAO;
+import edu.eci.cvds.sampleprj.dao.*;
+import edu.eci.cvds.sampleprj.dao.mybatis.*;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
-import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISOfertaDAO;
-import edu.eci.cvds.sampleprj.dao.OfertaDAO;
 
 public class GuiceContextListener implements ServletContextListener {
 
@@ -40,7 +34,11 @@ public class GuiceContextListener implements ServletContextListener {
                 bind(CategoriaDAO.class).to(MyBATISCategoriaDAO.class);
                 bind(NecesidadDAO.class).to(MyBATISNecesidadDAO.class);
                 bind(OfertaDAO.class).to(MyBATISOfertaDAO.class);
+                bind(SolicitudDAO.class).to(MyBATISSolicitudDAO.class);
+                bind(RespuestaDAO.class).to(MyBATISRespuestaDAO.class);
                 bind(ServiciosSolidaridad.class).to(ServiciosSolidaridadImpl.class);
+                
+
             }
         });
         servletContextEvent.getServletContext().setAttribute(Injector.class.getName(), injector);

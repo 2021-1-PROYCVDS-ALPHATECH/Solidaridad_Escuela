@@ -56,6 +56,8 @@ public class Categoria implements Serializable{
         this.fechaModificacion = Date.valueOf(hoy);
         this.estado = "Activa";
     }
+
+    
     public Categoria(){}
 
     public void setId(String newId){

@@ -10,25 +10,31 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <typeAlias type="edu.eci.cvds.samples.entities.Necesidad" alias="Necesidad"/>
         <typeAlias type='edu.eci.cvds.samples.entities.Rol' alias='Rol'/>
         <typeAlias type="edu.eci.cvds.samples.entities.Oferta" alias="Oferta" />
+        <typeAlias type="edu.eci.cvds.samples.entities.Solicitud" alias="Solicitud" /> 
+        <typeAlias type="edu.eci.cvds.samples.entities.Respuesta" alias="Respuesta" /> 
+
     </typeAliases>
 
-    <environments default="development">
-        <environment id="development">
+    <environments default="test">
+        <environment id="test">
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <property name="driver" value="org.h2.Driver" />
                 <property name="url" value="jdbc:h2:file:./target/db/testdb;MODE=PostgreSQL" />
-                <property name="username" value="anonymous" />
+                <property name="username" value="sa" />
                 <property name="password" value="" />
             </dataSource>
         </environment>
     </environments>
+    
 
     <mappers>
         <mapper resource="mappers/UsuarioMapper.xml"></mapper>
         <mapper resource="mappers/CategoriaMapper.xml"></mapper>
         <mapper resource="mappers/NecesidadMapper.xml"></mapper>
         <mapper resource="mappers/OfertaMapper.xml"></mapper>
+        <mapper resource="mappers/SolicitudMapper.xml"></mapper>
+        <mapper resource="mappers/RespuestaMapper.xml"></mapper>
     </mappers> 
 
 </configuration>

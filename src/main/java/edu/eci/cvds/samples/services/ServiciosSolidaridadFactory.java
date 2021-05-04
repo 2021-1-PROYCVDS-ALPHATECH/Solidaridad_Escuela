@@ -1,21 +1,16 @@
 package edu.eci.cvds.samples.services;
 
 import com.google.inject.Injector;
-import org.apache.ibatis.transaction.TransactionFactory;
-import org.apache.ibatis.transaction.jdbc.JdbcTransactionFactory;
 import org.mybatis.guice.XMLMyBatisModule;
 
 import edu.eci.cvds.sampleprj.dao.*;
 import edu.eci.cvds.sampleprj.dao.mybatis.*;
-import edu.eci.cvds.samples.entities.Categoria;
-import edu.eci.cvds.samples.entities.Oferta;
-import edu.eci.cvds.samples.entities.Rol;
-import edu.eci.cvds.samples.entities.Usuario;
-import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
+
 
 import java.util.Optional;
 
 import static com.google.inject.Guice.createInjector;
+import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
 
 /**
  * Clase fabrica para la aplicacion
@@ -42,6 +37,8 @@ public class ServiciosSolidaridadFactory {
                 bind(CategoriaDAO.class).to(MyBATISCategoriaDAO.class);
                 bind(NecesidadDAO.class).to(MyBATISNecesidadDAO.class);
                 bind(OfertaDAO.class).to(MyBATISOfertaDAO.class);
+                bind(SolicitudDAO.class).to(MyBATISSolicitudDAO.class);
+                bind(RespuestaDAO.class).to(MyBATISRespuestaDAO.class);
                 bind(ServiciosSolidaridad.class).to(ServiciosSolidaridadImpl.class);
             }
         });
@@ -75,42 +72,18 @@ public class ServiciosSolidaridadFactory {
 
     public static void main(String[] args){
         try{
-            
-            /*System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
-            /*System.out.println("-------------------------------- INSERTAR USUARIOS --------------------------------");
-            instance.getServiciosSolidaridad().registrarUsuario(new Usuario("3", "estudiante1", "0000000000", "estu123@gmail.com", "10e35", Rol.Estudiante));
-            System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarUsuarios().toString());
-
-            System.out.println("\n-------------------------------- CONSULAR CATEGORIAS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
-            System.out.println("-------------------------------- INSERTAR CATEGORIAS  --------------------------------");
-            //instance.getServiciosSolidaridad().registrarCategoria("3", "insercion", "inserciond");
-            System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());
-            System.out.println("-------------------------------- ACTUALIZAR NOMBRE CATEGORIAS --------------------------------");
-            instance.getServiciosSolidaridad().actualizarNombreCategoria("1", "actnom");
-            System.out.println("-------------------------------- ACTUALIZAR DESCRIPCION CATEGORIAS --------------------------------");
-            instance.getServiciosSolidaridad().actualizarDescripcionCategoria("1", "actdes");
-            System.out.println("-------------------------------- ACTUALIZAR ESTADO CATEGORIAS --------------------------------");
-            instance.getServiciosSolidaridad().actualizarEstadoCategoria("1", "Inactiva");
-            System.out.println("-------------------------------- CONSULAR CATEGORIAS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarCategorias().toString());   */
-
-            //System.out.println("-------------------------------- INSERTAR NECESIDADES --------------------------------");
-            //instance.getServiciosSolidaridad().registrarNecesidades("3", "2", "estudiante", "necesidad2", "necesidad", "Activa", new Categoria("2", "test", "test"));
-            System.out.println("-------------------------------- CONSULTAR NECESIDADES --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarNecesidades().toString());
-
-            /*System.out.println("-------------------------------- INSERTAR OFERTAS --------------------------------");
-            instance.getServiciosSolidaridad().registrarOferta(new Oferta("1","1","estudiante","oferta1","estado"));
-            System.out.println("-------------------------------- CONSULTAR OFERTAS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarOferta().toString());*/
-
+            /*
+            System.out.println("-------------------------------- CONSULAR RESPUESTAS  --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarRespuestas().toString());
+            System.out.println("-------------------------------- INSERTAR RESPUESTA  --------------------------------");
+            instance.getServiciosSolidaridad().registrarRespuesta("1", "2", "Respuesta1", "Coments", "1");;
+            System.out.println("-------------------------------- CONSULAR RESPUESTAS  --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarRespuestas().toString());
+            */
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
 }
+

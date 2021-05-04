@@ -10,42 +10,33 @@ import edu.eci.cvds.samples.entities.Categoria;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 19/04/2021 v1.0
+ * @version 22/04/2021 v2.0
  */
 public interface CategoriaDAO {
-
-    public List<Categoria> loadAll() throws PersistenceException;
 
     /**
      * 
      * @param ca
      * @throws PersistenceException
      */
-    public void save (Categoria ca) throws PersistenceException;
+    public void save(Categoria ca) throws PersistenceException;
+
+    public List<Categoria> loadAll() throws PersistenceException;
+
+    public Categoria load(String id) throws PersistenceException;
+
+    public Categoria loadByName(String nombre) throws PersistenceException;
+
 
     /**
      * 
      * @param id
-     * @param name
+     * @param nombre
+     * @param descripcion
+     * @param estado
      * @throws PersistenceException
      */
-    public void updateName (String id, String name) throws PersistenceException;
+    public void update(String id, String nombre, String descripcion, String estado) throws PersistenceException;    
 
-    /**
-     * 
-     * @param id
-     * @param description
-     * @throws PersistenceException
-     */
-    public void updateDescription (String id, String description) throws PersistenceException;
-
-    /**
-     * 
-     * @param id
-     * @param state
-     * @throws PersistenceException
-     */
-    public void updateState (String id, String state) throws PersistenceException;
-
-    
+    public void delete(String idCategoria) throws PersistenceException;
 }

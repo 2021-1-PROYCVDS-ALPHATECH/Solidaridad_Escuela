@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title> Solidaridad Escuela | Login</title>
     <link rel="stylesheet" href="LoginStyle.css"/>
@@ -75,14 +75,14 @@ body {
                     <div class="tab-pane" id="signUp">
                         <h:panelGrid column="1" id="Grid2" style="width: 100%;" cellpadding="8">
                             <p:outputLabel styleClass="p-d-block" style="font-weight: bold;">Username</p:outputLabel>
-                            <p:inputText id="RegistroUsuario" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;" required="false" requiredMessage="El usuario no puede ser nulo"/>
+                            <p:inputText id="RegistroUsuario" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;" readonly="true"/>
                             <p:outputLabel styleClass="p-d-block" style="font-weight: bold;">Email</p:outputLabel>
-                            <p:inputText id="RegistroEmail" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;" required="false" requiredMessage="La contraseña no puede ser nulo"/>
+                            <p:inputText id="RegistroEmail" type="String" style="width: 100%; border-radius: 100px; padding-left: 20px;" readonly="true"/>
                             <p:outputLabel styleClass="p-d-block" style="font-weight: bold;">Password</p:outputLabel>
-                            <p:inputText id="RegistroPassword" type="password" style="width: 100%; border-radius: 100px; padding-left: 20px;" required="false" requiredMessage="El Email no puede ser nulo"/>
+                            <p:inputText id="RegistroPassword" type="password" style="width: 100%; border-radius: 100px; padding-left: 20px;" readonly="true"/>
                             <hr style="margin-top: 30px; margin-bottom: 30px;"/>
                             
-                            <p:commandButton id="registerButton" value="Register" update="log" style="width: 100%; margin-bottom: 100px; border-radius: 100px;" onclick="return validateRegister();"/>
+                            <p:commandButton id="registerButton" value="Register" style="width: 100%; margin-bottom: 100px; border-radius: 100px;"/>
                         </h:panelGrid>
                     </div>
                 </div>
@@ -92,26 +92,6 @@ body {
     <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
         <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
     </svg>
-    <script>
-        function validateRegister(){
-            user = document.getElementById("log:RegistroUsuario");
-            pass = document.getElementById("log:RegistroPassword");
-            mail = document.getElementById("log:RegistroEmail");
-            user.classList.remove("ui-state-error");
-            pass.classList.remove("ui-state-error");
-            mail.classList.remove("ui-state-error");
-            if(user.value.trim() == ''){
-                user.classList.add("ui-state-error");
-            }
-            if(pass.value.trim() == ''){
-                pass.classList.add("ui-state-error");
-            }
-            if(mail.value.trim() == ''){
-                mail.classList.add("ui-state-error");
-            }
-            return !(user.value.trim() == '' || pass.value.trim() == '' || mail.value.trim() == '');
-        }
-    </script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 </h:body>
 </html>
