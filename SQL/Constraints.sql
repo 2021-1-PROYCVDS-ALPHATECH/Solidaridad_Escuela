@@ -10,8 +10,15 @@ CHECK (
 	nombre IN ('Administrador', 'Estudiante', 'Profesor', 'Egresado', 'Administrativo')
 );
 
-ALTER TABLE Necesiudades
-ADD CONSTRAINT Estados_CK
+ALTER TABLE Solicitudes
+ADD CONSTRAINT EstadoSolicitud_CK
 CHECK (
     estado IN ('Activa', 'En Proceso', 'Resuelta', 'Cerrada')
+);
+
+
+ALTER TABLE categorias 
+ADD CONSTRAINT Estadoategoria_CK
+CHECK (
+    estado IN ('Activa', 'Inactiva')
 );
