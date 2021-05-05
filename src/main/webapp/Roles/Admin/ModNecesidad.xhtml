@@ -4,7 +4,7 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title> Registro Cliente </title>
+    <title> Modificar necesidad </title>
 </h:head>
 <style>
 *,*::after,*,*::before{
@@ -25,29 +25,16 @@ body {
 }
 
 .container{
-    margin-top: 100px;
+    margin-top: 50px;
     height: 800px;
     display: grid;
-    grid-template-columns: 34% 66%;
+    grid-template-columns: 100%;
     grid-template-rows: 100%;
     column-gap: 10px;
     margin-left: 25px;
     margin-right: 25px;
 }
 
-#item1 {
-    margin-right: 25px;
-    grid-row: 1;
-    grid-column-start: 1;
-    grid-column-end: 2;   
-}
-
-#item2 {
-    margin-right: 25px;
-    grid-row: 1;
-    grid-column-start: 2;
-    grid-column-end: 3;   
-}
 
 body .ui-panel .ui-panel-titlebar {
     border: 1px solid #dee2e6;
@@ -149,16 +136,21 @@ body .ui-datatable .ui-datatable-footer{
     margin-top: -10px;
 }
 
+.noEditable {
+    text-align: center;
+    background-color:#989999
+}
+
 </style>
 <h:body>
-    <h:form id="Necesities">
+    <h:form id="Categories">
         <div style="background-color: #7e1323; height: 10px;"></div>
         <div class="header">
             <div class="headerElements">
                 <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
                 <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                     <p:submenu label="Navigations">
-                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Necesities" icon="pi pi-external-link"/>
+                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Categories" icon="pi pi-external-link"/>
                     </p:submenu>
                 </p:menu>
             </div> 
@@ -167,57 +159,31 @@ body .ui-datatable .ui-datatable-footer{
             </svg>
         </div>
         <div class="container">
-            <p:panel header="Registar Necesidad" style="text-align: center" name="panel" id="item1">   
-                <p:messages id="messages" showDetail="true" style="text-align: left"/>
-                <h:panelGrid columns="1" style="margin: auto" >
+            <p:panel header="Info #{LoginBean.necesidad.nombre}" style="text-align: center" name="panel" id="item1">   
+                <h:panelGrid columns="2" style="margin: auto" >
                     <p:outputLabel for="@next" value="ID"/>
-                    <p:inputText  id="registerID" type="String" binding="#{id}"/>
-                    <p:outputLabel for="@next" value="IDUser"/>
-                    <p:inputText  id="registerIDUser" type="String" binding="#{idUser}"/>
-                    <p:outputLabel for="@next" value="Nombre" />
-                    <p:inputText  id= "registerName" type="String" binding="#{nombre}"/>
+                    <p:inputText  id="ID" type="String" value="#{LoginBean.necesidad.idSolicitud}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:outputLabel for="@next" value="Nombre"/>
+                    <p:inputText  id="Name" type="String" value="#{LoginBean.necesidad.nombre}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Descripcion" />
-                    <p:inputText  id= "registerDes" type="String" binding="#{descripcion}"/>
-                    <p:outputLabel for="@next" value="Urgencia" />
-                    <p:inputText  id= "registerUrg" type="String" binding="#{urgencia}"/>
+                    <p:inputTextarea id= "Des" rows="6" cols="30" type="String" value="#{LoginBean.necesidad.descripcion}" readonly="true" style="margin: 10px; width: 220px; font-size: 12px; background-color:#eaecec;"/>
+                    <p:outputLabel for="@next" value="Fecha de Creacion" />
+                    <p:inputText  id= "CDate" type="String" value="#{LoginBean.necesidad.fechaCreacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:outputLabel for="@next" value="Ultima Modificacion" />
+                    <p:inputText  id= "MDate" type="String" value="#{LoginBean.necesidad.fechaModificacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:outputLabel for="@next" value="Urgencia"/>
+                    <p:inputText  id="Urgency" type="String" value="#{LoginBean.necesidad.urgencia}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Estado" />
                     <p:selectOneMenu id="option"  binding="#{estado}" style="width: 220px;">
                         <f:selectItem itemLabel="Activa" itemValue="Activa"/>
-                        <f:selectItem itemLabel="En proceso" itemValue="En proces"/>
+                        <f:selectItem itemLabel="En proceso" itemValue="En proceso"/>
                         <f:selectItem itemLabel="Resuelta" itemValue="Resuelta"/>
                         <f:selectItem itemLabel="Cerrada" itemValue="Cerrada"/>
                     </p:selectOneMenu>
-                    <p:outputLabel for="@next" value="Categoria" />
-                    <p:inputText  id= "registerCat" type="String" binding="#{categoria}"/>
+                    
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Necesities" value="Registrar" actionListener="#{LoginBean.registrarNecesidad(id.value, idUser.value, nombre.value, descripcion.value, urgencia.value, estado.value, categoria.value)}"/>
-            </p:panel>
-            <p:panel header="Lista Necesidades" style="text-align: center; min-height: 800px;" name="panel" id="item2">
-                <p:dataTable  id="NecesidadDT" var="necesidad" value="#{LoginBean.consultarNecesidades()}" rows="10" paginator="true" rowKey="#{necesidad.idSolicitud}" selectionMode="single" selection="#{LoginBean.necesidad}"
-                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
-                    <p:column headerText="Nombre">
-                        <h:outputText value="#{necesidad.nombre}" />
-                    </p:column>
-                    <p:column headerText="Descripcion">
-                        <h:outputText value="#{necesidad.descripcion}" />
-                    </p:column>
-                    <p:column headerText="Fecha de Creacion">
-                        <h:outputText value="#{necesidad.fechaCreacion}" />
-                    </p:column>
-                    <p:column headerText="Fecha de Modificacion">
-                        <h:outputText value="#{necesidad.fechaModificacion}" />
-                    </p:column>
-                    <p:column headerText="Estado">
-                        <h:outputText value="#{necesidad.estado}" />
-                    </p:column>
-                    <p:column headerText="Urgencia">
-                        <h:outputText value="#{necesidad.urgencia}" />
-                    </p:column>
-                    <f:facet name="footer" style="margin: auto">
-                        <p:commandButton id="Modify" value="Seleccionar" action="ModNecesidad?faces-redirect=true" update="Necesities" styleClass="ui-button"/>
-                    </f:facet>
-                </p:dataTable>
-            </p:panel>    
+                <p:commandButton id="Modify" style="margin: 30px;" value="Modificar" action="Necesidad?faces-redirect=true" actionListener="#{LoginBean.actualizarNecesidad(LoginBean.necesidad.idSolicitud,LoginBean.necesidad.nombre,LoginBean.necesidad.descripcion,estado.value)}" styleClass="ui-button"/>
+            </p:panel>   
         </div>
     </h:form>
     <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">

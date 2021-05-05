@@ -15,6 +15,7 @@ import org.apache.shiro.subject.Subject;
 import edu.eci.cvds.samples.entities.Categoria;
 import edu.eci.cvds.samples.entities.Necesidad;
 import edu.eci.cvds.samples.entities.Oferta;
+import edu.eci.cvds.samples.entities.Respuesta;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.entities.Rol;
 import edu.eci.cvds.samples.services.ExcepcionSolidaridad;
@@ -37,6 +38,9 @@ public class LoginBean extends BasePageBean{
     private Categoria categoria;
     private Usuario currentUser;
     private Usuario usuario;
+    private Respuesta respuesta;
+    private Necesidad necesidad;
+    private Oferta oferta;
 
     public LoginBean(){
         user = "";
@@ -73,6 +77,30 @@ public class LoginBean extends BasePageBean{
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public Respuesta getRespuesta() {
+        return respuesta;
+    }
+
+    public void setRespuesta(Respuesta respuesta) {
+        this.respuesta = respuesta;
+    }
+
+    public Necesidad getNecesidad() {
+        return necesidad;
+    }
+
+    public void setNecesidad(Necesidad necesidad) {
+        this.necesidad = necesidad;
+    }
+
+    public Oferta getOferta() {
+        return oferta;
+    }
+
+    public void setOferta(Oferta oferta) {
+        this.oferta = oferta;
     }
 
     public void logIn(){
@@ -132,6 +160,14 @@ public class LoginBean extends BasePageBean{
         }
     }
 
+    public void actualizarOferta(String idOferta, String nombre, String descripcion, String estado){
+        try {
+            servicios.actualizarOferta(idOferta, nombre, descripcion, estado);
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
+    }
+
     public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad{
         return servicios.consultarNecesidades();
     }
@@ -143,6 +179,14 @@ public class LoginBean extends BasePageBean{
             System.out.println(e.getMessage());
         }
         
+    }
+
+    public void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado){
+        try {
+            servicios.actualizarNecesidad(idNecesidad, nombre, descripcion, estado);
+        } catch (Exception e) {
+            //TODO: handle exception
+        }
     }
 
     public List<Usuario> consultarUsuarios() throws ExcepcionSolidaridad{
@@ -160,7 +204,18 @@ public class LoginBean extends BasePageBean{
     public void actualizarNumSolicitudes(String idUsuario, int numSolicitudes) throws ExcepcionSolidaridad{
         servicios.actualizarNumSolicitudes(idUsuario, numSolicitudes);
     }
+
+    public List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad{
+        return servicios.consultarRespuestas();
+    }
     
+    public void registrarRespuesta(String idRespuesta, String idUsuario, String nombre, String comentarios, String idSolicitud){
+        try {
+            servicios.registrarRespuesta(idRespuesta, idUsuario, nombre, comentarios, idSolicitud);
+        } catch (Exception e){
+
+        }
+    }
     public void logOut(){
         subject.logout();
         try{

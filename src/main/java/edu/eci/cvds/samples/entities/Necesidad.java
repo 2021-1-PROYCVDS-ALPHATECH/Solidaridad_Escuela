@@ -52,6 +52,14 @@ public class Necesidad extends Solicitud{
         return nombre;
     }
     
+    public void setUrgencia(String urgencia) {
+        this.urgencia = urgencia;
+    }
+
+    public String getUrgencia() {
+        return urgencia;
+    }
+
     @Override
     public String toString(){
         return "Necesidad{"+"id= "+ idSolicitud + ", nombre= " + nombre + ", descripcion= " + descripcion +", urgencia= " + urgencia  +", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + ", categoria="+ categoria+"}";

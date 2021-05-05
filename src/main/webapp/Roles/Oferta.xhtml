@@ -151,14 +151,14 @@ body .ui-datatable .ui-datatable-footer{
 
 </style>
 <h:body>
-    <h:form id="Categories">
+    <h:form id="Oferts">
         <div style="background-color: #7e1323; height: 10px;"></div>
         <div class="header">
             <div class="headerElements">
                 <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
                 <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                     <p:submenu label="Navigations">
-                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Categories" icon="pi pi-external-link"/>
+                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Oferts" icon="pi pi-external-link"/>
                     </p:submenu>
                 </p:menu>
             </div> 
@@ -183,10 +183,10 @@ body .ui-datatable .ui-datatable-footer{
                     <p:outputLabel for="@next" value="Categoria" />
                     <p:inputText  id= "registerCat" type="String" binding="#{categoria}"/>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{LoginBean.registrarOferta(id.value, idUser.value, nombre.value, descripcion.value, estado.value, categoria.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Oferts" value="Registrar" actionListener="#{LoginBean.registrarOferta(id.value, idUser.value, nombre.value, descripcion.value, estado.value, categoria.value)}"/>
             </p:panel>
             <p:panel header="Lista ofertas" style="text-align: center; min-height: 800px;" name="panel" id="item2">
-                <p:dataTable  id="ofertaDT" var="oferta" value="#{LoginBean.consultarOfertas()}" rows="10" paginator="true" rowKey="#{oferta.id}"
+                <p:dataTable  id="ofertaDT" var="oferta" value="#{LoginBean.consultarOfertas()}" rows="10" paginator="true" rowKey="#{oferta.idSolicitud}" selectionMode="single" selection="#{LoginBean.oferta}"
                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
                     <p:column headerText="Nombre">
                         <h:outputText value="#{oferta.nombre}" />
@@ -203,7 +203,9 @@ body .ui-datatable .ui-datatable-footer{
                     <p:column headerText="Estado">
                         <h:outputText value="#{oferta.estado}" />
                     </p:column>
-                    <f:facet name="footer" style="margin: auto"></f:facet>
+                    <f:facet name="footer" style="margin: auto">
+                        <p:commandButton id="Modify" value="Seleccionar" action="ModOferta?faces-redirect=true" update="Oferts" styleClass="ui-button"/>
+                    </f:facet>
                 </p:dataTable>
                     
             </p:panel>    
