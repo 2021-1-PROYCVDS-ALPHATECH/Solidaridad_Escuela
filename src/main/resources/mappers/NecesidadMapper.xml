@@ -14,6 +14,8 @@
             s.fechaModificacion AS n_fechaModificacion,
             s.estado AS n_estado,
 
+            u.nombre AS u_nombreUsuario, 
+
             c.idCategoria AS c_idCategoria,
             c.nombre AS c_nombre,
             c.descripcion AS c_descripcion,
@@ -26,7 +28,8 @@
             r.comentarios AS r_comentarios,
             r.fechaCreacion AS r_fechaCreacion
 
-        FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
+        FROM Solicitudes s JOIN Usuarios u ON (s.idUsuario = u.idUsuario)
+            JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
             JOIN Categorias c ON (s.idCategoria = c.idCategoria)
             LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
     </select>
@@ -41,6 +44,8 @@
             s.fechaModificacion AS n_fechaModificacion,
             s.estado AS n_estado,
 
+            u.nombre AS u_nombreUsuario, 
+
             c.idCategoria AS c_idCategoria,
             c.nombre AS c_nombre,
             c.descripcion AS c_descripcion,
@@ -53,7 +58,8 @@
             r.comentarios AS r_comentarios,
             r.fechaCreacion AS r_fechaCreacion
 
-        FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
+        FROM Solicitudes s JOIN Usuarios u ON (s.idUsuario = u.idUsuario)
+            JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
             JOIN Categorias c ON (s.idCategoria = c.idCategoria)
             LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
 
@@ -70,6 +76,8 @@
             s.fechaModificacion AS n_fechaModificacion,
             s.estado AS n_estado,
 
+            u.nombre AS u_nombreUsuario, 
+
             c.idCategoria AS c_idCategoria,
             c.nombre AS c_nombre,
             c.descripcion AS c_descripcion,
@@ -82,7 +90,8 @@
             r.comentarios AS r_comentarios,
             r.fechaCreacion AS r_fechaCreacion
 
-        FROM Solicitudes s JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
+        FROM Solicitudes s JOIN Usuarios u ON (s.idUsuario = u.idUsuario) 
+            JOIN Necesidades n ON (s.idSolicitud = n.idNecesidad)
             JOIN Categorias c ON (s.idCategoria = c.idCategoria)
             LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
 
@@ -143,6 +152,7 @@
         <result property="fechaCreacion" column="n_fechaCreacion"/>
         <result property="fechaModificacion" column="n_fechaModificacion"/>
         <result property="estado" column="n_estado"/>
+        <result property="nombreUsuario" column="u_nombreUsuario"/>
         <association  property="categoria"
                 resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.CategoriaMapper.CategoriaResult">
         </association>
