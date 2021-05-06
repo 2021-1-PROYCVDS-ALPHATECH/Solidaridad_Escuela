@@ -20,6 +20,8 @@ public interface OfertaMapper {
 
     public List<Oferta> consultarOfertas();
 
+    public List<Oferta> consultarOfertasUsuario(@Param("idUsuario") String idUsuario);
+
     public Oferta consultarOferta(@Param("id") String id);
 
     public Oferta consultarOfertaNombre(@Param("nombre") String nombre);

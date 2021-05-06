@@ -44,6 +44,15 @@ public class MyBATISOfertaDAO implements OfertaDAO {
     }
 
     @Override
+    public List<Oferta> loadByUser(String idUsuario) throws PersistenceException {
+        try {
+            return ofertaMapper.consultarOfertasUsuario(idUsuario);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar las ofertas del usuario con id " + idUsuario, e);
+        }
+    }
+
+    @Override
     public Oferta load(String id) throws PersistenceException {
         try {
             return ofertaMapper.consultarOferta(id);

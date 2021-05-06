@@ -18,6 +18,8 @@ public interface OfertaDAO {
 
     public List<Oferta> loadAll() throws PersistenceException;
 
+    public List<Oferta> loadByUser(String idUsuario) throws PersistenceException;
+
     public Oferta load(String id) throws PersistenceException;
 
     public Oferta loadByName(String nombre) throws PersistenceException;

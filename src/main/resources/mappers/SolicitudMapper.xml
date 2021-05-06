@@ -12,6 +12,8 @@
       s.fechaCreacion AS s_fechaCreacion,
       s.fechaModificacion AS s_fechaModificacion,
 
+      u.nombre AS u_nombreUsuario,
+
       c.idCategoria AS c_idCategoria,
       c.nombre AS c_nombre,
       c.descripcion AS c_descripcion,
@@ -24,7 +26,8 @@
       r.comentarios AS r_comentarios,
       r.fechaCreacion AS r_fechaCreacion
 
-    FROM Solicitudes s JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+    FROM Solicitudes s JOIN Usuarios u ON (s.idUsuario = u.idUsuario)
+      JOIN Categorias c ON (s.idCategoria = c.idCategoria)
       LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
   </select>
 
@@ -53,6 +56,35 @@
     WHERE s.idSolicitud = #{id}
   </select>
 
+  <select parameterType="map" id="consultarSolicitudesUsuario" resultMap="SolicitudResult">
+    SELECT 
+      s.idSolicitud AS s_idSolicitud,
+      s.descripcion AS s_descripcion,
+      s.estado AS s_estado,
+      s.fechaCreacion AS s_fechaCreacion,
+      s.fechaModificacion AS s_fechaModificacion,
+
+      u.nombre AS u_nombreUsuario,
+
+      c.idCategoria AS c_idCategoria,
+      c.nombre AS c_nombre,
+      c.descripcion AS c_descripcion,
+      c.fechaCreacion AS c_fechaCreacion,
+      c.fechaModificacion AS c_fechaModificacion,
+      c.estado AS c_estado,
+
+      r.idRespuesta AS r_idRespuesta,
+      r.nombre AS r_nombre,
+      r.comentarios AS r_comentarios,
+      r.fechaCreacion AS r_fechaCreacion
+
+    FROM Solicitudes s JOIN Usuarios u ON (s.idUsuario = u.idUsuario)
+      LEFT JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+      LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
+      
+    WHERE s.idUsuario = #{idUsuario}
+  </select>
+
   <insert parameterType="map" id="insertarSolicitud">
     INSERT INTO Solicitudes
       VALUES(#{id}, #{idUsuario}, #{desc}, #{estado}, #{categoria}, CURRENT_DATE, CURRENT_DATE)
@@ -75,6 +107,7 @@
     <result property='fechaCreacion' column='s_fechaCreacion'/>  
     <result property='fechaModificacion' column='s_fechaModificacion'/>  
     <result property='estado' column='s_estado'/>
+    <result property='nombreUsuario' column="u_nombreUsuario"/>
     <association  property="categoria"
                 resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.CategoriaMapper.CategoriaResult">
     </association>
@@ -84,5 +117,6 @@
     </collection>
   </resultMap>
 
+  
 
 </mapper>

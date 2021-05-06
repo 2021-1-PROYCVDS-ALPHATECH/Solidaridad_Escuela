@@ -41,6 +41,15 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
         }
     }
 
+    public List<Necesidad> loadByUser(String idUsuario) throws PersistenceException{
+        try {
+            return necesidadMapper.consultarNecesidadesUsuario(idUsuario);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            throw new PersistenceException("Error al consultar las necesidades ",e);
+        }
+    }
+
     @Override
     public Necesidad load(String id) throws PersistenceException {
         try {

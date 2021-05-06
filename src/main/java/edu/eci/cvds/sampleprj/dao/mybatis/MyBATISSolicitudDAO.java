@@ -71,4 +71,14 @@ public class MyBATISSolicitudDAO implements SolicitudDAO{
         }
         
     }
+
+    @Override
+    public List<Solicitud> loadByUser(String idUsuario) throws PersistenceException {
+        try{
+            return solicitudMapper.consultarSolicitudesUsuario(idUsuario);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println(e.getMessage());
+            throw new PersistenceException("Error al consultar las solicitudes del usuario con id: " + idUsuario, e);
+        }
+    }
 }

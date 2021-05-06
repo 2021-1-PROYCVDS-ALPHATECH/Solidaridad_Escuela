@@ -196,6 +196,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
+    public List<Solicitud> consultarSolicitudesUsuario(String idUsuario) throws ExcepcionSolidaridad {
+        try {
+            return solicitudDAO.loadByUser(idUsuario);
+        } catch (PersistenceException e) {
+            throw new ExcepcionSolidaridad("Error al consultar las solicitudes del usuario con id " + idUsuario, e);
+        }
+    }
+
+    @Override
     public Solicitud consultarSolicitudId(String id) throws ExcepcionSolidaridad {
         try {
             return solicitudDAO.load(id);
@@ -224,7 +233,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             solicitudDAO.delete(idSolicitud);
         } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al eliminar la solicitud con ID: " + idSolicitud, e);
+            throw new ExcepcionSolidaridad("Error al eliminar la solicitud con id: " + idSolicitud, e);
         }
     }
     
@@ -247,6 +256,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             return necesidadDAO.loadAll();
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al consultar todas las necesidades ", e);
+        }
+    }
+
+    @Override
+    public List<Necesidad> consultarNecesidadesUsuario(String idUsuario) throws ExcepcionSolidaridad {
+        try {
+            return necesidadDAO.loadByUser(idUsuario);
+        } catch (PersistenceException e) {
+            throw new ExcepcionSolidaridad("Error al consultar las necesidades del usuario con id " + idUsuario, e);
         }
     }
 
@@ -310,6 +328,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     public List<Oferta> consultarOfertas() throws ExcepcionSolidaridad {
         try {
             return ofertaDAO.loadAll();
+        } catch (PersistenceException e) {
+            throw new ExcepcionSolidaridad("Error al consultar todas las ofertas ", e);
+        }
+    }
+
+    @Override
+    public List<Oferta> consultarOfertasUsuario(String idUsuario) throws ExcepcionSolidaridad {
+        try {
+            return ofertaDAO.loadByUser(idUsuario);
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al consultar todas las ofertas ", e);
         }
@@ -416,4 +443,6 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         }
         
     }
+
+    
 }

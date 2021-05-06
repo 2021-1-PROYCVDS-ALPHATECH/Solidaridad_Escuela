@@ -27,5 +27,7 @@ public interface NecesidadDAO {
     
     public void delete(String idNecesidad) throws PersistenceException;
 
+    public List<Necesidad> loadByUser(String idUsuario) throws PersistenceException;
+
 }
 

@@ -26,6 +26,7 @@ public class Solicitud implements Serializable{
     protected Date fechaCreacion;
     protected Date fechaModificacion;
     protected ArrayList<Respuesta> respuestas;
+    protected String nombreUsuario;
 
 
     public Solicitud(String idSolicitud, String descripcion, String estado, Date fechaCreacion, Date fechaModificacion, Categoria categoria, ArrayList<Respuesta> respuestas){
@@ -119,6 +120,6 @@ public class Solicitud implements Serializable{
 
     @Override
     public String toString(){
-        return "Solicitud{"+"id = "+ idSolicitud + ", descripcion = " + descripcion +", fecha C = " + fechaCreacion + ", fecha M = " + fechaModificacion + ", estado = " + estado + ", categoria = \n\t"+ categoria + ", respuestas = \n\t" + respuestas + "}";
+        return "Solicitud{"+"id = "+ idSolicitud + ", descripcion = " + descripcion +", fecha C = " + fechaCreacion + ", fecha M = " + fechaModificacion + ", estado = " + estado + ", nombreUsuario = " + nombreUsuario + ", categoria = \n\t"+ categoria + ", respuestas = \n\t" + respuestas + "}";
     }
 }

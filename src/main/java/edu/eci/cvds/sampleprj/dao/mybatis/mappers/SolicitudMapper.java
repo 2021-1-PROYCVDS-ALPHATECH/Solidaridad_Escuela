@@ -24,6 +24,8 @@ public interface SolicitudMapper{
                                     
     public List<Solicitud> consultarSolicitudes();
 
+    public List<Solicitud> consultarSolicitudesUsuario(@Param("idUsuario") String idUsuario);
+
     public Solicitud consultarSolicitud(@Param("id") String id);
     
     public void actualizarSolicitud(@Param("id") String id,
@@ -31,4 +33,5 @@ public interface SolicitudMapper{
                                     @Param("estado") String estado);
 
     public void eliminarSolicitud(@Param("idSolicitud") String idSolicitud);
+
 }

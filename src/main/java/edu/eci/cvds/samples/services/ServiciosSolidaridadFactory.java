@@ -80,6 +80,7 @@ public class ServiciosSolidaridadFactory {
             System.out.println("-------------------------------- CONSULAR RESPUESTAS  --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarRespuestas().toString());
             */
+            System.out.println(instance.getServiciosSolidaridad().consultarSolicitudes());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

@@ -25,4 +25,6 @@ public interface SolicitudDAO {
     public void update(String id, String descripcion, String estado) throws PersistenceException;
 
     public void delete(String idSolicitud) throws PersistenceException;
+
+    public List<Solicitud> loadByUser(String idUsuario) throws PersistenceException;
 }

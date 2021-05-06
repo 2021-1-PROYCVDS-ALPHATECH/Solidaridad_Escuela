@@ -103,11 +103,20 @@ public class LoginBean extends BasePageBean{
         this.oferta = oferta;
     }
 
+    public Usuario getCurrentUser() {
+        return currentUser;
+    }
+
+    public void setCurrentUser(Usuario currentUser) {
+        this.currentUser = currentUser;
+    }
+
     public void logIn(){
         subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user, new Sha256Hash(password).toHex());
         try {
             subject.login(token);
+            currentUser = servicios.consultarUsuarioNombre(user);
             if (subject.hasRole("Administrador")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Admin/admin.xhtml");
 			}
@@ -172,6 +181,10 @@ public class LoginBean extends BasePageBean{
         return servicios.consultarNecesidades();
     }
 
+    public List<Necesidad> consultarNecesidadesEstudiante(String idUsuario) throws ExcepcionSolidaridad{
+        return servicios.consultarNecesidadesUsuario(idUsuario);
+    }
+
     public void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado, String categoria){
         try{
             servicios.registrarNecesidad(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado, categoria);
@@ -216,6 +229,16 @@ public class LoginBean extends BasePageBean{
 
         }
     }
+
+    public List<String[]> test(){
+        ArrayList<String[]> list = new ArrayList<String[]>();
+        for(int i=0; i<10; i++){
+            String[] entry = {""+i,"Nombre "+i};
+            list.add(entry);
+        }
+        return list;
+    }
+
     public void logOut(){
         subject.logout();
         try{
