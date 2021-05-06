@@ -2,7 +2,7 @@ package edu.eci.cvds.samples.entities;
 
 public enum Estado{
     ACTIVA("Activa"),
-    PROCESO("En Proceso"),
+    PROCESO("En proceso"),
     RESUELTA("Resuelta"),
     CERRADA("Cerrada");
 

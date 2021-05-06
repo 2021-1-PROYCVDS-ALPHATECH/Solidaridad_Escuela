@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:f="http://xmlns.jcp.org/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title> Registro Cliente </title>
+    <link rel="stylesheet" href="../style.css"></link>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</h:head>
+<style>
+.container{
+    margin-top: 100px;
+    height: 800px;
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 100%;
+    column-gap: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+}
+
+#item1 {
+    margin-right: 25px;
+    grid-row: 1;
+    grid-column-start: 1;
+    grid-column-end: 2;   
+}
+
+#item2 {
+    margin-right: 25px;
+    grid-row: 1;
+    grid-column-start: 2;
+    grid-column-end: 3;   
+}
+
+.header {
+    background-color: #7e132300;
+    width: 100%;
+    height: 50px;
+}
+
+.headerElements {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    color: white;
+    height: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: -10px;
+}
+
+</style>
+<h:body>
+    <h:inputHidden id="labels" value="#{LoginBean.ConsultarLabelsOfertas()}"/>
+    <h:inputHidden id="values" value="#{LoginBean.ConsultarEstadosOfertas()}"/>
+    <h:form id="Oferts">
+        <div style="background-color: #7e1323; height: 10px;"></div>
+        <div class="header">
+            <div class="headerElements">
+                <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
+                <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
+                    <p:submenu label="Navigations">
+                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Oferts" icon="pi pi-external-link"/>
+                    </p:submenu>
+                </p:menu>
+            </div> 
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" style="position: absolute; top: 10px; z-index: -1;">
+                <path fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,0L960,0L480,0L0,0Z"></path>
+            </svg>
+        </div>
+        <div class="container">
+            <p:panel header="Estadisticas oferta" style="text-align: center" name="panel" id="item1">   
+                <canvas id="myChart" width="300" height="300"></canvas>
+            </p:panel>
+            <p:panel header="Lista ofertas" style="text-align: center; min-height: 800px;" name="panel" id="item2">
+                <p:dataTable  id="ofertaDT" var="oferta" value="#{LoginBean.consultarOfertas()}" rows="10" paginator="true" rowKey="#{oferta.idSolicitud}"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
+                    <p:column headerText="Id">
+                        <h:outputText value="#{oferta.idSolicitud}" />
+                    </p:column>
+                    <p:column headerText="Categoria">
+                        <h:outputText value="#{oferta.categoria.nombre}" />
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{oferta.nombre}" />
+                    </p:column>
+                    <p:column headerText="Descripcion">
+                        <h:outputText value="#{oferta.descripcion}" />
+                    </p:column>
+                    <p:column headerText="Fecha de Creacion">
+                        <h:outputText value="#{oferta.fechaCreacion}" />
+                    </p:column>
+                    <p:column headerText="Fecha de Modificacion">
+                        <h:outputText value="#{oferta.fechaModificacion}" />
+                    </p:column>
+                    <p:column headerText="Estado">
+                        <h:outputText value="#{oferta.estado}" />
+                    </p:column>
+                    <p:column headerText="Usuario">
+                        <h:outputText value="#{oferta.nombreUsuario}" />
+                    </p:column>
+                    <f:facet name="footer" style="margin: auto"></f:facet>
+                </p:dataTable> 
+            </p:panel>    
+        </div>
+    </h:form>
+    <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+        <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
+    </svg>
+    <script src="./Chart.js"></script>
+</h:body>
+</html>

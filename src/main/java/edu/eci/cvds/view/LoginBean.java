@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
@@ -41,6 +42,8 @@ public class LoginBean extends BasePageBean{
     private Respuesta respuesta;
     private Necesidad necesidad;
     private Oferta oferta;
+    
+
 
     public LoginBean(){
         user = "";
@@ -230,13 +233,44 @@ public class LoginBean extends BasePageBean{
         }
     }
 
-    public List<String[]> test(){
-        ArrayList<String[]> list = new ArrayList<String[]>();
-        for(int i=0; i<10; i++){
-            String[] entry = {""+i,"Nombre "+i};
-            list.add(entry);
+    public String ConsultarLabelsNecesidad() throws ExcepcionSolidaridad{
+        String labels = "";
+        HashMap<String, Integer> estadisticas = servicios.consultarNecesidadesEstado();
+        for(String key: estadisticas.keySet()){
+            labels += key + ",";
         }
-        return list;
+        labels = labels.substring(0, labels.length()-1);
+        return labels;
+    }
+
+    public String ConsultarEstadosNecesidad() throws ExcepcionSolidaridad{
+        String values = "";
+        HashMap<String, Integer> estadisticas = servicios.consultarNecesidadesEstado();
+        for(String key: estadisticas.keySet()){
+            values += estadisticas.get(key) + ",";
+        }
+        values = values.substring(0, values.length()-1);
+        return values;
+    }
+
+    public String ConsultarLabelsOfertas() throws ExcepcionSolidaridad{
+        String labels = "";
+        HashMap<String, Integer> estadisticas = servicios.consultarOfertasEstado();
+        for(String key: estadisticas.keySet()){
+            labels += key + ",";
+        }
+        labels = labels.substring(0, labels.length()-1);
+        return labels;
+    }
+
+    public String ConsultarEstadosOfertas() throws ExcepcionSolidaridad{
+        String values = "";
+        HashMap<String, Integer> estadisticas = servicios.consultarOfertasEstado();
+        for(String key: estadisticas.keySet()){
+            values += estadisticas.get(key) + ",";
+        }
+        values = values.substring(0, values.length()-1);
+        return values;
     }
 
     public void logOut(){

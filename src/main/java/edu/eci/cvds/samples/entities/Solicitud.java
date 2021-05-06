@@ -118,6 +118,14 @@ public class Solicitud implements Serializable{
         return respuestas;
     }
 
+    public String getNombreUsuario() {
+        return nombreUsuario;
+    }
+    
+    public void setNombreUsuario(String nombreUsuario) {
+        this.nombreUsuario = nombreUsuario;
+    }
+    
     @Override
     public String toString(){
         return "Solicitud{"+"id = "+ idSolicitud + ", descripcion = " + descripcion +", fecha C = " + fechaCreacion + ", fecha M = " + fechaModificacion + ", estado = " + estado + ", nombreUsuario = " + nombreUsuario + ", categoria = \n\t"+ categoria + ", respuestas = \n\t" + respuestas + "}";
