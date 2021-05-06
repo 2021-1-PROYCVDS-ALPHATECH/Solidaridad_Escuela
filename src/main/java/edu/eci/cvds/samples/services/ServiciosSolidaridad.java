@@ -1,5 +1,6 @@
 package edu.eci.cvds.samples.services;
 
+import java.util.HashMap;
 import java.util.List;
 import edu.eci.cvds.samples.entities.*;
 
@@ -44,7 +45,7 @@ public interface ServiciosSolidaridad {
 
     public abstract List<Solicitud> consultarSolicitudes() throws ExcepcionSolidaridad;
 
-    public List<Solicitud> consultarSolicitudesUsuario(String idUsuario) throws ExcepcionSolidaridad;
+    public abstract List<Solicitud> consultarSolicitudesUsuario(String idUsuario) throws ExcepcionSolidaridad;
     
     public abstract Solicitud consultarSolicitudId(String id) throws ExcepcionSolidaridad;
 
@@ -56,7 +57,9 @@ public interface ServiciosSolidaridad {
 
     public abstract List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad;
 
-    public List<Necesidad> consultarNecesidadesUsuario(String idUsuario) throws ExcepcionSolidaridad;
+    public abstract List<Necesidad> consultarNecesidadesUsuario(String idUsuario) throws ExcepcionSolidaridad;
+
+    public abstract HashMap<String, Integer> consultarNecesidadesEstado() throws ExcepcionSolidaridad;
 
     public abstract Necesidad consultarNecesidadId(String id) throws ExcepcionSolidaridad;
 
@@ -71,6 +74,8 @@ public interface ServiciosSolidaridad {
     public abstract List<Oferta> consultarOfertas() throws ExcepcionSolidaridad;
 
     public abstract List<Oferta> consultarOfertasUsuario(String idUsuario) throws ExcepcionSolidaridad;
+
+    public abstract HashMap<String, Integer> consultarOfertasEstado() throws ExcepcionSolidaridad;
 
     public abstract Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad;
 

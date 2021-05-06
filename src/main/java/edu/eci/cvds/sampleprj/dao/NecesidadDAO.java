@@ -23,6 +23,8 @@ public interface NecesidadDAO {
 
     public Necesidad loadByName(String nombre) throws PersistenceException;
 
+    public List<Necesidad> loadByState(String estado) throws PersistenceException;
+
     public void update(String id, String nombre) throws PersistenceException;
     
     public void delete(String idNecesidad) throws PersistenceException;

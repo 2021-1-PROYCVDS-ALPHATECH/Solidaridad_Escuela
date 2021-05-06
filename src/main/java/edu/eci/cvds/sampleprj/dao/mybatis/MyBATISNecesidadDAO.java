@@ -25,8 +25,7 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
     public void save(String idNecesidad, String nombre, String urgencia) throws PersistenceException {
         try {
             necesidadMapper.registrarNecesidad(idNecesidad, nombre, urgencia);
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al registrar la necesidad " + idNecesidad, e);
         }
     }
@@ -35,8 +34,7 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
     public List<Necesidad> loadAll() throws PersistenceException {
         try {
             return necesidadMapper.consultarNecesidades();
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar las necesidades ",e);
         }
     }
@@ -44,9 +42,17 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
     public List<Necesidad> loadByUser(String idUsuario) throws PersistenceException{
         try {
             return necesidadMapper.consultarNecesidadesUsuario(idUsuario);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar las necesidades ",e);
+        }
+    }
+
+    @Override
+    public List<Necesidad> loadByState(String estado) throws PersistenceException {
+        try {
+            return necesidadMapper.consultarNecesidadesEstado(estado);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar las necesidades con estado " + estado, e);
         }
     }
 
@@ -54,8 +60,7 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
     public Necesidad load(String id) throws PersistenceException {
         try {
             return necesidadMapper.consultarNecesidad(id);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar la necesidad " + id,e);
         }
     }
@@ -64,8 +69,7 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
     public Necesidad loadByName(String nombre) throws PersistenceException {
         try {
             return necesidadMapper.consultarNecesidadNombre(nombre);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al consultar la necesidad con nombre " + nombre, e);
         }
     }
@@ -74,7 +78,7 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
     public void update(String idNecesidad, String nombre) throws PersistenceException {
         try {
             necesidadMapper.actualizarNecesidad(idNecesidad, nombre);
-        } catch (Exception e) {
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al actualizar la necesidad con id " + idNecesidad, e);
         }
     }
@@ -83,7 +87,7 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
     public void delete(String idNecesidad) throws PersistenceException {
         try {
             necesidadMapper.eliminarNecesidad(idNecesidad);
-        } catch (Exception e) {
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al eliminar la necesidad: " + idNecesidad, e);
         }
     }

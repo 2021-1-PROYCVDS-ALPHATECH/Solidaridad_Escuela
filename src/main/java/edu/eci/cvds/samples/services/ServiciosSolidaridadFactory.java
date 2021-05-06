@@ -72,11 +72,11 @@ public class ServiciosSolidaridadFactory {
 
     public static void main(String[] args){
         try{
-            System.out.println(instance.getServiciosSolidaridad().consultarSolicitudes());
-            System.out.println("-------------------------------- CONSULAR NECESIDADES  --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarNecesidades());
-            System.out.println("-------------------------------- CONSULAR OFERTAS  --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarOfertas());
+            System.out.println("-------------------------------- CONSULAR NECESIDADES ESTADO --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarNecesidadesEstado());
+            System.out.println("-------------------------------- CONSULAR OFERTAS ESTADO --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarOfertasEstado());
+            
             
         } catch (Exception e){
             System.out.println(e.getMessage());

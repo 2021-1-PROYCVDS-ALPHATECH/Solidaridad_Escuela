@@ -1,7 +1,9 @@
 package edu.eci.cvds.samples.services.impl;
 
 import java.util.List;
+import java.util.HashMap;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.bouncycastle.jcajce.provider.digest.RIPEMD128.HashMac;
 
 import com.google.inject.Inject;
 
@@ -287,6 +289,19 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
+    public HashMap<String, Integer> consultarNecesidadesEstado() throws ExcepcionSolidaridad {
+        try{
+            HashMap<String, Integer> estadisticas = new HashMap<>();
+            for (Estado estado : Estado.values()){
+                estadisticas.put(estado.getDescripcion(), necesidadDAO.loadByState(estado.getDescripcion()).size());
+            }
+            return estadisticas;
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar las necesidades por estado", e);
+        }
+    }
+
+    @Override
     public void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
         try {
             Necesidad necesidad = consultarNecesidadId(idNecesidad);
@@ -339,6 +354,19 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             return ofertaDAO.loadByUser(idUsuario);
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al consultar todas las ofertas ", e);
+        }
+    }
+
+    @Override
+    public HashMap<String, Integer> consultarOfertasEstado() throws ExcepcionSolidaridad {
+        try{
+            HashMap<String, Integer> estadisticas = new HashMap<>();
+            for (Estado estado : Estado.values()){
+                estadisticas.put(estado.getDescripcion(), ofertaDAO.loadByState(estado.getDescripcion()).size());
+            }
+            return estadisticas;
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar las ofertas por estado", e);
         }
     }
 

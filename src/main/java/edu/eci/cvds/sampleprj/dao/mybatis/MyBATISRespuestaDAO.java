@@ -28,7 +28,6 @@ public class MyBATISRespuestaDAO implements RespuestaDAO{
         try{
             respuestaMapper.insertarRespuesta(r, idUsuario, idSolicitud);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error " + e.getMessage());
             throw new PersistenceException("Error al registrar la respuesta", e);
         }
     }    
@@ -38,7 +37,6 @@ public class MyBATISRespuestaDAO implements RespuestaDAO{
         try{
             return respuestaMapper.consultarRespuestas();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error " + e.getMessage());
             throw new PersistenceException("Error al consultar las respuestas", e);
         }
     }
@@ -48,7 +46,6 @@ public class MyBATISRespuestaDAO implements RespuestaDAO{
         try{
             return respuestaMapper.consultarRespuestaId(id);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error " + e.getMessage());
             throw new PersistenceException("Error al consultar las respuestas", e);
         }
     }
@@ -58,7 +55,6 @@ public class MyBATISRespuestaDAO implements RespuestaDAO{
         try{
             return respuestaMapper.consultarRespuestasUsuario(nombre);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error " + e.getMessage());
             throw new PersistenceException("Error al consultar las respuestas del usuario " + nombre , e);
         }
     }
@@ -68,7 +64,6 @@ public class MyBATISRespuestaDAO implements RespuestaDAO{
         try{
             return respuestaMapper.consultarRespuestasUsuario(nombre);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error " + e.getMessage());
             throw new PersistenceException("Error al consultar las respuestas de la solicitud " + nombre , e);
         }
     }
@@ -78,9 +73,7 @@ public class MyBATISRespuestaDAO implements RespuestaDAO{
         try{
             respuestaMapper.eliminarRespuesta(id);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error " + e.getMessage());
             throw new PersistenceException("Error al eliminar la respuesta con id: " + id , e);
         }
     }
-
 }

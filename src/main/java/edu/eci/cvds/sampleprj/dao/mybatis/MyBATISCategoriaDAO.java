@@ -27,7 +27,6 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
         try{
             categoriaMapper.insertarCategoria(ca);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println(e.getMessage());
             throw new PersistenceException("Error al registrar la categoria" + ca.toString(), e);
         }   
     }
@@ -37,7 +36,6 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
         try{
             return categoriaMapper.consultarCategorias();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error " + e.getMessage());
             throw new PersistenceException("Error al consultar las categorias", e);
         }
     }
@@ -47,7 +45,6 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
         try{
             return categoriaMapper.consultarCategoria(id);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error consulta" + e.getMessage());
             throw new PersistenceException("Error al consultar la categoria: " + id, e);
         }
     }
@@ -57,7 +54,6 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
         try{
             return categoriaMapper.consultarCategoriaNombre(nombre);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error consulta" + e.getMessage());
             throw new PersistenceException("Error al consultar la categoria con nombre: " + nombre, e);
         }
     }
@@ -75,7 +71,7 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
     public void delete(String idCategoria) throws PersistenceException {
         try {
             categoriaMapper.eliminarCategoria(idCategoria);
-        } catch (Exception e) {
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al eliminar la categoria: " + idCategoria, e);
         }
     }
