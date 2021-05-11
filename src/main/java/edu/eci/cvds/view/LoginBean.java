@@ -13,6 +13,7 @@ import javax.faces.application.FacesMessage;
 
 import org.apache.shiro.subject.Subject;
 
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Categoria;
 import edu.eci.cvds.samples.entities.Necesidad;
 import edu.eci.cvds.samples.entities.Oferta;
@@ -140,7 +141,7 @@ public class LoginBean extends BasePageBean{
         }
     }
 
-    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridad{
+    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridad, PersistenceException{
         return servicios.consultarCategorias();
     }
 
@@ -160,7 +161,7 @@ public class LoginBean extends BasePageBean{
         servicios.actualizarCategoria(id, nombre, descripcion, estado);
     }
 
-    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridad{
+    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridad, PersistenceException{
         return servicios.consultarOfertas();
     }
 
@@ -180,11 +181,11 @@ public class LoginBean extends BasePageBean{
         }
     }
 
-    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad{
+    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad, PersistenceException{
         return servicios.consultarNecesidades();
     }
 
-    public List<Necesidad> consultarNecesidadesEstudiante(String idUsuario) throws ExcepcionSolidaridad{
+    public List<Necesidad> consultarNecesidadesEstudiante(String idUsuario) throws ExcepcionSolidaridad, PersistenceException{
         return servicios.consultarNecesidadesUsuario(idUsuario);
     }
 
@@ -205,7 +206,7 @@ public class LoginBean extends BasePageBean{
         }
     }
 
-    public List<Usuario> consultarUsuarios() throws ExcepcionSolidaridad{
+    public List<Usuario> consultarUsuarios() throws ExcepcionSolidaridad, PersistenceException{
         return servicios.consultarUsuariosRol("WHERE u.nombre = 'admin'");
     }
 
@@ -221,7 +222,7 @@ public class LoginBean extends BasePageBean{
         servicios.actualizarNumSolicitudes(idUsuario, numSolicitudes);
     }
 
-    public List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad{
+    public List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad, PersistenceException{
         return servicios.consultarRespuestas();
     }
     
@@ -233,7 +234,7 @@ public class LoginBean extends BasePageBean{
         }
     }
 
-    public String ConsultarLabelsNecesidad() throws ExcepcionSolidaridad{
+    public String ConsultarLabelsNecesidad() throws ExcepcionSolidaridad, PersistenceException{
         String labels = "";
         HashMap<String, Integer> estadisticas = servicios.consultarNecesidadesEstado();
         for(String key: estadisticas.keySet()){
@@ -243,7 +244,7 @@ public class LoginBean extends BasePageBean{
         return labels;
     }
 
-    public String ConsultarEstadosNecesidad() throws ExcepcionSolidaridad{
+    public String ConsultarEstadosNecesidad() throws ExcepcionSolidaridad, PersistenceException{
         String values = "";
         HashMap<String, Integer> estadisticas = servicios.consultarNecesidadesEstado();
         for(String key: estadisticas.keySet()){
@@ -253,7 +254,7 @@ public class LoginBean extends BasePageBean{
         return values;
     }
 
-    public String ConsultarLabelsOfertas() throws ExcepcionSolidaridad{
+    public String ConsultarLabelsOfertas() throws ExcepcionSolidaridad, PersistenceException{
         String labels = "";
         HashMap<String, Integer> estadisticas = servicios.consultarOfertasEstado();
         for(String key: estadisticas.keySet()){
@@ -263,7 +264,7 @@ public class LoginBean extends BasePageBean{
         return labels;
     }
 
-    public String ConsultarEstadosOfertas() throws ExcepcionSolidaridad{
+    public String ConsultarEstadosOfertas() throws ExcepcionSolidaridad, PersistenceException{
         String values = "";
         HashMap<String, Integer> estadisticas = servicios.consultarOfertasEstado();
         for(String key: estadisticas.keySet()){

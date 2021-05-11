@@ -46,7 +46,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaTenerDatosUsuarios(){
         try{
             if (serviciosSolidaridad.consultarUsuarios() == null) fail("No se encontraron datos de usuarios.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(Exception e){
             fail("Lanzo excepcion.");
         }
     }
@@ -58,7 +58,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaTenerDatosCategorias(){
         try{
             if (serviciosSolidaridad.consultarCategorias() == null) fail("No se encontraron datos de categorias.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(Exception e){
             fail("Lanzo excepcion.");
         }
     }
@@ -70,7 +70,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaTenerDatosSolicitudes(){
         try{
             if (serviciosSolidaridad.consultarSolicitudes() == null) fail("No se encontraron datos de solicitudes.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(Exception e){
             fail("Lanzo excepcion.");
         }
     }
@@ -82,7 +82,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaTenerDatosNecesidades(){
         try{
             if (serviciosSolidaridad.consultarNecesidades() == null) fail("No se encontraron datos de necesidades.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(Exception e){
             fail("Lanzo excepcion.");
         }
     }
@@ -95,7 +95,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaTenerDatosOfertas(){
         try{
             if (serviciosSolidaridad.consultarOfertas() == null) fail("No se encontraron datos de ofertas.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(Exception e){
             fail("Lanzo excepcion.");
         }
     }
@@ -107,7 +107,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaTenerDatosRespuestas(){
         try{
             if (serviciosSolidaridad.consultarRespuestas() == null) fail("No se encontraron datos de respuestas.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(Exception e){
             fail("Lanzo excepcion.");
         }
     }
@@ -122,7 +122,7 @@ public class ServiciosSolidaridadTest {
             if(serviciosSolidaridad.consultarUsuario("10") == null){
                 fail("No se encontro el usuario.");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion." + e.getMessage());
         }
     }
@@ -135,7 +135,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarUsuario("1", "Steve Davidson","(938) 559-6778" , "iru@pawumvap.hm", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
             fail("Lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
         }
     }
 
@@ -149,7 +149,7 @@ public class ServiciosSolidaridadTest {
             if(serviciosSolidaridad.consultarUsuarioNombre("Christina Wood") == null){
                 fail("No se encontro el usuario.");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion." + e.getMessage());
         }
     }
@@ -162,7 +162,7 @@ public class ServiciosSolidaridadTest {
             if(serviciosSolidaridad.consultarUsuariosRol(rol) == null || serviciosSolidaridad.consultarUsuariosRol(rol).size() < 1){
                 fail("No se encontraron usuarios.");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion."+ e.getMessage());
         }
     }
@@ -171,7 +171,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaConsultarSolicitudesUsuario(){
         try{
             if (serviciosSolidaridad.consultarSolicitudesUsuario("2") == null) fail("No hay solicitudes del usuario.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo ecepcion.");
         }
 
@@ -189,7 +189,7 @@ public class ServiciosSolidaridadTest {
             int numSolicitudes = 5;
             serviciosSolidaridad.actualizarNumSolicitudes("13", numSolicitudes);
             assertEquals(numSolicitudes, serviciosSolidaridad.consultarUsuario("13").getNumSolicitudes());
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion." + e.getMessage());
         }
     }
@@ -219,7 +219,7 @@ public class ServiciosSolidaridadTest {
             if (serviciosSolidaridad.consultarCategoriaId("11") == null) {
                 fail("No se encontro la categoria.");
             }
-        } catch (ExcepcionSolidaridad e){
+        } catch (Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
     }
@@ -263,7 +263,35 @@ public class ServiciosSolidaridadTest {
             if (!(serviciosSolidaridad.consultarCategoriaId("2").getFechaModificacion().equals(Date.valueOf(LocalDate.now())))){
                 fail("No se actualizo la fecha de la categoria.");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaActualizarSolicitudConDescripcionNull(){
+        try {
+            serviciosSolidaridad.actualizarSolicitud("2", null, "Activa");
+        } catch (Exception e) {
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaActualizarSolicitudConEstadoNull(){
+        try {
+            serviciosSolidaridad.actualizarSolicitud("2", "DescripcionS22", null);
+        } catch (Exception e) {
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+
+    @Test
+    public void deberiaActualizarSolicitudConEstadoNullDescripcionNull(){
+        try {
+            serviciosSolidaridad.actualizarSolicitud("2", null, null);
+        } catch (Exception e) {
             fail("Lanzo excepcion: " + e.getMessage());
         }
     }
@@ -281,7 +309,48 @@ public class ServiciosSolidaridadTest {
             if (!(categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
             else if (!(categoria.getDescripcion().equals(descripcion))) fail("Descripcion no actualizada.");
             else if(!(categoria.getEstado().equals(estado)))  fail("Estado no actualizado.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaActualizarInformacionCategoriaNombreNull(){
+        try{
+            String nombre = null, descripcion = "DescripcionC33", estado = "Inactiva";
+            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
+            Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
+            if ((categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
+            else if (!(categoria.getDescripcion().equals(descripcion))) fail("Descripcion no actualizada.");
+            else if(!(categoria.getEstado().equals(estado)))  fail("Estado no actualizado.");
+        } catch(Exception e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaActualizarInformacionCategoriaDescripcionNull(){
+        try{
+            serviciosSolidaridad.actualizarCategoria("3", "Categoria3333", null, "Inactiva");
+            Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
+            if (!(categoria.getNombre().equals("Categoria3333"))) fail("Nombre no actualizado.");
+            else if ((categoria.getDescripcion().equals(null))) fail("Descripcion no actualizada.");
+            else if(!(categoria.getEstado().equals("Inactiva")))  fail("Estado no actualizado.");
+        } catch(Exception e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaActualizarInformacionCategoriaEstadoNull(){
+        try{
+            String nombre = "Categoria33", descripcion = "DescripcionC33", estado = null;
+            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
+            Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
+            if (!(categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
+            else if (!(categoria.getDescripcion().equals(descripcion))) fail("Descripcion no actualizada.");
+            else if((categoria.getEstado().equals(estado)))  fail("Estado no actualizado.");
+        } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
     }
@@ -328,7 +397,7 @@ public class ServiciosSolidaridadTest {
             else if (cantNecesidades >= serviciosSolidaridad.consultarNecesidadesUsuario("2").size()){
                 fail("No se inserto la necesidad al usuario.");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion." + e.getMessage());
         }
     }
@@ -394,7 +463,7 @@ public class ServiciosSolidaridadTest {
             else if (cantOfertas >= serviciosSolidaridad.consultarOfertasUsuario("2").size()){
                 fail("No se inserto la oferta al usuario.");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion."+e.getMessage());
         }
     }
@@ -463,7 +532,7 @@ public class ServiciosSolidaridadTest {
             else if (cantRespuestasSolicitud >= serviciosSolidaridad.consultarRespuestasSolicitud("Solicitud2").size()){
                 fail("No se inserto respuesa ");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
     }
@@ -503,7 +572,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.registrarRespuesta("100", "2", "Respuesta100", "RespuestaCom100", "2");
             serviciosSolidaridad.eliminarRespuesta("100");
             if (serviciosSolidaridad.consultarRespuestaId("100") != null) fail("No se elimino la respuesta.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion.");
         }
 
@@ -520,7 +589,7 @@ public class ServiciosSolidaridadTest {
             if (!(serviciosSolidaridad.consultarNecesidadId("7").getFechaModificacion().equals(Date.valueOf(LocalDate.now())))){
                 fail("No se actualizo la fecha de la necesidad.");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
     }
@@ -541,7 +610,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.registrarSolicitud("100", "DescripcionS100", "Activa", "1", "2");
             serviciosSolidaridad.eliminarSolicitud("100");
             if (serviciosSolidaridad.consultarSolicitudId("100") != null) fail("No elimino la solicitud.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(Exception e){
             fail("Lanzo excepcion " + e.getMessage());
         }
     }
@@ -552,7 +621,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.actualizarNecesidad("100", "Solicitud100", "DescripcionSN100", "Cerrada");
             fail("No lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             assertEquals(ExcepcionSolidaridad.NO_APPLICATION_REGISTRED, e.getMessage());
         }     
     }
@@ -568,7 +637,7 @@ public class ServiciosSolidaridadTest {
             if (!(serviciosSolidaridad.consultarOfertaId("8").getFechaModificacion().equals(Date.valueOf(LocalDate.now())))){
                 fail("No se actualizo la fecha de la oferta.");
             }
-        } catch(ExcepcionSolidaridad e){
+        } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
     }

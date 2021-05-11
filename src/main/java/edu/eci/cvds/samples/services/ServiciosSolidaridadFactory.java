@@ -76,7 +76,7 @@ public class ServiciosSolidaridadFactory {
             System.out.println(instance.getServiciosSolidaridad().consultarUsuarios());
             
             System.out.println("-------------------------------- CONSULAR SOLICITUDES --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarSolicitudId("1"));
+            System.out.println(instance.getServiciosSolidaridad().consultarSolicitudId("1"));*/
 
             System.out.println("-------------------------------- CONSULTAR RESPUESTAS --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarRespuestas());
@@ -85,12 +85,14 @@ public class ServiciosSolidaridadFactory {
             System.out.println(instance.getServiciosSolidaridad().consultarRespuestaId("1"));
 
             System.out.println("-------------------------------- CONSULAR RESPUESTA SOLICITUD --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasSolicitud("necesidad1"));*/
+            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasSolicitud("necesidad1"));
             
-            /*
+            
             System.out.println("-------------------------------- CONSULAR RESPUESTAS DE USUARIO --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuario("2").getRespuestas());
-            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasUsuario("EstudTest2"));*/
+            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasUsuario("EstudTest2"));
+            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasUsuario("2"));
+
 
         } catch (Exception e){
             System.out.println(e.getMessage());

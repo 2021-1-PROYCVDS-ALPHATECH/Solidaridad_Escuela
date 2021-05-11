@@ -37,48 +37,28 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
 
     @Transactional
     @Override
-    public void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol, int num) throws ExcepcionSolidaridad{
-        try{
-            usuarioDAO.save(new Usuario(id, nombre, telefono, email, new Sha256Hash(clave).toHex() + "", rol, num));
-        } catch(PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al registrar el usuario " + id, e);
-        }
+    public void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol, int num) throws ExcepcionSolidaridad, PersistenceException{
+        usuarioDAO.save(new Usuario(id, nombre, telefono, email, new Sha256Hash(clave).toHex() + "", rol, num));
     }
 
     @Override
-    public List<Usuario> consultarUsuarios() throws ExcepcionSolidaridad {
-        try{
-            return usuarioDAO.loadAll();
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al consultar los usuarios", e);
-        }
+    public List<Usuario> consultarUsuarios() throws ExcepcionSolidaridad, PersistenceException {
+        return usuarioDAO.loadAll();
     }
 
     @Override
-    public Usuario consultarUsuario(String idUsuario) throws ExcepcionSolidaridad {
-        try{
-            return usuarioDAO.load(idUsuario);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al consultar el usuario " + idUsuario, e);
-        }
+    public Usuario consultarUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException {
+        return usuarioDAO.load(idUsuario);
     }
 
     @Override
-    public Usuario consultarUsuarioNombre(String nombre) throws ExcepcionSolidaridad{
-        try{
-            return usuarioDAO.loadByName(nombre);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al consultar el usuario con nombre " + nombre, e);
-        }
+    public Usuario consultarUsuarioNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException{
+        return usuarioDAO.loadByName(nombre);
     }
 
     @Override
-    public List<Usuario> consultarUsuariosRol(String rol) throws ExcepcionSolidaridad{
-        try{
-            return usuarioDAO.loadByRol(rol);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al consultar los usuarios con rol " + rol, e);
-        }
+    public List<Usuario> consultarUsuariosRol(String rol) throws ExcepcionSolidaridad, PersistenceException{
+        return usuarioDAO.loadByRol(rol);
     }
 
     @Override
@@ -95,12 +75,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad {
-        try {
-            usuarioDAO.delete(idUsuario);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al eliminar el usuario con ID: " + idUsuario, e);
-        }
+    public void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException {
+        usuarioDAO.delete(idUsuario);
     }
 
     @Transactional
@@ -116,30 +92,18 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridad {
-        try{
-            return categoriaDAO.loadAll();
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al consultar las categorias", e);
-        }
+    public List<Categoria> consultarCategorias() throws ExcepcionSolidaridad, PersistenceException {
+        return categoriaDAO.loadAll();
     }
 
     @Override
-    public Categoria consultarCategoriaId(String id) throws ExcepcionSolidaridad {
-        try{
-            return categoriaDAO.load(id);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al consultar la categoria: " + id, e);
-        }
+    public Categoria consultarCategoriaId(String id) throws ExcepcionSolidaridad, PersistenceException {
+        return categoriaDAO.load(id);
     }
 
     @Override
-    public Categoria consultarCategoriaNombre(String nombre) throws ExcepcionSolidaridad {
-        try{
-            return categoriaDAO.loadByName(nombre);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al consultar la categoria con nombre: " + nombre, e);
-        }
+    public Categoria consultarCategoriaNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException {
+        return categoriaDAO.loadByName(nombre);
     }
 
     @Override
@@ -168,12 +132,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad{
-        try {
-            categoriaDAO.delete(idCategoria);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al eliminar la categoria con ID: " + idCategoria, e);
-        }
+    public void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad, PersistenceException{
+        categoriaDAO.delete(idCategoria);
     }
 
     @Transactional
@@ -189,30 +149,18 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public List<Solicitud> consultarSolicitudes() throws ExcepcionSolidaridad {
-        try {
-            return solicitudDAO.loadAll();
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar todas las solicitudes", e);
-        }
+    public List<Solicitud> consultarSolicitudes() throws ExcepcionSolidaridad, PersistenceException {
+        return solicitudDAO.loadAll();
     }
 
     @Override
-    public List<Solicitud> consultarSolicitudesUsuario(String idUsuario) throws ExcepcionSolidaridad {
-        try {
-            return solicitudDAO.loadByUser(idUsuario);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar las solicitudes del usuario con id " + idUsuario, e);
-        }
+    public List<Solicitud> consultarSolicitudesUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException {
+        return solicitudDAO.loadByUser(idUsuario);
     }
 
     @Override
-    public Solicitud consultarSolicitudId(String id) throws ExcepcionSolidaridad {
-        try {
-            return solicitudDAO.load(id);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar la solicitud " + id, e);
-        }
+    public Solicitud consultarSolicitudId(String id) throws ExcepcionSolidaridad, PersistenceException {
+        return solicitudDAO.load(id);
     }
 
     @Override
@@ -231,12 +179,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad {
-        try {
-            solicitudDAO.delete(idSolicitud);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al eliminar la solicitud con id: " + idSolicitud, e);
-        }
+    public void eliminarSolicitud(String idSolicitud) throws ExcepcionSolidaridad, PersistenceException {
+        solicitudDAO.delete(idSolicitud);
     }
     
     @Transactional
@@ -253,52 +197,32 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad {
-        try {
-            return necesidadDAO.loadAll();
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar todas las necesidades ", e);
-        }
+    public List<Necesidad> consultarNecesidades() throws ExcepcionSolidaridad, PersistenceException {
+        return necesidadDAO.loadAll();
     }
 
     @Override
-    public List<Necesidad> consultarNecesidadesUsuario(String idUsuario) throws ExcepcionSolidaridad {
-        try {
-            return necesidadDAO.loadByUser(idUsuario);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar las necesidades del usuario con id " + idUsuario, e);
-        }
+    public List<Necesidad> consultarNecesidadesUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException {
+        return necesidadDAO.loadByUser(idUsuario);
     }
 
     @Override
-    public Necesidad consultarNecesidadId(String id) throws ExcepcionSolidaridad {
-        try {
-            return necesidadDAO.load(id);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar la necesidad " + id, e);
-        }
+    public Necesidad consultarNecesidadId(String id) throws ExcepcionSolidaridad, PersistenceException {
+        return necesidadDAO.load(id);
     }
 
     @Override
-    public Necesidad consultarNecesidadNombre(String nombre) throws ExcepcionSolidaridad {
-        try {
-            return necesidadDAO.loadByName(nombre);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar la necesidad con nombre " + nombre, e);
-        }
+    public Necesidad consultarNecesidadNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException {
+        return necesidadDAO.loadByName(nombre);
     }
 
     @Override
-    public HashMap<String, Integer> consultarNecesidadesEstado() throws ExcepcionSolidaridad {
-        try{
-            HashMap<String, Integer> estadisticas = new HashMap<>();
-            for (Estado estado : Estado.values()){
-                estadisticas.put(estado.getDescripcion(), necesidadDAO.loadByState(estado.getDescripcion()).size());
-            }
-            return estadisticas;
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad("Error al consultar las necesidades por estado", e);
+    public HashMap<String, Integer> consultarNecesidadesEstado() throws ExcepcionSolidaridad, PersistenceException {
+        HashMap<String, Integer> estadisticas = new HashMap<>();
+        for (Estado estado : Estado.values()){
+            estadisticas.put(estado.getDescripcion(), necesidadDAO.loadByState(estado.getDescripcion()).size());
         }
+        return estadisticas;
     }
 
     @Override
@@ -316,14 +240,9 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }    
 
     @Override
-    public void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad {
-        try {
-            necesidadDAO.delete(idNecesidad);
-            solicitudDAO.delete(idNecesidad);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al eliminar la necesidad con ID: " + idNecesidad, e);
-        }
-        
+    public void eliminarNecesidad(String idNecesidad) throws ExcepcionSolidaridad, PersistenceException {
+        necesidadDAO.delete(idNecesidad);
+        solicitudDAO.delete(idNecesidad);
     }
 
     @Transactional
@@ -339,52 +258,32 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
     
     @Override
-    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridad {
-        try {
-            return ofertaDAO.loadAll();
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar todas las ofertas ", e);
-        }
+    public List<Oferta> consultarOfertas() throws ExcepcionSolidaridad, PersistenceException {
+        return ofertaDAO.loadAll();
     }
 
     @Override
-    public List<Oferta> consultarOfertasUsuario(String idUsuario) throws ExcepcionSolidaridad {
-        try {
-            return ofertaDAO.loadByUser(idUsuario);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar todas las ofertas ", e);
-        }
+    public List<Oferta> consultarOfertasUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException {
+        return ofertaDAO.loadByUser(idUsuario);
     }
 
     @Override
-    public HashMap<String, Integer> consultarOfertasEstado() throws ExcepcionSolidaridad {
-        try{
-            HashMap<String, Integer> estadisticas = new HashMap<>();
-            for (Estado estado : Estado.values()){
-                estadisticas.put(estado.getDescripcion(), ofertaDAO.loadByState(estado.getDescripcion()).size());
-            }
-            return estadisticas;
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad("Error al consultar las ofertas por estado", e);
+    public HashMap<String, Integer> consultarOfertasEstado() throws ExcepcionSolidaridad, PersistenceException {
+        HashMap<String, Integer> estadisticas = new HashMap<>();
+        for (Estado estado : Estado.values()){
+            estadisticas.put(estado.getDescripcion(), ofertaDAO.loadByState(estado.getDescripcion()).size());
         }
+        return estadisticas;
     }
 
     @Override
-    public Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad {
-        try {
-            return ofertaDAO.load(id);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar la oferta " + id, e);
-        }
+    public Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad, PersistenceException {
+        return ofertaDAO.load(id);
     }
 
     @Override
-    public Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad {
-        try {
-            return ofertaDAO.loadByName(nombre);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al consultar la oferta con nombre " + nombre, e);
-        }
+    public Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException {
+        return ofertaDAO.loadByName(nombre);
     }
 
     @Override
@@ -402,13 +301,9 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void eliminarOferta(String idOferta) throws ExcepcionSolidaridad {
-        try {
-            ofertaDAO.delete(idOferta);
-            solicitudDAO.delete(idOferta);
-        } catch (PersistenceException e) {
-            throw new ExcepcionSolidaridad("Error al eliminar la oferta con ID: " + idOferta, e);
-        }
+    public void eliminarOferta(String idOferta) throws ExcepcionSolidaridad, PersistenceException {
+        ofertaDAO.delete(idOferta);
+        solicitudDAO.delete(idOferta);
     }
 
     @Override
@@ -426,49 +321,28 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad {
-        try{
+    public List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad, PersistenceException {
             return respuestaDAO.loadAll();
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad("Error al consultar todas las respuestas", e);
-        }
     }
 
     @Override
-    public Respuesta consultarRespuestaId(String id) throws ExcepcionSolidaridad {
-        try{
+    public Respuesta consultarRespuestaId(String id) throws ExcepcionSolidaridad, PersistenceException {
             return respuestaDAO.load(id);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad("Error al consultar la respuesta con id: " + id, e);
-        }
     }
 
     @Override
-    public List<Respuesta> consultarRespuestasUsuario(String nombre) throws ExcepcionSolidaridad {
-        try{
+    public List<Respuesta> consultarRespuestasUsuario(String nombre) throws ExcepcionSolidaridad, PersistenceException {
             return respuestaDAO.loadByUser(nombre);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad("Error al consultar las respuestas del usuario  " + nombre, e);
-        }
     }
 
     @Override
-    public List<Respuesta> consultarRespuestasSolicitud(String nombre) throws ExcepcionSolidaridad {
-        try{
+    public List<Respuesta> consultarRespuestasSolicitud(String nombre) throws ExcepcionSolidaridad, PersistenceException {
             return respuestaDAO.loadByApplication(nombre);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad("Error al consultar las respuestas de la solicitud " + nombre, e);
-        }
     }
 
     @Override
-    public void eliminarRespuesta(String id) throws ExcepcionSolidaridad {
-        try{
-            respuestaDAO.delete(id);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad("Error al eliminar la respuesta con id  " + id, e);
-        }
-        
+    public void eliminarRespuesta(String id) throws ExcepcionSolidaridad, PersistenceException {
+        respuestaDAO.delete(id);
     }
 
     
