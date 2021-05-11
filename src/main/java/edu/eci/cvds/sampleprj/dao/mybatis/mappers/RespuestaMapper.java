@@ -21,12 +21,12 @@ public interface RespuestaMapper {
                                     @Param("idSol") String idSolicitud);   
 
     public List<Respuesta> consultarRespuestas();
-
+    
     public Respuesta consultarRespuestaId(@Param("id") String idRespuesta);
 
     public List<Respuesta> consultarRespuestasUsuario(@Param ("nombre") String nombre);
 
-    public List<Respuesta> consultarRespuestasSolicitud(@Param ("nombre") String nombre);
+    public List<Respuesta> consultarRespuestasSolicitud(@Param ("solicitud") String nombre);
 
     public void eliminarRespuesta(@Param("idRespuesta") String idRespuesta);
 }

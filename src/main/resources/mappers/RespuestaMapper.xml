@@ -44,8 +44,12 @@
             r.fechaCreacion AS r_fechaCreacion
         FROM Respuestas r
         WHERE r.idSolicitud IN (SELECT idSolicitud
-                                FROM Solicitudes
-                                WHERE nombre = #{nombre})
+                                FROM Solicitudes JOIN Necesidades ON (idSolicitud = idNecesidad)
+                                WHERE nombre = #{solicitud})
+        	or r.idSolicitud IN (SELECT idSolicitud
+                                FROM Solicitudes JOIN Ofertas ON (idSolicitud = idoferta)
+                                WHERE nombre = #{solicitud})
+
     </select>
 
     <insert parameterType="map" id="insertarRespuesta">

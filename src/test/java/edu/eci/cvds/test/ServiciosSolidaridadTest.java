@@ -451,19 +451,18 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaRegistrarRespuesta(){
         try{
-            int cantRespuestas = serviciosSolidaridad.consultarRespuestasUsuario("3").size();
+            int cantRespuestasUsuario = serviciosSolidaridad.consultarRespuestasUsuario("Allen Wright").size();
+            int cantRespuestasSolicitud = serviciosSolidaridad.consultarRespuestasSolicitud("Solicitud2").size();
             serviciosSolidaridad.registrarRespuesta("11", "3", "Respuesta11", "RespuestaCom11", "2");
-            /*System.out.println(cantRespuestas + " " + serviciosSolidaridad.consultarRespuestasUsuario("3").size());
-            System.out.println(serviciosSolidaridad.consultarRespuestasUsuario("2").size());
-            System.out.println(serviciosSolidgi staridad.consultarUsuario("2"));
-            System.out.println();
-            System.out.println(serviciosSolidaridad.consultarSolicitudes());*/
             if (serviciosSolidaridad.consultarRespuestaId("11") == null) {
                 fail("No se encontro la respuesta.");
-            }/*
-            else if (cantRespuestas >= serviciosSolidaridad.consultarRespuestasUsuario("3").size()){
+            }
+            else if (cantRespuestasUsuario >= serviciosSolidaridad.consultarRespuestasUsuario("Allen Wright").size()){
                 fail("No se inserto respuesta al usuario");
-            }*/
+            }
+            else if (cantRespuestasSolicitud >= serviciosSolidaridad.consultarRespuestasSolicitud("Solicitud2").size()){
+                fail("No se inserto respuesa ");
+            }
         } catch(ExcepcionSolidaridad e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
@@ -496,6 +495,18 @@ public class ServiciosSolidaridadTest {
         } catch(ExcepcionSolidaridad e){
             assertEquals(ExcepcionSolidaridad.INVALID_ANSWER, e.getMessage());
         }
+    }
+
+    @Test
+    public void noDeberiaEliminarRespuesta(){
+        try{
+            serviciosSolidaridad.registrarRespuesta("100", "2", "Respuesta100", "RespuestaCom100", "2");
+            serviciosSolidaridad.eliminarRespuesta("100");
+            if (serviciosSolidaridad.consultarRespuestaId("100") != null) fail("No se elimino la respuesta.");
+        } catch(ExcepcionSolidaridad e){
+            fail("Lanzo excepcion.");
+        }
+
     }
 
     /**

@@ -20,6 +20,8 @@
       s.fechaCreacion AS s_fechaCreacion,
       s.fechaModificacion AS s_fechaModificacion,
 
+      u.nombre AS u_nombreUsuario,
+
       c.idCategoria AS c_idCategoria,
       c.nombre AS c_nombre,
       c.descripcion AS c_descripcion,
@@ -52,6 +54,8 @@
       s.estado AS s_estado,
       s.fechaCreacion AS s_fechaCreacion,
       s.fechaModificacion AS s_fechaModificacion,
+
+      u.nombre AS u_nombreUsuario,
 
       c.idCategoria AS c_idCategoria,
       c.nombre AS c_nombre,
@@ -88,6 +92,8 @@
       s.fechaCreacion AS s_fechaCreacion,
       s.fechaModificacion AS s_fechaModificacion,
 
+      u.nombre AS u_nombreUsuario,
+
       c.idCategoria AS c_idCategoria,
       c.nombre AS c_nombre,
       c.descripcion AS c_descripcion,
@@ -122,6 +128,8 @@
       s.estado AS s_estado,
       s.fechaCreacion AS s_fechaCreacion,
       s.fechaModificacion AS s_fechaModificacion,
+
+      u.nombre AS u_nombreUsuario,
 
       c.idCategoria AS c_idCategoria,
       c.nombre AS c_nombre,
