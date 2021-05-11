@@ -7,11 +7,14 @@
     
     <select parameterType="map" id="consultarRespuestas" resultMap="RespuestaResult">
         SELECT 
+            s.idSolicitud AS r_idSolicitud,
+            
             r.idRespuesta AS r_idRespuesta,
             r.nombre AS r_nombre,
             r.comentarios AS r_comentarios,
             r.fechaCreacion AS r_fechaCreacion
-        FROM Respuestas r
+
+        FROM Respuestas r LEFT JOIN Solicitudes s ON (r.idSolicitud = s.idSolicitud)
     </select>
 
     <select parameterType="map" id="consultarRespuestaId" resultMap="RespuestaResult">
@@ -56,12 +59,13 @@
     <delete id="eliminarRespuesta" parameterType="map">
         DELETE FROM Respuestas 
             WHERE idRespuesta = #{idRespuesta};
-  </delete>
+    </delete>
 
     <resultMap id="RespuestaResult" type="Respuesta">
         <id property='idRespuesta' column='r_idRespuesta' />
         <result property="nombre" column="r_nombre"/>
         <result property="comentarios" column="r_comentarios"/>
         <result property="fechaCreacion" column="r_fechaCreacion"/>
+        <result property="idSolicitud" column="r_idSolicitud"/>
     </resultMap>
 </mapper>

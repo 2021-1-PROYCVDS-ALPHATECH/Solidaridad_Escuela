@@ -76,8 +76,8 @@ public class ServiciosSolidaridadFactory {
             System.out.println(instance.getServiciosSolidaridad().consultarNecesidadesEstado());
             System.out.println("-------------------------------- CONSULAR OFERTAS ESTADO --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarOfertasEstado());
-            
-            
+            System.out.println("-------------------------------- CONSULAR RESPUESTAS --------------------------------");
+            System.out.print(instance.getServiciosSolidaridad().consultarRespuestas());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

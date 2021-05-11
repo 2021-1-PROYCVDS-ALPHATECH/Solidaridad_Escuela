@@ -20,6 +20,7 @@ public class Respuesta implements Serializable{
     private String nombre;
     private String comentarios;
     private Date fechaCreacion;
+    private String idSolicitud;
 
     public Respuesta(String idRespuesta, String nombre, String comentarios, Date fechaCreacion){
         this.idRespuesta = idRespuesta;
@@ -69,8 +70,16 @@ public class Respuesta implements Serializable{
         return fechaCreacion;
     }
 
+    public void setIdSolicitud(String newIdSolicitud) {
+        idSolicitud = newIdSolicitud;
+    }
+
+    public String getIdSolicitud() {
+        return idSolicitud;
+    }
+
     @Override
     public String toString(){
-        return "Respuesta{"+"id = "+ idRespuesta + ", nombre = " + nombre + ", comentarios =" + comentarios + ", fecha C = " + fechaCreacion +"}";
+        return "Respuesta{"+"id = "+ idRespuesta + ", nombre = " + nombre + ", comentarios =" + comentarios + ", fecha C = " + fechaCreacion + ", idSolicitud = "+ idSolicitud+ "}";
     }
 }
