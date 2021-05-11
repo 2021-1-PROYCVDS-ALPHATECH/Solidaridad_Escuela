@@ -305,7 +305,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     public void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
         try {
             Necesidad necesidad = consultarNecesidadId(idNecesidad);
-            if (nombre != null &&  !necesidad.getNombre().equals(nombre) && consultarNecesidadNombre(nombre) != null){
+            if (necesidad != null && nombre != null &&  !necesidad.getNombre().equals(nombre) && consultarNecesidadNombre(nombre) != null){
                 throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NAME);
             }
             actualizarSolicitud(idNecesidad, descripcion, estado);
@@ -320,7 +320,6 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             necesidadDAO.delete(idNecesidad);
             solicitudDAO.delete(idNecesidad);
-            if(necesidadDAO.load(idNecesidad) != null) throw new ExcepcionSolidaridad("No se elimino la Necesidad");
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al eliminar la necesidad con ID: " + idNecesidad, e);
         }
@@ -391,7 +390,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     @Override
     public void actualizarOferta(String idOferta, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
         try {
-            if (nombre != null && consultarNecesidadNombre(nombre) != null){
+            Oferta oferta = consultarOfertaId(idOferta);
+            if (oferta != null && nombre != null && !oferta.getNombre().equals(nombre) && consultarOfertaNombre(nombre) != null){
                 throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NAME);
             }
             actualizarSolicitud(idOferta, descripcion, estado);
@@ -406,7 +406,6 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             ofertaDAO.delete(idOferta);
             solicitudDAO.delete(idOferta);
-            if(ofertaDAO.load(idOferta) != null) throw new ExcepcionSolidaridad("No se elimino la oferta");
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al eliminar la oferta con ID: " + idOferta, e);
         }

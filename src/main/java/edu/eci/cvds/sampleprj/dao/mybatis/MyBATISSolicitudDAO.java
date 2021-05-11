@@ -29,7 +29,7 @@ public class MyBATISSolicitudDAO implements SolicitudDAO{
         try{
             solicitudMapper.insertarSolicitud(id, descripcion, estado, categoria, idUsuario);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al consultar las solicitudes", e);
+            throw new PersistenceException("Error al insertar la solicitud", e);
         }
     }
 
@@ -38,7 +38,6 @@ public class MyBATISSolicitudDAO implements SolicitudDAO{
         try{
             return solicitudMapper.consultarSolicitudes();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println(e.getMessage());
             throw new PersistenceException("Error al consultar las solicitudes", e);
         }
     }
