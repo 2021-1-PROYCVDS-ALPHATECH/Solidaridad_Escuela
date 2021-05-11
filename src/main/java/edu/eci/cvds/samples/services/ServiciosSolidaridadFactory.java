@@ -88,10 +88,10 @@ public class ServiciosSolidaridadFactory {
             System.out.println(instance.getServiciosSolidaridad().consultarRespuestasSolicitud("necesidad1"));*/
             
             /*
-            System.out.println();
             System.out.println("-------------------------------- CONSULAR RESPUESTAS DE USUARIO --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().consultarUsuario("2").getRespuestas());
             System.out.println(instance.getServiciosSolidaridad().consultarRespuestasUsuario("EstudTest2"));*/
+
         } catch (Exception e){
             System.out.println(e.getMessage());
         }
