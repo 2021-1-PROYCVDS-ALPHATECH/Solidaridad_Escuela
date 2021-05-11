@@ -572,6 +572,17 @@ public class ServiciosSolidaridadTest {
         }
     }
 
+    @Test
+    public void deberiaEliminarCategoria(){
+        try {
+            serviciosSolidaridad.registrarCategoria("120", "cat120", "cat120Desc");
+            serviciosSolidaridad.eliminarCategoria("120");
+            if(serviciosSolidaridad.consultarCategoriaId("120") != null) fail("No elimino la categoria");
+        } catch (Exception e) {
+            fail("Lanzo excepcion: "+ e.getMessage());
+        }
+    }
+
     @After
     public void dropData(){
         try {
