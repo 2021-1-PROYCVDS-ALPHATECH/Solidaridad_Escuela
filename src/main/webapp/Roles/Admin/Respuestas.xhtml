@@ -57,7 +57,9 @@
                 <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
                 <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                     <p:submenu label="Navigations">
-                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut}" update="Answers" icon="pi pi-external-link"/>
+                        <p:menuitem value="Home" action="admin?faces-redirect=true" update="Answers" icon="fas fa-home"/>
+                        <p:menuitem value="Reportes" action="Reportes?faces-redirect=true" update="Answers" icon="far fa-file"/>
+                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Answers" icon="pi pi-external-link"/>
                     </p:submenu>
                 </p:menu>
             </div> 

@@ -6,7 +6,10 @@
 <h:head>
     <title> Registro Cliente </title>
     <link rel="stylesheet" href="../style.css"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="./Chart.js"></script>
 </h:head>
 <style>
 .container{
@@ -53,8 +56,8 @@
 
 </style>
 <h:body>
-    <h:inputHidden id="labels" value="#{LoginBean.ConsultarLabelsNecesidad()}"/>
-    <h:inputHidden id="values" value="#{LoginBean.ConsultarEstadosNecesidad()}"/>
+    <h:inputHidden id="labels" value="#{ConsultBean.ConsultarLabelsNecesidad()}"/>
+    <h:inputHidden id="values" value="#{ConsultBean.ConsultarEstadosNecesidad()}"/>
     <h:form id="Necesities">
         <div style="background-color: #7e1323; height: 10px;"></div>
         <div class="header">
@@ -62,6 +65,8 @@
                 <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
                 <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                     <p:submenu label="Navigations">
+                        <p:menuitem value="Home" action="admin?faces-redirect=true" update="Necesities" icon="fas fa-home"/>
+                        <p:menuitem value="Reportes" action="Reportes?faces-redirect=true" update="Necesities" icon="far fa-file"/>
                         <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Necesities" icon="pi pi-external-link"/>
                     </p:submenu>
                 </p:menu>
@@ -75,7 +80,7 @@
                 <canvas id="myChart" width="400" height="400"></canvas>
             </p:panel>
             <p:panel header="Lista Necesidades" style="text-align: center; min-height: 800px;" name="panel" id="item2">
-                <p:dataTable  id="NecesidadDT" var="necesidad" value="#{LoginBean.consultarNecesidades()}" rows="10" paginator="true" rowKey="#{necesidad.idSolicitud}"
+                <p:dataTable  id="NecesidadDT" var="necesidad" value="#{ConsultBean.consultarNecesidades()}" rows="4" paginator="true" rowKey="#{necesidad.idSolicitud}"
                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
                     <p:column headerText="Id">
                         <h:outputText value="#{necesidad.idSolicitud}" />
@@ -101,7 +106,14 @@
                     <p:column headerText="Usuario">
                         <h:outputText value="#{necesidad.nombreUsuario}" />
                     </p:column>
-                    <f:facet name="footer" style="margin: auto"></f:facet>
+                    <f:facet name="footer" style="margin: auto">
+                        <p:commandButton id="generatePDF" style="margin-top: 20px; margin-right: 50px;" value="Generar PDF" styleClass="ui-button">
+                            <p:dataExporter type="pdf" target="NecesidadDT" fileName="Necesidades" preProcessor="#{ExportBean.preProcessPDFNecesidades}"/>
+                        </p:commandButton>
+                        <p:commandButton id="generateXLS" style="margin-top: 20px;" value="Generar XLS" styleClass="ui-button">
+                            <p:dataExporter type="xls" target="NecesidadDT" fileName="Necesidades" postProcessor="#{ExportBean.postProcessXLSNecesidades}"/>
+                        </p:commandButton>
+                    </f:facet>
                 </p:dataTable>
             </p:panel>    
         </div>

@@ -4,9 +4,13 @@ import java.io.Serializable;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.servlet.ServletContext;
+
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public abstract class BasePageBean implements Serializable {
+
+    @Inject
 
     private Injector injector;
 
