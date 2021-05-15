@@ -72,27 +72,12 @@ public class ServiciosSolidaridadFactory {
 
     public static void main(String[] args){
         try{
-            /*System.out.println("-------------------------------- CONSULAR USUARIOS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarUsuarios());
-            
-            System.out.println("-------------------------------- CONSULAR SOLICITUDES --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarSolicitudId("1"));*/
-
-            System.out.println("-------------------------------- CONSULTAR RESPUESTAS --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarRespuestas());
-
-            System.out.println("-------------------------------- CONSULTAR RESPUESTAS ID --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarRespuestaId("1"));
-
-            System.out.println("-------------------------------- CONSULAR RESPUESTA SOLICITUD --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasSolicitud("necesidad1"));
-            
-            
-            System.out.println("-------------------------------- CONSULAR RESPUESTAS DE USUARIO --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarUsuario("2").getRespuestas());
-            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasUsuario("EstudTest2"));
-            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasUsuario("2"));
-
+            System.out.println("-------------------------------- CONSULAR NECESIDADES CATEGORIA --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarNecesidadesCategoria("categoria1").size());
+            System.out.println("-------------------------------- CONSULAR OFERTAS CATEGORIA --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().consultarOfertasCategoria("categoria1"));
+            System.out.println("-------------------------------- CONSULAR SOLICITUDES CATEGORIA --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().reporteCategorias());
 
         } catch (Exception e){
             System.out.println(e.getMessage());

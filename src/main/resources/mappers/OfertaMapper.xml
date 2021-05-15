@@ -93,6 +93,36 @@
         WHERE s.estado = #{estado}
     </select>
 
+    <select parameterType="map" id="consultarOfertasCategoria" resultMap="OfertaResult">
+        SELECT 
+            s.idSolicitud AS o_idSolicitud,
+            o.nombre AS o_nombre,
+            s.descripcion AS o_descripcion,
+            s.fechaCreacion AS o_fechaCreacion,
+            s.fechaModificacion AS o_fechaModificacion,
+            s.estado AS o_estado,
+
+            u.nombre AS u_nombreUsuario,
+
+            c.idCategoria AS c_idCategoria,
+            c.nombre AS c_nombre,
+            c.descripcion AS c_descripcion,
+            c.fechaCreacion AS c_fechaCreacion,
+            c.fechaModificacion AS c_fechaModificacion,
+            c.estado AS c_estado,
+
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion
+
+        FROM Solicitudes s JOIN Usuarios u ON (s.idUsuario = u.idUsuario) 
+            JOIN Ofertas o ON (s.idSolicitud = o.idOferta)
+            JOIN Categorias c ON (s.idCategoria = c.idCategoria)
+            LEFT JOIN Respuestas r ON (r.idSolicitud = s.idSolicitud)
+        WHERE c.nombre = #{categoria}
+    </select>
+
     <select parameterType="map" id="consultarOferta" resultMap="OfertaResult">
         SELECT 
             s.idSolicitud AS o_idSolicitud,

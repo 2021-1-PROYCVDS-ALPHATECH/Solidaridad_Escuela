@@ -22,6 +22,8 @@ public interface OfertaDAO {
 
     public List<Oferta> loadByState(String estado) throws PersistenceException;
 
+    public List<Oferta> loadByCategory(String categoria) throws PersistenceException;
+
     public Oferta load(String id) throws PersistenceException;
 
     public Oferta loadByName(String nombre) throws PersistenceException;

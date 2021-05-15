@@ -27,6 +27,8 @@ public interface NecesidadMapper {
 
     public List<Necesidad> consultarNecesidadesEstado(@Param("estado") String estado);
 
+    public List<Necesidad> consultarNecesidadesCategoria(@Param("categoria") String categoria);
+
     public Necesidad consultarNecesidad(@Param("id") String idNecesidad);
 
     public Necesidad consultarNecesidadNombre(@Param("nombre") String nombre);

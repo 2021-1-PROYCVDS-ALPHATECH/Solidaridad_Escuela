@@ -25,11 +25,13 @@ public interface NecesidadDAO {
 
     public List<Necesidad> loadByState(String estado) throws PersistenceException;
 
+    public List<Necesidad> loadByUser(String idUsuario) throws PersistenceException;
+
+    public List<Necesidad> loadByCategory(String categoria) throws PersistenceException;
+
     public void update(String id, String nombre) throws PersistenceException;
     
     public void delete(String idNecesidad) throws PersistenceException;
-
-    public List<Necesidad> loadByUser(String idUsuario) throws PersistenceException;
 
 }
 

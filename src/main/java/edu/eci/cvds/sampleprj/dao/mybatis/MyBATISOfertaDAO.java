@@ -38,7 +38,6 @@ public class MyBATISOfertaDAO implements OfertaDAO {
         try {
             return ofertaMapper.consultarOfertas();
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            System.out.println(e.getMessage());
             throw new PersistenceException("Error al consultar las ofertas ", e);
         }
     }
@@ -57,7 +56,16 @@ public class MyBATISOfertaDAO implements OfertaDAO {
         try {
             return ofertaMapper.consultarOfertasEstado(estado);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            throw new PersistenceException("Error al consultar las necesidades con estado " + estado, e);
+            throw new PersistenceException("Error al consultar las ofertas con estado " + estado, e);
+        }
+    }
+
+    @Override
+    public List<Oferta> loadByCategory(String categoria) throws PersistenceException {
+        try {
+            return ofertaMapper.consultarOfertasCategoria(categoria);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar las ofertas con categoria " + categoria, e);
         }
     }
 
@@ -84,7 +92,6 @@ public class MyBATISOfertaDAO implements OfertaDAO {
         try {
             ofertaMapper.actualizarOferta(idOferta, nombre);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
-            System.out.println(e.getMessage());
             throw new PersistenceException("Error al actualizar la oferta con id: " + idOferta, e);
         }
     }

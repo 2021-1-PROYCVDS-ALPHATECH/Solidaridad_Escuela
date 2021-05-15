@@ -75,6 +75,15 @@ public class MyBATISNecesidadDAO implements NecesidadDAO{
     }
 
     @Override
+    public List<Necesidad> loadByCategory(String categoria) throws PersistenceException {
+        try {
+            return necesidadMapper.consultarNecesidadesCategoria(categoria);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e) {
+            throw new PersistenceException("Error al consultar las necesidades con categoria " + categoria, e);
+        }
+    }
+
+    @Override
     public void update(String idNecesidad, String nombre) throws PersistenceException {
         try {
             necesidadMapper.actualizarNecesidad(idNecesidad, nombre);

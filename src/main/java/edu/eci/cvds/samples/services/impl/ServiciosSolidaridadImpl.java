@@ -1,9 +1,10 @@
 package edu.eci.cvds.samples.services.impl;
 
 import java.util.List;
+import java.util.TreeMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.bouncycastle.jcajce.provider.digest.RIPEMD128.HashMac;
 
 import com.google.inject.Inject;
 
@@ -226,6 +227,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
+    public List<Necesidad> consultarNecesidadesCategoria(String categoria) throws ExcepcionSolidaridad, PersistenceException {
+        try{
+            return necesidadDAO.loadByCategory(categoria);
+        } catch(PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar las necesidades con categoria " + categoria, e);
+        }
+    }
+
+    @Override
     public void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
         try {
             Necesidad necesidad = consultarNecesidadId(idNecesidad);
@@ -268,6 +278,16 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
+    public Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad, PersistenceException {
+        return ofertaDAO.load(id);
+    }
+
+    @Override
+    public Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException {
+        return ofertaDAO.loadByName(nombre);
+    }
+
+    @Override
     public HashMap<String, Integer> consultarOfertasEstado() throws ExcepcionSolidaridad, PersistenceException {
         HashMap<String, Integer> estadisticas = new HashMap<>();
         for (Estado estado : Estado.values()){
@@ -277,13 +297,12 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad, PersistenceException {
-        return ofertaDAO.load(id);
-    }
-
-    @Override
-    public Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException {
-        return ofertaDAO.loadByName(nombre);
+    public List<Oferta> consultarOfertasCategoria(String categoria) throws ExcepcionSolidaridad, PersistenceException {
+        try{
+            return ofertaDAO.loadByCategory(categoria);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar ofertas con categoria " + categoria, e);
+        }
     }
 
     @Override
@@ -345,5 +364,21 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         respuestaDAO.delete(id);
     }
 
-    
+    @Override
+    public TreeMap<Integer, HashMap<String, int[]>> reporteCategorias() throws ExcepcionSolidaridad, PersistenceException {
+        TreeMap<Integer, HashMap<String, int[]>> estadisticas =  new TreeMap<>();
+        for (Categoria categoria : consultarCategorias()){
+            String nombre = categoria.getNombre();
+            int necesidades = consultarNecesidadesCategoria(nombre).size();
+            int ofertas = consultarOfertasCategoria(nombre).size();
+            HashMap<String, int[]> categorias = new HashMap<>();
+            if (estadisticas.containsKey(necesidades + ofertas)){
+                categorias = estadisticas.get(necesidades + ofertas);
+            }
+            int cantidades[] = {necesidades, ofertas};
+            categorias.put(nombre, cantidades);
+            estadisticas.put(necesidades + ofertas, categorias);
+        }
+        return null;
+    }
 }
