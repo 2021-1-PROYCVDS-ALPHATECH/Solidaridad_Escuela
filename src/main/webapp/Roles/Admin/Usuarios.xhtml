@@ -6,6 +6,8 @@
     xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title> Categorias </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </h:head>
 <style>
 *,*::after,*,*::before{
@@ -164,7 +166,9 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                 <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
                 <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                     <p:submenu label="Navigations">
-                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut}" update="Users" icon="pi pi-external-link"/>
+                        <p:menuitem value="Home" action="admin?faces-redirect=true" update="Users" icon="fas fa-home"/>
+                        <p:menuitem value="Reportes" action="Reportes?faces-redirect=true" update="Users" icon="far fa-file"/>
+                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Users" icon="pi pi-external-link"/>
                     </p:submenu>
                 </p:menu>
             </div> 
@@ -191,10 +195,10 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                     <p:outputLabel for="@next" value="Numero Solicitudes" />
                     <p:inputText  id= "registerSolicitud" type="Number" binding="#{nsolicitud}"/>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Users" value="Registrar" action="Usuarios?faces-redirect=true" actionListener="#{LoginBean.registrarUsuario(id.value,nombre.value,telefono.value,mail.value,pass.value,rol.value,nsolicitud.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Users" value="Registrar" action="Usuarios?faces-redirect=true" actionListener="#{RegisterBean.registrarUsuario(id.value,nombre.value,telefono.value,mail.value,pass.value,rol.value,nsolicitud.value)}"/>
             </p:panel>
             <p:panel header="Usuarios" style="text-align: center; min-height: 800px;" name="panel" id="item2">
-                <p:dataTable  id="userDT" var="usuario" value="#{LoginBean.consultarUsuarios()}" rows="6" paginator="true" selectionMode="single" selection="#{LoginBean.usuario}" rowKey="#{usuario.idUsuario}"
+                <p:dataTable  id="userDT" var="usuario" value="#{ConsultBean.consultarUsuarios()}" rows="6" paginator="true" selectionMode="single" selection="#{UpdateBean.usuario}" rowKey="#{usuario.idUsuario}"
                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
                     <p:column headerText="Nombre">
                         <h:outputText value="#{usuario.nombre}"/>

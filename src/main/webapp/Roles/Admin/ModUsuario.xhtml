@@ -6,6 +6,8 @@
     xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title> Categorias </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </h:head>
 <style>
 *,*::after,*,*::before{
@@ -158,7 +160,9 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                 <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
                 <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                     <p:submenu label="Navigations">
-                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut}" update="Users" icon="pi pi-external-link"/>
+                        <p:menuitem value="Home" action="admin?faces-redirect=true" update="Users" icon="fas fa-home"/>
+                        <p:menuitem value="Reportes" action="Reportes?faces-redirect=true" update="Users" icon="far fa-file"/>
+                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Users" icon="pi pi-external-link"/>
                     </p:submenu>
                 </p:menu>
             </div> 
@@ -171,19 +175,19 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                 <p:messages id="messages" showDetail="true" style="text-align: left"/>
                 <h:panelGrid columns="1" style="margin: auto">
                     <p:outputLabel for="@next" value="ID" />
-                    <p:inputText  id= "registerID" type="String" value="#{LoginBean.usuario.idUsuario}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id= "registerID" type="String" value="#{UpdateBean.usuario.idUsuario}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Nombre" />
-                    <p:inputText  id= "registerNombre" type="String" value="#{LoginBean.usuario.nombre}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id= "registerNombre" type="String" value="#{UpdateBean.usuario.nombre}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Telefono" />
-                    <p:inputText  id= "registerTelefono" type="String" value="#{LoginBean.usuario.telefono}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id= "registerTelefono" type="String" value="#{UpdateBean.usuario.telefono}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Email" />
-                    <p:inputText  id= "registerMail" type="String" value="#{LoginBean.usuario.email}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id= "registerMail" type="String" value="#{UpdateBean.usuario.email}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Rol" />
-                    <p:inputText  id= "registerRol" type="String" value="#{LoginBean.usuario.rol}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id= "registerRol" type="String" value="#{UpdateBean.usuario.rol}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Numero Solicitudes" />
                     <p:inputText  id= "registerSolicitud" type="Long" binding="#{nsolicitud}"/>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Users" value="Actualizar" action="Usuarios?faces-redirect=true" actionListener="#{LoginBean.actualizarNumSolicitudes(LoginBean.usuario.idUsuario,nsolicitud.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Users" value="Actualizar" action="Usuarios?faces-redirect=true" actionListener="#{UpdateBean.actualizarNumSolicitudes(UpdateBean.usuario.idUsuario,nsolicitud.value)}"/>
             </p:panel>   
         </div>
     </h:form>

@@ -49,18 +49,18 @@
             </svg>
         </div>
         <div class="container">
-            <p:panel header="Info #{LoginBean.oferta.nombre}" style="text-align: center" name="panel" id="item1">   
+            <p:panel header="Info #{UpdateBean.oferta.nombre}" style="text-align: center" name="panel" id="item1">   
                 <h:panelGrid columns="2" style="margin: auto" >
                     <p:outputLabel for="@next" value="ID"/>
-                    <p:inputText  id="ID" type="String" value="#{LoginBean.oferta.idSolicitud}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id="ID" type="String" value="#{UpdateBean.oferta.idSolicitud}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Nombre"/>
                     <p:inputText  id="ModifyName" type="String" binding="#{nombre}" style="margin: 10px;"/>
                     <p:outputLabel for="@next" value="Descripcion" />
                     <p:inputTextarea id= "ModifyDes" rows="6" cols="30" type="String" binding="#{descripcion}" style="margin: 10px; width: 220px; font-size: 12px;"/>
                     <p:outputLabel for="@next" value="Fecha de Creacion" />
-                    <p:inputText  id= "CDate" type="String" value="#{LoginBean.oferta.fechaCreacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id= "CDate" type="String" value="#{UpdateBean.oferta.fechaCreacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Ultima Modificacion" />
-                    <p:inputText  id= "MDate" type="String" value="#{LoginBean.oferta.fechaModificacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id= "MDate" type="String" value="#{UpdateBean.oferta.fechaModificacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Estado" />
                     <p:selectOneMenu id="option"  binding="#{estado}" style="width: 220px;">
                         <f:selectItem itemLabel="Activa" itemValue="Activa"/>
@@ -69,7 +69,7 @@
                         <f:selectItem itemLabel="Cerrada" itemValue="Cerrada"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton id="Modify" style="margin: 30px;" value="Modificar" action="Oferta?faces-redirect=true" actionListener="#{LoginBean.actualizarOferta(LoginBean.oferta.idSolicitud,nombre.value,descripcion.value,estado.value)}" styleClass="ui-button"/>
+                <p:commandButton id="Modify" style="margin: 30px;" value="Modificar" action="Oferta?faces-redirect=true" actionListener="#{UpdateBean.actualizarOferta(UpdateBean.oferta.idSolicitud,nombre.value,descripcion.value,estado.value)}" styleClass="ui-button"/>
             </p:panel>   
         </div>
     </h:form>
