@@ -18,7 +18,7 @@ CHECK (
 
 
 ALTER TABLE categorias 
-ADD CONSTRAINT Estadoategoria_CK
+ADD CONSTRAINT EstadoCategoria_CK
 CHECK (
-    estado IN ('Activa', 'Inactiva')
+    estado IN ('Valida', 'Invalida')
 );

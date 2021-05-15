@@ -19,7 +19,7 @@ public class ExcepcionSolidaridad extends Exception{
     public static final String INVALID_REGISTRED = "Se ha alcanzado el tope de solicitudes.";
     public static final String INVALID_UPDATE = "Los datos ingresados son los mismos.";
     public static final String INVALID_ANSWER = "Solo se puede dar respuesta a solicitudes en estado activo o en proceso.";
-
+    public static final String INVALID_CATEGORY = "Las categorias invalidas deben tener un comentario.";
 
     /**
      * Genera una excepcion con el mensaje dado

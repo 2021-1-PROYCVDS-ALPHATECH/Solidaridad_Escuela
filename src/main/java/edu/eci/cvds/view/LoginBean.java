@@ -145,9 +145,9 @@ public class LoginBean extends BasePageBean{
         return servicios.consultarCategorias();
     }
 
-    public void registrarCategoria(String id, String nombre, String descripcion){
+    public void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario){
         try{
-            servicios.registrarCategoria(id, nombre, descripcion);
+            servicios.registrarCategoria(id, nombre, descripcion, estado, comentario);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -155,9 +155,9 @@ public class LoginBean extends BasePageBean{
     }
 
     public void actualizarCategoria(String id, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
-        if (nombre == "") nombre = null;
-        if (estado == "") estado = null;
-        if (descripcion == "") descripcion = null;
+        if (nombre.equals("")) nombre = null;
+        if (estado.equals("")) estado = null;
+        if (descripcion.equals("")) descripcion = null;
         servicios.actualizarCategoria(id, nombre, descripcion, estado);
     }
 

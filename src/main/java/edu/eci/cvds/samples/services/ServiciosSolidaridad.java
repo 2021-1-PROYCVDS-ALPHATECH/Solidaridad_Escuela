@@ -33,7 +33,7 @@ public interface ServiciosSolidaridad {
 
     public abstract void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException;
 
-    public abstract void registrarCategoria(String id, String nombre, String descripcion) throws ExcepcionSolidaridad;
+    public abstract void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario) throws ExcepcionSolidaridad;
 
     public abstract List<Categoria> consultarCategorias() throws ExcepcionSolidaridad, PersistenceException;
 

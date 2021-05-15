@@ -72,12 +72,8 @@ public class ServiciosSolidaridadFactory {
 
     public static void main(String[] args){
         try{
-            System.out.println("-------------------------------- CONSULAR NECESIDADES CATEGORIA --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarNecesidadesCategoria("categoria1").size());
-            System.out.println("-------------------------------- CONSULAR OFERTAS CATEGORIA --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().consultarOfertasCategoria("categoria1"));
-            System.out.println("-------------------------------- CONSULAR SOLICITUDES CATEGORIA --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().reporteCategorias());
+            System.out.println("-------------------------------- ERROR SOLICITUDES --------------------------------");
+            instance.getServiciosSolidaridad().registrarNecesidad("101", "2", "PruebaInvalida", "PruebaInvalida2", "Media", "Activa", "100");
 
         } catch (Exception e){
             System.out.println(e.getMessage());

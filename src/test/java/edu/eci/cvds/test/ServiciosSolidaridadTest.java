@@ -2,8 +2,6 @@ package edu.eci.cvds.test;
 
 import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 
@@ -59,6 +57,7 @@ public class ServiciosSolidaridadTest {
         try{
             if (serviciosSolidaridad.consultarCategorias() == null) fail("No se encontraron datos de categorias.");
         }catch(Exception e){
+            System.out.println(e.getMessage());
             fail("Lanzo excepcion.");
         }
     }
@@ -215,7 +214,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaRegistrarCategoria(){
         try{
-            serviciosSolidaridad.registrarCategoria("11", "cat11", "cat11Desc");
+            serviciosSolidaridad.registrarCategoria("11", "cat11", "cat11Desc", "Valida", null);
             if (serviciosSolidaridad.consultarCategoriaId("11") == null) {
                 fail("No se encontro la categoria.");
             }
@@ -231,7 +230,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaRegistrarCategoriaIdExistente(){
         try{
-            serviciosSolidaridad.registrarCategoria("1", "cat1", "cat1Desc");
+            serviciosSolidaridad.registrarCategoria("1", "cat1", "cat1Desc", "Valida", null);
             fail("No lanzo excepcion.");
         } catch(ExcepcionSolidaridad e){
             assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
@@ -245,7 +244,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaRegistrarCategoriaNombreExistente(){
         try{
-            serviciosSolidaridad.registrarCategoria("11", "Categoria1", "cat11Desc");
+            serviciosSolidaridad.registrarCategoria("11", "Categoria1", "cat11Desc", "Valida", null);
             fail("No lanzo excepcion.");
         } catch(ExcepcionSolidaridad e){
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
@@ -259,7 +258,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarLaFechaCategoria(){
         try{
-            serviciosSolidaridad.actualizarCategoria("2", "Categoria22", "DescripcionC22", "Activa");
+            serviciosSolidaridad.actualizarCategoria("2", "Categoria22", "DescripcionC22", "Valida");
             if (!(serviciosSolidaridad.consultarCategoriaId("2").getFechaModificacion().equals(Date.valueOf(LocalDate.now())))){
                 fail("No se actualizo la fecha de la categoria.");
             }
@@ -303,7 +302,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarInformacionCategoria(){
         try{
-            String nombre = "Categoria33", descripcion = "DescripcionC33", estado = "Inactiva";
+            String nombre = "Categoria33", descripcion = "DescripcionC33", estado = "Invalida";
             serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if (!(categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
@@ -317,7 +316,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarInformacionCategoriaNombreNull(){
         try{
-            String nombre = null, descripcion = "DescripcionC33", estado = "Inactiva";
+            String nombre = null, descripcion = "DescripcionC33", estado = "Invalida";
             serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if ((categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
@@ -331,11 +330,11 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarInformacionCategoriaDescripcionNull(){
         try{
-            serviciosSolidaridad.actualizarCategoria("3", "Categoria3333", null, "Inactiva");
+            serviciosSolidaridad.actualizarCategoria("3", "Categoria3333", null, "Invalida");
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if (!(categoria.getNombre().equals("Categoria3333"))) fail("Nombre no actualizado.");
             else if ((categoria.getDescripcion().equals(null))) fail("Descripcion no actualizada.");
-            else if(!(categoria.getEstado().equals("Inactiva")))  fail("Estado no actualizado.");
+            else if(!(categoria.getEstado().equals("Invalida")))  fail("Estado no actualizado.");
         } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
@@ -362,7 +361,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaActualizarCategoriaNoId(){
         try{
-            serviciosSolidaridad.actualizarCategoria("12", "Categoria12", "DescripcionC12", "Activa");
+            serviciosSolidaridad.actualizarCategoria("12", "Categoria12", "DescripcionC12", "Valida");
             fail("No lanzo excepcion.");
         } catch(ExcepcionSolidaridad e){
             assertEquals(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED, e.getMessage());
@@ -372,7 +371,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiAlctualizarCategoriaDatosIguales(){
         try{
-            serviciosSolidaridad.actualizarCategoria("1", "Categoria1", "DescripcionC1", "Activa");
+            serviciosSolidaridad.actualizarCategoria("1", "Categoria1", "DescripcionC1", "Valida");
             fail("No lanzo excepcion.");
         } catch(ExcepcionSolidaridad e){
             assertEquals(ExcepcionSolidaridad.INVALID_UPDATE, e.getMessage());
@@ -655,7 +654,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaEliminarCategoria(){
         try {
-            serviciosSolidaridad.registrarCategoria("120", "cat120", "cat120Desc");
+            serviciosSolidaridad.registrarCategoria("120", "cat120", "cat120Desc", "Valida", null);
             serviciosSolidaridad.eliminarCategoria("120");
             if(serviciosSolidaridad.consultarCategoriaId("120") != null) fail("No elimino la categoria");
         } catch (Exception e) {
@@ -676,8 +675,8 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.eliminarUsuario("11");
             serviciosSolidaridad.eliminarUsuario("12");
             serviciosSolidaridad.eliminarUsuario("13");
-            serviciosSolidaridad.actualizarCategoria("3", "Categoria3", "DescripcionC3", "Activa");
-            serviciosSolidaridad.actualizarCategoria("2", "Categoria2", "DescripcionC2", "Inactiva");
+            serviciosSolidaridad.actualizarCategoria("3", "Categoria3", "DescripcionC3", "Valida");
+            serviciosSolidaridad.actualizarCategoria("2", "Categoria2", "DescripcionC2", "Invalida");
             serviciosSolidaridad.eliminarRespuesta("11");
         } catch (Exception e) {
             //System.out.println(e.getMessage());

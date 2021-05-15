@@ -82,11 +82,12 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
 
     @Transactional
     @Override
-    public void registrarCategoria(String id, String nombre, String descripcion) throws ExcepcionSolidaridad {
+    public void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario) throws ExcepcionSolidaridad {
         try{
             if (consultarCategoriaId(id) != null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_ID);
             else if (consultarCategoriaNombre(nombre) != null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NAME);
-            categoriaDAO.save(new Categoria(id, nombre, descripcion));
+            if (estado.equals("Invalida") && comentario == null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_CATEGORY);
+            categoriaDAO.save(new Categoria(id, nombre, descripcion, estado, comentario));
         } catch (PersistenceException e){
             throw new ExcepcionSolidaridad ("Error al registrar la categoria: " + id, e);
         }        
@@ -143,6 +144,9 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             if (consultarSolicitudId(id) != null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_ID);
             else if(consultarUsuario(idUsuario).solicitudesRestantes() == 0) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_REGISTRED);
+            Categoria categoriaSolicitud = consultarCategoriaId(categoria);
+            if(categoriaSolicitud == null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED);
+            else if (categoriaSolicitud.getEstado().equals("Invalida")) throw new ExcepcionSolidaridad(categoriaSolicitud.getComentario());
             solicitudDAO.save(id, descripcion, estado, categoria, idUsuario);
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al insertar solicitud: " + id, e);
@@ -379,6 +383,6 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             categorias.put(nombre, cantidades);
             estadisticas.put(necesidades + ofertas, categorias);
         }
-        return null;
+        return estadisticas;
     }
 }
