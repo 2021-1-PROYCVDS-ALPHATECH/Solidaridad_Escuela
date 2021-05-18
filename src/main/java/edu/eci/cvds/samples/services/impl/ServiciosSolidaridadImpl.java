@@ -1,9 +1,10 @@
 package edu.eci.cvds.samples.services.impl;
 
 import java.util.List;
+import java.util.TreeMap;
+import java.util.ArrayList;
 import java.util.HashMap;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-import org.bouncycastle.jcajce.provider.digest.RIPEMD128.HashMac;
 
 import com.google.inject.Inject;
 
@@ -81,11 +82,12 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
 
     @Transactional
     @Override
-    public void registrarCategoria(String id, String nombre, String descripcion) throws ExcepcionSolidaridad {
+    public void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario) throws ExcepcionSolidaridad {
         try{
             if (consultarCategoriaId(id) != null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_ID);
             else if (consultarCategoriaNombre(nombre) != null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NAME);
-            categoriaDAO.save(new Categoria(id, nombre, descripcion));
+            if (estado.equals("Invalida") && comentario == null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_CATEGORY);
+            categoriaDAO.save(new Categoria(id, nombre, descripcion, estado, comentario));
         } catch (PersistenceException e){
             throw new ExcepcionSolidaridad ("Error al registrar la categoria: " + id, e);
         }        
@@ -142,6 +144,9 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         try {
             if (consultarSolicitudId(id) != null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_ID);
             else if(consultarUsuario(idUsuario).solicitudesRestantes() == 0) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_REGISTRED);
+            Categoria categoriaSolicitud = consultarCategoriaId(categoria);
+            if(categoriaSolicitud == null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED);
+            else if (categoriaSolicitud.getEstado().equals("Invalida")) throw new ExcepcionSolidaridad(categoriaSolicitud.getComentario());
             solicitudDAO.save(id, descripcion, estado, categoria, idUsuario);
         } catch (PersistenceException e) {
             throw new ExcepcionSolidaridad("Error al insertar solicitud: " + id, e);
@@ -226,6 +231,15 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
+    public List<Necesidad> consultarNecesidadesCategoria(String categoria) throws ExcepcionSolidaridad, PersistenceException {
+        try{
+            return necesidadDAO.loadByCategory(categoria);
+        } catch(PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar las necesidades con categoria " + categoria, e);
+        }
+    }
+
+    @Override
     public void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad {
         try {
             Necesidad necesidad = consultarNecesidadId(idNecesidad);
@@ -268,6 +282,16 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
+    public Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad, PersistenceException {
+        return ofertaDAO.load(id);
+    }
+
+    @Override
+    public Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException {
+        return ofertaDAO.loadByName(nombre);
+    }
+
+    @Override
     public HashMap<String, Integer> consultarOfertasEstado() throws ExcepcionSolidaridad, PersistenceException {
         HashMap<String, Integer> estadisticas = new HashMap<>();
         for (Estado estado : Estado.values()){
@@ -277,13 +301,12 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad, PersistenceException {
-        return ofertaDAO.load(id);
-    }
-
-    @Override
-    public Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException {
-        return ofertaDAO.loadByName(nombre);
+    public List<Oferta> consultarOfertasCategoria(String categoria) throws ExcepcionSolidaridad, PersistenceException {
+        try{
+            return ofertaDAO.loadByCategory(categoria);
+        } catch (PersistenceException e){
+            throw new ExcepcionSolidaridad("Error al consultar ofertas con categoria " + categoria, e);
+        }
     }
 
     @Override
@@ -345,5 +368,21 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         respuestaDAO.delete(id);
     }
 
-    
+    @Override
+    public TreeMap<Integer, HashMap<String, int[]>> reporteCategorias() throws ExcepcionSolidaridad, PersistenceException {
+        TreeMap<Integer, HashMap<String, int[]>> estadisticas =  new TreeMap<>();
+        for (Categoria categoria : consultarCategorias()){
+            String nombre = categoria.getNombre();
+            int necesidades = consultarNecesidadesCategoria(nombre).size();
+            int ofertas = consultarOfertasCategoria(nombre).size();
+            HashMap<String, int[]> categorias = new HashMap<>();
+            if (estadisticas.containsKey(necesidades + ofertas)){
+                categorias = estadisticas.get(necesidades + ofertas);
+            }
+            int cantidades[] = {necesidades, ofertas};
+            categorias.put(nombre, cantidades);
+            estadisticas.put(necesidades + ofertas, categorias);
+        }
+        return estadisticas;
+    }
 }

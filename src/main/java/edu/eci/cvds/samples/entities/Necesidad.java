@@ -62,6 +62,6 @@ public class Necesidad extends Solicitud{
 
     @Override
     public String toString(){
-        return "Necesidad{"+"id= "+ idSolicitud + ", nombre= " + nombre + ", descripcion= " + descripcion +", urgencia= " + urgencia  +", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + ", nombreUsuario = " + nombreUsuario +", categoria =\n\t"+ categoria+", respuestas = \n\t" + respuestas+"}";
+        return "Necesidad{"+"id= "+ idSolicitud + ", nombre= " + nombre + ", descripcion= " + descripcion +", urgencia= " + urgencia  +", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + ", nombreUsuario = " + nombreUsuario +", categoria = "+ categoria+", respuestas = \n\t" + respuestas+"}\n\t";
     }
 }

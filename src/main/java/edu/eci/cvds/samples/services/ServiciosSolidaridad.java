@@ -1,7 +1,9 @@
 package edu.eci.cvds.samples.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
@@ -31,7 +33,7 @@ public interface ServiciosSolidaridad {
 
     public abstract void eliminarUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException;
 
-    public abstract void registrarCategoria(String id, String nombre, String descripcion) throws ExcepcionSolidaridad;
+    public abstract void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario) throws ExcepcionSolidaridad;
 
     public abstract List<Categoria> consultarCategorias() throws ExcepcionSolidaridad, PersistenceException;
 
@@ -63,6 +65,8 @@ public interface ServiciosSolidaridad {
 
     public abstract HashMap<String, Integer> consultarNecesidadesEstado() throws ExcepcionSolidaridad, PersistenceException;
 
+    public abstract List<Necesidad> consultarNecesidadesCategoria(String nombre) throws ExcepcionSolidaridad, PersistenceException;
+
     public abstract Necesidad consultarNecesidadId(String id) throws ExcepcionSolidaridad, PersistenceException;
 
     public abstract Necesidad consultarNecesidadNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException;
@@ -77,11 +81,13 @@ public interface ServiciosSolidaridad {
 
     public abstract List<Oferta> consultarOfertasUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException;
 
-    public abstract HashMap<String, Integer> consultarOfertasEstado() throws ExcepcionSolidaridad, PersistenceException;
-
     public abstract Oferta consultarOfertaId(String id) throws ExcepcionSolidaridad, PersistenceException;
 
     public abstract Oferta consultarOfertaNombre(String nombre) throws ExcepcionSolidaridad, PersistenceException;
+
+    public abstract HashMap<String, Integer> consultarOfertasEstado() throws ExcepcionSolidaridad, PersistenceException;
+
+    public abstract List<Oferta> consultarOfertasCategoria(String categoria) throws ExcepcionSolidaridad, PersistenceException;
 
     public abstract void actualizarOferta(String idOferta, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad;
 
@@ -99,4 +105,5 @@ public interface ServiciosSolidaridad {
 
     public abstract void eliminarRespuesta(String id) throws ExcepcionSolidaridad, PersistenceException;
 
+    public abstract TreeMap<Integer, HashMap<String, int[]>> reporteCategorias() throws ExcepcionSolidaridad, PersistenceException;
 }

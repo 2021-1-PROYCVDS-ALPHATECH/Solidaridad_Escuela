@@ -12,7 +12,8 @@
       c.descripcion AS c_descripcion,
       c.fechaCreacion AS c_fechaCreacion,
       c.fechaModificacion AS c_fechaModificacion,
-      c.estado AS c_estado
+      c.estado AS c_estado,
+      c.comentario AS c_comentario
     FROM Categorias c
   </select>
 
@@ -23,7 +24,8 @@
       c.descripcion AS c_descripcion,
       c.fechaCreacion AS c_fechaCreacion,
       c.fechaModificacion AS c_fechaModificacion,
-      c.estado AS c_estado
+      c.estado AS c_estado,
+      c.comentario AS c_comentario
     FROM Categorias c
     WHERE idCategoria = #{id}
   </select>
@@ -35,7 +37,8 @@
       c.descripcion AS c_descripcion,
       c.fechaCreacion AS c_fechaCreacion,
       c.fechaModificacion AS c_fechaModificacion,
-      c.estado AS c_estado
+      c.estado AS c_estado,
+      c.comentario AS c_comentario
     FROM Categorias c
     WHERE nombre = #{nombre}
   </select>
@@ -44,7 +47,7 @@
   
   <insert parameterType="map" id="insertarCategoria">
     INSERT INTO Categorias
-      VALUES(#{cat.idCategoria}, #{cat.nombre}, #{cat.descripcion}, CURRENT_DATE, CURRENT_DATE, 'Activa')
+      VALUES(#{cat.idCategoria}, #{cat.nombre}, #{cat.descripcion}, CURRENT_DATE, CURRENT_DATE, #{cat.estado}, #{cat.comentario})
   </insert>
 
   <update parameterType="map" id="actualizarCategoria">
@@ -65,5 +68,6 @@
     <result property='fechaCreacion' column='c_fechaCreacion'/>  
     <result property='fechaModificacion' column='c_fechaModificacion'/>  
     <result property='estado' column='c_estado'/>  
+    <result property='comentario' column='c_comentario'/>  
   </resultMap>
 </mapper>

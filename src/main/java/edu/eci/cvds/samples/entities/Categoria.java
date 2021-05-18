@@ -13,7 +13,7 @@ import java.time.LocalDate;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 19/04/2021 v1.0
+ * @version 14/05/2021 v2.0
  */
 public class Categoria implements Serializable{
     private String idCategoria;
@@ -22,39 +22,27 @@ public class Categoria implements Serializable{
     private Date fechaCreacion;
     private Date fechaModificacion;
     private String estado;
+    private String comentario;
 
-    /**
-     * 
-     * @param id
-     * @param nombre
-     * @param descripcion
-     * @param fechaCreacion
-     * @param fechaModificacion
-     * @param estado
-     */
-    public Categoria(String id, String nombre, String descripcion, Date fechaCreacion, Date fechaModificacion, String estado) {
+    public Categoria(String id, String nombre, String descripcion, Date fechaCreacion, Date fechaModificacion, String estado, String comentario) {
         this.idCategoria = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fechaCreacion = fechaCreacion;
         this.fechaModificacion = fechaModificacion;
         this.estado = estado;
+        this.comentario = comentario;
     }
 
-    /**
-     * 
-     * @param id
-     * @param nombre
-     * @param descripcion
-     */
-    public Categoria(String id, String nombre, String descripcion){
+    public Categoria(String id, String nombre, String descripcion, String estado, String comentario){
         this.idCategoria = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         LocalDate hoy = LocalDate.now();
         this.fechaCreacion = Date.valueOf(hoy);
         this.fechaModificacion = Date.valueOf(hoy);
-        this.estado = "Activa";
+        this.estado = estado;
+        this.comentario = comentario;
     }
 
     
@@ -104,8 +92,16 @@ public class Categoria implements Serializable{
         return estado;
     }
 
+    public void setComentario(String newComentario){
+        comentario = newComentario;
+    }
+
+    public String getComentario(){
+        return comentario;
+    }
+
     @Override
     public String toString(){
-        return "Categoria{" + "id=" + idCategoria + ", nombre=" + nombre +", descripcion=" + descripcion +", fecha C=" + fechaCreacion + ", fecha M=" + fechaModificacion+", estado= "+estado+'}';
+        return "Categoria{" + "id=" + idCategoria + ", nombre=" + nombre +", descripcion=" + descripcion +", fecha C=" + fechaCreacion + ", fecha M=" + fechaModificacion+", estado= "+estado+", comentario= "+comentario + '}';
     }
 }

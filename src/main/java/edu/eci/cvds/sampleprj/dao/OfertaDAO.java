@@ -46,9 +46,17 @@ public interface OfertaDAO {
     public List<Oferta> loadByState(String estado) throws PersistenceException;
 
     /**
-     * Consulta una oferta en especifico por su Id
+     * Consulta todas las ofertas que pertenezcan a una misma categoria
+     * @param categoria Categoria por la cual se van a consultar las ofertas
+     * @return Lista de Ofertas consultadas
+     * @throws PersistenceException
+     */
+    public List<Oferta> loadByCategory(String categoria) throws PersistenceException;
+
+    /**
+     * Consulta una oferta por su Id
      * @param id Id de la oferta a consultar
-     * @return Oferta consultada por su Id
+     * @return Oferta consultada
      * @throws PersistenceException
      */
     public Oferta load(String id) throws PersistenceException;

@@ -49,6 +49,6 @@ public class Oferta extends Solicitud {
     
     @Override
     public String toString(){
-        return "Oferta{"+"id= "+ idSolicitud + ", nombre= " + nombre + ", descripcion= " + descripcion +", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + ", nombreUsuario = " + nombreUsuario +", categoria =\n\t"+ categoria+", respuestas = \n\t" + respuestas+"}";
+        return "Oferta{"+"id= "+ idSolicitud + ", nombre= " + nombre + ", descripcion= " + descripcion +", fecha C= " + fechaCreacion + ", fecha M= " + fechaModificacion + ", estado= " + estado + ", nombreUsuario = " + nombreUsuario +", categoria =\n\t"+ categoria+", respuestas = \n\t" + respuestas+"}\n\t";
     }
 }

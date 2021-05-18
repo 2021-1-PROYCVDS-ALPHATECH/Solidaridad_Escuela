@@ -27,6 +27,7 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
         try{
             categoriaMapper.insertarCategoria(ca);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            System.out.println(e.getMessage());
             throw new PersistenceException("Error al registrar la categoria" + ca.toString(), e);
         }   
     }

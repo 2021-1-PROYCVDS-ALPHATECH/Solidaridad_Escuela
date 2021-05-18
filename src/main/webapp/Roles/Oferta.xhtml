@@ -84,10 +84,10 @@
                     <p:outputLabel for="@next" value="Categoria" />
                     <p:inputText  id= "registerCat" type="String" binding="#{categoria}"/>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Oferts" value="Registrar" actionListener="#{LoginBean.registrarOferta(id.value, idUser.value, nombre.value, descripcion.value, estado.value, categoria.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Oferts" value="Registrar" actionListener="#{RegisterBean.registrarOferta(id.value, idUser.value, nombre.value, descripcion.value, estado.value, categoria.value)}"/>
             </p:panel>
             <p:panel header="Lista ofertas" style="text-align: center; min-height: 800px;" name="panel" id="item2">
-                <p:dataTable  id="ofertaDT" var="oferta" value="#{LoginBean.consultarOfertas()}" rows="10" paginator="true" rowKey="#{oferta.idSolicitud}" selectionMode="single" selection="#{LoginBean.oferta}"
+                <p:dataTable  id="ofertaDT" var="oferta" value="#{ConsultBean.consultarOfertas()}" rows="10" paginator="true" rowKey="#{oferta.idSolicitud}" selectionMode="single" selection="#{UpdateBean.oferta}"
                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
                     <p:column headerText="Nombre">
                         <h:outputText value="#{oferta.nombre}" />

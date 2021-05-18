@@ -147,7 +147,7 @@ body .ui-button.ui-button.ui-state-focus {
                     <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars"/>
                     <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                         <p:submenu label="Navigations">
-
+                            <p:menuitem value="Home" action="admin?faces-redirect=true" update="admin" icon="fas fa-home"/>
                             <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="admin" icon="pi pi-external-link"/>
                         </p:submenu>
                     </p:menu>

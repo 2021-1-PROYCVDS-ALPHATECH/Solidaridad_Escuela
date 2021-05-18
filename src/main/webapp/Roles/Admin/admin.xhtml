@@ -147,6 +147,8 @@ body .ui-button.ui-button.ui-state-focus {
                     <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars"/>
                     <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                         <p:submenu label="Navigations">
+                            <p:menuitem value="Home" action="admin?faces-redirect=true" update="admin" icon="fas fa-home"/>
+                            <p:menuitem value="Reportes" action="Reportes?faces-redirect=true" update="admin" icon="far fa-file"/>
                             <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="admin" icon="pi pi-external-link"/>
                         </p:submenu>
                     </p:menu>
@@ -172,7 +174,7 @@ body .ui-button.ui-button.ui-state-focus {
                     </div>
                 </a>
             
-                <a id="OfertaLink" href="/faces/Roles/Oferta.xhtml">
+                <a id="OfertaLink" href="/faces/Roles/Admin/Oferta.xhtml">
                     <div class="card">
                         <i class="fas fa-lightbulb"></i>
                         <p style="text-align: center; font-size: 24px; color: #7e1323;">Ofertas</p>
@@ -188,7 +190,7 @@ body .ui-button.ui-button.ui-state-focus {
                     </div>
                 </a>
 
-                <a id="OfertaLink" href="/faces/Roles/Respuestas.xhtml">
+                <a id="OfertaLink" href="/faces/Roles/Admin/Respuestas.xhtml">
                     <div class="card">
                         <i class="fas fa-question"></i>
                         <p style="text-align: center; font-size: 24px; color: #7e1323;">Respuestas</p>

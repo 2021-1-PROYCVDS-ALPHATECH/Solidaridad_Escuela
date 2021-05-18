@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS Categorias (
     descripcion VARCHAR(1000),
     fechaCreacion DATE NOT NULL,
     fechaModificacion DATE NOT NULL,
-    estado VARCHAR(10) DEFAULT 'Activa'
+    estado VARCHAR(10) DEFAULT 'Valida',
+    comentario TEXT
 );
 
 -- -----------------------------------------------------

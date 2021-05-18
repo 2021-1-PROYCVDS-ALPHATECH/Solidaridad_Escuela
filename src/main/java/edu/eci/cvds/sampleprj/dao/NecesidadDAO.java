@@ -42,18 +42,26 @@ public interface NecesidadDAO {
     /**
      * Consulta una necesidad en especifico por su nombre
      * @param nombre Nombre de la necesidad a consultar
-     * @return
+     * @return Necesidad consultada
      * @throws PersistenceException
      */
     public Necesidad loadByName(String nombre) throws PersistenceException;
 
     /**
      * Consulta las necesidades que esten en el mismo estado
-     * @param estado Estado por el cual se van a listar las necesidades
+     * @param estado Estado por el cual se van a listar las necesidades. Este puede ser: Activa, En Proceso, Resuelta, Cerrada
      * @return Lista de necesidades que tienen el mismo estado que se ingreso
      * @throws PersistenceException
      */
     public List<Necesidad> loadByState(String estado) throws PersistenceException;
+
+    /**
+     * Consulta todas las necesidades que pertenezcan a una misma categoria
+     * @param categoria Categoria por la cual se van a consultar las Necesidades
+     * @return Lista de Necesidades consultadas
+     * @throws PersistenceException
+     */
+    public List<Necesidad> loadByCategory(String categoria) throws PersistenceException;
 
     /**
      * Actualiza algunos valores de una necesidad en especifico
