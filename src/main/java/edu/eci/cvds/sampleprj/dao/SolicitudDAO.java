@@ -35,7 +35,7 @@ public interface SolicitudDAO {
     public List<Solicitud> loadAll() throws PersistenceException;
     
     /**
-     * Consulta uns Solicitud por su id
+     * Consulta una Solicitud por su id
      * @param id Id de la solicitud a ser consultada
      * @return Solicitud consultada por su Id
      * @throws PersistenceException

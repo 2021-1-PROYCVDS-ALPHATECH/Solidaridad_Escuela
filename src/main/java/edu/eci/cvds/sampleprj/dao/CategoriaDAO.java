@@ -50,7 +50,7 @@ public interface CategoriaDAO {
      * @param id Id de la categoria a la cual se le desean cambiar los valores
      * @param nombre Nuevo nombre de la categoria
      * @param descripcion Nueva descripcion de la categoria
-     * @param estado Nuevo estado de la categoria
+     * @param estado Nuevo estado de la categoria. Puede ser: Valida, Invalida
      * @throws PersistenceException
      */
     public void update(String id, String nombre, String descripcion, String estado) throws PersistenceException;    

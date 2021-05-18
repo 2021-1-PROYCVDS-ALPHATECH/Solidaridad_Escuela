@@ -14,18 +14,57 @@ import edu.eci.cvds.samples.entities.Usuario;
  */
 public interface UsuarioDAO {
 
+    /**
+     * Registra un nuevo usuario
+     * @param u Nuevo usuario a ser insertado en la base de datos
+     * @throws PersistenceException
+     */
     public void save(Usuario u) throws PersistenceException;
     
+    /**
+     * Consulta todos los usuarios existentes
+     * @return Lista con todos los usuarios
+     * @throws PersistenceException
+     */
     public List<Usuario> loadAll() throws PersistenceException;
 
+    /**
+     * Consulta un usuario en especifico a travez de su ID
+     * @param idUsuario ID del usuario para ser consultado
+     * @return Usuario consultado
+     * @throws PersistenceException
+     */
     public Usuario load(String idUsuario) throws PersistenceException;
 
+    /**
+     * Consulta un usuario en especifico a travez de su nombre
+     * @param nombre Nombre del usuario a ser consultado
+     * @return Usuario consultado
+     * @throws PersistenceException
+     */
     public Usuario loadByName(String nombre) throws PersistenceException;
 
+    /**
+     * Consulta los usuarios que pertenezcan a un mismo rol
+     * @param rol Rol por el cual se van a consultar a los usuarios. Pueden ser: Administrador, Estudiante, Profesor, Egresado o Administrativo
+     * @return Lista de Usuarios consultados
+     * @throws PersistenceException
+     */
     public List<Usuario> loadByRol(String rol) throws PersistenceException;
 
+    /**
+     * Actualiza el numerdo de Solicitudes que puede realizar un usuario 
+     * @param idUsuario Id del usuario al que se le van a actualizar el numero de solicitudes
+     * @param numApplications Nuevo numero de solicitudes, no puede ser menor al numero que ya tenia anteriormente el Usuario
+     * @throws PersistenceException
+     */
     public void updateNumApplication(String idUsuario, int numApplications) throws PersistenceException;
 
+    /**
+     * ELimina un Usuario por su ID
+     * @param idUsuario ID del usuario a eliminar
+     * @throws PersistenceException
+     */
     public void delete(String idUsuario) throws PersistenceException;
 
 }
