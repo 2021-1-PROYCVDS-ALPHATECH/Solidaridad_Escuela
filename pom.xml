@@ -245,7 +245,7 @@
                     </goals>
                     <configuration>
                         <srcFiles>
-                            <srcFile>SQL/Poblar Local.sqL</srcFile>
+                            <srcFile>SQL/PoblarLocal.sql</srcFile>
                         </srcFiles>
                     </configuration>
                 </execution>
