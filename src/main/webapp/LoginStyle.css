@@ -36,7 +36,7 @@ tbody {
   width: 75%;
 }
 
-tr   {
+tr {
   display: block;
   margin: auto;
   width: 100%;
@@ -68,7 +68,6 @@ td {
   border-bottom: 2px solid;
   border-color: #7e1323;
 }
-
 
 .nav-link {
   display: block;
@@ -166,27 +165,29 @@ body .ui-inputfield.ui-state-error {
   { -webkit-transform: translateX(0);
     transform: translateX(0);
   }
+
   10%,
   30%,
   50%,
-  70% 
-  { -webkit-transform: translateX(-10px);
+  70% {
+  -webkit-transform: translateX(-10px);
     transform: translateX(-10px);
   }
+
   20%,
   40%,
-  60% 
-  { -webkit-transform: translateX(10px);
+  60% {
+  -webkit-transform: translateX(10px);
     transform: translateX(10px);
   }
 
-  80% 
-  { -webkit-transform: translateX(8px);
+  80% {
+  -webkit-transform: translateX(8px);
     transform: translateX(8px);
   }
 
-  90% 
-  { -webkit-transform: translateX(-8px);
+  90% {
+  -webkit-transform: translateX(-8px);
     transform: translateX(-8px);
   }
 }
@@ -196,26 +197,28 @@ body .ui-inputfield.ui-state-error {
   { -webkit-transform: translateX(0);
     transform: translateX(0);
   }
+
   10%,
   30%,
   50%,
-  70% 
-  { -webkit-transform: translateX(-10px);
+  70% {
+  -webkit-transform: translateX(-10px);
     transform: translateX(-10px);
   }
+
   20%,
   40%,
-  60% 
-  { -webkit-transform: translateX(10px);
+  60% {
+  -webkit-transform: translateX(10px);
     transform: translateX(10px);
   }
 
-  80%{ 
+  80% {
   -webkit-transform: translateX(8px);
     transform: translateX(8px);
   }
 
-  90% { 
+  90% {
   -webkit-transform: translateX(-8px);
     transform: translateX(-8px);
   }
