@@ -53,14 +53,14 @@ td {
   margin-top: 30px;
 }
 
-.nav{
+.nav {
   padding-top: 20px;
   padding-left: 20px;
   margin-bottom: 20px;
   font-weight: bold;
 }
 
-.nav-item  {
+.nav-item {
   margin-left: 20px;
 }
 
@@ -156,8 +156,8 @@ body .ui-chkbox .ui-chkbox-box .ui-chkbox-icon {
 body .ui-inputfield.ui-state-error {
   border-color: #7e1323;
   background-color: rgba(166,25,46,0.2);
-  -webkit-animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
-	animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+  -webkit-animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both; 
+    animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
 }
 
 @-webkit-keyframes shake-horizontal {
@@ -178,7 +178,7 @@ body .ui-inputfield.ui-state-error {
     -webkit-transform: translateX(-10px);
     transform: translateX(-10px);
   }
-  
+
   20%,
 
   40%,
