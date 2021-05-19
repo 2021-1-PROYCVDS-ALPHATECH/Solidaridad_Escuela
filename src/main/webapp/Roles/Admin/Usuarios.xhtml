@@ -192,8 +192,6 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                     <p:inputText  id= "registerPassword" type="Password" binding="#{pass}"/>
                     <p:outputLabel for="@next" value="Rol" />
                     <p:inputText  id= "registerRol" type="String" binding="#{rol}"/>
-                    <p:outputLabel for="@next" value="Numero Solicitudes" />
-                    <p:inputText  id= "registerSolicitud" type="Number" binding="#{nsolicitud}"/>
                 </h:panelGrid>
                 <p:commandButton style="margin: 20px;" update="Users" value="Registrar" action="Usuarios?faces-redirect=true" actionListener="#{RegisterBean.registrarUsuario(id.value,nombre.value,telefono.value,mail.value,pass.value,rol.value,nsolicitud.value)}"/>
             </p:panel>
@@ -211,9 +209,6 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                     </p:column>
                     <p:column headerText="Rol">
                         <h:outputText value="#{usuario.rol}"/>
-                    </p:column>
-                    <p:column headerText="Numero de Solicitudes">
-                        <h:outputText value="#{usuario.numSolicitudes}"/>
                     </p:column>
                     <f:facet name="footer" style="margin: auto"></f:facet>
                 </p:dataTable>

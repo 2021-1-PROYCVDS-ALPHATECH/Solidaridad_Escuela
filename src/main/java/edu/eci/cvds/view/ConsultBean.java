@@ -118,8 +118,8 @@ public class ConsultBean extends BasePageBean{
 
     public List consultarReporteCategorias() throws ExcepcionSolidaridad, PersistenceException{
         ArrayList<String[]> categorias = new ArrayList<String[]>();
-        /*TreeMap<Integer, HashMap<String, int[]>> reporte = servicios.reporteCategorias();
-        /*for(Integer key: servicios.reporteCategorias().keySet()){
+        TreeMap<Integer, HashMap<String, int[]>> reporte = servicios.reporteCategorias();
+        for(Integer key: servicios.reporteCategorias().keySet()){
             HashMap<String, int[]> map = reporte.get(key);
             for(String nombreCategoria: map.keySet()){
                 String[] entry = new String[4];
@@ -127,7 +127,7 @@ public class ConsultBean extends BasePageBean{
                 entry[3] = "" + key;        entry[2] = "" + map.get(nombreCategoria)[1];
                 categorias.add(entry);
             }
-        }*/
+        }
         return categorias;
     }
 }
