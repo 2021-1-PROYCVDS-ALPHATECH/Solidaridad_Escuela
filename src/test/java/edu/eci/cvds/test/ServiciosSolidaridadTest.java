@@ -1,11 +1,8 @@
 package edu.eci.cvds.test;
 
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.Statement;
 import java.time.LocalDate;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
@@ -323,7 +320,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.actualizarCategoria("3", "Categoria3333", null, "Invalida");
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if (!(categoria.getNombre().equals("Categoria3333"))) fail("Nombre no actualizado.");
-            else if ((categoria.getDescripcion().equals(null))) fail("Descripcion no actualizada.");
+            else if ((categoria.getDescripcion() == null)) fail("Descripcion no actualizada.");
             else if(!(categoria.getEstado().equals("Invalida")))  fail("Estado no actualizado.");
         } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
