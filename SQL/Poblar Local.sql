@@ -18,6 +18,7 @@ INSERT INTO Usuarios VALUES ('4', 'Garrett Elliott', '(450) 244-1462', 'powbo@tu
 INSERT INTO Categorias (idCategoria, nombre, descripcion, fechaCreacion, fechaModificacion, estado) VALUES ('1', 'Categoria1', 'DescripcionC1', '2013-06-01', '2013-06-01', 'Valida');
 INSERT INTO Categorias (idCategoria, nombre, descripcion, fechaCreacion, fechaModificacion, estado) VALUES ('2', 'Categoria2', 'DescripcionC2', '2014-06-01', '2014-06-01', 'Valida');
 INSERT INTO Categorias (idCategoria, nombre, descripcion, fechaCreacion, fechaModificacion, estado) VALUES ('3', 'Categoria3', 'DescripcionC3', '2015-06-01', '2015-06-01', 'Valida');
+INSERT INTO Categorias VALUES ('4', 'Categoria4', 'DescripcionC4', '2015-06-01', '2015-06-01', 'Invalida', 'No se maneja dinero');
 
 INSERT INTO Solicitudes VALUES ('1', '2', 'DescripcionSN1', 'Activa', '1', '2013-06-01', '2013-06-01');
 INSERT INTO Solicitudes VALUES ('2', '3', 'DescripcionSN2', 'Activa', '2', '2014-06-01', '2014-06-01');
@@ -27,6 +28,7 @@ INSERT INTO Solicitudes VALUES ('5', '4', 'DescripcionSO5', 'Activa', '2', '2014
 INSERT INTO Solicitudes VALUES ('6', '2', 'DescripcionSO6', 'Cerrada', '2', '2014-06-01', '2014-06-01');
 INSERT INTO Solicitudes VALUES ('7', '2', 'DescripcionSN7', 'Activa', '2', '2014-06-01', '2014-06-01');
 INSERT INTO Solicitudes VALUES ('8', '2', 'DescripcionSO8', 'Activa', '2', '2014-06-01', '2014-06-01');
+INSERT INTO Solicitudes VALUES ('9', '2', 'DescripcionSN9', 'Activa', '2', '2014-06-01', '2014-06-01');
 
 
 
@@ -34,6 +36,7 @@ INSERT INTO Solicitudes VALUES ('8', '2', 'DescripcionSO8', 'Activa', '2', '2014
 INSERT INTO Necesidades VALUES ('1', 'Solicitud1', 'Media');
 INSERT INTO Necesidades VALUES ('2', 'Solicitud2', 'Alta');
 INSERT INTO Necesidades VALUES ('7', 'Solicitud7', 'Baja');
+INSERT INTO Necesidades VALUES ('9', 'Solicitud9', 'Baja');
 
 INSERT INTO Ofertas VALUES('3', 'Solicitud3');
 INSERT INTO Ofertas VALUES('4', 'Solicitud4');

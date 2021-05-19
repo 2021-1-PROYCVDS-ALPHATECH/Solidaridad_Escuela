@@ -13,7 +13,9 @@ import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Categoria;
+import edu.eci.cvds.samples.entities.Necesidad;
 import edu.eci.cvds.samples.services.ExcepcionSolidaridad;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 import edu.eci.cvds.samples.services.ServiciosSolidaridadFactory;
@@ -223,6 +225,15 @@ public class ServiciosSolidaridadTest {
         }
     }
 
+    @Test
+    public void deberiaRegistrarCategoriaInvalida(){
+        try{
+            serviciosSolidaridad.registrarCategoria("21", "Cat21", "Cat21Desc", "Invalida", "No se maneja dinero");
+        } catch (ExcepcionSolidaridad e){
+            fail("Lanzo excepcion.");
+        }
+    }
+
     /**
      * Prueba Historia de usuario #2 Registrar Categoria
      * Se prueba que no sea posible registrar una categoria con id ya existente
@@ -251,6 +262,16 @@ public class ServiciosSolidaridadTest {
         }
     }
 
+    @Test
+    public void noDeberiRegistrarCategoriaInvalidaSinComentario(){
+        try{
+            serviciosSolidaridad.registrarCategoria("20", "Cat20", "Cat20Desc", "Invalida", null);
+            fail("No lanzo excepcion.");
+        } catch (ExcepcionSolidaridad e){
+            assertEquals(ExcepcionSolidaridad.INVALID_CATEGORY, e.getMessage());
+        }
+    }
+
     /**
      * Prueba Historia de usuario #3 Actualizar Categoria
      * Se prueba que al actualizar una categoria se actualice la fecha de modificacion a la actual
@@ -264,6 +285,16 @@ public class ServiciosSolidaridadTest {
             }
         } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void noDeberiaRegistrarSolicitudNoCategoria(){
+        try{
+            serviciosSolidaridad.registrarSolicitud("100", "Sol100Desc", "Activa", "200", "2");
+            fail("No lanzo excepcion.");
+        } catch(ExcepcionSolidaridad e){
+            assertEquals(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED, e.getMessage());
         }
     }
 
@@ -591,6 +622,23 @@ public class ServiciosSolidaridadTest {
         } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
+    }
+
+    @Test
+    public void deberiaActualizarNecesidadNombreNull(){
+        try{
+            Necesidad beforeNecesidad = serviciosSolidaridad.consultarNecesidadId("9");
+            serviciosSolidaridad.actualizarNecesidad("9", null, "Solicitud91", "Activa");
+            Necesidad afterNecesidad = serviciosSolidaridad.consultarNecesidadId("9");
+            if (!beforeNecesidad.getNombre().equals(afterNecesidad.getNombre())){
+                fail("Cambio el nombre de la necesidad.");
+            }
+        } catch(ExcepcionSolidaridad e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        } catch (PersistenceException e) {
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+
     }
 
     @Test
