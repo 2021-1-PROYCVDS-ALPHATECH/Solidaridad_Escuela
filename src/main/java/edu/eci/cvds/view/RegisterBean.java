@@ -2,6 +2,8 @@ package edu.eci.cvds.view;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.faces.application.FacesMessage; 
 
 import com.google.inject.Inject;
 
@@ -13,9 +15,7 @@ public class RegisterBean extends BasePageBean{
     @Inject
     private ServiciosSolidaridad servicios;
 
-    public void registrarCategoria(String id, String nombre, String descripcion){
-        String estado = "Valida";
-        String comentario = "";
+    public void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario){
         try{
             servicios.registrarCategoria(id, nombre, descripcion, estado, comentario);
         }catch (Exception e){
@@ -28,7 +28,7 @@ public class RegisterBean extends BasePageBean{
         try{
             servicios.registrarOferta(idOferta, idUsuario, nombre, descripcion, estado, categoria);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("Categories:optionEstado", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Categoria Invalida ", e.getMessage()));
         }
     }
 
@@ -36,7 +36,7 @@ public class RegisterBean extends BasePageBean{
         try{
             servicios.registrarNecesidad(idNecesidad, idUsuario, nombre, descripcion, urgencia, estado, categoria);
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            FacesContext.getCurrentInstance().addMessage("Necesities:option", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Categoria Invalida ", e.getMessage()));
         }
         
     }
