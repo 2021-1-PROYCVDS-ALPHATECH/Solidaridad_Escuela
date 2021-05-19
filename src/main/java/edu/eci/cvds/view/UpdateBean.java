@@ -50,14 +50,6 @@ public class UpdateBean extends BasePageBean{
         }
     }
 
-    public void actualizarNumSolicitudes(String idUsuario, int numSolicitudes){
-        try {
-            servicios.actualizarNumSolicitudes(idUsuario, numSolicitudes);
-        } catch (Exception e) {
-            //TODO: handle exception
-        }
-    }
-
     public Usuario getUsuario() {
         return usuario;
     }

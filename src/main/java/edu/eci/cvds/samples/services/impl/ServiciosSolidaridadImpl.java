@@ -1,10 +1,15 @@
 package edu.eci.cvds.samples.services.impl;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.TreeMap;
-import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.PropertiesConfiguration;
 
 import com.google.inject.Inject;
 
@@ -35,6 +40,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     @Inject
     private RespuestaDAO respuestaDAO;
 
+    private InputStream inputStream;
 
     @Transactional
     @Override
@@ -60,19 +66,6 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     @Override
     public List<Usuario> consultarUsuariosRol(String rol) throws ExcepcionSolidaridad, PersistenceException{
         return usuarioDAO.loadByRol(rol);
-    }
-
-    @Override
-    public void actualizarNumSolicitudes(String idUsuario, int numSolicitudes) throws ExcepcionSolidaridad {
-        try{
-            Usuario usuario = consultarUsuario(idUsuario);
-            if (usuario.getSolicitudes().size() > numSolicitudes){
-                throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NUM_SOLICITUDES);
-            }
-            usuarioDAO.updateNumApplication(idUsuario, numSolicitudes);
-        } catch (PersistenceException e){
-            throw new ExcepcionSolidaridad ("Error al consultar los usuarios", e);
-        }
     }
 
     @Override
@@ -143,7 +136,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     public void registrarSolicitud(String id, String descripcion, String estado, String categoria, String idUsuario) throws ExcepcionSolidaridad {
         try {
             if (consultarSolicitudId(id) != null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_ID);
-            else if(consultarUsuario(idUsuario).solicitudesRestantes() == 0) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_REGISTRED);
+            if (Integer.parseInt(getNumeroSolicitudes()) < consultarSolicitudes().size()) throw new  ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_REGISTRED);
             Categoria categoriaSolicitud = consultarCategoriaId(categoria);
             if(categoriaSolicitud == null) throw new ExcepcionSolidaridad(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED);
             else if (categoriaSolicitud.getEstado().equals("Invalida")) throw new ExcepcionSolidaridad(categoriaSolicitud.getComentario());
@@ -384,5 +377,41 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
             estadisticas.put(necesidades + ofertas, categorias);
         }
         return estadisticas;
+    }
+
+    @Override
+    public String getNumeroSolicitudes() {
+        String result = "";
+        try{
+            Properties prop = new Properties();
+            String propFile = "src/main/resources/config.properties";
+            inputStream = new FileInputStream(propFile);
+            prop.load(inputStream);
+            result = prop.getProperty("numSolicitudes");
+        } catch (IOException  e){
+            e.printStackTrace();
+        } finally{
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void actualizarNumeroSolicitudes(int nuevoNumero) throws ExcepcionSolidaridad, PersistenceException{
+        if (nuevoNumero < consultarSolicitudes().size()){
+            throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NUM_SOLICITUDES);
+        }
+        try{
+            PropertiesConfiguration conf = new PropertiesConfiguration("src/main/resources/config.properties");
+            conf.setProperty("numSolicitudes", nuevoNumero + "");
+            conf.save();    
+        } catch (ConfigurationException  e){
+            e.printStackTrace();
+        }
+
     }
 }

@@ -175,38 +175,6 @@ public class ServiciosSolidaridadTest {
         } catch(Exception e){
             fail("Lanzo ecepcion.");
         }
-
-        
-
-    }
-
-    /**
-     * Se comprueba que se actualice el numero de solicitudes permitidas del usuario de manera correcta
-     */
-    @Test
-    public void deberiaActualizarNumSolicitudesUsuario(){
-        try{
-            serviciosSolidaridad.registrarUsuario("13", "Tom Barton","(911) 456-4054" , "ehiuj@cavmis.ad", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
-            int numSolicitudes = 5;
-            serviciosSolidaridad.actualizarNumSolicitudes("13", numSolicitudes);
-            assertEquals(numSolicitudes, serviciosSolidaridad.consultarUsuario("13").getNumSolicitudes());
-        } catch(Exception e){
-            fail("Lanzo excepcion." + e.getMessage());
-        }
-    }
-
-    /**
-     * Se prueba que no se actualice el numero de solicitudes del usuario si este numero es menor
-     * a las solucitudes que ya realizo
-     */
-    @Test
-    public void noDeberiaActualizarNumSolicitudesUsuario(){
-        try{
-            serviciosSolidaridad.actualizarNumSolicitudes("2", 1);
-            fail("No lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
-            assertEquals(ExcepcionSolidaridad.INVALID_NUM_SOLICITUDES, e.getMessage());
-        }
     }
 
     /**
@@ -460,20 +428,6 @@ public class ServiciosSolidaridadTest {
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
-    
-    /**
-     * Prueba Historia de usuario #4 Registrar Necesidad
-     * Se prueba que no sea posible registrar una necesidad si el usuario ya llego al tope de su cantidad de solicitudes
-     */
-    @Test
-    public void noDeberiaRegistrarNecesidadNumSolicitudes(){
-        try{
-            serviciosSolidaridad.registrarNecesidad("13", "4", "Necesidad1", "DescripconN1", "Alta", "Activa", "1");
-            fail("No lanzo excepcion");
-        } catch(ExcepcionSolidaridad e){
-            assertEquals(ExcepcionSolidaridad.INVALID_REGISTRED, e.getMessage());
-        }
-    }
 
     /**
      * Prueba Historia de usuario #5 Registrar Oferta
@@ -526,22 +480,6 @@ public class ServiciosSolidaridadTest {
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
-
-
-    /**
-     * Prueba Historia de usuario #5 Registrar Oferta
-     * Se prueba que no sea posible registrar una necesidad si el usuario ya llego al tope de su cantidad de solicitudes
-     */
-    @Test
-    public void noDeberiaRegistrarOfertaNumSolicitudes(){
-        try{
-            serviciosSolidaridad.registrarOferta("24", "4", "Oferta24", "DescripconO24", "Activa", "1");
-            fail("No lanzo excepcion");
-        } catch(ExcepcionSolidaridad e){
-            assertEquals(ExcepcionSolidaridad.INVALID_REGISTRED, e.getMessage());
-        }
-    }
-
 
     /**
      * Prueba Historia de usuario #6 Registrar Respuestas

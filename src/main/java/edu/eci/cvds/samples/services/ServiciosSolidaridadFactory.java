@@ -72,8 +72,12 @@ public class ServiciosSolidaridadFactory {
 
     public static void main(String[] args){
         try{
-            System.out.println("-------------------------------- ERROR SOLICITUDES --------------------------------");
-            instance.getServiciosSolidaridad().registrarNecesidad("101", "2", "PruebaInvalida", "PruebaInvalida2", "Media", "Activa", "100");
+            System.out.println("-------------------------------- PRUEBA --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().getNumeroSolicitudes());
+            System.out.println("-------------------------------- ESCRITURA --------------------------------");
+            instance.getServiciosSolidaridad().actualizarNumeroSolicitudes(100);
+            System.out.println("-------------------------------- PRUEBA --------------------------------");
+            System.out.println(instance.getServiciosSolidaridad().getNumeroSolicitudes());
 
         } catch (Exception e){
             System.out.println(e.getMessage());
