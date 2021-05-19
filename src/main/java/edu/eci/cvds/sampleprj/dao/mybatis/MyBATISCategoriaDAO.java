@@ -27,7 +27,6 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
         try{
             categoriaMapper.insertarCategoria(ca);
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println(e.getMessage());
             throw new PersistenceException("Error al registrar la categoria" + ca.toString(), e);
         }   
     }
@@ -71,7 +70,6 @@ public class MyBATISCategoriaDAO implements CategoriaDAO{
     @Override
     public void delete(String idCategoria) throws PersistenceException {
         try {
-            System.out.println(idCategoria);
             categoriaMapper.eliminarCategoria(idCategoria);
         } catch (org.apache.ibatis.exceptions.PersistenceException e) {
             throw new PersistenceException("Error al eliminar la categoria: " + idCategoria, e);
