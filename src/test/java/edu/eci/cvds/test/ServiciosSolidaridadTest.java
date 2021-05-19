@@ -17,7 +17,7 @@ import edu.eci.cvds.samples.services.ServiciosSolidaridadFactory;
 
 public class ServiciosSolidaridadTest {
 
-    ServiciosSolidaridad serviciosSolidaridad;
+    private ServiciosSolidaridad serviciosSolidaridad;
 
     public ServiciosSolidaridadTest(){
         serviciosSolidaridad = ServiciosSolidaridadFactory.getInstance().getServiciosSolidaridadTesting();
