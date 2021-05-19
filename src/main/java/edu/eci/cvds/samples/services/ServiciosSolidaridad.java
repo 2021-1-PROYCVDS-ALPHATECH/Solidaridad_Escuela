@@ -30,7 +30,7 @@ public interface ServiciosSolidaridad {
      * @throws ExcepcionSolidaridad
      * @throws PersistenceException
      */
-    public abstract void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol, int num) throws ExcepcionSolidaridad, PersistenceException;
+    public abstract void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol) throws ExcepcionSolidaridad, PersistenceException;
     
     /**
      * Consulta todos los Usuarios existentes

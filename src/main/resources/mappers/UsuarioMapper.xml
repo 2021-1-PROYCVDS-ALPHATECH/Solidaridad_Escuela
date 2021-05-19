@@ -12,7 +12,6 @@
       u.email AS u_email,
       u.clave AS u_clave,
       u.rol AS u_rol,
-      u.numSolicitudes AS u_numSolicitudes,
 
       s.idSolicitud AS s_idSolicitud,
       s.descripcion AS s_descripcion,
@@ -47,7 +46,6 @@
       u.email AS u_email,
       u.clave AS u_clave,
       u.rol AS u_rol,
-      u.numSolicitudes AS u_numSolicitudes,
 
       s.idSolicitud AS s_idSolicitud,
       s.descripcion AS s_descripcion,
@@ -84,7 +82,6 @@
       u.email AS u_email,
       u.clave AS u_clave,
       u.rol AS u_rol,
-      u.numSolicitudes AS u_numSolicitudes,
 
       s.idSolicitud AS s_idSolicitud,
       s.descripcion AS s_descripcion,
@@ -121,7 +118,6 @@
       u.email AS u_email,
       u.clave AS u_clave,
       u.rol AS u_rol,
-      u.numSolicitudes AS u_numSolicitudes,
 
       s.idSolicitud AS s_idSolicitud,
       s.descripcion AS s_descripcion,
@@ -152,7 +148,7 @@
 
   <insert parameterType="map" id="registrarUsuario">
     INSERT INTO Usuarios VALUES (#{usuario.idUsuario}, #{usuario.nombre}, #{usuario.telefono},
-                                  #{usuario.email}, #{usuario.rol}, #{usuario.clave}, #{usuario.numSolicitudes})
+                                  #{usuario.email}, #{usuario.rol}, #{usuario.clave})
   </insert>
 
   <update parameterType="map" id="actualizarNumSolicitudes">
@@ -173,7 +169,6 @@
     <result property='email' column='u_email'/>  
     <result property='clave' column='u_clave'/>  
     <result property='rol' column='u_rol'/>
-    <result property='numSolicitudes' column='u_numSolicitudes'/>
     <collection property='solicitudes'
                 ofType='Solicitud' 
                 resultMap='edu.eci.cvds.sampleprj.dao.mybatis.mappers.SolicitudMapper.SolicitudResult'>

@@ -20,7 +20,6 @@ public class Usuario implements Serializable{
     private String email;
     private String clave;
     private Rol rol;
-    private int numSolicitudes;
     private ArrayList<Solicitud> solicitudes;
     private ArrayList<Respuesta> respuestas;
 
@@ -34,15 +33,14 @@ public class Usuario implements Serializable{
      * @param clave
      * @param rol
      */
-    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, Rol rol,
-                    Integer numSolicitudes, ArrayList<Solicitud> solicitudes, ArrayList<Respuesta> respuestas){
+    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, Rol rol
+                    , ArrayList<Solicitud> solicitudes, ArrayList<Respuesta> respuestas){
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.clave = clave;
         this.rol = rol;
-        this.numSolicitudes = numSolicitudes;
         this.solicitudes = solicitudes;
         this.respuestas = respuestas;
     }
@@ -55,14 +53,13 @@ public class Usuario implements Serializable{
      * @param clave
      * @param rol
      */
-    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol, Integer numSolicitudes){
+    public Usuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol){
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.telefono = telefono;
         this.email = email;
         this.clave = clave;
         this.rol = Rol.valueOf(rol);
-        this.numSolicitudes = numSolicitudes;
         solicitudes = new ArrayList<>();
         respuestas =  new ArrayList<>();
     }
@@ -117,24 +114,12 @@ public class Usuario implements Serializable{
         return rol;
     }
 
-    public void setNumSolicitudes(int numSolicitudes) {
-        this.numSolicitudes = numSolicitudes;
-    }
-
-    public int getNumSolicitudes() {
-        return numSolicitudes;
-    }
-
     public void setSolicitudes(ArrayList<Solicitud> newSolicitudes) {
         solicitudes = newSolicitudes;
     }
 
     public ArrayList<Solicitud> getSolicitudes(){
         return solicitudes;
-    }
-
-    public int solicitudesRestantes(){
-        return numSolicitudes - solicitudes.size();
     }
 
     public void setRespuestas(ArrayList<Respuesta> newRespuestas){
@@ -147,6 +132,6 @@ public class Usuario implements Serializable{
 
     @Override
     public String toString(){
-        return "Usuario{" + "id = " + idUsuario + ", nombre = " + nombre + ", clave = " + clave + ", rol = " + rol + ", num = " + numSolicitudes + ", solicitudes = \n\t "+ solicitudes + ", respuestas = \n\t"+ respuestas+'}';
+        return "Usuario{" + "id = " + idUsuario + ", nombre = " + nombre + ", clave = " + clave + ", rol = " + rol + ", solicitudes = \n\t "+ solicitudes + ", respuestas = \n\t"+ respuestas+'}';
     }
 }

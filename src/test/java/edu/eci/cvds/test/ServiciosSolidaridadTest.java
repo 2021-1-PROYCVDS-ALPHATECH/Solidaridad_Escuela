@@ -119,7 +119,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaRegistrarUsuario(){
         try{
-            serviciosSolidaridad.registrarUsuario("10", "Bess Woods","(345) 394-5688" , "ikagim@oleat.tf", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
+            serviciosSolidaridad.registrarUsuario("10", "Bess Woods","(345) 394-5688" , "ikagim@oleat.tf", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante");
             if(serviciosSolidaridad.consultarUsuario("10") == null){
                 fail("No se encontro el usuario.");
             }
@@ -134,7 +134,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaRegistrarUsuario(){
         try{
-            serviciosSolidaridad.registrarUsuario("1", "Steve Davidson","(938) 559-6778" , "iru@pawumvap.hm", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
+            serviciosSolidaridad.registrarUsuario("1", "Steve Davidson","(938) 559-6778" , "iru@pawumvap.hm", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante");
             fail("Lanzo excepcion.");
         } catch(Exception e){
         }
@@ -146,7 +146,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaConsultarPorNombre(){
         try{
-            serviciosSolidaridad.registrarUsuario("11", "Christina Wood","(349) 349-3399" , "daet@dujo.ba", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
+            serviciosSolidaridad.registrarUsuario("11", "Christina Wood","(349) 349-3399" , "daet@dujo.ba", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante");
             if(serviciosSolidaridad.consultarUsuarioNombre("Christina Wood") == null){
                 fail("No se encontro el usuario.");
             }
@@ -159,7 +159,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaConsultarPorRol(){
         try{
             String rol = "Estudiante";
-            serviciosSolidaridad.registrarUsuario("12", "Travis Cunningham","(476) 912-7578" , "ogwuz@judi.cu", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", rol, 2);
+            serviciosSolidaridad.registrarUsuario("12", "Travis Cunningham","(476) 912-7578" , "ogwuz@judi.cu", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", rol);
             if(serviciosSolidaridad.consultarUsuariosRol(rol) == null || serviciosSolidaridad.consultarUsuariosRol(rol).size() < 1){
                 fail("No se encontraron usuarios.");
             }

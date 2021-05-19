@@ -44,8 +44,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
 
     @Transactional
     @Override
-    public void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol, int num) throws ExcepcionSolidaridad, PersistenceException{
-        usuarioDAO.save(new Usuario(id, nombre, telefono, email, new Sha256Hash(clave).toHex() + "", rol, num));
+    public void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol) throws ExcepcionSolidaridad, PersistenceException{
+        usuarioDAO.save(new Usuario(id, nombre, telefono, email, new Sha256Hash(clave).toHex() + "", rol));
     }
 
     @Override
