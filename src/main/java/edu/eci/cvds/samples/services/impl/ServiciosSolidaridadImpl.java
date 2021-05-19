@@ -128,6 +128,7 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
 
     @Override
     public void eliminarCategoria(String idCategoria) throws ExcepcionSolidaridad, PersistenceException{
+        System.out.println(idCategoria);
         categoriaDAO.delete(idCategoria);
     }
 

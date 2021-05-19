@@ -5,8 +5,9 @@ import javax.faces.bean.SessionScoped;
 
 import com.google.inject.Inject;
 
+import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.*;
-
+import edu.eci.cvds.samples.services.ExcepcionSolidaridad;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 
 @ManagedBean(name = "UpdateBean")
@@ -14,22 +15,30 @@ import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 public class UpdateBean extends BasePageBean{
 
     @Inject
+    private ServiciosSolidaridad servicios;
 
     private Categoria categoria;
     private Usuario usuario;
     private Respuesta respuesta;
     private Necesidad necesidad;
     private Oferta oferta;
-    protected ServiciosSolidaridad servicios;
     
+    
+    public void eliminarCategoria(){
+        try {
+            servicios.eliminarCategoria(categoria.getId());
+        } catch (Exception e) {
+        }
+    }
+
     public void actualizarCategoria(String id, String nombre, String descripcion, String estado){
         try {
-            if (nombre == "") nombre = null;
-            if (estado == "") estado = null;
-            if (descripcion == "") descripcion = null;
+            if (nombre.equals("")) nombre = null;
+            if (estado.equals("")) estado = null;
+            if (descripcion.equals("")) descripcion = null;
             servicios.actualizarCategoria(id, nombre, descripcion, estado);
         } catch (Exception e) {
-            //TODO: handle exception
+            e.printStackTrace();
         }
         
     }

@@ -21,13 +21,13 @@ import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 @SessionScoped
 public class LoginBean extends BasePageBean{
     @Inject
-    
+    private ServiciosSolidaridad servicios;
+
     private String user;
     private String password;
     private Subject subject;
     private Usuario currentUser;
-    protected ServiciosSolidaridad servicios;
-
+    
     public LoginBean(){
         user = "";
         password = "";

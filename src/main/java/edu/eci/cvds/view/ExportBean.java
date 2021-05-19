@@ -40,8 +40,7 @@ import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 public class ExportBean extends BasePageBean{
 
     @Inject
-
-    protected ServiciosSolidaridad servicios;
+    private ServiciosSolidaridad servicios;
 
     public void preProcessPDFOfertas(Object document) throws IOException, BadElementException, DocumentException {
         Document pdf = (Document) document;

@@ -11,10 +11,11 @@ import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 @SessionScoped
 public class RegisterBean extends BasePageBean{
     @Inject
+    private ServiciosSolidaridad servicios;
 
-    protected ServiciosSolidaridad servicios;
-
-    public void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario){
+    public void registrarCategoria(String id, String nombre, String descripcion){
+        String estado = "Valida";
+        String comentario = "";
         try{
             servicios.registrarCategoria(id, nombre, descripcion, estado, comentario);
         }catch (Exception e){

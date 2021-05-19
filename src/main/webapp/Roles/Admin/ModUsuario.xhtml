@@ -187,7 +187,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                     <p:outputLabel for="@next" value="Numero Solicitudes" />
                     <p:inputText  id= "registerSolicitud" type="Long" binding="#{nsolicitud}"/>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Users" value="Actualizar" action="Usuarios?faces-redirect=true" actionListener="#{UpdateBean.actualizarNumSolicitudes(UpdateBean.usuario.idUsuario,nsolicitud.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Users" value="Actualizar" action="Usuarios?faces-redirect=true"/>
             </p:panel>   
         </div>
     </h:form>

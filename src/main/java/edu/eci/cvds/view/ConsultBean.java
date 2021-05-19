@@ -24,9 +24,9 @@ import edu.eci.cvds.sampleprj.dao.PersistenceException;
 @ManagedBean(name = "ConsultBean")
 @SessionScoped
 public class ConsultBean extends BasePageBean{
+    
     @Inject
-
-    protected ServiciosSolidaridad servicios;
+    private ServiciosSolidaridad servicios;
 
     public List<Categoria> consultarCategorias() throws ExcepcionSolidaridad, PersistenceException{
         return servicios.consultarCategorias();

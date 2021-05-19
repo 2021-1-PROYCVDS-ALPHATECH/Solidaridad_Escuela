@@ -78,7 +78,8 @@ public class ServiciosSolidaridadFactory {
             instance.getServiciosSolidaridad().actualizarNumeroSolicitudes(100);
             System.out.println("-------------------------------- PRUEBA --------------------------------");
             System.out.println(instance.getServiciosSolidaridad().getNumeroSolicitudes());
-
+            instance.getServiciosSolidaridad().eliminarCategoria("100");
+            System.out.println(instance.getServiciosSolidaridad().consultarCategorias());
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

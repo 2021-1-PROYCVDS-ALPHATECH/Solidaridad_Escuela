@@ -104,7 +104,8 @@
                         <h:outputText value="#{categoria.estado}" />
                     </p:column>
                     <f:facet name="footer" style="margin: auto">
-                        <p:commandButton id="Modify" value="Seleccionar" action="ModCategoria?faces-redirect=true" update="Categories" styleClass="ui-button"/>	
+                        <p:commandButton id="Delete" value="Eliminar" styleClass="ui-button" update="Categories" actionListener="#{UpdateBean.eliminarCategoria()}"/>	
+                        <p:commandButton id="Modify" value="Seleccionar" action="ModCategoria?faces-redirect=true" update="Categories" styleClass="ui-button" style="margin-left: 30px;"/>	
                     </f:facet>
                 </p:dataTable>
             </p:panel>    
