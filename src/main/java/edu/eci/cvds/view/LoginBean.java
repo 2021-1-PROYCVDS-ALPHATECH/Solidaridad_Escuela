@@ -1,7 +1,5 @@
 package edu.eci.cvds.view;
 
-import com.google.inject.Inject;
-
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
@@ -14,8 +12,6 @@ import edu.eci.cvds.samples.entities.Usuario;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Sha256Hash;
-
-import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 
 @ManagedBean(name = "LoginBean")
 @SessionScoped

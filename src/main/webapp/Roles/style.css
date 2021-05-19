@@ -30,7 +30,7 @@ body .ui-panel .ui-panel-titlebar {
 }
 
 body .ui-widget {
-  font-family: Montserrat;
+  font-family: Montserrat, sans-serif;
 }
 
 body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-active {
