@@ -28,4 +28,5 @@ function load(){
     });
 }
 
+/*eslint no-undef: "error"*/
 window.onload = load();

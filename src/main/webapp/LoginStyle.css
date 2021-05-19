@@ -162,7 +162,7 @@ body .ui-inputfield.ui-state-error {
 @-webkit-keyframes shake-horizontal {
   0%,
   100% {
-  -webkit-transform: translateX(0);
+    -webkit-transform: translateX(0);
     transform: translateX(0);
   }
 
@@ -191,6 +191,7 @@ body .ui-inputfield.ui-state-error {
     transform: translateX(-8px);
   }
 }
+
 @keyframes shake-horizontal {
   0%,
   100% {
