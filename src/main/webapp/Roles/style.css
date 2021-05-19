@@ -45,7 +45,8 @@ body .ui-paginator .ui-paginator-pages .ui-paginator-page.ui-state-focus {
 }
 
 input {
-  border-radius: 100px; padding-left: 20px;
+  border-radius: 100px;
+  padding-left: 20px;
 }
 
 body .ui-inputfield.ui-state-hover {
