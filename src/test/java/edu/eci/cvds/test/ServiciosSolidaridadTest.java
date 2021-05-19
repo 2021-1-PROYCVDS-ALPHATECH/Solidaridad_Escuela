@@ -5,8 +5,6 @@ import java.sql.Date;
 import java.sql.Statement;
 import java.time.LocalDate;
 
-import com.google.inject.Inject;
-import org.apache.ibatis.session.SqlSession;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.After;
@@ -22,22 +20,11 @@ import edu.eci.cvds.samples.services.ServiciosSolidaridadFactory;
 
 public class ServiciosSolidaridadTest {
 
-    @Inject
-    private SqlSession SqlSession;
-
     ServiciosSolidaridad serviciosSolidaridad;
-    Connection connection;
-    Statement stmt;
 
     public ServiciosSolidaridadTest(){
         serviciosSolidaridad = ServiciosSolidaridadFactory.getInstance().getServiciosSolidaridadTesting();
     }
-    
-    @Before
-    public void setUp(){
-        
-    }
-
 
     /**
      * Se prueba que se tengan datos de usuario guardados previamente
@@ -301,7 +288,9 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarInformacionCategoria(){
         try{
-            String nombre = "Categoria33", descripcion = "DescripcionC33", estado = "Invalida";
+            String nombre = "Categoria33";
+            String descripcion = "DescripcionC33";
+            String estado = "Invalida";
             serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if (!(categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
@@ -315,7 +304,9 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarInformacionCategoriaNombreNull(){
         try{
-            String nombre = null, descripcion = "DescripcionC33", estado = "Invalida";
+            String nombre = null;
+            String descripcion = "DescripcionC33";
+            String estado = "Invalida";
             serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if ((categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
@@ -342,7 +333,9 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarInformacionCategoriaEstadoNull(){
         try{
-            String nombre = "Categoria33", descripcion = "DescripcionC33", estado = null;
+            String nombre = "Categoria33";
+            String descripcion = "DescripcionC33";
+            String estado = null;
             serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if (!(categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
