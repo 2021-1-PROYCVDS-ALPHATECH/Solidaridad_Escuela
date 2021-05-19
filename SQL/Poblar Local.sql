@@ -9,10 +9,10 @@ INSERT INTO Roles VALUES ('Profesor');
 INSERT INTO Roles VALUES ('Estudiante');
 
 -- Clave 1234
-INSERT INTO Usuarios VALUES ('1', 'Mario Doyle', '(887) 257-4554', 'puc@tumuhge.ke', 'Administrador', '1234', 2);
-INSERT INTO Usuarios VALUES ('2', 'Devin Walton', '(638) 927-3662', 'sevdijek@dahapawop.sj', 'Estudiante', '1234', 100);
-INSERT INTO Usuarios VALUES ('3', 'Allen Wright', '(785) 458-8387', 'swazguec@nilkit.bw', 'Estudiante', '1234',5);
-INSERT INTO Usuarios VALUES ('4', 'Garrett Elliott', '(450) 244-1462', 'powbo@tumpin.sc', 'Estudiante', '1234',1);
+INSERT INTO Usuarios VALUES ('1', 'Mario Doyle', '(887) 257-4554', 'puc@tumuhge.ke', 'Administrador', '1234');
+INSERT INTO Usuarios VALUES ('2', 'Devin Walton', '(638) 927-3662', 'sevdijek@dahapawop.sj', 'Estudiante', '1234');
+INSERT INTO Usuarios VALUES ('3', 'Allen Wright', '(785) 458-8387', 'swazguec@nilkit.bw', 'Estudiante', '1234');
+INSERT INTO Usuarios VALUES ('4', 'Garrett Elliott', '(450) 244-1462', 'powbo@tumpin.sc', 'Estudiante', '1234');
 
 
 INSERT INTO Categorias (idCategoria, nombre, descripcion, fechaCreacion, fechaModificacion, estado) VALUES ('1', 'Categoria1', 'DescripcionC1', '2013-06-01', '2013-06-01', 'Valida');

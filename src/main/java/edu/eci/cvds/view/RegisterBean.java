@@ -40,9 +40,9 @@ public class RegisterBean extends BasePageBean{
         
     }
 
-    public void registrarUsuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol, int num){
+    public void registrarUsuario(String idUsuario, String nombre, String telefono, String email, String clave, String rol){
         try {
-            servicios.registrarUsuario(idUsuario, nombre, telefono, email, clave, rol, num);
+            servicios.registrarUsuario(idUsuario, nombre, telefono, email, clave, rol);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

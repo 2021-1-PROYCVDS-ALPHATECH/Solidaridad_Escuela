@@ -8,7 +8,6 @@ CREATE TABLE IF NOT EXISTS Roles (
 
 -- -----------------------------------------------------
 -- Table `Usuarios`
--- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS Usuarios (
     idUsuario VARCHAR(50) PRIMARY KEY,
     nombre VARCHAR(50) UNIQUE NOT NULL,
@@ -16,7 +15,6 @@ CREATE TABLE IF NOT EXISTS Usuarios (
     email VARCHAR(100) UNIQUE NOT NULL,
     rol VARCHAR(20) NOT NULL,
     clave VARCHAR(100) NOT NULL,
-    numSolicitudes INTEGER NOT NULL,
     FOREIGN KEY (rol) REFERENCES Roles(nombre)
 );
 

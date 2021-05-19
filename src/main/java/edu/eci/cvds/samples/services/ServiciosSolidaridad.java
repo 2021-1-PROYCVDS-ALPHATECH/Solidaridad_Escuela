@@ -1,6 +1,5 @@
 package edu.eci.cvds.samples.services;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
@@ -15,7 +14,7 @@ import edu.eci.cvds.samples.entities.*;
  * @author Sebastian Mina
  * @author Jose Perez
  * 
- * @version 22/04/2021 v2.0
+ * @version 18/05/2021 v3.0
  */
 public interface ServiciosSolidaridad {
 
@@ -31,7 +30,7 @@ public interface ServiciosSolidaridad {
      * @throws ExcepcionSolidaridad
      * @throws PersistenceException
      */
-    public abstract void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol, int num) throws ExcepcionSolidaridad, PersistenceException;
+    public abstract void registrarUsuario(String id, String nombre, String telefono, String email, String clave, String rol) throws ExcepcionSolidaridad, PersistenceException;
     
     /**
      * Consulta todos los Usuarios existentes
@@ -67,14 +66,6 @@ public interface ServiciosSolidaridad {
      * @throws PersistenceException
      */
     public abstract List<Usuario> consultarUsuariosRol(String rol) throws ExcepcionSolidaridad, PersistenceException;
-
-    /**
-     * Actualiza el numerdo de Solicitudes que puede realizar un usuario 
-     * @param idUsuario Id del usuario al que se le van a actualizar el numero de solicitudes
-     * @param numSolicitudes Nuevo numero de solicitudes, no puede ser menor al numero que ya tenia anteriormente el Usuario
-     * @throws ExcepcionSolidaridad
-     */
-    public abstract void actualizarNumSolicitudes(String idUsuario, int numSolicitudes) throws ExcepcionSolidaridad;
 
     /**
      * ELimina un Usuario por su ID
@@ -415,7 +406,9 @@ public interface ServiciosSolidaridad {
 
     /**
      * Genera un reporte con todas las categorias
-     * @return TreeMap compuesto de un entero y de un HashMap de las Categorias y el numero de Solicitudes y Respuestas que pertenecen a cada Categoria
+     * @return TreeMap compuesto de un entero indicando el numero de solicitudes que pertenecen a una categoria, y como llava un HashMap
+     * que tiene como llave el nombre de la categoria y como valores un array donde se alamacen el numero de necesidades y el de ofertas que
+     * pertenecen a la categoria
      * @throws ExcepcionSolidaridad
      * @throws PersistenceException
      */
@@ -428,4 +421,13 @@ public interface ServiciosSolidaridad {
      * @throws PersistenceException
      */
     public HashMap<String,Integer> consultarCantidadPorCategorias() throws ExcepcionSolidaridad, PersistenceException;
-}
+    
+    /* Se obtiene el numero maximo de solicitudes que estan permitidas en la aplicacion
+     */
+    public abstract String getNumeroSolicitudes();
+
+    /**
+     * Se modifica el numero maximo de solicitudes que estan permitidas en la aplicacion
+     */
+    public abstract void actualizarNumeroSolicitudes(int nuevoNumero) throws ExcepcionSolidaridad, PersistenceException;
+

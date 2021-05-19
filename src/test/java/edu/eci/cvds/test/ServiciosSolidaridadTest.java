@@ -119,7 +119,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaRegistrarUsuario(){
         try{
-            serviciosSolidaridad.registrarUsuario("10", "Bess Woods","(345) 394-5688" , "ikagim@oleat.tf", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
+            serviciosSolidaridad.registrarUsuario("10", "Bess Woods","(345) 394-5688" , "ikagim@oleat.tf", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante");
             if(serviciosSolidaridad.consultarUsuario("10") == null){
                 fail("No se encontro el usuario.");
             }
@@ -134,7 +134,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaRegistrarUsuario(){
         try{
-            serviciosSolidaridad.registrarUsuario("1", "Steve Davidson","(938) 559-6778" , "iru@pawumvap.hm", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
+            serviciosSolidaridad.registrarUsuario("1", "Steve Davidson","(938) 559-6778" , "iru@pawumvap.hm", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante");
             fail("Lanzo excepcion.");
         } catch(Exception e){
         }
@@ -146,7 +146,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaConsultarPorNombre(){
         try{
-            serviciosSolidaridad.registrarUsuario("11", "Christina Wood","(349) 349-3399" , "daet@dujo.ba", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
+            serviciosSolidaridad.registrarUsuario("11", "Christina Wood","(349) 349-3399" , "daet@dujo.ba", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante");
             if(serviciosSolidaridad.consultarUsuarioNombre("Christina Wood") == null){
                 fail("No se encontro el usuario.");
             }
@@ -159,7 +159,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaConsultarPorRol(){
         try{
             String rol = "Estudiante";
-            serviciosSolidaridad.registrarUsuario("12", "Travis Cunningham","(476) 912-7578" , "ogwuz@judi.cu", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", rol, 2);
+            serviciosSolidaridad.registrarUsuario("12", "Travis Cunningham","(476) 912-7578" , "ogwuz@judi.cu", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", rol);
             if(serviciosSolidaridad.consultarUsuariosRol(rol) == null || serviciosSolidaridad.consultarUsuariosRol(rol).size() < 1){
                 fail("No se encontraron usuarios.");
             }
@@ -174,38 +174,6 @@ public class ServiciosSolidaridadTest {
             if (serviciosSolidaridad.consultarSolicitudesUsuario("2") == null) fail("No hay solicitudes del usuario.");
         } catch(Exception e){
             fail("Lanzo ecepcion.");
-        }
-
-        
-
-    }
-
-    /**
-     * Se comprueba que se actualice el numero de solicitudes permitidas del usuario de manera correcta
-     */
-    @Test
-    public void deberiaActualizarNumSolicitudesUsuario(){
-        try{
-            serviciosSolidaridad.registrarUsuario("13", "Tom Barton","(911) 456-4054" , "ehiuj@cavmis.ad", "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4", "Estudiante", 2);
-            int numSolicitudes = 5;
-            serviciosSolidaridad.actualizarNumSolicitudes("13", numSolicitudes);
-            assertEquals(numSolicitudes, serviciosSolidaridad.consultarUsuario("13").getNumSolicitudes());
-        } catch(Exception e){
-            fail("Lanzo excepcion." + e.getMessage());
-        }
-    }
-
-    /**
-     * Se prueba que no se actualice el numero de solicitudes del usuario si este numero es menor
-     * a las solucitudes que ya realizo
-     */
-    @Test
-    public void noDeberiaActualizarNumSolicitudesUsuario(){
-        try{
-            serviciosSolidaridad.actualizarNumSolicitudes("2", 1);
-            fail("No lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
-            assertEquals(ExcepcionSolidaridad.INVALID_NUM_SOLICITUDES, e.getMessage());
         }
     }
 
@@ -460,20 +428,6 @@ public class ServiciosSolidaridadTest {
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
-    
-    /**
-     * Prueba Historia de usuario #4 Registrar Necesidad
-     * Se prueba que no sea posible registrar una necesidad si el usuario ya llego al tope de su cantidad de solicitudes
-     */
-    @Test
-    public void noDeberiaRegistrarNecesidadNumSolicitudes(){
-        try{
-            serviciosSolidaridad.registrarNecesidad("13", "4", "Necesidad1", "DescripconN1", "Alta", "Activa", "1");
-            fail("No lanzo excepcion");
-        } catch(ExcepcionSolidaridad e){
-            assertEquals(ExcepcionSolidaridad.INVALID_REGISTRED, e.getMessage());
-        }
-    }
 
     /**
      * Prueba Historia de usuario #5 Registrar Oferta
@@ -526,22 +480,6 @@ public class ServiciosSolidaridadTest {
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
-
-
-    /**
-     * Prueba Historia de usuario #5 Registrar Oferta
-     * Se prueba que no sea posible registrar una necesidad si el usuario ya llego al tope de su cantidad de solicitudes
-     */
-    @Test
-    public void noDeberiaRegistrarOfertaNumSolicitudes(){
-        try{
-            serviciosSolidaridad.registrarOferta("24", "4", "Oferta24", "DescripconO24", "Activa", "1");
-            fail("No lanzo excepcion");
-        } catch(ExcepcionSolidaridad e){
-            assertEquals(ExcepcionSolidaridad.INVALID_REGISTRED, e.getMessage());
-        }
-    }
-
 
     /**
      * Prueba Historia de usuario #6 Registrar Respuestas
