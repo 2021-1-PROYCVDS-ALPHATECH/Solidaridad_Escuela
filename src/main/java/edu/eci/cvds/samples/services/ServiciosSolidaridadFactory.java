@@ -84,6 +84,5 @@ public class ServiciosSolidaridadFactory {
             System.out.println(e.getMessage());
         }
     }
-
 }
 

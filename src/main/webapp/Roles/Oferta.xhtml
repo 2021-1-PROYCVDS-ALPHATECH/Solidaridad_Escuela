@@ -5,6 +5,8 @@
     xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title> Registro Cliente </title>
+    <link rel="stylesheet" href="../style.css"></link>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <link rel="stylesheet" href="./style.css"></link>
 </h:head>
 <style>
@@ -80,7 +82,12 @@
                     <p:outputLabel for="@next" value="Descripcion" />
                     <p:inputText  id= "registerDes" type="String" binding="#{descripcion}"/>
                     <p:outputLabel for="@next" value="Estado" />
-                    <p:inputText  id= "registerEst" type="String" binding="#{estado}"/>
+                    <p:selectOneMenu id="option"  binding="#{estado}" style="width: 220px;">
+                        <f:selectItem itemLabel="Activa" itemValue="Activa"/>
+                        <f:selectItem itemLabel="En proceso" itemValue="En proceso"/>
+                        <f:selectItem itemLabel="Resuelta" itemValue="Resuelta"/>
+                        <f:selectItem itemLabel="Cerrada" itemValue="Cerrada"/>
+                    </p:selectOneMenu>
                     <p:outputLabel for="@next" value="Categoria" />
                     <p:inputText  id= "registerCat" type="String" binding="#{categoria}"/>
                 </h:panelGrid>

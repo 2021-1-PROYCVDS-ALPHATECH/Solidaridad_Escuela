@@ -81,8 +81,15 @@
                     <p:inputText  id= "registerDoc" type="Long" binding="#{nombre}"/>
                     <p:outputLabel for="@next" value="Descripcion" />
                     <p:inputText  id= "registerDes" type="String" binding="#{descripcion}"/>
+                    <p:outputLabel for="@next" value="Estado" />
+                    <p:selectOneMenu id="optionEstado"  binding="#{estado}" style="width: 220px;">
+                        <f:selectItem itemLabel="Valida" itemValue="Valida"/>
+                        <f:selectItem itemLabel="Invalida" itemValue="Invalida"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel for="@next" value="Comentario" />
+                    <p:inputText  id= "registerComm" type="String" binding="#{comentario}"/>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{RegisterBean.registrarCategoria(id.value, nombre.value, descripcion.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{RegisterBean.registrarCategoria(id.value, nombre.value, descripcion.value, estado.value, comentario.value)}"/>
             </p:panel>
             
             <p:panel header="Lista Categorias" style="text-align: center; min-height: 800px;" name="panel" id="item2">
