@@ -10,8 +10,18 @@ import com.google.inject.Injector;
 import org.mybatis.guice.XMLMyBatisModule;
 import org.mybatis.guice.datasource.helper.JdbcHelper;
 
-import edu.eci.cvds.sampleprj.dao.*;
-import edu.eci.cvds.sampleprj.dao.mybatis.*;
+import edu.eci.cvds.sampleprj.dao.UsuarioDAO;
+import edu.eci.cvds.sampleprj.dao.CategoriaDAO;
+import edu.eci.cvds.sampleprj.dao.NecesidadDAO;
+import edu.eci.cvds.sampleprj.dao.OfertaDAO;
+import edu.eci.cvds.sampleprj.dao.SolicitudDAO;
+import edu.eci.cvds.sampleprj.dao.RespuestaDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISUsuarioDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISCategoriaDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISOfertaDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISNecesidadDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISSolicitudDAO;
+import edu.eci.cvds.sampleprj.dao.mybatis.MyBATISRespuestaDAO;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 import edu.eci.cvds.samples.services.impl.ServiciosSolidaridadImpl;
 
@@ -23,7 +33,7 @@ public class GuiceContextListener implements ServletContextListener {
     }
 
     public void contextInitialized(ServletContextEvent servletContextEvent) {     
-	    Injector injector = Guice.createInjector(new XMLMyBatisModule() {
+        Injector injector = Guice.createInjector(new XMLMyBatisModule() {
             @Override
             protected void initialize() {
                 install(JdbcHelper.PostgreSQL);
