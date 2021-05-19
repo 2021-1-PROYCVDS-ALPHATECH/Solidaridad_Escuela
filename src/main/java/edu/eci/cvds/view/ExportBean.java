@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.HashMap;
-import java.util.TreeMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;

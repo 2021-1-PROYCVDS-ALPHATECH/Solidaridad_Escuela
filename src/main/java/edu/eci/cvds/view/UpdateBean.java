@@ -5,9 +5,13 @@ import javax.faces.bean.SessionScoped;
 
 import com.google.inject.Inject;
 
-import edu.eci.cvds.sampleprj.dao.PersistenceException;
-import edu.eci.cvds.samples.entities.*;
-import edu.eci.cvds.samples.services.ExcepcionSolidaridad;
+import edu.eci.cvds.samples.entities.Categoria;
+import edu.eci.cvds.samples.entities.Estado;
+import edu.eci.cvds.samples.entities.Necesidad;
+import edu.eci.cvds.samples.entities.Oferta;
+import edu.eci.cvds.samples.entities.Usuario;
+import edu.eci.cvds.samples.entities.Respuesta;
+
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 
 @ManagedBean(name = "UpdateBean")

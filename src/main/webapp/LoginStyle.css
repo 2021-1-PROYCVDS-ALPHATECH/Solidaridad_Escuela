@@ -66,7 +66,6 @@ td {
 
 .nav-item.active {
   border-bottom: 2px solid;
-  border-radius: 0px;
   border-color: #7e1323;
 }
 
@@ -179,6 +178,7 @@ body .ui-inputfield.ui-state-error {
     -webkit-transform: translateX(-10px);
     transform: translateX(-10px);
   }
+  
   20%,
 
   40%,
@@ -200,8 +200,8 @@ body .ui-inputfield.ui-state-error {
 @keyframes shake-horizontal {
   0%,
 
-  100% {
-    -webkit-transform: translateX(0);
+  100% 
+  { -webkit-transform: translateX(0);
     transform: translateX(0);
   }
 
@@ -211,24 +211,24 @@ body .ui-inputfield.ui-state-error {
 
   50%,
 
-  70% {
-    -webkit-transform: translateX(-10px);
+  70% 
+  { -webkit-transform: translateX(-10px);
     transform: translateX(-10px);
   }
   20%,
   40%,
   60% 
-  {
-    -webkit-transform: translateX(10px);
+  { -webkit-transform: translateX(10px);
     transform: translateX(10px);
   }
+
   80%
-  {
-    -webkit-transform: translateX(8px);
+  { -webkit-transform: translateX(8px);
     transform: translateX(8px);
   }
-  90% {
-    -webkit-transform: translateX(-8px);
+
+  90% 
+  { -webkit-transform: translateX(-8px);
     transform: translateX(-8px);
   }
 }

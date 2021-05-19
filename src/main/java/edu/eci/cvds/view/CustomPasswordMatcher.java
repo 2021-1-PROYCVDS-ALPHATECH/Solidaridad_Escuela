@@ -18,10 +18,11 @@
  */
 package edu.eci.cvds.view;
 
-import org.apache.shiro.authc.credential.*;
-
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.authc.credential.HashingPasswordService;
+import org.apache.shiro.authc.credential.PasswordService;
 import org.apache.shiro.crypto.hash.Hash;
 
 /**
