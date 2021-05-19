@@ -130,7 +130,7 @@ public class ExportBean extends BasePageBean{
     public JFreeChart getPieChart(String name){
         DefaultPieDataset dataset = new DefaultPieDataset();
         try {
-            HashMap<String, Integer> estadisticas = null;
+            HashMap<String, Integer> estadisticas;
             switch (name.toLowerCase()){
                 case "necesidades":
                     estadisticas = servicios.consultarNecesidadesEstado();
@@ -140,6 +140,9 @@ public class ExportBean extends BasePageBean{
                     break;
                 case "categorias":
                     estadisticas = servicios.consultarCantidadPorCategorias();
+                    break;
+                default :
+                    estadisticas = null;
                     break;
             }
             for(String key: estadisticas.keySet()){

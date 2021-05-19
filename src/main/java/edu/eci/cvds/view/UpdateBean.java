@@ -6,7 +6,6 @@ import javax.faces.bean.SessionScoped;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.samples.entities.Categoria;
-import edu.eci.cvds.samples.entities.Estado;
 import edu.eci.cvds.samples.entities.Necesidad;
 import edu.eci.cvds.samples.entities.Oferta;
 import edu.eci.cvds.samples.entities.Usuario;
@@ -37,10 +36,7 @@ public class UpdateBean extends BasePageBean{
 
     public void actualizarCategoria(String id, String nombre, String descripcion, String estado){
         try {
-            if (nombre.equals("")) nombre = null;
-            if (estado.equals("")) estado = null;
-            if (descripcion.equals("")) descripcion = null;
-            servicios.actualizarCategoria(id, nombre, descripcion, estado);
+            servicios.actualizarCategoria(id, nombre.equals("")?null:nombre, descripcion.equals("")?null:descripcion, estado.equals("")?null:estado);
         } catch (Exception e) {
             e.printStackTrace();
         }

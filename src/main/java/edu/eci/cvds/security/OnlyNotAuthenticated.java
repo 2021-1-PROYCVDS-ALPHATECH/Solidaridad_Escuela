@@ -9,7 +9,7 @@ import org.apache.shiro.web.util.WebUtils;
 
 public class OnlyNotAuthenticated  extends  AccessControlFilter{
 
-    String welcomeurl="";
+    private String welcomeurl="";
     
     @Override
     protected boolean isAccessAllowed(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {

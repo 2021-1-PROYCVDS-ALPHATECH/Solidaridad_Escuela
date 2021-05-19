@@ -20,8 +20,8 @@ import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 @ManagedBean(name = "LoginBean")
 @SessionScoped
 public class LoginBean extends BasePageBean{
-    @Inject
-    private ServiciosSolidaridad servicios;
+    //@Inject
+    //private ServiciosSolidaridad servicios;
 
     private String user;
     private String password;
