@@ -156,7 +156,7 @@ body .ui-inputfield.ui-state-error {
   border-color: #7e1323;
   background-color: rgba(166, 25, 46, 0.2);
   -webkit-animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
-    animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: shake-horizontal 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
 }
 
 @-webkit-keyframes shake-horizontal {
