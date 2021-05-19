@@ -210,13 +210,13 @@ body .ui-inputfield.ui-state-error {
     transform: translateX(10px);
   }
 
-  80%
-  { -webkit-transform: translateX(8px);
+  80%{ 
+  -webkit-transform: translateX(8px);
     transform: translateX(8px);
   }
 
-  90% 
-  { -webkit-transform: translateX(-8px);
+  90% { 
+  -webkit-transform: translateX(-8px);
     transform: translateX(-8px);
   }
 }
