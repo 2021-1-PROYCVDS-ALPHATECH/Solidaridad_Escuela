@@ -420,4 +420,12 @@ public interface ServiciosSolidaridad {
      * @throws PersistenceException
      */
     public abstract TreeMap<Integer, HashMap<String, int[]>> reporteCategorias() throws ExcepcionSolidaridad, PersistenceException;
+
+    /**
+     * Consulta todas las categorias y devuelve un HashMap con el numero de necesidades y solicitudes que pertenecen a cada categoria existente
+     * @return Hashmap con las categorias y el nuemero de necesidades y solicitudes que pertenecen a esta
+     * @throws ExcepcionSolidaridad
+     * @throws PersistenceException
+     */
+    public HashMap<String,Integer> consultarCantidadPorCategorias() throws ExcepcionSolidaridad, PersistenceException;
 }

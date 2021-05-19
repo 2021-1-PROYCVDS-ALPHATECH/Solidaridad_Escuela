@@ -2,6 +2,7 @@ function load(){
     var ctx = document.getElementById('myChart').getContext('2d');
     var labelsValues = document.getElementById('labels').value.split(",");
     var statesValues = document.getElementById('values').value.split(",").map(Number);
+    alert(statesValues);
     var myChart = new Chart(ctx, {
         type: 'doughnut',
         data: {

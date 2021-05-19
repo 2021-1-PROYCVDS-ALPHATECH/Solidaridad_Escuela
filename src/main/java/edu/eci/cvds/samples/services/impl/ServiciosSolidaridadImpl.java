@@ -369,6 +369,18 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
+    public HashMap<String,Integer> consultarCantidadPorCategorias() throws ExcepcionSolidaridad, PersistenceException{
+        HashMap<String, Integer> reporte = new HashMap<>();
+        for (Categoria categoria : consultarCategorias()){
+            String nombre = categoria.getNombre();
+            int necesidades = consultarNecesidadesCategoria(nombre).size();
+            int ofertas = consultarOfertasCategoria(nombre).size();
+            reporte.put(nombre, necesidades + ofertas);
+        }
+        return reporte;
+    }
+
+    @Override
     public TreeMap<Integer, HashMap<String, int[]>> reporteCategorias() throws ExcepcionSolidaridad, PersistenceException {
         TreeMap<Integer, HashMap<String, int[]>> estadisticas =  new TreeMap<>();
         for (Categoria categoria : consultarCategorias()){

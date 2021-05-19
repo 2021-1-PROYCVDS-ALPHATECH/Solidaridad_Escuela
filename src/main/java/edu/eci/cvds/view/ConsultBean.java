@@ -1,7 +1,9 @@
 package edu.eci.cvds.view;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.List;
+import java.util.ArrayList;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -49,18 +51,8 @@ public class ConsultBean extends BasePageBean{
     public List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad, PersistenceException{
         return servicios.consultarRespuestas();
     }
-    
-    public String ConsultarEstadosNecesidad() throws ExcepcionSolidaridad, PersistenceException{
-        String values = "";
-        HashMap<String, Integer> estadisticas = servicios.consultarNecesidadesEstado();
-        for(String key: estadisticas.keySet()){
-            values += estadisticas.get(key) + ",";
-        }
-        values = values.substring(0, values.length()-1);
-        return values;
-    }
 
-    public String ConsultarLabelsNecesidad() throws ExcepcionSolidaridad, PersistenceException{
+    public String consultarLabelsNecesidad() throws ExcepcionSolidaridad, PersistenceException{
         String labels = "";
         HashMap<String, Integer> estadisticas = servicios.consultarNecesidadesEstado();
         for(String key: estadisticas.keySet()){
@@ -70,7 +62,7 @@ public class ConsultBean extends BasePageBean{
         return labels;
     }
 
-    public String ConsultarLabelsOfertas() throws ExcepcionSolidaridad, PersistenceException{
+    public String consultarLabelsOfertas() throws ExcepcionSolidaridad, PersistenceException{
         String labels = "";
         HashMap<String, Integer> estadisticas = servicios.consultarOfertasEstado();
         for(String key: estadisticas.keySet()){
@@ -80,7 +72,19 @@ public class ConsultBean extends BasePageBean{
         return labels;
     }
 
-    public String ConsultarEstadosOfertas() throws ExcepcionSolidaridad, PersistenceException{
+    public String consultarLabelsCategorias() throws ExcepcionSolidaridad, PersistenceException{
+        String labels = "";
+        TreeMap<Integer, HashMap<String, int[]>> reporte = servicios.reporteCategorias();
+        for(Integer key: reporte.keySet()){
+            for(String nombreCategoria: reporte.get(key).keySet()){
+                labels += nombreCategoria + ",";
+            }
+        }
+        labels = labels.substring(0, labels.length()-1);
+        return labels;
+    }
+
+    public String consultarValuesOfertas() throws ExcepcionSolidaridad, PersistenceException{
         String values = "";
         HashMap<String, Integer> estadisticas = servicios.consultarOfertasEstado();
         for(String key: estadisticas.keySet()){
@@ -88,5 +92,42 @@ public class ConsultBean extends BasePageBean{
         }
         values = values.substring(0, values.length()-1);
         return values;
+    }
+
+    public String consultarValuesCategorias() throws ExcepcionSolidaridad, PersistenceException{
+        String values = "";
+        TreeMap<Integer, HashMap<String, int[]>> reporte = servicios.reporteCategorias();
+        for(Integer key: reporte.keySet()){
+            for(int i=0; i<reporte.get(key).size(); i++){
+                values += key + ",";
+            }
+        }
+        values = values.substring(0, values.length()-1);
+        return values;
+    }
+
+    public String consultarValuesNecesidad() throws ExcepcionSolidaridad, PersistenceException{
+        String values = "";
+        HashMap<String, Integer> estadisticas = servicios.consultarNecesidadesEstado();
+        for(String key: estadisticas.keySet()){
+            values += estadisticas.get(key) + ",";
+        }
+        values = values.substring(0, values.length()-1);
+        return values;
+    }
+
+    public List consultarReporteCategorias() throws ExcepcionSolidaridad, PersistenceException{
+        ArrayList<String[]> categorias = new ArrayList<String[]>();
+        /*TreeMap<Integer, HashMap<String, int[]>> reporte = servicios.reporteCategorias();
+        /*for(Integer key: servicios.reporteCategorias().keySet()){
+            HashMap<String, int[]> map = reporte.get(key);
+            for(String nombreCategoria: map.keySet()){
+                String[] entry = new String[4];
+                entry[0] = nombreCategoria; entry[1] = "" + map.get(nombreCategoria)[0];
+                entry[3] = "" + key;        entry[2] = "" + map.get(nombreCategoria)[1];
+                categorias.add(entry);
+            }
+        }*/
+        return categorias;
     }
 }

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
@@ -60,6 +61,15 @@ public class ExportBean extends BasePageBean{
         pdf.newPage();
     }
 
+    public void preProcessPDFCategorias(Object document) throws IOException, BadElementException, DocumentException {
+        Document pdf = (Document) document;
+        pdf.open();
+        pdf.setPageSize(PageSize.A4);
+        generateCharPNG(getPieChart("Categorias"), "Categorias");
+        pdf.add(Image.getInstance("Categorias.png"));
+        pdf.newPage();
+    }
+
     public void postProcessXLSOfertas(Object document) throws IOException, BadElementException, DocumentException {
         HSSFWorkbook wb = (HSSFWorkbook) document;
 		HSSFSheet sheet = wb.getSheetAt(0);
@@ -94,6 +104,23 @@ public class ExportBean extends BasePageBean{
         pict.resize();
     }
 
+    public void postProcessXLSCategorias(Object document) throws IOException, BadElementException, DocumentException {
+        HSSFWorkbook wb = (HSSFWorkbook) document;
+		HSSFSheet sheet = wb.getSheetAt(0);
+        generateCharPNG(getPieChart("Categorias"), "Categorias");
+        InputStream inputStream = new FileInputStream("Categorias.png");
+        byte[] bytes = IOUtils.toByteArray(inputStream);
+        int pictureIdx = wb.addPicture(bytes, Workbook.PICTURE_TYPE_PNG);
+        inputStream.close();
+        Drawing drawing = sheet.createDrawingPatriarch();
+        CreationHelper helper = wb.getCreationHelper();
+        ClientAnchor anchor = helper.createClientAnchor();
+        anchor.setCol1(10);
+        anchor.setRow1(10);
+        Picture pict = drawing.createPicture(anchor, pictureIdx);
+        pict.resize();
+    }
+
     public void generateCharPNG(JFreeChart chart, String name){
         try{
             BufferedImage bufferedImage = chart.createBufferedImage(520,700);
@@ -105,7 +132,18 @@ public class ExportBean extends BasePageBean{
     public JFreeChart getPieChart(String name){
         DefaultPieDataset dataset = new DefaultPieDataset();
         try {
-            HashMap<String, Integer> estadisticas = name.toLowerCase().equals("necesidades")?servicios.consultarNecesidadesEstado():servicios.consultarOfertasEstado();
+            HashMap<String, Integer> estadisticas = null;
+            switch (name.toLowerCase()){
+                case "necesidades":
+                    estadisticas = servicios.consultarNecesidadesEstado();
+                    break;
+                case "ofertas":
+                    estadisticas = servicios.consultarOfertasEstado();
+                    break;
+                case "categorias":
+                    estadisticas = servicios.consultarCantidadPorCategorias();
+                    break;
+            }
             for(String key: estadisticas.keySet()){
                 dataset.setValue(key, estadisticas.get(key));
             }
