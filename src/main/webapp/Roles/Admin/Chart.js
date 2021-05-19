@@ -28,5 +28,6 @@ function load(){
     });
 }
 
+/*global load, Chart*/
 /*eslint no-undef: "error"*/
 window.onload = load();
