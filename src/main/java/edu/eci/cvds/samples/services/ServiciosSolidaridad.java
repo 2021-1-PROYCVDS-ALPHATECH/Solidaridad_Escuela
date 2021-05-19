@@ -422,7 +422,8 @@ public interface ServiciosSolidaridad {
      */
     public HashMap<String,Integer> consultarCantidadPorCategorias() throws ExcepcionSolidaridad, PersistenceException;
     
-    /* Se obtiene el numero maximo de solicitudes que estan permitidas en la aplicacion
+    /**
+     *  Se obtiene el numero maximo de solicitudes que estan permitidas en la aplicacion 
      */
     public abstract String getNumeroSolicitudes();
 
@@ -430,4 +431,6 @@ public interface ServiciosSolidaridad {
      * Se modifica el numero maximo de solicitudes que estan permitidas en la aplicacion
      */
     public abstract void actualizarNumeroSolicitudes(int nuevoNumero) throws ExcepcionSolidaridad, PersistenceException;
+
+}
 
