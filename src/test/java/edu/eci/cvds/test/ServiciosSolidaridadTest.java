@@ -2,15 +2,20 @@ package edu.eci.cvds.test;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.HashMap;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
 import edu.eci.cvds.samples.entities.Categoria;
+import edu.eci.cvds.samples.entities.Estado;
 import edu.eci.cvds.samples.entities.Necesidad;
+import edu.eci.cvds.samples.entities.Oferta;
 import edu.eci.cvds.samples.services.ExcepcionSolidaridad;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 import edu.eci.cvds.samples.services.ServiciosSolidaridadFactory;
@@ -181,7 +186,7 @@ public class ServiciosSolidaridadTest {
     public void deberiaRegistrarCategoriaInvalida(){
         try{
             serviciosSolidaridad.registrarCategoria("21", "Cat21", "Cat21Desc", "Invalida", "No se maneja dinero");
-        } catch (ExcepcionSolidaridad e){
+        } catch (ExcepcionSolidaridad | PersistenceException e){
             fail("Lanzo excepcion.");
         }
     }
@@ -195,7 +200,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarCategoria("1", "cat1", "cat1Desc", "Valida", null);
             fail("No lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
         }
     }
@@ -209,7 +214,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarCategoria("11", "Categoria1", "cat11Desc", "Valida", null);
             fail("No lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
@@ -219,7 +224,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarCategoria("20", "Cat20", "Cat20Desc", "Invalida", null);
             fail("No lanzo excepcion.");
-        } catch (ExcepcionSolidaridad e){
+        } catch (ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_CATEGORY, e.getMessage());
         }
     }
@@ -245,7 +250,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarSolicitud("100", "Sol100Desc", "Activa", "200", "2");
             fail("No lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED, e.getMessage());
         }
     }
@@ -352,7 +357,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.actualizarCategoria("12", "Categoria12", "DescripcionC12", "Valida");
             fail("No lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED, e.getMessage());
         }
     }
@@ -362,7 +367,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.actualizarCategoria("1", "Categoria1", "DescripcionC1", "Valida");
             fail("No lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_UPDATE, e.getMessage());
         }
     }
@@ -374,7 +379,8 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaRegistrarNecesidad(){
         try{
-            int cantNecesidades =  serviciosSolidaridad.consultarNecesidadesUsuario("2").size();
+            int cantNecesidadesUsuarios =  serviciosSolidaridad.consultarNecesidadesUsuario("2").size();
+            int cantNecesidadesCategorias = serviciosSolidaridad.consultarNecesidadesCategoria("Categoria1").size();
             serviciosSolidaridad.registrarNecesidad("10", "2", "Necesidad10", "DescripconN10", "Alta", "Activa", "1");
             if (serviciosSolidaridad.consultarSolicitudId("10") == null){
                 fail("No se inserto la necesidad en solicicitudes.");
@@ -382,8 +388,11 @@ public class ServiciosSolidaridadTest {
             else if (serviciosSolidaridad.consultarNecesidadNombre("Necesidad10") == null){
                 fail("No se inserto la necesidad.");
             }
-            else if (cantNecesidades >= serviciosSolidaridad.consultarNecesidadesUsuario("2").size()){
+            else if (cantNecesidadesUsuarios + 1 != serviciosSolidaridad.consultarNecesidadesUsuario("2").size()){
                 fail("No se inserto la necesidad al usuario.");
+            }
+            else if (cantNecesidadesCategorias + 1 != serviciosSolidaridad.consultarNecesidadesCategoria("Categoria1").size()){
+                fail("No se inserto la necesidad con la categoria dicha.");
             }
         } catch(Exception e){
             fail("Lanzo excepcion." + e.getMessage());
@@ -399,7 +408,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarNecesidad("1", "3", "Necesidad1", "DescripconN1", "Alta", "Activa", "1");
             fail("No lanzo excepcion");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
         }
     }
@@ -414,7 +423,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarNecesidad("11", "3" ,"Solicitud1", "DescripcionSN10", "Alta", "Activa", "2");
             fail("No lanzo excepcion");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
@@ -426,7 +435,8 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaRegistrarOferta(){
         try{
-            int cantOfertas =  serviciosSolidaridad.consultarOfertasUsuario("2").size();
+            int cantOfertasUsuarios =  serviciosSolidaridad.consultarOfertasUsuario("2").size();
+            int cantNecesidadesCategorias = serviciosSolidaridad.consultarOfertasCategoria("Categoria1").size();
             serviciosSolidaridad.registrarOferta("20", "2", "Oferta20", "DescripconO20", "Activa", "1");
             if (serviciosSolidaridad.consultarSolicitudId("20") == null){
                 fail("No se inserto la oferta en solicicitudes.");
@@ -434,8 +444,11 @@ public class ServiciosSolidaridadTest {
             else if (serviciosSolidaridad.consultarOfertaNombre("Oferta20") == null){
                 fail("No se inserto la oferta.");
             }
-            else if (cantOfertas >= serviciosSolidaridad.consultarOfertasUsuario("2").size()){
+            else if (cantOfertasUsuarios + 1 != serviciosSolidaridad.consultarOfertasUsuario("2").size()){
                 fail("No se inserto la oferta al usuario.");
+            }
+            else if (cantNecesidadesCategorias + 1 != serviciosSolidaridad.consultarOfertasCategoria("Categoria1").size()){
+                fail("No se inserto la oferta con la categoria dicha.");
             }
         } catch(Exception e){
             fail("Lanzo excepcion."+e.getMessage());
@@ -451,7 +464,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarOferta("3", "2", "Oferta21", "DescripconO21", "Activa", "1");
             fail("No lanzo excepcion");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
         }
     }
@@ -466,7 +479,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.registrarOferta("22", "3", "Solicitud23", "DescripconO23", "Activa", "1");
             serviciosSolidaridad.registrarOferta("21", "3", "Solicitud23", "DescripconO21", "Activa", "1");
             fail("No lanzo excepcion");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
@@ -476,7 +489,7 @@ public class ServiciosSolidaridadTest {
      * Se comprueba que se registre la categoria de manera exitosa
      */
     @Test
-    public void deberiaRegistrarRespuesta(){
+    public void deberiaRegistrarRespuestaSolicitudActiva(){
         try{
             int cantRespuestasUsuario = serviciosSolidaridad.consultarRespuestasUsuario("Allen Wright").size();
             int cantRespuestasSolicitud = serviciosSolidaridad.consultarRespuestasSolicitud("Solicitud2").size();
@@ -495,6 +508,30 @@ public class ServiciosSolidaridadTest {
         }
     }
 
+        /**
+     * Prueba Historia de usuario #6 Registrar Respuestas
+     * Se comprueba que se registre la categoria de manera exitosa
+     */
+    @Test
+    public void deberiaRegistrarRespuesta(){
+        try{
+            int cantRespuestasUsuario = serviciosSolidaridad.consultarRespuestasUsuario("Allen Wright").size();
+            int cantRespuestasSolicitud = serviciosSolidaridad.consultarRespuestasSolicitud("Solicitud300").size();
+            serviciosSolidaridad.registrarRespuesta("12", "3", "Respuesta12", "RespuestaCom12", "300");
+            if (serviciosSolidaridad.consultarRespuestaId("12") == null) {
+                fail("No se encontro la respuesta.");
+            }
+            else if (cantRespuestasUsuario + 1 != serviciosSolidaridad.consultarRespuestasUsuario("Allen Wright").size()){
+                fail("No se inserto respuesta al usuario");
+            }
+            else if (cantRespuestasSolicitud + 1 != serviciosSolidaridad.consultarRespuestasSolicitud("Solicitud2").size()){
+                fail("No se inserto respuesa ");
+            }
+        } catch(Exception e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
     /**
      * Prueba Historia de usuario #6 Registrar Respuestas
      * Se prueba que no sea posible registrar una respuesta con id ya existente
@@ -504,7 +541,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.registrarRespuesta("1", "3", "Respuesta11", "RespuestaCom11", "2");
             fail("Lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_ID, e.getMessage());
         }
     }
@@ -515,14 +552,25 @@ public class ServiciosSolidaridadTest {
      * esta Activa o en proceso
      */
     @Test
-    public void noDeberiaRegistrarRespuestaEstadoSolicitud(){
+    public void noDeberiaRegistrarRespuestaEstadoSolicitudCerrada(){
         try{
             serviciosSolidaridad.registrarRespuesta("10", "3", "Respuesta11", "RespuestaCom11", "6");
             fail("Lanzo excepcion.");
-        } catch(ExcepcionSolidaridad e){
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_ANSWER, e.getMessage());
         }
     }
+
+    @Test
+    public void noDeberiaRegistrarRespuestaEstadoSolicitudResuelta(){
+        try{
+            serviciosSolidaridad.registrarRespuesta("20", "3", "Respuesta111", "RespuestaCom111", "301");
+            fail("Lanzo excepcion.");
+        } catch(ExcepcionSolidaridad | PersistenceException e){
+            assertEquals(ExcepcionSolidaridad.INVALID_ANSWER, e.getMessage());
+        }
+    }
+
 
     @Test
     public void noDeberiaEliminarRespuesta(){
@@ -533,7 +581,6 @@ public class ServiciosSolidaridadTest {
         } catch(Exception e){
             fail("Lanzo excepcion.");
         }
-
     }
 
     /**
@@ -566,7 +613,6 @@ public class ServiciosSolidaridadTest {
         } catch (PersistenceException e) {
             fail("Lanzo excepcion: " + e.getMessage());
         }
-
     }
 
     @Test
@@ -574,7 +620,7 @@ public class ServiciosSolidaridadTest {
         try{
             serviciosSolidaridad.actualizarNecesidad("1", "Solicitud2", "DescripcionS101", "Cerrada");
             fail("No lanzo excepcion.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
@@ -618,11 +664,27 @@ public class ServiciosSolidaridadTest {
     }
 
     @Test
+    public void deberiaActualizarOfertaNombreNull(){
+        try{
+            Oferta beforeOferta = serviciosSolidaridad.consultarOfertaId("8");
+            serviciosSolidaridad.actualizarOferta("8", null, "Solicitud81", "Activa");
+            Oferta afterOferta = serviciosSolidaridad.consultarOfertaId("8");
+            if (!beforeOferta.getNombre().equals(afterOferta.getNombre())){
+                fail("Cambio el nombre de la necesidad.");
+            }
+        } catch(ExcepcionSolidaridad e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        } catch (PersistenceException e) {
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
     public void noDeberiaActualizarOferta(){
         try{
             serviciosSolidaridad.actualizarOferta("3", "Solicitud5", "DescripcionSO301", "Cerrada");
             fail("No lanzo excepcion.");
-        }catch(ExcepcionSolidaridad e){
+        }catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_NAME, e.getMessage());
         }
     }
@@ -635,6 +697,104 @@ public class ServiciosSolidaridadTest {
             if(serviciosSolidaridad.consultarCategoriaId("120") != null) fail("No elimino la categoria");
         } catch (Exception e) {
             fail("Lanzo excepcion: "+ e.getMessage());
+        }
+    }
+
+    @Test
+    public void noDeberiaRegistrarSolicitudCategoriaInvalida(){
+        String idCategoria = "4";
+        try{
+            serviciosSolidaridad.registrarSolicitud("200", "descripcion", "Activa", idCategoria, "2");
+            fail("No lanzo excepcion.");
+        } catch(ExcepcionSolidaridad | PersistenceException e){
+            try {
+                assertEquals(serviciosSolidaridad.consultarCategoriaId(idCategoria).getComentario(), e.getMessage());
+            } catch (ExcepcionSolidaridad | PersistenceException e1) {
+                fail("La excepcion no es correcta.");
+            }
+        }
+    }
+
+    @Test
+    public void deberiaConsultarNecesidadesPorTodosLosEstados(){
+        try{
+            HashMap<String, Integer> estadisticas = serviciosSolidaridad.consultarNecesidadesEstado();
+            Estado[] estado = Estado.values();
+            Set<String> estadosEstadisticas = estadisticas.keySet();
+            int cont = 0;
+            for (int i = 0; i < estado.length; i++){
+                if (!estadosEstadisticas.contains(estado[i].getDescripcion())) break;
+                else{cont++;}
+            }
+            if (cont != estado.length) fail("No se tienen todas los estados");
+        } catch (ExcepcionSolidaridad | PersistenceException e1) {
+            fail("Lanzo excepcion.");
+        }
+    }
+
+    @Test
+    public void deberiaConsultarOfertasPorTodosLosEstados(){
+        try{
+            HashMap<String, Integer> estadisticas = serviciosSolidaridad.consultarOfertasEstado();
+            Estado[] estado = Estado.values();
+            Set<String> estadosEstadisticas = estadisticas.keySet();
+            int cont = 0;
+            for (int i = 0; i < estado.length; i++){
+                if (!estadosEstadisticas.contains(estado[i].getDescripcion())) break;
+                else{cont++;}
+            }
+            if (cont != estado.length) fail("No se tienen todas los estados");
+        } catch (ExcepcionSolidaridad | PersistenceException e1) {
+            fail("Lanzo excepcion.");
+        }
+    }
+
+    @Test
+    public void deberiaActualizarNumSolicitudes(){
+        int numSolicitudes = 1000;
+        try{
+            String before = serviciosSolidaridad.getNumeroSolicitudes();
+            serviciosSolidaridad.actualizarNumeroSolicitudes(numSolicitudes);
+            String after = serviciosSolidaridad.getNumeroSolicitudes();
+            serviciosSolidaridad.actualizarNumeroSolicitudes(Integer.parseInt(before));
+            assertTrue(before != after);
+        }catch (ExcepcionSolidaridad | PersistenceException e1) {
+            fail("Lanzo excepcion.");
+        }
+    }
+
+    @Test
+    public void noDeberiaActualizarNumSolicitudes(){
+        int numSolicitudes = 0;
+        try{
+            serviciosSolidaridad.actualizarNumeroSolicitudes(numSolicitudes);
+            fail("No lanzo excepcion.");
+        }catch (ExcepcionSolidaridad | PersistenceException e1) {
+            assertEquals(ExcepcionSolidaridad.INVALID_NUM_SOLICITUDES, e1.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaTenerExactamenteNSolicitudes(){
+        try{
+            int numSolicitudes = serviciosSolidaridad.consultarSolicitudes().size();
+            int cont = 0;
+            for (int cant : serviciosSolidaridad.consultarCantidadPorCategorias().values()) cont += cant;
+            assertEquals(numSolicitudes, cont);
+        }catch (ExcepcionSolidaridad | PersistenceException e1) {
+            fail("Lanzo excepcion.");
+        }
+    }
+
+    @Test
+    public void deberiaTenerExactamenteNSolicitudes2(){
+        try{
+            int numSolicitudes = serviciosSolidaridad.consultarSolicitudes().size();
+            int cont = 0;
+            for (int cant : serviciosSolidaridad.reporteCategorias().keySet())cont += cant;
+            assertEquals(numSolicitudes, cont);
+        }catch (ExcepcionSolidaridad | PersistenceException e1) {
+            fail("Lanzo excepcion.");
         }
     }
 
@@ -654,6 +814,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.actualizarCategoria("3", "Categoria3", "DescripcionC3", "Valida");
             serviciosSolidaridad.actualizarCategoria("2", "Categoria2", "DescripcionC2", "Invalida");
             serviciosSolidaridad.eliminarRespuesta("11");
+            serviciosSolidaridad.eliminarRespuesta("12");
         } catch (Exception e) {
             //System.out.println(e.getMessage());
         }
