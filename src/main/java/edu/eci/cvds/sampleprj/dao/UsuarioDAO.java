@@ -53,14 +53,6 @@ public interface UsuarioDAO {
     public List<Usuario> loadByRol(String rol) throws PersistenceException;
 
     /**
-     * Actualiza el numerdo de Solicitudes que puede realizar un usuario 
-     * @param idUsuario Id del usuario al que se le van a actualizar el numero de solicitudes
-     * @param numApplications Nuevo numero de solicitudes, no puede ser menor al numero que ya tenia anteriormente el Usuario
-     * @throws PersistenceException
-     */
-    public void updateNumApplication(String idUsuario, int numApplications) throws PersistenceException;
-
-    /**
      * ELimina un Usuario por su ID
      * @param idUsuario ID del usuario a eliminar
      * @throws PersistenceException

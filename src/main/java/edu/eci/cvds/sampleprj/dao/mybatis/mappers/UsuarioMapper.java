@@ -51,14 +51,6 @@ public interface UsuarioMapper {
     public List<Usuario> consultarUsuariosRol(@Param("rol") String rol);
 
     /**
-     * Actualiza el numerdo de Solicitudes que puede realizar un usuario 
-     * @param idUsuario Id del usuario al que se le van a actualizar el numero de solicitudes
-     * @param numSolicitudes Nuevo numero de solicitudes, no puede ser menor al numero que ya tenia anteriormente el Usuario
-     */
-    public void actualizarNumSolicitudes(@Param("id") String idUsuario,
-                                        @Param("num") int numSolicitudes);
-
-    /**
      * ELimina un Usuario por su ID
      * @param idUsuario ID del usuario a eliminar
      */

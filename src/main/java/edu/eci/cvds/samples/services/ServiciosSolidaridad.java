@@ -405,6 +405,14 @@ public interface ServiciosSolidaridad {
     public abstract void eliminarRespuesta(String id) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
+     * Consulta todas las categorias y devuelve un HashMap con el numero de necesidades y solicitudes que pertenecen a cada categoria existente
+     * @return Hashmap con las categorias y el nuemero de necesidades y solicitudes que pertenecen a esta
+     * @throws ExcepcionSolidaridad
+     * @throws PersistenceException
+     */
+    public HashMap<String,Integer> consultarCantidadPorCategorias() throws ExcepcionSolidaridad, PersistenceException;
+    
+    /**
      * Genera un reporte con todas las categorias
      * @return TreeMap compuesto de un entero indicando el numero de solicitudes que pertenecen a una categoria, y como llava un HashMap
      * que tiene como llave el nombre de la categoria y como valores un array donde se alamacen el numero de necesidades y el de ofertas que
@@ -413,14 +421,6 @@ public interface ServiciosSolidaridad {
      * @throws PersistenceException
      */
     public abstract TreeMap<Integer, HashMap<String, int[]>> reporteCategorias() throws ExcepcionSolidaridad, PersistenceException;
-
-    /**
-     * Consulta todas las categorias y devuelve un HashMap con el numero de necesidades y solicitudes que pertenecen a cada categoria existente
-     * @return Hashmap con las categorias y el nuemero de necesidades y solicitudes que pertenecen a esta
-     * @throws ExcepcionSolidaridad
-     * @throws PersistenceException
-     */
-    public HashMap<String,Integer> consultarCantidadPorCategorias() throws ExcepcionSolidaridad, PersistenceException;
     
     /**
      *  Se obtiene el numero maximo de solicitudes que estan permitidas en la aplicacion 

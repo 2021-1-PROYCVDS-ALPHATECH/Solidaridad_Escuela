@@ -8,7 +8,6 @@ import java.util.Set;
 import org.junit.Test;
 import org.junit.After;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import edu.eci.cvds.sampleprj.dao.PersistenceException;
@@ -757,7 +756,7 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.actualizarNumeroSolicitudes(numSolicitudes);
             String after = serviciosSolidaridad.getNumeroSolicitudes();
             serviciosSolidaridad.actualizarNumeroSolicitudes(Integer.parseInt(before));
-            assertTrue(before != after);
+            assertEquals(1000 + "", after);
         }catch (ExcepcionSolidaridad | PersistenceException e1) {
             fail("Lanzo excepcion.");
         }
