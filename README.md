@@ -9,8 +9,8 @@
 |-----------------------------|-------------------------|---------------------------------------------|
 | Luis Gerardo Amaya          | Programador y Tester    | [luis-amaya](https://github.com/luis-amaya) |
 | Angie Tatiana Medina        | Scrum Master            | [AngieMeG](https://github.com/AngieMeG) |
-| Juan Sebastian Mina         | Programador y Diseñador | [sebastianmina](https://github.com/sebastianmina) |
-| Jose Ricardo Perez          | Programador y Diseñador | [J-382](https://github.com/J-382) |
+| Juan Sebastián Mina         | Programador y Diseñador | [sebastianmina](https://github.com/sebastianmina) |
+| Jose Ricardo Pérez          | Programador y Diseñador | [J-382](https://github.com/J-382) |
 
 ## Profesor del curso
 *   ***Oscar David Ospina:*** *Product Owner*
