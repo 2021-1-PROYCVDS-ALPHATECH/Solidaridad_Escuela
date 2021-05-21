@@ -37,7 +37,7 @@ https://solidaridadescuela-alpha.herokuapp.com
 https://app.circleci.com/pipelines/github/2021-1-PROYCVDS-ALPHATECH
 ## Descripción del proceso
 ### Descripción de la Metodologia
-*Durante el desarrollo del proyecto se aplico la metodología Scrum en la cual se realizan entregas parciales y regulares del producto final con reunionen diarias donde se realizar preguntas como ¿Qué se realizó el día anterior? ¿Qué impedimentos se han tenido? y ¿Qué se hará en el día?*
+*Durante el desarrollo del proyecto se aplico la metodología Scrum en la cual se realizan entregas parciales y regulares del producto final con reuniones diarias, donde se realizan preguntas como: ¿Qué se realizó el día anterior?, ¿Qué impedimentos se han tenido? y ¿Qué se hará en el día?*
 ### Enlace Taiga  
 
 ![Backlock](./img/Backlock.PNG)
@@ -45,7 +45,7 @@ https://tree.taiga.io/project/j-382-solidaridad-escuela/backlog
 ### Sprints
 *Para el proyecto se manejaron 3 Sprints de aproximadamente 2 semanas cada uno*
 *   **Sprint 1**  
-    *El principal problema que se tuvo fue con el tema de la autenticación, los ejemplos para la configuración de shiro no eran muy claros y se presentaron varios inconvenientes con los servicios default para la comparación de contraseñas.*
+    *El principal problema que se tuvo, fue con el tema de la autenticación, los ejemplos para la configuración de shiro no eran muy claros y se presentaron varios inconvenientes con los servicios default para la comparación de contraseñas.*
     *   ***Sprint-backlog***  
 
     ![Sprint1Backlog](./img/Sprint1Backlog.PNG)
@@ -64,7 +64,7 @@ https://tree.taiga.io/project/j-382-solidaridad-escuela/backlog
     ![Sprint2](./img/Sprint2.PNG)
 
 *   **Sprint 3**  
-    *Al principio de sprint no se tenia muy claro segun lo que se podia intuir de la especificación el como realizar la implmentación de la historia de usuario para el manejo de las categorias invalidas.*
+    *Al principio de sprint, no se tenía muy claro según lo que se podía intuir de la especificación el como realizar la implmentación de la historia de usuario para el manejo de las categorias invalidas.*
     *Además se tuvo que cambiar la forma en la que se tenía implemantada la gestión del número de solicitudes*
     *   ***Sprint-backlog***  
 
