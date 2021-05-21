@@ -30,14 +30,14 @@
 *Se contruyó la aplicación con 3 capas:*
 *   ***Capa de Aplicación:*** *En esta capa fue utilizado el lenguaje **Java**, el framework de inyección de dependencias **Google Guice** y el framework para la autenticación  **Apache Shiro**.*
 *   ***Capa de Presentación:*** *En esta capa se utilizó un framework que simplifica el desarrollo de interfaces de usuario en aplicaciones **Java JavaServer Faces (JSF)** y asi mismo su biblioteca de componentes **PrimeFaces**.*
-*   ***Capa de Persistencia:*** *Para lograr una persistencia sobre los datos se uso el motor de base de datos **PostgreSQL** y la herramienta para persistencia Java para mapear sentencias SQL **myBatis**.*
+*   ***Capa de Persistencia:*** *Para lograr una persistencia sobre los datos se uso el motor de base de datos **PostgreSQL** y la herramienta de persistencia Java para mapear sentencias SQL **myBatis**.*
 ### Enlace a la aplicación en Heroku
 https://solidaridadescuela-alpha.herokuapp.com
 ### Enlace al sistema de integración continua
 https://app.circleci.com/pipelines/github/2021-1-PROYCVDS-ALPHATECH
 ## Descripción del proceso
 ### Descripción de la Metodologia
-*Durante el desarrollo del proyecto se aplico la metodología Scrum en la cual se realizan entregas parciales y regulares del producto final con reuniones diarias, donde se realizan preguntas como: ¿Qué se realizó el día anterior?, ¿Qué impedimentos se han tenido? y ¿Qué se hará en el día?*
+*Durante el desarrollo del proyecto se aplicó la metodología **Scrum** en la cual se realizan entregas parciales y regulares del producto final con reuniones diarias, donde se realizan preguntas como: ¿Qué se realizó el día anterior?, ¿Qué impedimentos se han tenido? y ¿Qué se hará en el día?*
 ### Enlace Taiga  
 
 ![Backlock](./img/Backlock.PNG)
