@@ -37,7 +37,7 @@ https://solidaridadescuela-alpha.herokuapp.com
 https://app.circleci.com/pipelines/github/2021-1-PROYCVDS-ALPHATECH
 ## Descripción del proceso
 ### Descripción de la Metodologia
-*Durante el desarrollo del proyecto se aplico la metodolo Scrum en la cual se realizan entregas parciales y regulares del producto final con reunionen diarias donde se realizar preguntas como ¿Qué se realizó el día anterior? ¿Qué impedimentos se han tenido? y ¿Qué se hará en el día?*
+*Durante el desarrollo del proyecto se aplico la metodología Scrum en la cual se realizan entregas parciales y regulares del producto final con reunionen diarias donde se realizar preguntas como ¿Qué se realizó el día anterior? ¿Qué impedimentos se han tenido? y ¿Qué se hará en el día?*
 ### Enlace Taiga  
 
 ![Backlock](./img/Backlock.PNG)
