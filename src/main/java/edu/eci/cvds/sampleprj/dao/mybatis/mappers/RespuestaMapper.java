@@ -9,7 +9,7 @@ import edu.eci.cvds.samples.entities.Respuesta;
 /**
  * @author Luis Amaya
  * @author Angie Medina
- * @author Sebastian Mina
+ * @author Sebastian MinaeliminarOferta(@Param("idOferta") String idOferta);
  * @author Jose Perez
  * 
  * @version 28/04/2021 v1.0
@@ -24,7 +24,7 @@ public interface RespuestaMapper {
      */
     public void insertarRespuesta(@Param ("res") Respuesta r,
                                     @Param("idUs") String idUsuario,
-                                    @Param("idSol") String idSolicitud);   
+                                    @Param("idSol") String idSolicitud);
 
     /**
      * Consulta todas las respuestas dadas, dentro de la base de datos

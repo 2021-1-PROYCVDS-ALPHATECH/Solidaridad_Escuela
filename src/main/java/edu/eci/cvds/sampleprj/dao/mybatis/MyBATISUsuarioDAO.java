@@ -38,7 +38,6 @@ public class MyBATISUsuarioDAO implements UsuarioDAO{
         try{
             return usuarioMapper.consultarUsuarios();
         } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println(e.getMessage());
             throw new PersistenceException("Error al consultar usuarios " + e);
         }
     }
@@ -57,7 +56,6 @@ public class MyBATISUsuarioDAO implements UsuarioDAO{
         try{
             return usuarioMapper.consultarUsuarioNombre(nombre);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error: " + e.getMessage());
             throw new PersistenceException("Error al consultar el usuario con nombre " + nombre + e);
         }
     }
@@ -67,17 +65,7 @@ public class MyBATISUsuarioDAO implements UsuarioDAO{
         try{
             return usuarioMapper.consultarUsuariosRol(rol);
         }catch(org.apache.ibatis.exceptions.PersistenceException e){
-            System.out.println("Error: " + e.getMessage());
             throw new PersistenceException("Error al consultar usuarios con rol " + rol + e);
-        }
-    }
-
-    @Override
-    public void updateNumApplication(String idUsuario, int numApplication) throws PersistenceException {
-        try{
-            usuarioMapper.actualizarNumSolicitudes(idUsuario, numApplication);
-        } catch (org.apache.ibatis.exceptions.PersistenceException e){
-            throw new PersistenceException("Error al actualizar el numero de solicitudes del usuario " + idUsuario + e);
         }
     }
 

@@ -84,7 +84,7 @@ public interface ServiciosSolidaridad {
      * @param comentario Comentario de la nueva Categoria
      * @throws ExcepcionSolidaridad
      */
-    public abstract void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario) throws ExcepcionSolidaridad;
+    public abstract void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Consulta todas las categorias existentes en la base de datos
@@ -120,7 +120,7 @@ public interface ServiciosSolidaridad {
      * @param estado Nuevo estado de la categoria. Puede ser: Valida, Invalida
      * @throws ExcepcionSolidaridad
      */
-    public abstract void actualizarCategoria(String id, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad;
+    public abstract void actualizarCategoria(String id, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Elimina una categoria de la base de datos
@@ -139,7 +139,7 @@ public interface ServiciosSolidaridad {
      * @param idUsuario Id del usuario que crea la solicitud
      * @throws ExcepcionSolidaridad
      */
-    public abstract void registrarSolicitud(String id, String descripcion, String estado, String categoria, String idUsuario) throws ExcepcionSolidaridad;
+    public abstract void registrarSolicitud(String id, String descripcion, String estado, String categoria, String idUsuario) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Consulta todas las Solicitudes existentes en la base de datos
@@ -174,7 +174,7 @@ public interface ServiciosSolidaridad {
      * @param estado Nuevo estado de la solicitud, puede ser Activa, En Proceso, Resuelta y Cerrada
      * @throws ExcepcionSolidaridad
      */
-    public abstract void actualizarSolicitud(String id, String descripcion, String estado) throws ExcepcionSolidaridad;
+    public abstract void actualizarSolicitud(String id, String descripcion, String estado) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Consulta las solicitudes realizadas por el usuario
@@ -196,7 +196,7 @@ public interface ServiciosSolidaridad {
      * @param categoria Categoria a la que pertenece la Necesidad
      * @throws ExcepcionSolidaridad
      */
-    public abstract void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado, String categoria) throws ExcepcionSolidaridad;
+    public abstract void registrarNecesidad(String idNecesidad, String idUsuario, String nombre, String descripcion, String urgencia, String estado, String categoria) throws ExcepcionSolidaridad, PersistenceException;;
 
     /**
      * Consulta todas las necesidades existentes en la base de datos
@@ -258,7 +258,7 @@ public interface ServiciosSolidaridad {
      * @param estado Nuevo estado de la Necesidad. Puede ser: Abierta, En Proceso, Resuelta o Cerrada
      * @throws ExcepcionSolidaridad
      */
-    public abstract void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad;
+    public abstract void actualizarNecesidad(String idNecesidad, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Elimina una necesidad de la base de datos
@@ -278,7 +278,7 @@ public interface ServiciosSolidaridad {
      * @param categoria Estado de la nueva Oferta. Puede ser: Valida o Invalida
      * @throws ExcepcionSolidaridad
      */
-    public abstract void registrarOferta(String idOferta, String idUsuario, String nombre, String descripcion, String estado, String categoria)  throws ExcepcionSolidaridad;
+    public abstract void registrarOferta(String idOferta, String idUsuario, String nombre, String descripcion, String estado, String categoria)  throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Consulta todas las ofertas existentes en la base de datos
@@ -340,7 +340,7 @@ public interface ServiciosSolidaridad {
      * @param estado Nuevo estado de la Oferta. Puede ser: Activa, En Proceso, Resuelta o Cerrada
      * @throws ExcepcionSolidaridad
      */
-    public abstract void actualizarOferta(String idOferta, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad;
+    public abstract void actualizarOferta(String idOferta, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Elimina una oferta de la base de datos
@@ -359,7 +359,7 @@ public interface ServiciosSolidaridad {
      * @param idSolicitud Id de la Solicitud a la cual se esta dando Respuesta
      * @throws ExcepcionSolidaridad
      */
-    public abstract void registrarRespuesta(String idRespuesta, String idUsuario, String nombre, String comentarios, String idSolicitud) throws ExcepcionSolidaridad;
+    public abstract void registrarRespuesta(String idRespuesta, String idUsuario, String nombre, String comentarios, String idSolicitud) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Consulta todas las respuestas dadas, dentro de la base de datos
@@ -405,6 +405,14 @@ public interface ServiciosSolidaridad {
     public abstract void eliminarRespuesta(String id) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
+     * Consulta todas las categorias y devuelve un HashMap con el numero de necesidades y solicitudes que pertenecen a cada categoria existente
+     * @return Hashmap con las categorias y el nuemero de necesidades y solicitudes que pertenecen a esta
+     * @throws ExcepcionSolidaridad
+     * @throws PersistenceException
+     */
+    public HashMap<String,Integer> consultarCantidadPorCategorias() throws ExcepcionSolidaridad, PersistenceException;
+    
+    /**
      * Genera un reporte con todas las categorias
      * @return TreeMap compuesto de un entero indicando el numero de solicitudes que pertenecen a una categoria, y como llava un HashMap
      * que tiene como llave el nombre de la categoria y como valores un array donde se alamacen el numero de necesidades y el de ofertas que
@@ -413,14 +421,6 @@ public interface ServiciosSolidaridad {
      * @throws PersistenceException
      */
     public abstract TreeMap<Integer, HashMap<String, int[]>> reporteCategorias() throws ExcepcionSolidaridad, PersistenceException;
-
-    /**
-     * Consulta todas las categorias y devuelve un HashMap con el numero de necesidades y solicitudes que pertenecen a cada categoria existente
-     * @return Hashmap con las categorias y el nuemero de necesidades y solicitudes que pertenecen a esta
-     * @throws ExcepcionSolidaridad
-     * @throws PersistenceException
-     */
-    public HashMap<String,Integer> consultarCantidadPorCategorias() throws ExcepcionSolidaridad, PersistenceException;
     
     /**
      *  Se obtiene el numero maximo de solicitudes que estan permitidas en la aplicacion 
