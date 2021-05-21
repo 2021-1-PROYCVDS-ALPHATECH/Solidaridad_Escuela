@@ -4,7 +4,7 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title> Registro Cliente </title>
+    <title> Mis necesidades </title>
     <link rel="stylesheet" href="../style.css"></link>
     <script src="../icons.js" crossorigin="anonymous"></script>
 </h:head>
@@ -74,7 +74,7 @@
                     <p:outputLabel for="@next" value="ID"/>
                     <p:inputText  id="registerID" type="String" binding="#{id}"/>
                     <p:outputLabel for="@next" value="IDUser"/>
-                    <p:inputText  id="registerIDUser" type="String" binding="#{idUser}"/>
+                    <p:inputText  id= "user" type="String" value="#{LoginBean.currentUser.idUsuario}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Nombre" />
                     <p:inputText  id= "registerName" type="String" binding="#{nombre}"/>
                     <p:outputLabel for="@next" value="Descripcion" />
@@ -95,10 +95,10 @@
                     <p:outputLabel for="@next" value="Categoria" />
                     <p:inputText  id= "registerCat" type="String" binding="#{categoria}"/>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Necesities" value="Registrar" actionListener="#{LoginBean.registrarNecesidad(id.value, idUser.value, nombre.value, descripcion.value, urgencia.value, estado.value, categoria.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Necesities" value="Registrar" actionListener="#{RegisterBean.registrarNecesidad(id.value, LoginBean.currentUser.idUsuario, nombre.value, descripcion.value, urgencia.value, estado.value, categoria.value)}"/>
             </p:panel>
             <p:panel header="Lista Necesidades" style="text-align: center; min-height: 800px;" name="panel" id="item2">
-                <p:dataTable  id="NecesidadDT" var="necesidad" value="#{LoginBean.consultarNecesidadesEstudiante(LoginBean.currentUser.idUsuario)}" rows="10" paginator="true" rowKey="#{necesidad.idSolicitud}" selectionMode="single" selection="#{LoginBean.necesidad}"
+                <p:dataTable  id="NecesidadDT" var="necesidad" value="#{ConsultBean.consultarNecesidadesEstudiante(LoginBean.currentUser.idUsuario)}" rows="10" paginator="true" rowKey="#{necesidad.idSolicitud}" selectionMode="single" selection="#{UpdateBean.necesidad}"
                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
                     <p:column headerText="Nombre">
                         <h:outputText value="#{necesidad.nombre}" />

@@ -191,9 +191,15 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                     <p:outputLabel for="@next" value="Password" />
                     <p:inputText  id= "registerPassword" type="Password" binding="#{pass}"/>
                     <p:outputLabel for="@next" value="Rol" />
-                    <p:inputText  id= "registerRol" type="String" binding="#{rol}"/>
+                    <p:selectOneMenu id="optionRol"  binding="#{rol}" style="width: 220px;">
+                        <f:selectItem itemLabel="Administrador" itemValue="Administrador"/>
+                        <f:selectItem itemLabel="Administrativo" itemValue="Administrativo"/>
+                        <f:selectItem itemLabel="Egresado" itemValue="Egresado"/>
+                        <f:selectItem itemLabel="Estudiante" itemValue="Estudiante"/>
+                        <f:selectItem itemLabel="Profesor" itemValue="Profesor"/>
+                    </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Users" value="Registrar" action="Usuarios?faces-redirect=true" actionListener="#{RegisterBean.registrarUsuario(id.value,nombre.value,telefono.value,mail.value,pass.value,rol.value,nsolicitud.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Users" value="Registrar" action="Usuarios?faces-redirect=true" actionListener="#{RegisterBean.registrarUsuario(id.value,nombre.value,telefono.value,mail.value,pass.value,rol.value)}"/>
             </p:panel>
             <p:panel header="Usuarios" style="text-align: center; min-height: 800px;" name="panel" id="item2">
                 <p:dataTable  id="userDT" var="usuario" value="#{ConsultBean.consultarUsuarios()}" rows="6" paginator="true" selectionMode="single" selection="#{UpdateBean.usuario}" rowKey="#{usuario.idUsuario}"

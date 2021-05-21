@@ -3,11 +3,15 @@ package edu.eci.cvds.view;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
+
+import com.google.inject.Inject;
+
 import javax.faces.application.FacesMessage; 
 
 import org.apache.shiro.subject.Subject;
 
 import edu.eci.cvds.samples.entities.Usuario;
+import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -16,8 +20,8 @@ import org.apache.shiro.crypto.hash.Sha256Hash;
 @ManagedBean(name = "LoginBean")
 @SessionScoped
 public class LoginBean extends BasePageBean{
-    //@Inject
-    //private ServiciosSolidaridad servicios;
+    @Inject
+    private ServiciosSolidaridad servicios;
 
     private String user;
     private String password;
@@ -58,7 +62,7 @@ public class LoginBean extends BasePageBean{
         UsernamePasswordToken token = new UsernamePasswordToken(user, new Sha256Hash(password).toHex());
         try {
             subject.login(token);
-            //currentUser = servicios.consultarUsuarioNombre(user);
+            currentUser = servicios.consultarUsuarioNombre(user);
             if (subject.hasRole("Administrador")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Admin/admin.xhtml");
 			}

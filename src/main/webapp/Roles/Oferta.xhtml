@@ -4,10 +4,9 @@
     xmlns:f="http://xmlns.jcp.org/jsf/core"
     xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title> Registro Cliente </title>
-    <link rel="stylesheet" href="../style.css"></link>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title> Ofertas </title>
     <link rel="stylesheet" href="./style.css"></link>
+    <script src="../icons.js" crossorigin="anonymous"></script>
 </h:head>
 <style>
 .container{
@@ -112,7 +111,7 @@
                         <h:outputText value="#{oferta.estado}" />
                     </p:column>
                     <f:facet name="footer" style="margin: auto">
-                        <p:commandButton id="Modify" value="Seleccionar" action="ModOferta?faces-redirect=true" update="Oferts" styleClass="ui-button"/>
+                        <p:commandButton id="Modify" value="Seleccionar" action="false" update="Oferts" styleClass="ui-button" enabled="false"/>
                     </f:facet>
                 </p:dataTable>
                     
