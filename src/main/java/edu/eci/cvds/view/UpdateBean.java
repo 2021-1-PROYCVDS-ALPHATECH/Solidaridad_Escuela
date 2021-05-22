@@ -26,10 +26,18 @@ public class UpdateBean extends BasePageBean{
     private Necesidad necesidad;
     private Oferta oferta;
     
-    public String isDisabled(Usuario currentUser){
-        boolean isDisabled = currentUser.getRol().equals("Administrador");
-        if(oferta != null) isDisabled = isDisabled || oferta.getNombreUsuario().equals(currentUser.getNombre());
-        return isDisabled?"false":"ModOferta?faces-redirect=true";
+    public String isDisabledModOferts(Usuario currentUser){
+        boolean enabled = currentUser.getRol().toString().equals("Administrador");
+        if(oferta != null) enabled = enabled || oferta.getNombreUsuario().equals(currentUser.getNombre());
+        else enabled = false;
+        return !enabled?"false":"ModOferta?faces-redirect=true";
+    }
+
+    public String isDisabledModNecesities(Usuario currentUser){
+        boolean enabled = currentUser.getRol().toString().equals("Administrador");
+        if(oferta != null) enabled = enabled || necesidad.getNombreUsuario().equals(currentUser.getNombre());
+        else enabled = false;
+        return !enabled?"false":"ModNecesidad?faces-redirect=true";
     }
 
     public void eliminarCategoria(){
