@@ -19,6 +19,9 @@
 ### Descripción General :speech_balloon:
 *La Plataforma Solidaridad Escuela, es  una  herramienta  para  generar  un entorno de  comunicación  y ayuda dentro de la comunidad de la Escuela Colombiana de Ingeniería Julio Garavito. El sistema permite que  los  estudiantes  puedan  expresar  las  necesidades  que  puedan  tener  de  algún  elemento  para  poder desarrollar sus actividades de forma correcta, y que los demás miembros de la comunidad puedan facilitar estos elementos a quienes lo necesitan. De igual manera los miembros de la comunidad pueden ofrecer diferentes elementos que sean de interés para los estudiantes sin que exista alguna solicitud específica. Adicionalmente  el  sistema  cuenta  con  diferentes  funcionalidades  de  reportería  y  administración  que permite llevar un control del funcionamiento de la plataforma y del alcance que se está logrando.*
 ### Manual de Usuario :boy:
+*Se mostrará el funcionamiento del aplicativo en base a los diferente roles que tiene la misma.*
+##Estudiante
+
 ## Arquitectura y Diseño Detallado
 ### Modelo E-R  :mag:
 
