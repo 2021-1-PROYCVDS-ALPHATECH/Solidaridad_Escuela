@@ -96,7 +96,7 @@ public class LoginBean extends BasePageBean{
             FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/login.xhtml");
         }
         catch(Exception e) {
-            System.out.println(e.getMessage()+" "+e.getCause());
+            if(subject.isAuthenticated()) logOut();
         }
     }
 }
