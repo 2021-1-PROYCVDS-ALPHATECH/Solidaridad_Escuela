@@ -85,7 +85,7 @@
 
 *3. Registrar Respuesta del Profesor y Visualizar Respuesta*
 
-![Respuesta2](./img/RespuestaProfesor.gif)
+![Respuesta2](./img/RespuestasProfesor.gif)
 
 ### Administrativo
 
