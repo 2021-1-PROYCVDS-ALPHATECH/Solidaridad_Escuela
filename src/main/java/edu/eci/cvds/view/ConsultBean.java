@@ -48,9 +48,14 @@ public class ConsultBean extends BasePageBean{
         return servicios.consultarNecesidadesUsuario(idUsuario);
     }
 
-    public List<Respuesta> consultarRespuestas() throws ExcepcionSolidaridad, PersistenceException{
-        return servicios.consultarRespuestas();
+    public List<Respuesta> consultarRespuestasPorUsuario(Usuario usuario) throws ExcepcionSolidaridad, PersistenceException{
+        return servicios.consultarRespuestasUsuario(usuario.getNombre());
     }
+
+    public List<Respuesta> consultarRespuestasParaUsuario(Usuario usuario) throws ExcepcionSolidaridad, PersistenceException{
+        return servicios.consultarRespuestasSolicitudesUsuario(usuario.getIdUsuario());
+    }
+
 
     public String consultarLabelsNecesidad() throws ExcepcionSolidaridad, PersistenceException{
         String labels = "";

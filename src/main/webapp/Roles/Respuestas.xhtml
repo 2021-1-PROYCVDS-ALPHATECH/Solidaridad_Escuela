@@ -13,7 +13,7 @@
     margin-top: 100px;
     height: 800px;
     display: grid;
-    grid-template-columns: 34% 66%;
+    grid-template-columns: 50% 50%;
     grid-template-rows: 100%;
     column-gap: 10px;
     margin-left: 25px;
@@ -67,25 +67,25 @@
             </svg>
         </div>
         <div class="container">
-            <p:panel header="Registar respuesta" style="text-align: center" name="panel" id="item1">   
-                <p:messages id="messages" showDetail="true" style="text-align: left"/>
-                <h:panelGrid columns="1" style="margin: auto" >
-                    <p:outputLabel for="@next" value="ID"/>
-                    <p:inputText  id="registerID" type="String" binding="#{id}"/>
-                    <p:outputLabel for="@next" value="Usuario" />
-                    <p:inputText  id= "registerUsr" type="String" binding="#{usuario}"/>
-                    <p:outputLabel for="@next" value="Nombre" />
-                    <p:inputText  id= "registerName" type="String" binding="#{nombre}"/>
-                    <p:outputLabel for="@next" value="Comentarios" />
-                    <p:inputText  id= "registerCom" type="String" binding="#{comentario}"/>
-                    <p:outputLabel for="@next" value="Solicitud" />
-                    <p:inputText  id= "registerSol" type="String" binding="#{solicitud}"/>
-                </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Answers" value="Registrar" actionListener="#{RegisterBean.registrarRespuesta(id.value, usuario.value, nombre.value, comentario.value, solicitud.value)}"/>
-            </p:panel>
+            <p:panel header="Mis Respuestas" style="text-align: center; min-height: 800px;" name="panel" id="item1">
+                <p:dataTable  id="mrespuestaDT" var="respuesta" value="#{ConsultBean.consultarRespuestasPorUsuario(LoginBean.currentUser)}" rows="6" paginator="true"
+                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
+                    <p:column headerText="Nombre">
+                        <h:outputText value="#{respuesta.nombre}" />
+                    </p:column>
+                    <p:column headerText="Comentarios">
+                        <h:outputText value="#{respuesta.comentarios}" />
+                    </p:column>
+                    <p:column headerText="Fecha de Creacion">
+                        <h:outputText value="#{respuesta.fechaCreacion}" />
+                    </p:column>
+                    <f:facet name="footer" style="margin: auto">	
+                    </f:facet>
+                </p:dataTable>
+            </p:panel>  
             
-            <p:panel header="Lista Respuestas" style="text-align: center; min-height: 800px;" name="panel" id="item2">
-                <p:dataTable  id="respuestaDT" var="respuesta" value="#{ConsultBean.consultarRespuestas()}" rows="6" paginator="true"
+            <p:panel header="Respuestas a mis solicitudes" style="text-align: center; min-height: 800px;" name="panel" id="item2">
+                <p:dataTable  id="respuestaDT" var="respuesta" value="#{ConsultBean.consultarRespuestasParaUsuario(LoginBean.currentUser)}" rows="6" paginator="true"
                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records" style="text-align: left;">
                     <p:column headerText="Nombre">
                         <h:outputText value="#{respuesta.nombre}" />
