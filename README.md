@@ -41,6 +41,10 @@
 
 ![Respuesta2](./img/VerRespuesta.gif)
 
+*5. Acutalizar Oferta*
+
+![Oferta](./img/ActualizarOfertaEstudiante.gif)
+
 ### Rol Estudiante 2
 
 *1. Inicio de sesión*
@@ -73,6 +77,10 @@
 
 ![Respuesta2](./img/VerRespuestaEgresado.gif)
 
+*4. Actualizar Oferta*
+
+![Oferta](./img/ActualizarOfertaEgresado.gif)
+
 ### Rol Profesor
 
 *1. Inicio de sesión*
@@ -87,6 +95,10 @@
 
 ![Respuesta2](./img/RespuestasProfesor.gif)
 
+*4. Actualizar Oferta*
+
+![Oferta](./img/ModOferta2.gif)
+
 ### Administrativo
 
 *1. Inicio de sesión*
@@ -100,6 +112,10 @@
 *3. Registrar Respuesta del Administrativo y Visualizar Respuesta*
 
 ![Respuesta2](./img/VerRespuestaAdministrativo.gif)
+
+*4. Actualizar Oferta*
+
+![Oferta](./img/ModOferta.gif)
 
 ### Administrador
 
@@ -135,6 +151,10 @@
 ![Categoria](./img/ActualizarCategoria.gif)
 
 ![Necesidad](./img/ActualizarNecesidad.gif)
+
+*8. Reporte Necesidad*
+
+![ReporteN](./img/ReporteNecesidad.gif)
 
 
 
