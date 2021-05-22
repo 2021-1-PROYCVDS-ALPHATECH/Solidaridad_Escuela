@@ -15,6 +15,7 @@ import edu.eci.cvds.samples.entities.Necesidad;
 import edu.eci.cvds.samples.entities.Oferta;
 import edu.eci.cvds.samples.entities.Respuesta;
 import edu.eci.cvds.samples.entities.Usuario;
+import edu.eci.cvds.samples.entities.Solicitud;
 
 import edu.eci.cvds.samples.services.ExcepcionSolidaridad;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
@@ -56,6 +57,9 @@ public class ConsultBean extends BasePageBean{
         return servicios.consultarRespuestasSolicitudesUsuario(usuario.getIdUsuario());
     }
 
+    public List<Solicitud> consultarSolicitudes() throws ExcepcionSolidaridad, PersistenceException{
+        return servicios.consultarSolicitudes();
+    }
 
     public String consultarLabelsNecesidad() throws ExcepcionSolidaridad, PersistenceException{
         String labels = "";

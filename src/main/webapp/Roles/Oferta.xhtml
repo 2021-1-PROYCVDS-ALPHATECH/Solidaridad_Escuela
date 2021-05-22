@@ -171,7 +171,7 @@
                 <div class="inputs">
                     <h:panelGrid columns="1" style="margin: auto; " >
                         <p:outputLabel for="@next" value="ID"/>
-                        <p:inputText  id="registerIDRes" type="String" binding="#{idRes}"/>
+                        <p:inputText  id="IDRes" type="String" value="#{ConsultBean.consultarSolicitudes().size()+1}" readonly="true" style="text-align: center; background-color:#dbdfdf; margin: 10px;"/>
                         <p:outputLabel for="@next" value="Usuario" />
                         <p:inputText  id="userRes" type="String" value="#{LoginBean.currentUser.nombre}" readonly="true" style="text-align: center; background-color:#dbdfdf; margin: 10px;"/>
                         <p:outputLabel for="@next" value="Nombre" />
@@ -182,7 +182,7 @@
                         <p:inputText  id="solicitudRes" type="String" value="#{UpdateBean.oferta.idSolicitud}" readonly="true" style="text-align: center; background-color:#dbdfdf; margin: 10px;"/>
                     </h:panelGrid>
                 </div>
-                <p:commandButton id="AnsRegister" value="Registrar" update="Oferts" actionListener="#{RegisterBean.registrarRespuesta(idRes.value, LoginBean.currentUser.idUsuario, nombreRes.value, comentarioRes.value, UpdateBean.oferta.idSolicitud)}" styleClass="ui-button" style="display: block; margin: auto; margin-top: 20px; margin-bottom: 20px;"/>
+                <p:commandButton id="AnsRegister" value="Registrar" update="Oferts" actionListener="#{RegisterBean.registrarRespuesta(ConsultBean.consultarSolicitudes().size(), LoginBean.currentUser.idUsuario, nombreRes.value, comentarioRes.value, UpdateBean.oferta.idSolicitud)}" styleClass="ui-button" style="display: block; margin: auto; margin-top: 20px; margin-bottom: 20px;"/>
             </div>
         </div>
     </h:form>
