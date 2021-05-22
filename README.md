@@ -37,7 +37,7 @@
 
 *4. Registrar Oferta Estudiante y Visualizar Respuesta*
 
-![Respuesta](./img/ResgistrarRespuestaEstudiante.gif)
+![Respuesta](https://github.com/2021-1-PROYCVDS-ALPHATECH/Solidaridad_Escuela/blob/main/img/RegistrarRespuestaEstudiante.gif)
 
 ![Respuesta2](./img/VerRespuesta.gif)
 
