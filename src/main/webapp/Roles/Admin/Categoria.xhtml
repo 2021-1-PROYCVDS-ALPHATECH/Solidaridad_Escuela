@@ -10,6 +10,13 @@
     <link rel="stylesheet" href="../style.css"></link>
 </h:head>
 <style>
+.comment {
+    visibility: hidden;
+}
+
+.active {
+    visibility: visible;
+}
 .container{
     margin-top: 100px;
     height: 800px;
@@ -54,7 +61,7 @@
 
 </style>
 <h:body>
-    <h:form id="Categories" onsubmit="alert('Submit mamawebo');">
+    <h:form id="Categories">
         <div style="background-color: #7e1323; height: 10px;"></div>
         <div class="header">
             <div class="headerElements">
@@ -82,12 +89,12 @@
                     <p:outputLabel for="@next" value="Descripcion" />
                     <p:inputText  id= "registerDes" type="String" binding="#{descripcion}"/>
                     <p:outputLabel for="@next" value="Estado" />
-                    <p:selectOneMenu id="optionEstado"  binding="#{estado}" style="width: 220px;">
+                    <p:selectOneMenu id="optionEstado"  binding="#{estado}" style="width: 220px;" onchange="changeVisibility(this.value)">
                         <f:selectItem itemLabel="Valida" itemValue="Valida"/>
                         <f:selectItem itemLabel="Invalida" itemValue="Invalida"/>
                     </p:selectOneMenu>
-                    <p:outputLabel for="@next" value="Comentario" />
-                    <p:inputText  id= "registerComm" type="String" binding="#{comentario}"/>
+                    <p:outputLabel for="@next" id="registerCommLabel" value="Comentario" class="comment active"/>
+                    <p:inputText id="registerComm" type="String" binding="#{comentario}" class="comment active"/>
                 </h:panelGrid>
                 <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{RegisterBean.registrarCategoria(id.value, nombre.value, descripcion.value, estado.value, comentario.value)}"/>
             </p:panel>
@@ -121,5 +128,6 @@
     <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
         <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
     </svg>
+    <script src="comments.js"></script>
 </h:body>
 </html>

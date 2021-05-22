@@ -5,11 +5,53 @@
     xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title> Necesidades </title>
-    <link rel="stylesheet" href="../style.css"></link>
+    <link rel="stylesheet" href="./style.css"></link>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <script src="../icons.js" crossorigin="anonymous"></script>
+    <script src="icons.js" crossorigin="anonymous"></script>
 </h:head>
 <style>
+.overlay {
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}
+
+.overlay.active {
+    visibility: visible;
+}
+
+.popup {
+    background-color: #eaecec;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    font-family: 'Monserrat';
+}
+
+.popup .close-popup {
+    font-size: 16px;
+    line-height: 16px;
+    display: block;
+    text-align: right;
+    color: #BBBBBB;
+    margin: 20px;
+    transition: 0.3s ease all;
+}
+
+.popup .close-popup:hover {
+    color:#7e1323;
+}
+
+.inputs {
+    text-align: center;
+}
+
 .container{
     margin-top: 100px;
     height: 800px;
@@ -54,6 +96,9 @@
 
 </style>
 <h:body>
+    <h:inputHidden id="user" value="#{LoginBean.currentUser.nombre}"/>
+    <h:inputHidden id="test" value="#{UpdateBean.isDisabledModNecesities(LoginBean.currentUser)}"/>
+    <h:inputHidden id="sol" value="#{UpdateBean.necesidad.nombreUsuario}"/>
     <h:form id="Necesities">
         <div style="background-color: #7e1323; height: 10px;"></div>
         <div class="header">
@@ -78,7 +123,7 @@
                     <p:outputLabel for="@next" value="ID"/>
                     <p:inputText  id="registerID" type="String" binding="#{id}"/>
                     <p:outputLabel for="@next" value="IDUser"/>
-                    <p:inputText  id="registerIDUser" type="String" binding="#{idUser}"/>
+                    <p:inputText  id= "registerUser" type="String" value="#{LoginBean.currentUser.idUsuario}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Nombre" />
                     <p:inputText  id= "registerName" type="String" binding="#{nombre}"/>
                     <p:outputLabel for="@next" value="Descripcion" />
@@ -96,10 +141,12 @@
                         <f:selectItem itemLabel="Resuelta" itemValue="Resuelta"/>
                         <f:selectItem itemLabel="Cerrada" itemValue="Cerrada"/>
                     </p:selectOneMenu>
-                    <p:outputLabel for="@next" value="Categoria" />
-                    <p:inputText  id= "registerCat" type="String" binding="#{categoria}"/>
+                    <p:outputLabel for="@next" value="Categoria"/>
+                    <p:selectOneMenu id="optionCategoria" binding="#{categoria}" style="width: 220px;" onchange="test(this.value)">
+                        <f:selectItems value="#{ConsultBean.categoriasASelectMenu()}"/>
+                    </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Necesities" value="Registrar" actionListener="#{RegisterBean.registrarNecesidad(id.value, idUser.value, nombre.value, descripcion.value, urgencia.value, estado.value, categoria.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Necesities" value="Registrar" actionListener="#{RegisterBean.registrarNecesidad(id.value, LoginBean.currentUser.idUsuario, nombre.value, descripcion.value, urgencia.value, estado.value, categoria.value)}"/>
             </p:panel>
             <p:panel header="Lista Necesidades" style="text-align: center; min-height: 800px;" name="panel" id="item2">
                 <p:dataTable  id="NecesidadDT" var="necesidad" value="#{ConsultBean.consultarNecesidades()}" rows="10" paginator="true" rowKey="#{necesidad.idSolicitud}" selectionMode="single" selection="#{UpdateBean.necesidad}"
@@ -123,14 +170,39 @@
                         <h:outputText value="#{necesidad.urgencia}" />
                     </p:column>
                     <f:facet name="footer" style="margin: auto">
-                        <p:commandButton id="Modify" value="Seleccionar" action="ModNecesidad?faces-redirect=true" update="Necesities" styleClass="ui-button"/>
+                        <p:commandButton id="Modify" value="Seleccionar" action="#{UpdateBean.isDisabledModNecesities(LoginBean.currentUser)}" update="Necesities" styleClass="ui-button"/>
+                        <p:commandButton id="Reply" value="Responder" oncomplete="openPopup()" update="Necesities" style="margin-left: 30px;" :wqstyleClass="ui-button"/>      
                     </f:facet>
                 </p:dataTable>
+                    
             </p:panel>    
+        </div>
+
+        <div class="overlay" id="overlay">
+            <div class="popup">
+                <a href="" id="close-popup" class="close-popup"><i class="fas fa-times"></i></a>
+                <h2 style="margin: 50px; margin-top: 30px; margin-bottom: 30px;"> Registrar respuesta </h2>
+                <div class="inputs">
+                    <h:panelGrid columns="1" style="margin: auto; " >
+                        <p:outputLabel for="@next" value="ID"/>
+                        <p:inputText  id="registerIDRes" type="String" binding="#{idRes}"/>
+                        <p:outputLabel for="@next" value="Usuario" />
+                        <p:inputText  id="userRes" type="String" value="#{LoginBean.currentUser.nombre}" readonly="true" style="text-align: center; background-color:#dbdfdf; margin: 10px;"/>
+                        <p:outputLabel for="@next" value="Nombre" />
+                        <p:inputText  id= "registerNameRes" type="String" binding="#{nombreRes}"/>
+                        <p:outputLabel for="@next" value="Comentarios" />
+                        <p:inputTextarea  id="registerComRes" type="String" binding="#{comentarioRes}"/>
+                        <p:outputLabel for="@next" value="Solicitud" />
+                        <p:inputText  id="solicitudRes" type="String" value="#{UpdateBean.necesidad.idSolicitud}" readonly="true" style="text-align: center; background-color:#dbdfdf; margin: 10px;"/>
+                    </h:panelGrid>
+                </div>
+                <p:commandButton id="AnsRegister" value="Registrar" update="Necesities" actionListener="#{RegisterBean.registrarRespuesta(idRes.value, LoginBean.currentUser.idUsuario, nombreRes.value, comentarioRes.value, UpdateBean.necesidad.idSolicitud)}" styleClass="ui-button" style="display: block; margin: auto; margin-top: 20px; margin-bottom: 20px;"/>
+            </div>
         </div>
     </h:form>
     <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
         <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
     </svg>
+    <script src="Popup.js"></script>
 </h:body>
 </html>

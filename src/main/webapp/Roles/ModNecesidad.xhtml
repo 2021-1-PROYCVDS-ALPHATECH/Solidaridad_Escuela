@@ -5,16 +5,15 @@
     xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title> Modificar necesidad </title>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="./style.css"></link>
     <script src="../icons.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="../style.css"></link>
 </h:head>
 <style>
-.container{
+.container{    
     display: block;
     margin: auto;
     margin-top: 80px;
-    width: 35%;
+    width: 40%;
 }
 
 .header {
@@ -36,16 +35,14 @@
 
 </style>
 <h:body>
-    <h:form id="Necesities">
+    <h:form id="Categories">
         <div style="background-color: #7e1323; height: 10px;"></div>
         <div class="header">
             <div class="headerElements">
                 <p:commandButton id="dynaButton" value="#{LoginBean.user}" type="button" icon="pi pi-bars" style="background-color: #7e1323; border-color: #7e1323;"/>
                 <p:menu overlay="true" trigger="dynaButton" my="left top" at="left bottom">
                     <p:submenu label="Navigations">
-                        <p:menuitem value="Home" action="admin?faces-redirect=true" update="Necesities" icon="fas fa-home"/>
-                        <p:menuitem value="Reportes" action="Reportes?faces-redirect=true" update="Necesities" icon="far fa-file"/>
-                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Necesities" icon="pi pi-external-link"/>
+                        <p:menuitem value="Log out" actionListener="#{LoginBean.logOut()}" update="Categories" icon="pi pi-external-link"/>
                     </p:submenu>
                 </p:menu>
             </div> 
@@ -75,14 +72,13 @@
                         <f:selectItem itemLabel="Resuelta" itemValue="Resuelta"/>
                         <f:selectItem itemLabel="Cerrada" itemValue="Cerrada"/>
                     </p:selectOneMenu>
-
                 </h:panelGrid>
-                    <p:commandButton id="Modify" style="margin: 30px;" value="Modificar" action="Necesidad?faces-redirect=true" actionListener="#{UpdateBean.actualizarNecesidad(UpdateBean.necesidad.idSolicitud,nombre.value,descripcion.value,estado.value)}" styleClass="ui-button"/>
+                <p:commandButton id="Modify" style="margin: 30px;" value="Modificar" action="Necesidad?faces-redirect=true" actionListener="#{UpdateBean.actualizarNecesidad(UpdateBean.necesidad.idSolicitud,nombre.value,descripcion.value,estado.value)}" styleClass="ui-button"/>
             </p:panel>   
         </div>
+        <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
+            <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
+        </svg>
     </h:form>
-    <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
-        <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
-    </svg>
 </h:body>
 </html>
