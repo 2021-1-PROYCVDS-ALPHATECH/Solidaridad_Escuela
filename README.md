@@ -158,11 +158,11 @@
 
 *9. Reporte Oferta*
 
-![ReporteO](./img/ReporteOferta.gif)
+![ReporteO](./img/ReportesOfertas.gif)
 
 *10. Reporte Categoria*
 
-![ReporteC](./img/ReporteCategoria.gif)
+![ReporteC](./img/ReporteCategorias.gif)
 
 *11. Categoria Invalida*
 
