@@ -26,6 +26,7 @@
 *1. Inicio de sesión*
 
 ![Inicio](./img/Sing%20In.gif)
+
 *2. Registro de Necesidad*
 
 ![Necesidad](./img/NecesidadEstudiante.gif)
@@ -36,7 +37,8 @@
 
 *4. Registrar Oferta Estudiante y Visualizar Respuesta*
 
-![Respuesta](./img/ResgistrarRespuesta.gif)
+![Respuesta](./img/ResgistrarRespuestaEstudiante.gif)
+
 ![Respuesta2](./img/VerRespuesta.gif)
 
 ## Arquitectura y Diseño Detallado
