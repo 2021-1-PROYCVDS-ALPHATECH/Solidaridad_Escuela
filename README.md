@@ -19,6 +19,105 @@
 ### Descripción General :speech_balloon:
 *La Plataforma Solidaridad Escuela, es  una  herramienta  para  generar  un entorno de  comunicación  y ayuda dentro de la comunidad de la Escuela Colombiana de Ingeniería Julio Garavito. El sistema permite que  los  estudiantes  puedan  expresar  las  necesidades  que  puedan  tener  de  algún  elemento  para  poder desarrollar sus actividades de forma correcta, y que los demás miembros de la comunidad puedan facilitar estos elementos a quienes lo necesitan. De igual manera los miembros de la comunidad pueden ofrecer diferentes elementos que sean de interés para los estudiantes sin que exista alguna solicitud específica. Adicionalmente  el  sistema  cuenta  con  diferentes  funcionalidades  de  reportería  y  administración  que permite llevar un control del funcionamiento de la plataforma y del alcance que se está logrando.*
 ### Manual de Usuario :boy:
+*Se mostrará el funcionamiento del aplicativo en base a los diferente roles que tiene la misma.*
+### Página de Inicio
+![Inicio](./img/Inicio.gif)
+### Rol Estudiante
+*1. Inicio de sesión*
+
+![Inicio](./img/Sing%20In.gif)
+
+*2. Registro de Necesidad*
+
+![Necesidad](./img/NecesidadEstudiante.gif)
+
+*3. Registro de Oferta*
+
+![Oferta](./img/RegistrarOfertaEstudiante.gif)
+
+*4. Registrar Respuesta del Estudiante y Visualizar Respuesta*
+
+![Respuesta](https://github.com/2021-1-PROYCVDS-ALPHATECH/Solidaridad_Escuela/blob/main/img/RegistrarRespuestaEstudiante.gif)
+
+![Respuesta2](./img/VerRespuesta.gif)
+
+### Rol Estudiante 2
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SingIngEstudiante2.gif)
+
+*2. Registro de Necesidad*
+
+![Necesidad](./img/NecesidadEstudiante2.gif)
+
+*3. Registro de Oferta*
+
+![Oferta](./img/OfertaEstudiante2.gif)
+
+*4. Registrar Respuesta del Estudiante y Visualizar Respuesta*
+
+![Respuesta2](./img/VerRespuestaEstudiante2.gif)
+
+### Rol Egresado
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SigInEgresado.gif)
+
+*2. Registro de Oferta*
+
+![Oferta](./img/OfertaEgresdo.gif)
+
+*3. Registrar Respuesta del Egresado y Visualizar Respuesta*
+
+![Respuesta2](./img/VerRespuestaEgresado.gif)
+
+### Rol Profesor
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SigInProfesor.gif)
+
+*2. Registro de Oferta*
+
+![Oferta](./img/OfertaProfesor.gif)
+
+*3. Registrar Respuesta del Profesor y Visualizar Respuesta*
+
+
+### Administrativo
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SigInAdministrativo.gif)
+
+*2. Registro de Oferta*
+
+![Oferta](./img/OfertaProfesor.gif)
+
+*3. Registrar Respuesta del Administrativo y Visualizar Respuesta*
+
+### Administrador
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SigInAdministrativo.gif)
+
+*2. Registro de Categoría*
+
+![Oferta](./img/OfertaProfesor.gif)
+
+*3. Registrar Necesidad*
+
+*4. Registrar Oferta*
+
+*5. Registrar Usuarios*
+
+*6. Registrar Respuesta del Administrativo y Visualizar Respuesta*
+
+
+
 ## Arquitectura y Diseño Detallado
 ### Modelo E-R  :mag:
 
