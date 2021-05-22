@@ -77,7 +77,7 @@ public class Categoria implements Serializable{
     }
 
     public void setFechaModificacion(Date newFechaModificacion){
-        fechaModificacion = newFechaModificacion;;
+        fechaModificacion = newFechaModificacion;
     }
 
     public Date getFechaModificacion(){

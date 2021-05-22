@@ -52,7 +52,8 @@ public interface CategoriaMapper{
     public void actualizarCategoria(@Param("id") String id,
                             @Param("nom") String nombre,
                             @Param("desc") String descripcion, 
-                            @Param("est") String estado);
+                            @Param("est") String estado,
+                            @Param("com") String comentario);
 
     /**
      * Elimina una categoria de la base de datos

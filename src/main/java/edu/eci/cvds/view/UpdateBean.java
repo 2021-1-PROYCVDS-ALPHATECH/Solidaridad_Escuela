@@ -47,9 +47,9 @@ public class UpdateBean extends BasePageBean{
         }
     }
 
-    public void actualizarCategoria(String id, String nombre, String descripcion, String estado){
+    public void actualizarCategoria(String id, String nombre, String descripcion, String estado, String comentario){
         try {
-            servicios.actualizarCategoria(id, nombre.equals("")?null:nombre, descripcion.equals("")?null:descripcion, estado.equals("")?null:estado);
+            servicios.actualizarCategoria(id, nombre.equals("")?null:nombre, descripcion.equals("")?null:descripcion, estado.equals("")?null:estado, comentario.equals("")?null:comentario);
         } catch (Exception e) {
             e.printStackTrace();
         }

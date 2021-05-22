@@ -19,6 +19,8 @@ INSERT INTO Categorias (idCategoria, nombre, descripcion, fechaCreacion, fechaMo
 INSERT INTO Categorias (idCategoria, nombre, descripcion, fechaCreacion, fechaModificacion, estado) VALUES ('2', 'Categoria2', 'DescripcionC2', '2014-06-01', '2014-06-01', 'Valida');
 INSERT INTO Categorias (idCategoria, nombre, descripcion, fechaCreacion, fechaModificacion, estado) VALUES ('3', 'Categoria3', 'DescripcionC3', '2015-06-01', '2015-06-01', 'Valida');
 INSERT INTO Categorias VALUES ('4', 'Categoria4', 'DescripcionC4', '2015-06-01', '2015-06-01', 'Invalida', 'No se maneja dinero');
+INSERT INTO Categorias (idCategoria, nombre, descripcion, fechaCreacion, fechaModificacion, estado) VALUES ('5', 'Categoria5', 'DescripcionC5', '2015-06-01', '2015-06-01', 'Valida');
+INSERT INTO Categorias VALUES ('6', 'Categoria6', 'DescripcionC6', '2015-06-01', '2015-06-01', 'Invalida', 'No se manejan dispositivos');
 
 INSERT INTO Solicitudes VALUES ('1', '2', 'DescripcionSN1', 'Activa', '1', '2013-06-01', '2013-06-01');
 INSERT INTO Solicitudes VALUES ('2', '3', 'DescripcionSN2', 'Activa', '2', '2014-06-01', '2014-06-01');
