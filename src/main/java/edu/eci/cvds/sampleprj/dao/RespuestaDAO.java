@@ -56,6 +56,15 @@ public interface RespuestaDAO {
     public List<Respuesta> loadByApplication(String nombre) throws PersistenceException;
 
     /**
+     * Consulta las respuestas que se dieron a las solicitudes de un usuario
+     * @param idUsuario Id del usuario al que se le dieron respuestas
+     * @return Lista de respuestas dadas a todas las solicitudes del usario
+     * @throws ExcepcionSolidaridad
+     * @throws PersistenceException
+     */
+    public List<Respuesta> loadByApplicationUser(String idUsuario) throws PersistenceException;
+
+    /**
      * Elimina una respuesta en especifico de la base de datos
      * @param id Id de la respuesta a eliminar
      * @throws PersistenceException

@@ -68,6 +68,14 @@ public class MyBATISRespuestaDAO implements RespuestaDAO{
         }
     }
 
+    public List<Respuesta> loadByApplicationUser(String idUsuario) throws PersistenceException{
+        try{
+            return respuestaMapper.consultarRespuestasSolicitudUsuario(idUsuario);
+        } catch (org.apache.ibatis.exceptions.PersistenceException e){
+            throw new PersistenceException("Error al consultar las respuestas de las solicitudes del usuario " + idUsuario , e);
+        }
+    }
+
     @Override
     public void delete(String id) throws PersistenceException {
         try{

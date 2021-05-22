@@ -53,6 +53,16 @@ public interface RespuestaMapper {
      */
     public List<Respuesta> consultarRespuestasSolicitud(@Param ("solicitud") String nombre);
 
+
+    /**
+     * Consulta las respuestas que se dieron a las solicitudes de un usuario
+     * @param idUsuario Id del usuario al que se le dieron respuestas
+     * @return Lista de respuestas dadas a todas las solicitudes del usario
+     * @throws ExcepcionSolidaridad
+     * @throws PersistenceException
+     */
+    public List<Respuesta> consultarRespuestasSolicitudUsuario(@Param("id") String idUsuario);
+
     /**
      * Elimina una respuesta en especifico de la base de datos
      * @param idRespuesta Id de la respuesta a eliminar

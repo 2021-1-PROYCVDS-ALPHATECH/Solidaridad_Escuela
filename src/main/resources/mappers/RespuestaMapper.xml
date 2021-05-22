@@ -57,7 +57,22 @@
         	or r.idSolicitud IN (SELECT idSolicitud
                                 FROM Solicitudes JOIN Ofertas ON (idSolicitud = idoferta)
                                 WHERE nombre = #{solicitud})
+    </select>
 
+    <select parameterType="map" id="consultarRespuestasSolicitudUsuario" resultMap="RespuestaResult">
+        SELECT 
+            r.idRespuesta AS r_idRespuesta,
+            r.nombre AS r_nombre,
+            r.comentarios AS r_comentarios,
+            r.fechaCreacion AS r_fechaCreacion,
+            s.idSolicitud AS r_idSolicitud
+        FROM Respuestas r LEFT JOIN Solicitudes s ON (r.idSolicitud = s.idSolicitud)
+        WHERE r.idSolicitud IN (SELECT idSolicitud
+                                FROM Solicitudes JOIN Necesidades ON (idSolicitud = idNecesidad)
+                                WHERE idUsuario = #{id})
+        	or r.idSolicitud IN (SELECT idSolicitud
+                                FROM Solicitudes JOIN Ofertas ON (idSolicitud = idoferta)
+                                WHERE idUsuario = #{id})
     </select>
 
     <insert parameterType="map" id="insertarRespuesta">

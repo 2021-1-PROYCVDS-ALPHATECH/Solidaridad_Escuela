@@ -316,6 +316,11 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
+    public List<Respuesta> consultarRespuestasSolicitudesUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException{
+        return respuestaDAO.loadByApplicationUser(idUsuario);
+    }
+
+    @Override
     public void eliminarRespuesta(String id) throws ExcepcionSolidaridad, PersistenceException {
         respuestaDAO.delete(id);
     }

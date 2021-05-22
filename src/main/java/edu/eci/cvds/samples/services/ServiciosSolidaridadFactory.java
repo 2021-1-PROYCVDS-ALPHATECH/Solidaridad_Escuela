@@ -73,13 +73,7 @@ public class ServiciosSolidaridadFactory {
     public static void main(String[] args){
         try{
             System.out.println("-------------------------------- PRUEBA --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().getNumeroSolicitudes());
-            System.out.println("-------------------------------- ESCRITURA --------------------------------");
-            instance.getServiciosSolidaridad().actualizarNumeroSolicitudes(100);
-            System.out.println("-------------------------------- PRUEBA --------------------------------");
-            System.out.println(instance.getServiciosSolidaridad().getNumeroSolicitudes());
-            instance.getServiciosSolidaridad().eliminarCategoria("100");
-            System.out.println(instance.getServiciosSolidaridad().consultarCategorias());
+            System.out.println(instance.getServiciosSolidaridad().consultarRespuestasSolicitudesUsuario("6"));
         } catch (Exception e){
             System.out.println(e.getMessage());
         }

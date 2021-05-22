@@ -396,6 +396,16 @@ public interface ServiciosSolidaridad {
      */
     public abstract List<Respuesta> consultarRespuestasSolicitud(String nombre) throws ExcepcionSolidaridad, PersistenceException;
 
+
+    /**
+     * Consulta las respuestas que se dieron a las solicitudes de un usuario
+     * @param idUsuario Id del usuario al que se le dieron respuestas
+     * @return Lista de respuestas dadas a todas las solicitudes del usario
+     * @throws ExcepcionSolidaridad
+     * @throws PersistenceException
+     */
+    public abstract List<Respuesta> consultarRespuestasSolicitudesUsuario(String idUsuario) throws ExcepcionSolidaridad, PersistenceException;
+
     /**
      * Elimina una respuesta en especifico de la base de datos
      * @param id Id de la respuesta a eliminar
