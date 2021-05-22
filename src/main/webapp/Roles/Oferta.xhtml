@@ -117,7 +117,7 @@
                 <p:messages id="messages" showDetail="true" style="text-align: left"/>
                 <h:panelGrid columns="1" style="margin: auto" >
                     <p:outputLabel for="@next" value="ID"/>
-                    <p:inputText  id= "registerID" type="String" value="#{ConsultBean.consultarOfertas().size()+1}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
+                    <p:inputText  id= "registerID" type="String" value="#{ConsultBean.consultarSolicitudes().size()+1}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="IDUser"/>
                     <p:inputText  id= "registerUser" type="String" value="#{LoginBean.currentUser.idUsuario}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Nombre" />
@@ -136,7 +136,7 @@
                         <f:selectItems value="#{ConsultBean.categoriasASelectMenu()}"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Oferts" value="Registrar" actionListener="#{RegisterBean.registrarOferta(ConsultBean.consultarOfertas().size()+1, LoginBean.currentUser.idUsuario, nombre.value, descripcion.value, estado.value, categoria.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Oferts" value="Registrar" actionListener="#{RegisterBean.registrarOferta(ConsultBean.consultarSolicitudes().size()+1, LoginBean.currentUser.idUsuario, nombre.value, descripcion.value, estado.value, categoria.value)}"/>
             </p:panel>
             <p:panel header="Lista ofertas" style="text-align: center; min-height: 800px;" name="panel" id="item2">
                 <p:dataTable  id="ofertaDT" var="oferta" value="#{ConsultBean.consultarOfertas()}" rows="10" paginator="true" rowKey="#{oferta.idSolicitud}" selectionMode="single" selection="#{UpdateBean.oferta}"

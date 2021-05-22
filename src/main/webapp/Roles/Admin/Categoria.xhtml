@@ -83,7 +83,7 @@
                 <p:messages id="messages" showDetail="true" style="text-align: left"/>
                 <h:panelGrid columns="1" style="margin: auto" >
                     <p:outputLabel for="@next" value="ID"/>
-                    <p:inputText  id="registerID" type="String" binding="#{id}"/>
+                    <p:inputText  id="registerID" type="String" value="#{ConsultBean.consultarCategorias().size()+1}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Nombre" />
                     <p:inputText  id= "registerDoc" type="Long" binding="#{nombre}"/>
                     <p:outputLabel for="@next" value="Descripcion" />
@@ -96,7 +96,7 @@
                     <p:outputLabel for="@next" id="registerCommLabel" value="Comentario" class="comment active"/>
                     <p:inputText id="registerComm" type="String" binding="#{comentario}" class="comment active"/>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{RegisterBean.registrarCategoria(id.value, nombre.value, descripcion.value, estado.value, comentario.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{RegisterBean.registrarCategoria(ConsultBean.consultarCategorias().size()+1, nombre.value, descripcion.value, estado.value, comentario.value)}"/>
             </p:panel>
             
             <p:panel header="Lista Categorias" style="text-align: center; min-height: 800px;" name="panel" id="item2">
