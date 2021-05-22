@@ -120,7 +120,7 @@ public interface ServiciosSolidaridad {
      * @param estado Nuevo estado de la categoria. Puede ser: Valida, Invalida
      * @throws ExcepcionSolidaridad
      */
-    public abstract void actualizarCategoria(String id, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad, PersistenceException;
+    public abstract void actualizarCategoria(String id, String nombre, String descripcion, String estado, String comentario) throws ExcepcionSolidaridad, PersistenceException;
 
     /**
      * Elimina una categoria de la base de datos

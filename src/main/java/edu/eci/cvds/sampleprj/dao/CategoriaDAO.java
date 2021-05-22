@@ -51,9 +51,10 @@ public interface CategoriaDAO {
      * @param nombre Nuevo nombre de la categoria
      * @param descripcion Nueva descripcion de la categoria
      * @param estado Nuevo estado de la categoria. Puede ser: Valida, Invalida
+     * @param comentario Nuevo comentario de la categoria, puede ser null si el estado se cambio a Valida
      * @throws PersistenceException
      */
-    public void update(String id, String nombre, String descripcion, String estado) throws PersistenceException;    
+    public void update(String id, String nombre, String descripcion, String estado, String comentario) throws PersistenceException;    
 
     /**
      * Elimina una categoria de la base de datos

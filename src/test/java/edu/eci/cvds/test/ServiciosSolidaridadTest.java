@@ -235,7 +235,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarLaFechaCategoria(){
         try{
-            serviciosSolidaridad.actualizarCategoria("2", "Categoria22", "DescripcionC22", "Valida");
+            serviciosSolidaridad.actualizarCategoria("2", "Categoria22", "DescripcionC22", "Valida", null);
             if (!(serviciosSolidaridad.consultarCategoriaId("2").getFechaModificacion().equals(Date.valueOf(LocalDate.now())))){
                 fail("No se actualizo la fecha de la categoria.");
             }
@@ -292,11 +292,13 @@ public class ServiciosSolidaridadTest {
             String nombre = "Categoria33";
             String descripcion = "DescripcionC33";
             String estado = "Invalida";
-            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
+            String comentario = "No se maneja este tipo";
+            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado, comentario);
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if (!(categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
             else if (!(categoria.getDescripcion().equals(descripcion))) fail("Descripcion no actualizada.");
             else if(!(categoria.getEstado().equals(estado)))  fail("Estado no actualizado.");
+            else if(!(categoria.getComentario().equals(comentario))) fail("Comentario no actualizado.");
         } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
@@ -308,11 +310,13 @@ public class ServiciosSolidaridadTest {
             String nombre = null;
             String descripcion = "DescripcionC33";
             String estado = "Invalida";
-            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
+            String comentario = "No se maneja este tipo";
+            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado, comentario);
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if ((categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
             else if (!(categoria.getDescripcion().equals(descripcion))) fail("Descripcion no actualizada.");
             else if(!(categoria.getEstado().equals(estado)))  fail("Estado no actualizado.");
+            else if(!(categoria.getComentario().equals(comentario))) fail("Comentario no actualizado.");
         } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
@@ -321,11 +325,12 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarInformacionCategoriaDescripcionNull(){
         try{
-            serviciosSolidaridad.actualizarCategoria("3", "Categoria3333", null, "Invalida");
+            serviciosSolidaridad.actualizarCategoria("3", "Categoria3333", null, "Invalida", "No se maneja este tipo");
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if (!(categoria.getNombre().equals("Categoria3333"))) fail("Nombre no actualizado.");
-            else if ((categoria.getDescripcion() == null)) fail("Descripcion no actualizada.");
+            else if ((categoria.getDescripcion() == null)) fail("Descripcion actualizada.");
             else if(!(categoria.getEstado().equals("Invalida")))  fail("Estado no actualizado.");
+            else if(!(categoria.getComentario().equals("No se maneja este tipo"))) fail("Comentario no actualizado.");
         } catch(Exception e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
@@ -334,15 +339,52 @@ public class ServiciosSolidaridadTest {
     @Test
     public void deberiaActualizarInformacionCategoriaEstadoNull(){
         try{
-            String nombre = "Categoria33";
-            String descripcion = "DescripcionC33";
+            String nombre = "Categoria55";
+            String descripcion = "DescripcionC55";
             String estado = null;
-            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado);
+            serviciosSolidaridad.actualizarCategoria("5", nombre, descripcion, estado, null);
+            Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("5");
+            if (!(categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
+            else if (!(categoria.getDescripcion().equals(descripcion))) fail("Descripcion no actualizada.");
+            else if((categoria.getEstado().equals(estado)))  fail("Estado actualizado.");
+            else if(categoria.getComentario() != null) fail("Comentario actualizado");
+        } catch(ExcepcionSolidaridad | PersistenceException e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaActualizarInformacionCategoriaComentario(){
+        try{
+            String nombre = null;
+            String descripcion = null;
+            String estado = "Invalida";
+            String comentario = "No se maneja este tipo.";
+            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado, comentario);
+            Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
+            if ((categoria.getNombre().equals(nombre))) fail("Nombre actualizado.");
+            else if ((categoria.getDescripcion().equals(descripcion))) fail("Descripcion actualizada.");
+            else if(!(categoria.getEstado().equals(estado)))  fail("Estado no actualizado.");
+            else if(!(comentario.equals(categoria.getComentario()))) fail("Comentario no actualizado");
+        } catch(ExcepcionSolidaridad | PersistenceException e){
+            fail("Lanzo excepcion: " + e.getMessage());
+        }
+    }
+
+    @Test
+    public void deberiaActualizarInformacionCategoriaComentarioNull(){
+        try{
+            String nombre = "Categoria66";
+            String descripcion = "DescripcionC66";
+            String estado = "Invalida";
+            String comentario = null;
+            serviciosSolidaridad.actualizarCategoria("3", nombre, descripcion, estado, comentario);
             Categoria categoria =  serviciosSolidaridad.consultarCategoriaId("3");
             if (!(categoria.getNombre().equals(nombre))) fail("Nombre no actualizado.");
             else if (!(categoria.getDescripcion().equals(descripcion))) fail("Descripcion no actualizada.");
-            else if((categoria.getEstado().equals(estado)))  fail("Estado no actualizado.");
-        } catch(Exception e){
+            else if(!(categoria.getEstado().equals(estado)))  fail("Estado actualizado.");
+            else if(categoria.getComentario() == null) fail("Comentario no actualizado");
+        } catch(ExcepcionSolidaridad | PersistenceException e){
             fail("Lanzo excepcion: " + e.getMessage());
         }
     }
@@ -354,7 +396,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiaActualizarCategoriaNoId(){
         try{
-            serviciosSolidaridad.actualizarCategoria("12", "Categoria12", "DescripcionC12", "Valida");
+            serviciosSolidaridad.actualizarCategoria("12", "Categoria12", "DescripcionC12", "Valida", null);
             fail("No lanzo excepcion.");
         } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED, e.getMessage());
@@ -364,7 +406,7 @@ public class ServiciosSolidaridadTest {
     @Test
     public void noDeberiAlctualizarCategoriaDatosIguales(){
         try{
-            serviciosSolidaridad.actualizarCategoria("1", "Categoria1", "DescripcionC1", "Valida");
+            serviciosSolidaridad.actualizarCategoria("1", "Categoria1", "DescripcionC1", "Valida", null);
             fail("No lanzo excepcion.");
         } catch(ExcepcionSolidaridad | PersistenceException e){
             assertEquals(ExcepcionSolidaridad.INVALID_UPDATE, e.getMessage());
@@ -810,12 +852,11 @@ public class ServiciosSolidaridadTest {
             serviciosSolidaridad.eliminarUsuario("11");
             serviciosSolidaridad.eliminarUsuario("12");
             serviciosSolidaridad.eliminarUsuario("13");
-            serviciosSolidaridad.actualizarCategoria("3", "Categoria3", "DescripcionC3", "Valida");
-            serviciosSolidaridad.actualizarCategoria("2", "Categoria2", "DescripcionC2", "Invalida");
+            serviciosSolidaridad.actualizarCategoria("3", "Categoria3", "DescripcionC3", "Valida", null);
+            serviciosSolidaridad.actualizarCategoria("2", "Categoria2", "DescripcionC2", "Invalida", "No ");
             serviciosSolidaridad.eliminarRespuesta("11");
             serviciosSolidaridad.eliminarRespuesta("12");
         } catch (Exception e) {
-            //System.out.println(e.getMessage());
         }
     }
 }

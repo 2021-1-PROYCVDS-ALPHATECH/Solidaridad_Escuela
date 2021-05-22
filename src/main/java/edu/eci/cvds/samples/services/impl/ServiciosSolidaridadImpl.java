@@ -98,16 +98,18 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
     }
 
     @Override
-    public void actualizarCategoria(String id, String nombre, String descripcion, String estado) throws ExcepcionSolidaridad, PersistenceException {
+    public void actualizarCategoria(String id, String nombre, String descripcion, String estado, String comentario) throws ExcepcionSolidaridad, PersistenceException {
         Categoria categoria = consultarCategoriaId(id);
         if (categoria == null) {
             throw new ExcepcionSolidaridad(ExcepcionSolidaridad.NO_CATEGORY_REGISTRED);
         }
+        
         String oldNombre = categoria.getNombre();
         String oldDescripcion = categoria.getDescripcion(); 
         String oldEstado = categoria.getEstado(); 
-        if (oldNombre.equals(nombre) && oldDescripcion.equals(descripcion) &&  oldEstado.equals(estado)){
-            throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_UPDATE);
+        String oldComentario = categoria.getComentario();
+        if (oldNombre.equals(nombre) && oldDescripcion.equals(descripcion) &&  oldEstado.equals(estado) && (comentario == null || comentario.equals(oldComentario))) {
+                throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_UPDATE);
         }
         if (nombre != null && consultarCategoriaNombre(nombre) != null){
             throw new ExcepcionSolidaridad(ExcepcionSolidaridad.INVALID_NAME);
@@ -115,7 +117,8 @@ public class ServiciosSolidaridadImpl implements ServiciosSolidaridad{
         if (nombre == null) nombre = oldNombre;
         if (descripcion == null) descripcion = oldDescripcion;
         if (estado == null) estado = oldEstado;
-        categoriaDAO.update(id, nombre, descripcion, estado);
+        if (estado.equals("Invalida") && comentario == null) comentario = oldComentario;
+        categoriaDAO.update(id, nombre, descripcion, estado, comentario);
     }
 
     @Override

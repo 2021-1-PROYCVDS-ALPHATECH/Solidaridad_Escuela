@@ -52,7 +52,7 @@
 
   <update parameterType="map" id="actualizarCategoria">
     UPDATE Categorias
-      SET nombre = #{nom}, descripcion = #{desc}, estado = #{est}, fechaModificacion = CURRENT_DATE
+      SET nombre = #{nom}, descripcion = #{desc}, estado = #{est}, fechaModificacion = CURRENT_DATE, comentario = #{com}
       WHERE idCategoria = #{id}
   </update>
 
