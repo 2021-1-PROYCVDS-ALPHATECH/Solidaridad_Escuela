@@ -127,6 +127,15 @@
 
 ![Respuesta](./img/RespuestaAdministrador.gif)
 
+*7. Actuliazar Categoría, Oferta y Necesidad*
+
+
+![Oferta](./img/ActualizarOferta.gif)
+
+![Categoria](./img/ActualizarCategoria.gif)
+
+![Necesidad](./img/ActualizarNecesidad.gif)
+
 
 
 ## Arquitectura y Diseño Detallado
