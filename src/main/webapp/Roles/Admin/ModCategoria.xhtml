@@ -10,9 +10,17 @@
     <link rel="stylesheet" href="../style.css"></link>
 </h:head>
 <style>
+.comment {
+    visibility: hidden;
+}
+
+.active {
+    visibility: visible;
+}
+
 .container{
     margin: auto;
-    margin-top: 60px;
+    margin-top: 100px;
     display: block;
     width: 35%;
     
@@ -67,18 +75,20 @@
                     <p:outputLabel for="@next" value="Ultima Modificacion" />
                     <p:inputText  id= "MDate" type="String" value="#{UpdateBean.categoria.fechaModificacion}" readonly="true" style="text-align: center; background-color:#eaecec; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Estado" />
-                    <p:selectOneMenu id="option"  binding="#{estado}" style="width: 220px;">
+                    <p:selectOneMenu id="option"  binding="#{estado}" style="width: 220px;" onchange="changeVisibility(this.value)">
                         <f:selectItem itemLabel="Valida" itemValue="Valida"/>
                         <f:selectItem itemLabel="Invalida" itemValue="Invalida"/>
                     </p:selectOneMenu>
-                    
+                    <p:outputLabel for="@next" id="CommLabel" value="Comentarios" class="comment active"/>
+                    <p:inputTextarea id= "Comm" rows="6" cols="30" type="String" binding="#{comment}" class="comment active" style="margin: 10px; width: 220px; font-size: 12px;"/>
                 </h:panelGrid>
-                <p:commandButton id="Modify" style="margin-top: 20px;" value="Modificar" action="Categoria?faces-redirect=true" actionListener="#{UpdateBean.actualizarCategoria(UpdateBean.categoria.id,nombre.value,descripcion.value,estado.value)}" styleClass="ui-button"/>
+                <p:commandButton id="Modify" style="margin-top: 20px;" value="Modificar" action="Categoria?faces-redirect=true" actionListener="#{UpdateBean.actualizarCategoria(UpdateBean.categoria.id,nombre.value,descripcion.value,estado.value,comment.value)}" styleClass="ui-button"/>
             </p:panel>   
         </div>
     </h:form>
     <svg style="margin: 0; position:absolute; bottom: 0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100">
         <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
     </svg>
+    <script src="comments.js"></script>
 </h:body>
 </html>

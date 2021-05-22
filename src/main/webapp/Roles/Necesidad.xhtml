@@ -98,6 +98,7 @@
 <h:body>
     <h:inputHidden id="user" value="#{LoginBean.currentUser.nombre}"/>
     <h:inputHidden id="sol" value="#{UpdateBean.necesidad.nombreUsuario}"/>
+    <h:inputHidden id="test" value="#{UpdateBean.isDisabledModNecesities(LoginBean.currentUser)}"/>
     <h:form id="Necesities">
         <div style="background-color: #7e1323; height: 10px;"></div>
         <div class="header">
@@ -203,5 +204,8 @@
         <path style="margin: 0" fill="#7e1323" fill-opacity="1" d="M0,32L480,0L960,64L1440,32L1440,320L960,320L480,320L0,320Z"></path>
     </svg>
     <script src="Popup.js"></script>
+    <script>
+        alert(document.getElementById("test").value);
+    </script>
 </h:body>
 </html>

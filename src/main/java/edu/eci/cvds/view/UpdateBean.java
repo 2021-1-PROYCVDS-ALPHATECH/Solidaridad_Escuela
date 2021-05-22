@@ -29,14 +29,12 @@ public class UpdateBean extends BasePageBean{
     public String isDisabledModOferts(Usuario currentUser){
         boolean enabled = currentUser.getRol().toString().equals("Administrador");
         if(oferta != null) enabled = enabled || oferta.getNombreUsuario().equals(currentUser.getNombre());
-        else enabled = false;
         return !enabled?"false":"ModOferta?faces-redirect=true";
     }
 
     public String isDisabledModNecesities(Usuario currentUser){
         boolean enabled = currentUser.getRol().toString().equals("Administrador");
         if(oferta != null) enabled = enabled || necesidad.getNombreUsuario().equals(currentUser.getNombre());
-        else enabled = false;
         return !enabled?"false":"ModNecesidad?faces-redirect=true";
     }
 
@@ -49,7 +47,7 @@ public class UpdateBean extends BasePageBean{
 
     public void actualizarCategoria(String id, String nombre, String descripcion, String estado, String comentario){
         try {
-            servicios.actualizarCategoria(id, nombre.equals("")?null:nombre, descripcion.equals("")?null:descripcion, estado.equals("")?null:estado, comentario.equals("")?null:comentario);
+            servicios.actualizarCategoria(id, nombre.equals("")?null:nombre, descripcion.equals("")?null:descripcion, estado.equals("")?null:estado, estado.equals("Invalida")?null:comentario);
         } catch (Exception e) {
             e.printStackTrace();
         }
