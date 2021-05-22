@@ -24,6 +24,7 @@
 ![Inicio](./img/Inicio.gif)
 ### Rol Estudiante
 *1. Inicio de sesión*
+
 ![Inicio](./img/Sing%20In.gif)
 
 ## Arquitectura y Diseño Detallado
