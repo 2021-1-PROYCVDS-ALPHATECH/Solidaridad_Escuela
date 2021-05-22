@@ -79,8 +79,8 @@
                         <f:selectItem itemLabel="Valida" itemValue="Valida"/>
                         <f:selectItem itemLabel="Invalida" itemValue="Invalida"/>
                     </p:selectOneMenu>
-                    <p:outputLabel for="@next" id="CommLabel" value="Comentarios" class="comment active"/>
-                    <p:inputTextarea id= "Comm" rows="6" cols="30" type="String" binding="#{comment}" class="comment active" style="margin: 10px; width: 220px; font-size: 12px;"/>
+                    <p:outputLabel for="@next" id="CommLabel" value="Comentarios" class="comment"/>
+                    <p:inputTextarea id= "Comm" rows="6" cols="30" type="String" binding="#{comment}" class="comment" style="margin: 10px; width: 220px; font-size: 12px;"/>
                 </h:panelGrid>
                 <p:commandButton id="Modify" style="margin-top: 20px;" value="Modificar" action="Categoria?faces-redirect=true" actionListener="#{UpdateBean.actualizarCategoria(UpdateBean.categoria.id,nombre.value,descripcion.value,estado.value,comment.value)}" styleClass="ui-button"/>
             </p:panel>   

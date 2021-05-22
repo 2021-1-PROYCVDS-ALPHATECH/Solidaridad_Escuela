@@ -93,8 +93,8 @@
                         <f:selectItem itemLabel="Valida" itemValue="Valida"/>
                         <f:selectItem itemLabel="Invalida" itemValue="Invalida"/>
                     </p:selectOneMenu>
-                    <p:outputLabel for="@next" id="CommLabel" value="Comentario" class="comment active"/>
-                    <p:inputText id="Comm" type="String" binding="#{comentario}" class="comment active"/>
+                    <p:outputLabel for="@next" id="CommLabel" value="Comentario" class="comment"/>
+                    <p:inputText id="Comm" type="String" binding="#{comentario}" class="comment"/>
                 </h:panelGrid>
                 <p:commandButton style="margin: 20px;" update="Categories" value="Registrar" actionListener="#{RegisterBean.registrarCategoria(ConsultBean.consultarCategorias().size()+1, nombre.value, descripcion.value, estado.value, comentario.value)}"/>
             </p:panel>

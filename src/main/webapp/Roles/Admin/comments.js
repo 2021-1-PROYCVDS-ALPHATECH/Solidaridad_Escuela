@@ -1,5 +1,5 @@
 function changeVisibility(estado){
-    if(estado == "Valida"){
+    if(estado != "Valida"){
         document.getElementById("Categories:Comm").classList.add("active");
         document.getElementById("Categories:CommLabel").classList.add("active");
     }else{
