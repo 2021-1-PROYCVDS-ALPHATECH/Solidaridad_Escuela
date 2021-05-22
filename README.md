@@ -41,6 +41,39 @@
 
 ![Respuesta2](./img/VerRespuesta.gif)
 
+### Rol Estudiante 2
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SingIngEstudiante2.gif)
+
+*2. Registro de Necesidad*
+
+![Necesidad](./img/NecesidadEstudiante2.gif)
+
+*3. Registro de Oferta*
+
+![Oferta](./img/OfertaEstudiante2.gif)
+
+*4. Registrar Oferta Estudiante y Visualizar Respuesta*
+
+![Respuesta2](./img/VerRespuestaEstudiante2.gif)
+
+### Rol Egresado
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SingInEgresado.gif)
+
+*2. Registro de Oferta*
+
+![Oferta](./img/OfertaEgresado.gif)
+
+*3. Registrar Oferta Estudiante y Visualizar Respuesta*
+
+![Respuesta2](./img/VerRespuestaEgresado.gif)
+
+
 ## Arquitectura y Diseño Detallado
 ### Modelo E-R  :mag:
 
