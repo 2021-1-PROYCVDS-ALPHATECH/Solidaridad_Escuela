@@ -156,6 +156,18 @@
 
 ![ReporteN](./img/ReporteNecesidad.gif)
 
+*9. Reporte Oferta*
+
+![ReporteO](./img/ReporteOferta.gif)
+
+*10. Reporte Categoria*
+
+![ReporteC](./img/ReporteCategoria.gif)
+
+*11. Categoria Invalida*
+
+![CategoriaI](./img/CategoriaInvalida.gif)
+
 
 
 ## Arquitectura y Diseño Detallado
