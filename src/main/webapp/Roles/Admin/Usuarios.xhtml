@@ -181,7 +181,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                 <p:messages id="messages" showDetail="true" style="text-align: left"/>
                 <h:panelGrid columns="1" style="margin: auto">
                     <p:outputLabel for="@next" value="ID" />
-                    <p:inputText  id= "registerID" type="String" binding="#{id}"/>
+                    <p:inputText  id="registerID" type="String" value="#{ConsultBean.consultarUsuarios().size()+1}" readonly="true" style="text-align: center; background-color:#dbdfdf; margin: 10px;"/>
                     <p:outputLabel for="@next" value="Nombre" />
                     <p:inputText  id= "registerNombre" type="String" binding="#{nombre}"/>
                     <p:outputLabel for="@next" value="Telefono" />
@@ -199,7 +199,7 @@ body .ui-datatable .ui-datatable-data > tr.ui-state-highlight {
                         <f:selectItem itemLabel="Profesor" itemValue="Profesor"/>
                     </p:selectOneMenu>
                 </h:panelGrid>
-                <p:commandButton style="margin: 20px;" update="Users" value="Registrar" action="Usuarios?faces-redirect=true" actionListener="#{RegisterBean.registrarUsuario(id.value,nombre.value,telefono.value,mail.value,pass.value,rol.value)}"/>
+                <p:commandButton style="margin: 20px;" update="Users" value="Registrar" action="Usuarios?faces-redirect=true" actionListener="#{RegisterBean.registrarUsuario(ConsultBean.consultarUsuarios().size()+1,nombre.value,telefono.value,mail.value,pass.value,rol.value)}"/>
             </p:panel>
             <p:panel header="Usuarios" style="text-align: center; min-height: 800px;" name="panel" id="item2">
                 <p:dataTable  id="userDT" var="usuario" value="#{ConsultBean.consultarUsuarios()}" rows="6" paginator="true" selectionMode="single" selection="#{UpdateBean.usuario}" rowKey="#{usuario.idUsuario}"
