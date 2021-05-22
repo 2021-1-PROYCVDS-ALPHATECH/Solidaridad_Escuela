@@ -130,4 +130,14 @@ public class ConsultBean extends BasePageBean{
         }
         return categorias;
     }
+
+    public HashMap<String,String> categoriasASelectMenu(){
+        HashMap<String,String> map = new HashMap<String,String>();
+        try {
+            for(Categoria categoria: servicios.consultarCategorias()){
+                map.put(categoria.getNombre(),categoria.getId());
+            }
+        }catch (Exception e) {}
+        return map;
+    }
 }

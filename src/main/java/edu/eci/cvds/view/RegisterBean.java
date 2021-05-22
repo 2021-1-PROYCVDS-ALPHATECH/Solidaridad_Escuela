@@ -17,7 +17,7 @@ public class RegisterBean extends BasePageBean{
 
     public void registrarCategoria(String id, String nombre, String descripcion, String estado, String comentario){
         try{
-            servicios.registrarCategoria(id, nombre, descripcion, estado, comentario);
+            servicios.registrarCategoria(id, nombre, descripcion, estado, estado.equals("Invalida")?null:comentario);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -50,9 +50,10 @@ public class RegisterBean extends BasePageBean{
     }
     public void registrarRespuesta(String idRespuesta, String idUsuario, String nombre, String comentarios, String idSolicitud){
         try {
+            System.out.println(idRespuesta+" "+ idUsuario+" "+ nombre+" "+ comentarios+" "+ idSolicitud);
             servicios.registrarRespuesta(idRespuesta, idUsuario, nombre, comentarios, idSolicitud);
         } catch (Exception e){
-
+            System.out.println(e.getMessage());
         }
     }
 }

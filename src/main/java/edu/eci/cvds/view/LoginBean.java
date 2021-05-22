@@ -10,6 +10,7 @@ import javax.faces.application.FacesMessage;
 
 import org.apache.shiro.subject.Subject;
 
+import edu.eci.cvds.samples.entities.Rol;
 import edu.eci.cvds.samples.entities.Usuario;
 import edu.eci.cvds.samples.services.ServiciosSolidaridad;
 
@@ -57,12 +58,17 @@ public class LoginBean extends BasePageBean{
         this.currentUser = currentUser;
     }
 
+    public String getCurrentUserRol(){
+        return currentUser.getRol().toString();
+    }
+
     public void logIn(){
         subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(user, new Sha256Hash(password).toHex());
         try {
             subject.login(token);
-            currentUser = servicios.consultarUsuarioNombre(user);
+            currentUser = null;
+            while (currentUser == null) currentUser = servicios.consultarUsuarioNombre(user);
             if (subject.hasRole("Administrador")) {
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Admin/admin.xhtml");
 			}
@@ -79,6 +85,7 @@ public class LoginBean extends BasePageBean{
                 FacesContext.getCurrentInstance().getExternalContext().redirect("/faces/Roles/Estudiante/estudiante.xhtml");
 			}
         } catch(Exception e) {
+            if(subject.isAuthenticated()) subject.logout();
             FacesContext.getCurrentInstance().addMessage("log:Usuario", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error: Juaz juaz ", "Usuario o contraseña incorrectos"));
         }
     }
