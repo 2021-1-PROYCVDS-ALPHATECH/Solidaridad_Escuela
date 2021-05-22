@@ -182,7 +182,7 @@
                         <p:inputText  id="solicitudRes" type="String" value="#{UpdateBean.oferta.idSolicitud}" readonly="true" style="text-align: center; background-color:#dbdfdf; margin: 10px;"/>
                     </h:panelGrid>
                 </div>
-                <p:commandButton id="AnsRegister" value="Registrar" update="Oferts" actionListener="#{RegisterBean.registrarRespuesta(idRes.value, LoginBean.currentUser.idUsuario, nombreRes.value, comentarioRes.value, UpdateBean.necesidad.idSolicitud)}" styleClass="ui-button" style="display: block; margin: auto; margin-top: 20px; margin-bottom: 20px;"/>
+                <p:commandButton id="AnsRegister" value="Registrar" update="Oferts" actionListener="#{RegisterBean.registrarRespuesta(idRes.value, LoginBean.currentUser.idUsuario, nombreRes.value, comentarioRes.value, UpdateBean.oferta.idSolicitud)}" styleClass="ui-button" style="display: block; margin: auto; margin-top: 20px; margin-bottom: 20px;"/>
             </div>
         </div>
     </h:form>
