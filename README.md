@@ -85,6 +85,7 @@
 
 *3. Registrar Respuesta del Profesor y Visualizar Respuesta*
 
+![Respuesta2](./img/RespuestasProfesor.gif)
 
 ### Administrativo
 
@@ -94,9 +95,11 @@
 
 *2. Registro de Oferta*
 
-![Oferta](./img/OfertaProfesor.gif)
+![Oferta](./img/OfertaAdministrativo.gif)
 
 *3. Registrar Respuesta del Administrativo y Visualizar Respuesta*
+
+![Respuesta2](./img/VerRespuestaAdministrativo.gif)
 
 ### Administrador
 
@@ -110,11 +113,19 @@
 
 *3. Registrar Necesidad*
 
+![Necesidad](./img/NecesidadAdministrador.gif)
+
 *4. Registrar Oferta*
+
+![Oferta](./img/OfertaAdministrador.gif)
 
 *5. Registrar Usuarios*
 
+![Usuarios](./img/UsuarioAdministrador.gif)
+
 *6. Registrar Respuesta del Administrativo y Visualizar Respuesta*
+
+![Respuesta](./img/RespuestaAdministrador.gif)
 
 
 
