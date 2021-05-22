@@ -35,7 +35,7 @@
 
 ![Oferta](./img/RegistrarOfertaEstudiante.gif)
 
-*4. Registrar Oferta Estudiante y Visualizar Respuesta*
+*4. Registrar Respuesta del Estudiante y Visualizar Respuesta*
 
 ![Respuesta](https://github.com/2021-1-PROYCVDS-ALPHATECH/Solidaridad_Escuela/blob/main/img/RegistrarRespuestaEstudiante.gif)
 
@@ -55,7 +55,7 @@
 
 ![Oferta](./img/OfertaEstudiante2.gif)
 
-*4. Registrar Oferta Estudiante y Visualizar Respuesta*
+*4. Registrar Respuesta del Estudiante y Visualizar Respuesta*
 
 ![Respuesta2](./img/VerRespuestaEstudiante2.gif)
 
@@ -63,15 +63,30 @@
 
 *1. Inicio de sesión*
 
-![Inicio](./img/SingInEgresado.gif)
+![Inicio](./img/SigInEgresado.gif)
 
 *2. Registro de Oferta*
 
-![Oferta](./img/OfertaEgresado.gif)
+![Oferta](./img/OfertaEgresdo.gif)
 
-*3. Registrar Oferta Estudiante y Visualizar Respuesta*
+*3. Registrar Respuesta del Egresado y Visualizar Respuesta*
 
 ![Respuesta2](./img/VerRespuestaEgresado.gif)
+
+### Rol Profesor
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SigInProfesor.gif)
+
+*2. Registro de Oferta*
+
+![Oferta](./img/OfertaProfesor.gif)
+
+*3. Registrar Respuesta del Egresado y Visualizar Respuesta*
+
+![Respuesta2](./img/VerRespuestaEgresado.gif)
+
 
 
 ## Arquitectura y Diseño Detallado
