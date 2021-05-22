@@ -83,9 +83,38 @@
 
 ![Oferta](./img/OfertaProfesor.gif)
 
-*3. Registrar Respuesta del Egresado y Visualizar Respuesta*
+*3. Registrar Respuesta del Profesor y Visualizar Respuesta*
 
-![Respuesta2](./img/VerRespuestaEgresado.gif)
+
+### Administrativo
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SigInAdministrativo.gif)
+
+*2. Registro de Oferta*
+
+![Oferta](./img/OfertaProfesor.gif)
+
+*3. Registrar Respuesta del Administrativo y Visualizar Respuesta*
+
+### Administrador
+
+*1. Inicio de sesión*
+
+![Inicio](./img/SigInAdministrativo.gif)
+
+*2. Registro de Categoría*
+
+![Oferta](./img/OfertaProfesor.gif)
+
+*3. Registrar Necesidad*
+
+*4. Registrar Oferta*
+
+*5. Registrar Usuarios*
+
+*6. Registrar Respuesta del Administrativo y Visualizar Respuesta*
 
 
 
